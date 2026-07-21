@@ -123,3 +123,223 @@ Khi muốn gộp các thay đổi từ nhánh phụ (ví dụ: phát triển tí
   ```
 
 ---
+## 6. Git Flow
+
+Quy trình làm việc chuẩn giúp đồng bộ và quản lý mã nguồn hiệu quả giữa máy tính cá nhân (Local) và hạ tầng lưu trữ đám mây (GitHub) thông qua việc phân chia môi trường rõ ràng và tuần tự các bước luân chuyển code:
+
+### 6.1. Các môi trường và vùng làm việc
+- **Local Machine (Máy cá nhân):**
+  - **Working Directory:** Thư mục vật lý chứa các tệp tin mã nguồn đang được chỉnh sửa trực tiếp.
+  - **Staging Area:** Vùng đệm chuẩn bị, chọn lọc các thay đổi sẵn sàng để lưu trữ.
+  - **Local Repo:** Kho lưu trữ cục bộ chứa toàn bộ lịch sử commit trên máy tính.
+- **Remote (GitHub Cloud):**
+  - **Your GitHub Repo** (Remote `origin`): Kho chứa cá nhân trên GitHub, được sao chép (Fork) từ kho chính.
+  - **Sun* GitHub Repo** (Remote `upstream`): Kho chứa gốc của dự án, do Sun* hoặc khách hàng quản lý và là nơi tích hợp mã nguồn chung.
+
+---
+
+### 6.2. Chu trình 10 bước chuẩn hóa (Workflow Steps)
+
+```mermaid
+graph TD
+    Fork[1. Fork Repo gốc] --> Clone[2. Clone Repo cá nhân]
+    Clone --> Remote[3. Add remote upstream]
+    Remote --> Branch[4. Tạo nhánh Task mới]
+    Branch --> Commit[5. Code & Commit cục bộ]
+    Commit --> Rebase[6. Fetch & Rebase upstream]
+    Rebase --> Conflict{Có Conflict?}
+    Conflict -- Có --> Fix[7. Sửa conflict thủ công & Continue]
+    Conflict -- Không --> Squash[8. Squash/Gộp commit nếu cần]
+    Fix --> Squash
+    Squash --> Push[9. Push -f lên Repo cá nhân]
+    Push --> PR[10. Tạo Pull Request & Merge]
+    PR -.-> Branch
+```
+
+#### Giai đoạn A: Thiết lập dự án (Chỉ thực hiện 1 lần)
+1. **Fork:** Truy cập trang GitHub của dự án chính (`Sun* GitHub repo`), chọn **Fork** để tạo bản sao về tài khoản GitHub cá nhân của bạn.
+2. **Clone:** Tải mã nguồn từ repository cá nhân vừa Fork về máy cục bộ để bắt đầu làm việc.
+   ```bash
+   git clone <url_your_github_repo>
+   ```
+3. **Add Remote:** Tạo liên kết trực tiếp từ máy cục bộ tới repository chính của Sun* (đặt tên kết nối này là `upstream`).
+   ```bash
+   git remote add upstream <url_sun_github_repo>
+   ```
+
+#### Giai đoạn B: Chu trình phát triển tính năng (Lặp lại cho mỗi Task)
+4. **Branch working:** Tạo một nhánh nhiệm vụ mới tách từ nhánh phát triển chung (`develop`/`main`) để làm việc độc lập.
+   ```bash
+   git checkout -b <tên_nhánh_task>
+   ```
+5. **Add & Commit:** Đưa các thay đổi từ Working Directory vào Staging Area và lưu chính thức vào Local Repo.
+   ```bash
+   git add .
+   git commit -m "Mô tả ngắn gọn tính năng đã hoàn thành"
+   ```
+6. **Rebase code:** Tải mã nguồn mới nhất từ repository chính (`upstream`) về và đắp các commit của bạn lên trên cùng nhánh gốc để tránh bị lệch code.
+   ```bash
+   git fetch upstream
+   git rebase upstream/develop
+   ```
+7. **Fix conflict:** Nếu xảy ra xung đột khi rebase, hãy mở file để xử lý thủ công, sau đó tiếp tục quá trình rebase.
+   ```bash
+   # Chỉnh sửa file bị xung đột, sau đó chạy:
+   git add <tên_file_xung_đột>
+   git rebase --continue
+   ```
+8. **Rebase commit (Squash):** Gộp các commit nhỏ/nháp thành một hoặc vài commit lớn có ý nghĩa rõ ràng trước khi gửi review.
+   ```bash
+   git rebase -i HEAD~<số_lượng_commit>
+   ```
+9. **Create Pull Request (PR):** Đẩy nhánh lên repository cá nhân và tạo **Pull Request** trên giao diện web GitHub để gửi code sang dự án gốc.
+   ```bash
+   git push origin <tên_nhánh_task> -f
+   ```
+10. **Merged:** Người quản lý tiến hành review và gộp code của bạn vào dự án chính. Nhiệm vụ hoàn thành, quay lại **Bước 4** cho Task tiếp theo.
+
+---
+
+## 7. Case Studies
+
+### 1. Combine commits into one (Gộp nhiều commit thành một commit duy nhất)
+```bash
+$ git rebase -i HEAD~<number of commit>
+# Eg: git rebase -i HEAD~3
+
+# (Before editing) commits are displayed in order
+pick aa11bbc commit message 1
+pick b2c3c4d commit message 2
+pick 4e56fgh commit message 3
+```
+* **Giải thích chi tiết:**
+  - `git rebase -i HEAD~3`: Mở giao diện rebase tương tác (`-i` là viết tắt của interactive) cho 3 commit gần nhất tính từ vị trí con trỏ `HEAD`.
+  - Trình soạn thảo sẽ hiển thị danh sách commit theo thứ tự từ cũ nhất đến mới nhất.
+  - **Thao tác gộp:** Đổi chữ `pick` thành `squash` (hoặc viết tắt là `s`) trước các commit bạn muốn gộp vào commit nằm ngay phía trên nó. Sau khi lưu lại, Git sẽ yêu cầu bạn xác nhận hoặc chỉnh sửa lại thông điệp commit chung cuối cùng.
+
+---
+
+### 2. Ignore committed file (Bỏ qua tệp tin đã lỡ commit và push lên repository)
+```bash
+# First, remove committed file from repository
+$ git rm --cached <filename>
+
+# Then, add to gitignore
+$ echo '<filename>' >> .gitignore
+```
+* **Giải thích chi tiết:**
+  - `git rm --cached <filename>`: Loại bỏ tệp tin khỏi chỉ mục theo dõi của Git (index/repository) nhưng vẫn bảo toàn tệp vật lý trong thư mục làm việc cục bộ của bạn.
+  - `echo '<filename>' >> .gitignore`: Thêm tên tệp tin vào tệp cấu hình `.gitignore` để Git tự động bỏ qua và không theo dõi những thay đổi của tệp này ở các lần commit tiếp theo.
+
+---
+
+### 3. Rename branch (Đổi tên nhánh)
+```bash
+$ git branch -m <new name of branch>
+```
+* **Giải thích chi tiết:**
+  - Đổi tên nhánh hiện tại bạn đang làm việc (nhánh đang checkout) sang một tên mới phù hợp hơn với quy chuẩn dự án.
+  - Cờ `-m` là viết tắt của từ "move/rename".
+
+---
+
+### 4. Commit to other branch by mistake (Commit nhầm sang nhánh khác)
+```bash
+# Frist, create new branch to store all current commits
+$ git branch other-branch
+
+# Then, move HEAD, index of current branch to 1 commit ahead
+$ git reset --hard HEAD~
+
+# Checkout to branch which has that commit
+$ git checkout other-branch
+```
+* **Giải thích chi tiết:**
+  - `git branch other-branch`: Tạo nhanh một nhánh mới tên là `other-branch` ngay tại commit hiện tại để bảo toàn toàn bộ code vừa thay đổi.
+  - `git reset --hard HEAD~`: Quay ngược nhánh bị nhầm về trước đó 1 commit (`HEAD~`) và loại bỏ thay đổi nhầm khỏi nhánh này. Lúc này commit đã được tách và lưu giữ an toàn bên `other-branch`.
+  - `git checkout other-branch`: Chuyển sang nhánh mới tạo chứa commit chuẩn để tiếp tục phát triển.
+
+---
+
+### 5. Commit by mistake and remove it (Commit nhầm và các phương pháp hoàn tác)
+```bash
+# 1. Move HEAD to previous commit (keeps modifications in staging area)
+$ git reset --soft HEAD~
+
+# 2. Move HEAD and index to previous commit (keeps modifications in working tree)
+$ git reset HEAD~
+
+# 3. Move index and working tree to previous commit (discard changes entirely)
+$ git reset --hard HEAD~
+
+# 4. Record new commit to reverse the effect of earlier commits (safe for shared branches)
+$ git revert <commit>
+```
+* **Giải thích chi tiết:**
+  - `git reset --soft HEAD~`: Hoàn tác commit gần nhất. Con trỏ `HEAD` lùi về 1 commit, giữ nguyên toàn bộ thay đổi ở vùng **Staging Area** (sẵn sàng để commit lại).
+  - `git reset HEAD~` (hoặc cờ `--mixed` mặc định): Hoàn tác commit và đưa các thay đổi về vùng **Working Directory** (chưa được Staged, cần `git add` lại nếu muốn lưu).
+  - `git reset --hard HEAD~`: Xóa bỏ hoàn toàn commit gần nhất cùng toàn bộ mã nguồn vừa chỉnh sửa, đưa làm việc về trạng thái chính xác của commit trước đó (cần cẩn trọng khi dùng).
+  - `git revert <commit>`: Tạo một commit mới mang nội dung đảo ngược để triệt tiêu ảnh hưởng của commit cũ. Phương pháp này giữ nguyên lịch sử commit, an toàn tuyệt đối khi làm việc nhóm trên các nhánh chung.
+
+---
+
+### 6. Combine commits from other branch (Gộp một commit cụ thể từ nhánh khác)
+```bash
+$ git cherry-pick <commit-id>
+```
+* **Giải thích chi tiết:**
+  - `git cherry-pick <commit-id>`: Trích xuất một commit cụ thể (thông qua mã hash/ID commit) từ một nhánh khác và áp dụng trực tiếp vào nhánh hiện tại mà không cần phải hợp nhất (merge) toàn bộ nhánh.
+
+---
+
+### 7. In the middle of work but navigate to other branch (Tạm lưu công việc dở dang để chuyển nhánh)
+```bash
+# Save unfinished work
+$ git stash -u
+
+# check out to new branch
+$ git checkout -b other-branch
+~ work, work, work ~
+$ git add <necessary files>
+$ git commit -m "commit message"
+
+# checkout to origin branch
+$ git checkout origin-branch
+
+# Restore the unfinished work
+$ git stash pop
+```
+* **Giải thích chi tiết:**
+  - `git stash -u`: Tạm thời cất giấu toàn bộ thay đổi chưa commit (bao gồm cả tệp chưa được theo dõi nhờ cờ `-u`/`--include-untracked`) vào ngăn xếp tạm của Git, giúp thư mục làm việc trở nên sạch sẽ.
+  - `git checkout -b other-branch`: Chuyển sang nhánh khác thực hiện nhiệm vụ khẩn cấp và commit bình thường.
+  - `git checkout origin-branch`: Quay lại nhánh ban đầu sau khi xử lý xong nhiệm vụ khẩn cấp.
+  - `git stash pop`: Lấy lại toàn bộ mã nguồn đang làm dở lúc trước ra khỏi ngăn xếp để tiếp tục công việc.
+
+---
+
+### 8. Remove important commit by mistake (Khôi phục commit quan trọng bị xóa nhầm)
+```bash
+# First, see all the commits' history
+$ git reflog
+
+# Then, pick the commit to restore
+$ git reset --hard <commit>
+```
+* **Giải thích chi tiết:**
+  - `git reflog`: Tra cứu nhật ký hành động lịch sử của con trỏ HEAD. Ngay cả khi commit đã bị reset hoặc xóa mất, `reflog` vẫn ghi lại mã hash của commit đó.
+  - `git reset --hard <commit>`: Khôi phục toàn bộ trạng thái mã nguồn về đúng mã commit đã tìm thấy trong reflog.
+
+---
+
+### 9. Merged but want to undo (Hoàn tác thao tác gộp nhánh vừa thực hiện)
+```bash
+# merge
+$ git checkout <original branch>
+$ git merge <merged branch>
+
+# Then, want to turn back
+$ git reset --hard ORIG_HEAD
+```
+* **Giải thích chi tiết:**
+  - Ngay sau khi thực hiện `git merge`, Git sẽ tự động lưu lại vị trí trước khi merge của nhánh hiện tại vào biến môi trường con trỏ `ORIG_HEAD`.
+  - `git reset --hard ORIG_HEAD`: Đưa nhánh hiện tại quay trở lại vị trí chính xác trước thời điểm gộp nhánh, hủy bỏ toàn bộ thao tác merge vừa rồi.
