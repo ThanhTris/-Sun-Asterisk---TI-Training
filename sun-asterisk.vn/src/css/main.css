@@ -1,0 +1,46 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    @apply text-brand-body font-sans bg-white;
+  }
+  
+  h1, h2, h3, h4, h5, h6 {
+    @apply text-brand-heading font-heading font-bold;
+  }
+}
+
+@layer components {
+  /* Reusable Buttons */
+  .btn {
+    @apply inline-flex items-center justify-center px-6 py-3 font-semibold rounded-full transition-all duration-300 transform active:scale-95 cursor-pointer;
+  }
+  
+  .btn-primary {
+    @apply btn bg-brand-primary text-white hover:bg-red-700 hover:shadow-lg hover:shadow-red-500/20;
+  }
+  
+  .btn-secondary {
+    @apply btn bg-brand-heading text-white hover:bg-black hover:shadow-lg hover:shadow-slate-500/20;
+  }
+  
+  .btn-outline {
+    @apply btn border-2 border-brand-heading text-brand-heading hover:bg-brand-heading hover:text-white;
+  }
+
+  .btn-outline-primary {
+    @apply btn border-2 border-brand-primary text-brand-primary hover:bg-brand-primary hover:text-white;
+  }
+  
+  /* Container utility */
+  .container-custom {
+    @apply max-width-custom mx-auto px-4 sm:px-6 lg:px-8;
+  }
+}
+
+/* Custom styles not easily done in Tailwind */
+.max-width-custom {
+  max-width: 1200px;
+}

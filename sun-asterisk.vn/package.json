@@ -1,0 +1,18 @@
+{
+  "name": "sun-asterisk.vn",
+  "version": "1.0.0",
+  "description": "Reconstruction of sun-asterisk.vn website using HTML, CSS, Tailwind, and JS",
+  "main": "index.html",
+  "scripts": {
+    "tailwind": "npx tailwindcss -i ./src/css/main.css -o ./dist/css/style.css --watch",
+    "serve": "npx lite-server",
+    "dev": "npx concurrently \"npm run tailwind\" \"npm run serve\"",
+    "build": "npx tailwindcss -i ./src/css/main.css -o ./dist/css/style.css --minify"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "concurrently": "^8.2.2",
+    "lite-server": "^2.6.1",
+    "tailwindcss": "^3.4.1"
+  }
+}
