@@ -73,3 +73,112 @@
 .news-card:hover .news-thumbnail img {
   transform: scale(1.05);
 }
+
+/* 6. Card Button Custom Hover Effects (Scale3d Transition) */
+.btn-card-left, .btn-card-right {
+  position: relative;
+  height: 80px;
+  border-radius: 8px;
+  font-weight: 700;
+  font-size: 18px; /* Updated to 18px */
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px; /* Slight gap increase */
+  width: 100%;
+  overflow: hidden;
+  z-index: 1;
+  transition: color 0.4s, background-color 0.4s;
+}
+
+.btn-card-left {
+  background-color: #fff;
+  color: #c01111;
+}
+
+.btn-card-left::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #2b3441; /* black of right button */
+  z-index: -1;
+  opacity: 0;
+  transform: scale3d(0.7, 1, 1);
+  transition: transform 0.4s, opacity 0.4s;
+  transition-timing-function: cubic-bezier(.2, 1, .3, 1);
+}
+
+.btn-card-left .btn-arrow {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background-color: rgba(192, 17, 17, 0.1); /* light red */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.4s, color 0.4s;
+}
+
+.btn-card-left:hover {
+  color: #fff;
+}
+
+.btn-card-left:hover::before {
+  opacity: 1;
+  transform: scale3d(1, 1, 1);
+}
+
+.btn-card-left:hover .btn-arrow {
+  background-color: rgba(255, 255, 255, 0.2); /* light white on hover black background */
+  color: #fff;
+}
+
+.btn-card-right {
+  background-color: #2b3441;
+  color: #fff;
+}
+
+.btn-card-right::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #c01111; /* red of left button */
+  z-index: -1;
+  opacity: 0;
+  transform: scale3d(0.7, 1, 1);
+  transition: transform 0.4s, opacity 0.4s;
+  transition-timing-function: cubic-bezier(.2, 1, .3, 1);
+}
+
+.btn-card-right .btn-arrow {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background-color: rgba(255, 255, 255, 0.1); /* light white */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.4s, color 0.4s;
+}
+
+.btn-card-right:hover {
+  color: #fff;
+}
+
+.btn-card-right:hover::before {
+  opacity: 1;
+  transform: scale3d(1, 1, 1);
+}
+
+.btn-card-right:hover .btn-arrow {
+  background-color: rgba(255, 255, 255, 0.2); /* light white on hover red background */
+  color: #fff;
+}
+
+

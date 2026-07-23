@@ -14,7 +14,7 @@
   <!-- Page Specific CSS -->
   <link rel="stylesheet" href="./src/css/home.css">
 </head>
-<body class="text-brand-body font-sans bg-white selection:bg-brand-primary/10 selection:text-brand-primary">
+<body class="text-brand-body font-sans bg-white">
 
   <!-- ==================== HEADER (Sticky & Responsive) ==================== -->
   <header class="fixed top-0 left-0 right-0 z-50 bg-white border-b border-gray-100 shadow-sm h-[99.2px] flex items-center">
@@ -96,15 +96,189 @@
     </div>
   </header>
 
-  <!-- Main Content (Placeholder for homepage sections) -->
-  <main class="pt-24 min-h-[60vh]">
-    <div class="max-w-7xl mx-auto px-4 py-20 text-center">
-      <h1 class="text-4xl md:text-6xl mb-6">Make Awesome Things That Matter</h1>
-      <p class="text-lg md:text-xl text-brand-body max-w-2xl mx-auto mb-8">
-        Chúng tôi là một Digital Creative Studio hướng tới tạo ra các giá trị đổi mới sáng tạo thông qua các giải pháp công nghệ kỹ thuật và nền tảng nhân tài ưu việt.
-      </p>
-      <a href="./du-an/index.html" class="btn-primary">Xem dự án nổi bật</a>
-    </div>
+  <!-- Main Content (Homepage sections) -->
+  <main>
+    <!-- ==================== HERO SECTION ==================== -->
+    <section class="relative w-full h-[calc(100vh-99.2px)] mt-[99.2px] overflow-hidden flex items-center justify-center home-hero">
+      <!-- Video background -->
+      <video class="home-hero-video" autoplay muted loop playsinline>
+        <source src="./src/assets/video/mv-pc.mp4" type="video/mp4">
+        Trình duyệt của bạn không hỗ trợ video HTML5.
+      </video>
+    </section>
+
+    <!-- ==================== BUSINESS SECTORS SECTION ==================== -->
+    <section id="sectors" class="bg-white">
+      <div class="max-w-[1140px] mx-auto px-4 sm:px-6 lg:px-8 w-full">
+        
+        <!-- Section Title (No effect background circle, exact 40px Open Sans specs) -->
+        <h2 class="text-[40px] font-heading font-bold text-brand-heading mt-[20px] mb-[10px] pb-[25px]">
+          Lĩnh vực kinh doanh
+        </h2>
+
+        <!-- Introduction Wrapper -->
+        <div class="relative w-full overflow-visible mb-[80px]">
+          <!-- Stacked Card Protrusion on the Left (6px border #f9f9f9, rounded-l-16px, bg-white, 60% height) -->
+          <span class="absolute left-[-40px] top-1/2 -translate-y-1/2 w-[80px] h-[60%] bg-white border-[6px] border-[#f9f9f9] rounded-l-[16px] z-0 pointer-events-none"></span>
+
+          <!-- Main Card (6px border #f9f9f9, rounded-16px) -->
+          <div class="relative bg-white rounded-[16px] border-[6px] border-[#f9f9f9] shadow-sm p-8 md:p-12 min-h-[322px] flex flex-col lg:flex-row items-center overflow-visible z-10">
+            <!-- Text intro (Left 48%) -->
+            <div class="w-full lg:w-[48%] space-y-6 text-[16px] leading-relaxed text-brand-body z-10">
+            <p>
+              Là một Digital Creative Studio, Sun* luôn đề cao tinh thần làm chủ sản phẩm, tư duy sáng tạo trong mỗi dự án để mang đến những trải nghiệm <strong class="text-brand-primary font-bold">"Awesome"</strong> nhất cho end-user.
+            </p>
+            <p>
+              Với hai dòng dịch vụ là <strong class="text-brand-heading font-bold">"Creative & Engineering"</strong> và <strong class="text-brand-heading font-bold">"Talent Platform"</strong>, Sun* đã và đang từng bước cùng công nghệ tạo ra những giá trị tốt đẹp cho xã hội.
+            </p>
+          </div>
+          
+          <!-- Illustration (Right 58% - Overflowing absolute position on desktop) -->
+          <div class="w-full lg:w-[58%] lg:absolute lg:-right-[4%] lg:top-1/2 lg:-translate-y-1/2 mt-8 lg:mt-0 flex justify-center z-0 overflow-visible">
+            <img src="./src/assets/images/intro-business.png" alt="Lĩnh vực kinh doanh" class="w-full h-auto object-contain transform lg:scale-115 origin-center">
+          </div>
+        </div>
+      </div>
+
+        <!-- Services Cards -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-[160px]">
+          
+          <!-- Card 1: Creative & Engineering (Overflow visible) -->
+          <div class="relative bg-brand-primary text-white p-10 md:p-12 rounded-[20px] shadow-lg flex flex-col justify-between overflow-visible min-h-[420px]">
+            <!-- Red dot 66px top right edge -->
+            <span class="absolute right-[50px] top-0 -translate-y-1/2 w-[66px] h-[66px] rounded-full bg-[#d82329] z-20 pointer-events-none"></span>
+            
+            <div class="space-y-8">
+              <!-- Badge (Plain text with a transparent white circle behind) -->
+              <div class="relative inline-flex items-center h-8">
+                <span class="absolute left-0 w-8 h-8 rounded-full bg-white/10 z-0"></span>
+                <span class="relative z-10 text-white text-[12px] pl-4 font-light tracking-wide">Digital Creative Studio</span>
+              </div>
+              <!-- Title -->
+              <h3 class="text-3xl md:text-[32px] font-heading font-bold leading-tight text-white">
+                Creative<br>& Engineering
+              </h3>
+              <!-- Description -->
+              <p class="text-white text-[14px] md:text-[16px] font-light leading-relaxed max-w-sm mb-[40px]">
+                Đội ngũ nhân lực dồi dào chuyên về công nghệ, thiết kế và kinh doanh.
+              </p>
+            </div>
+            <!-- Button (Rectangular, wide padding) -->
+            <div>
+              <a href="./ve-chung-toi/index.html" class="btn-card-left">
+                Tìm hiểu thêm
+                <span class="btn-arrow">
+                  <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3"/>
+                  </svg>
+                </span>
+              </a>
+            </div>
+          </div>
+
+          <!-- Card 2: Talent Platform (Overflow visible) -->
+          <div class="relative bg-white text-brand-heading p-12 rounded-[16px] border border-[#d7dadc] flex flex-col justify-between overflow-visible min-h-[420px]">
+            <!-- Red dot 36px bottom right edge -->
+            <span class="absolute right-[-83px] bottom-[166px] -translate-y-1/2 w-[36px] h-[36px] rounded-full bg-[#c01111] z-20 pointer-events-none"></span>
+            
+            <div class="space-y-8">
+              <!-- Badge (Plain text with a light gray circle behind) -->
+              <div class="relative inline-flex items-center h-8">
+                <span class="absolute left-0 w-8 h-8 rounded-full bg-[#E4E4E4]/40 z-0"></span>
+                <span class="relative z-10 text-brand-body text-[12px] pl-4 font-light tracking-wide">Digital Creative Studio</span>
+              </div>
+              <!-- Title -->
+              <h3 class="text-3xl md:text-[32px] font-heading font-bold leading-tight text-brand-heading">
+                Talent<br>Platform
+              </h3>
+              <!-- Description -->
+              <p class="text-brand-body text-[14px] md:text-[16px] font-light leading-relaxed max-w-sm mb-[40px]">
+                Các giải pháp nguồn nhân lực hỗ trợ tăng trưởng kinh doanh bền vững.
+              </p>
+            </div>
+            <!-- Button (Rectangular, wide padding) -->
+            <div>
+              <a href="./ve-chung-toi/index.html" class="btn-card-right">
+                Tìm hiểu thêm
+                <span class="btn-arrow">
+                  <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3"/>
+                  </svg>
+                </span>
+              </a>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== PROJECTS SECTION ==================== -->
+    <section class="py-24 bg-[#f8f9fa] border-t border-gray-100">
+      <div class="max-w-[1140px] mx-auto px-4 sm:px-6 lg:px-8 w-full">
+        
+        <!-- Section Title (No effect background circle, exact 40px Open Sans specs) -->
+        <h2 class="text-[40px] font-heading font-bold text-brand-heading mt-[20px] mb-[10px] pb-[25px]">
+          Dự án của chúng tôi
+        </h2>
+
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
+          
+          <!-- Left Stats -->
+          <div class="lg:col-span-5 space-y-12">
+            <!-- Stat 1 -->
+            <div class="stat-item">
+              <div class="flex items-baseline gap-2">
+                <span class="text-6xl md:text-[80px] font-heading font-bold text-brand-primary stat-number" data-target="200">200</span>
+                <span class="text-3xl md:text-4xl font-heading font-bold text-brand-primary">++</span>
+              </div>
+              <p class="text-[16px] text-brand-body font-sans mt-2">Đối tác</p>
+            </div>
+            
+            <!-- Stat 2 -->
+            <div class="stat-item">
+              <div class="flex items-baseline gap-2">
+                <span class="text-6xl md:text-[80px] font-heading font-bold text-brand-primary stat-number" data-target="300">300</span>
+                <span class="text-3xl md:text-4xl font-heading font-bold text-brand-primary">++</span>
+              </div>
+              <p class="text-[16px] text-brand-body font-sans mt-2">Dịch vụ được hỗ trợ</p>
+            </div>
+          </div>
+
+          <!-- Right Featured Project Card -->
+          <div class="lg:col-span-7">
+            <div class="bg-white rounded-[24px] overflow-hidden border border-gray-100 shadow-sm hover:shadow-md transition-all duration-300 group">
+              <!-- Project Image -->
+              <div class="relative overflow-hidden aspect-[16/10]">
+                <img src="./src/assets/images/Kurashicom.png" alt="Dự án KURASHICOM" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105">
+              </div>
+              <!-- Project Info -->
+              <div class="p-8 md:p-10 space-y-4">
+                <div class="text-xs uppercase tracking-wider text-brand-body font-bold">
+                  Kurashicom Inc
+                </div>
+                <h3 class="text-2xl font-heading font-bold text-brand-heading">
+                  Dự án KURASHICOM
+                </h3>
+                <p class="text-brand-body text-sm md:text-[15px] font-sans leading-relaxed">
+                  Phát triển App giúp hiện thực hóa phong cách sống theo ý muốn.
+                </p>
+                
+                <div class="pt-4">
+                  <a href="./du-an/index.html" class="inline-flex items-center text-brand-primary hover:text-red-700 font-bold transition-colors text-sm">
+                    Xem chi tiết
+                    <svg class="w-4 h-4 ml-1.5 transition-transform duration-300 group-hover:translate-x-1" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3"/>
+                    </svg>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
   </main>
 
   <!-- ==================== FOOTER ==================== -->
