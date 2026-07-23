@@ -1,0 +1,75 @@
+/* ==========================================================================
+   Home Page Specific Styles (Trang chủ)
+   ========================================================================== */
+
+/* 1. Hero Section (Banner / Video background) */
+.home-hero {
+  position: relative;
+  overflow: hidden;
+}
+
+.home-hero-video {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  min-width: 100%;
+  min-height: 100%;
+  width: auto;
+  height: auto;
+  transform: translate(-50%, -50%);
+  object-fit: cover;
+  z-index: -1;
+}
+
+.home-hero-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(43, 52, 65, 0.4); /* Dark overlay matching brand-heading */
+  z-index: 0;
+}
+
+/* 2. Business Sectors (Lĩnh vực hoạt động) */
+.sector-card {
+  transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+
+.sector-card:hover {
+  transform: translateY(-8px);
+}
+
+/* 3. Projects Slider / Carousel (Dự án nổi bật) */
+.project-carousel {
+  display: flex;
+  overflow-x: auto;
+  scroll-behavior: smooth;
+  scrollbar-width: none; /* Firefox */
+}
+
+.project-carousel::-webkit-scrollbar {
+  display: none; /* Chrome/Safari/Webkit */
+}
+
+/* 4. Stats Counter (Số liệu thống kê ấn tượng) */
+.stat-item {
+  position: relative;
+}
+
+.stat-number {
+  font-family: 'Roboto Slab', serif;
+  background: linear-gradient(135deg, var(--color-brand-primary), #E05252);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* 5. Culture & News (Văn hóa & Tin tức) */
+.news-thumbnail {
+  overflow: hidden;
+}
+
+.news-thumbnail img {
+  transition: transform 0.5s ease;
+}
+
+.news-card:hover .news-thumbnail img {
+  transform: scale(1.05);
+}

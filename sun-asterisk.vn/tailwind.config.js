@@ -13,11 +13,16 @@ module.exports = {
     extend: {
       colors: {
         brand: {
-          primary: '#C01111',   // Sun* signature red/orange
-          heading: '#2B3441',   // Heading and title text color
-          body: '#4D5969',      // Content/body text color
-          bgLight: '#F5F7FA',   // Light gray background
-          bgDark: '#111827'     // Dark background
+          primary: 'var(--color-brand-primary, #C01111)',
+          heading: 'var(--color-brand-heading, #2B3441)',
+          body: 'var(--color-brand-body, #4D5969)',
+          footerBg: 'var(--color-footer-bg, #f7f7f7)',
+          footerText: 'var(--color-footer-text, #949ba4)',
+          footerTitle: 'var(--color-footer-title, #4d5969)',
+          borderGray: 'var(--color-border-gray, #E4E4E4)',
+          circleAccent: 'var(--color-circle-accent, #E4E4E4)',
+          bgLight: '#F5F7FA',
+          bgDark: '#111827'
         }
       },
       fontFamily: {
