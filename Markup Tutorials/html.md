@@ -1,8 +1,3 @@
-# Tóm tắt Kiến thức & Chức năng HTML (HTML Summary)
-
-Tài liệu này hệ thống lại các khái niệm cơ bản, lịch sử phát triển, cấu trúc trang web, các bộ thẻ phần tử thông dụng và công cụ lập trình HTML theo lộ trình học tập tiêu chuẩn.
-
----
 
 ## 1. Introducing HTML
 
