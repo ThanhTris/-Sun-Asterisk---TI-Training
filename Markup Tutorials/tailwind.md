@@ -1,8 +1,3 @@
-# Tóm tắt Kiến thức & Chức năng Bootstrap (Bootstrap Summary)
-
-Tài liệu này hệ thống lại các khái niệm cơ bản, hệ thống lưới (Grid System), cách thiết lập bố cục (Layout), định dạng nội dung (Contents), các thành phần giao diện nâng cao (Components) và các hiệu ứng động bằng JavaScript Plugins của framework Bootstrap 4 theo lộ trình học tập tiêu chuẩn.
-
----
 
 ## 1. Introduction to Bootstrap 4
 
