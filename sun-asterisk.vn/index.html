@@ -214,42 +214,66 @@
     </section>
 
     <!-- ==================== PROJECTS SECTION ==================== -->
-    <section class="py-24 bg-[#f8f9fa] border-t border-gray-100">
-      <div class="max-w-[1140px] mx-auto px-4 sm:px-6 lg:px-8 w-full">
-        
-        <!-- Section Title (No effect background circle, exact 40px Open Sans specs) -->
-        <h2 class="text-[40px] font-heading font-bold text-brand-heading mt-[20px] mb-[10px] pb-[25px]">
-          Dự án của chúng tôi
-        </h2>
+    <section class="py-24 bg-white border-t border-gray-100 relative overflow-hidden">
+      <!-- Section-project:before decoration dot -->
+      <span class="absolute right-[-90px] bottom-[-40px] w-[71px] h-[71px] rounded-full bg-[#ffeff0] z-0 pointer-events-none"></span>
 
+      <div class="max-w-[1140px] mx-auto px-4 sm:px-6 lg:px-8 w-full relative z-10">
+        
         <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
           
-          <!-- Left Stats -->
-          <div class="lg:col-span-5 space-y-12">
-            <!-- Stat 1 -->
-            <div class="stat-item">
-              <div class="flex items-baseline gap-2">
-                <span class="text-6xl md:text-[80px] font-heading font-bold text-brand-primary stat-number" data-target="200">200</span>
-                <span class="text-3xl md:text-4xl font-heading font-bold text-brand-primary">++</span>
-              </div>
-              <p class="text-[16px] text-brand-body font-sans mt-2">Đối tác</p>
+          <!-- Left Stats (Now including Title inside, exact 10px padding) -->
+          <div class="lg:col-span-6 p-[10px]">
+            <!-- Section Title (With before/after decoration dots, exact mb-20px) -->
+            <div class="relative mb-[20px]">
+              <!-- project-heading:before (Red dot) -->
+              <span class="absolute right-[25%] top-[-30px] -translate-y-1/2 w-[28px] h-[28px] rounded-full bg-[#c01111] z-20 pointer-events-none"></span>
+              <!-- project-heading:after (Light red dot) -->
+              <span class="absolute left-0 bottom-[-40px] w-[26px] h-[26px] rounded-full bg-[#c01111]/10 z-20 pointer-events-none"></span>
+
+              <h2 class="text-[40px] font-heading font-bold text-brand-heading mt-[20px] mb-[10px] pb-[25px]">
+                Dự án của chúng tôi
+              </h2>
             </div>
-            
-            <!-- Stat 2 -->
-            <div class="stat-item">
-              <div class="flex items-baseline gap-2">
-                <span class="text-6xl md:text-[80px] font-heading font-bold text-brand-primary stat-number" data-target="300">300</span>
-                <span class="text-3xl md:text-4xl font-heading font-bold text-brand-primary">++</span>
+
+            <div>
+              <!-- Stat 1 (Exact mb-50px) -->
+              <div class="stat-item mb-[50px]">
+                <div class="flex items-baseline gap-2">
+                  <span class="text-6xl md:text-[80px] font-heading font-bold text-brand-primary stat-number" data-target="200">200</span>
+                  <span class="text-3xl md:text-4xl font-heading font-bold text-brand-primary">++</span>
+                </div>
+                <p class="text-[16px] text-brand-body font-sans mt-2">Đối tác</p>
               </div>
-              <p class="text-[16px] text-brand-body font-sans mt-2">Dịch vụ được hỗ trợ</p>
+              
+              <!-- Stat 2 (Exact mb-50px) -->
+              <div class="stat-item mb-[50px]">
+                <div class="flex items-baseline gap-2">
+                  <span class="text-6xl md:text-[80px] font-heading font-bold text-brand-primary stat-number" data-target="300">300</span>
+                  <span class="text-3xl md:text-4xl font-heading font-bold text-brand-primary">++</span>
+                </div>
+                <p class="text-[16px] text-brand-body font-sans mt-2">Dịch vụ được hỗ trợ</p>
+              </div>
+            </div>
+
+            <!-- "Xem tất cả dự án" Button -->
+            <div>
+              <a href="./du-an/index.html" class="btn-card-right w-[270px]">
+                Xem tất cả dự án
+                <span class="btn-arrow">
+                  <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3"/>
+                  </svg>
+                </span>
+              </a>
             </div>
           </div>
 
-          <!-- Right Featured Project Card -->
-          <div class="lg:col-span-7">
-            <div class="bg-white rounded-[24px] overflow-hidden border border-gray-100 shadow-sm hover:shadow-md transition-all duration-300 group">
-              <!-- Project Image -->
-              <div class="relative overflow-hidden aspect-[16/10]">
+          <!-- Right Featured Project Card (Constrained max-width for a compact design) -->
+          <div class="lg:col-span-6">
+            <div class="bg-white rounded-[24px] overflow-hidden border border-gray-100 shadow-sm hover:shadow-md transition-all duration-300 group max-w-[342px] mx-auto lg:ml-auto">
+              <!-- Project Image (aspect-4/5 for tall layout matching screenshot) -->
+              <div class="relative overflow-hidden aspect-[4/5]">
                 <img src="./src/assets/images/Kurashicom.png" alt="Dự án KURASHICOM" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105">
               </div>
               <!-- Project Info -->
@@ -273,6 +297,20 @@
                   </a>
                 </div>
               </div>
+            </div>
+
+            <!-- Carousel Navigation Arrows (Aligned with Card) -->
+            <div class="flex justify-end gap-3 mt-6 max-w-[342px] mx-auto lg:ml-auto">
+              <button class="w-12 h-12 rounded-full border border-gray-200 flex items-center justify-center hover:bg-gray-50 transition-colors" aria-label="Previous project">
+                <svg class="w-5 h-5 text-brand-body" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7"/>
+                </svg>
+              </button>
+              <button class="w-12 h-12 rounded-full border border-gray-200 flex items-center justify-center hover:bg-gray-50 transition-colors" aria-label="Next project">
+                <svg class="w-5 h-5 text-brand-body" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/>
+                </svg>
+              </button>
             </div>
           </div>
 
