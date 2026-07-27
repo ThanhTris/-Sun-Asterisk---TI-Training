@@ -97,7 +97,7 @@
   </header>
 
   <!-- Main Content (Homepage sections) -->
-  <main>
+  <main class="overflow-x-hidden">
     <!-- ==================== HERO SECTION ==================== -->
     <section class="relative w-full h-[calc(100vh-99.2px)] mt-[99.2px] overflow-hidden flex items-center justify-center home-hero">
       <!-- Video background -->
@@ -107,9 +107,11 @@
       </video>
     </section>
 
-    <!-- ==================== BUSINESS SECTORS SECTION ==================== -->
-    <section id="sectors" class="bg-white">
-      <div class="max-w-[1140px] mx-auto px-4 sm:px-6 lg:px-8 w-full">
+    <!-- ==================== MAIN CONTENT WRAPPER ==================== -->
+    <div class="max-w-[1140px] mx-auto px-4 sm:px-6 lg:px-8 w-full py-24 space-y-24 relative overflow-visible">
+      
+      <!-- ==================== BUSINESS SECTORS SECTION ==================== -->
+      <div id="sectors">
         
         <!-- Section Title (No effect background circle, exact 40px Open Sans specs) -->
         <h2 class="text-[40px] font-heading font-bold text-brand-heading mt-[20px] mb-[10px] pb-[25px]">
@@ -211,14 +213,9 @@
 
         </div>
       </div>
-    </section>
 
-    <!-- ==================== PROJECTS SECTION ==================== -->
-    <section class="py-24 bg-white border-t border-gray-100 relative overflow-hidden">
-      <!-- Section-project:before decoration dot -->
-      <span class="absolute right-[-90px] bottom-[-40px] w-[71px] h-[71px] rounded-full bg-[#ffeff0] z-0 pointer-events-none"></span>
-
-      <div class="max-w-[1140px] mx-auto px-4 sm:px-6 lg:px-8 w-full relative z-10">
+      <!-- ==================== PROJECTS SECTION ==================== -->
+      <div class="border-t border-gray-100 pt-24 relative overflow-visible">
         
         <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
           
@@ -269,40 +266,143 @@
             </div>
           </div>
 
-          <!-- Right Featured Project Card (Constrained max-width for a compact design) -->
-          <div class="lg:col-span-6">
-            <div id="project-card" class="bg-white rounded-[24px] overflow-hidden border border-gray-100 shadow-sm hover:shadow-md transition-all duration-300 group max-w-[342px] mx-auto lg:ml-auto relative aspect-[4/5] opacity-100 transition-opacity duration-300">
-              <!-- Project Image (covers 100% of card) -->
-              <img id="project-img" src="./src/assets/images/Kurashicom.png" alt="Dự án KURASHICOM" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105 absolute inset-0 z-0">
-              
-              <!-- Gradient Overlay for readability -->
-              <div class="absolute inset-0 bg-gradient-to-t from-white/95 via-white/50 to-transparent z-10"></div>
-
-              <!-- Project Info (Overlayed at bottom) -->
-              <div class="absolute bottom-0 left-0 right-0 p-8 md:p-10 space-y-4 z-20">
-                <div id="project-client" class="text-xs uppercase tracking-wider text-brand-body font-bold">
-                  Kurashicom Inc
-                </div>
-                <h3 id="project-title" class="text-2xl font-heading font-bold text-brand-heading">
-                  Dự án KURASHICOM
-                </h3>
-                <p id="project-desc" class="text-brand-body text-sm md:text-[15px] font-sans leading-relaxed">
-                  Phát triển App giúp hiện thực hóa phong cách sống theo ý muốn.
-                </p>
+          <!-- Right Featured Project Card (Constrained to exact 322x469px size) -->
+          <div class="lg:col-span-6 relative overflow-visible">
+            <!-- Slider Viewport (rounded-8px, exact 322x469px, aligned to right edge) -->
+            <div class="overflow-hidden w-[322px] h-[469px] mx-auto lg:ml-auto rounded-[8px] border border-gray-100 shadow-sm hover:shadow-md transition-shadow duration-300">
+              <!-- Slider Track (Start at translateX(-100%) to show Card 1) -->
+              <div id="project-track" class="flex h-full" style="transform: translateX(-100%);">
                 
-                <div class="pt-2">
-                  <a id="project-link" href="./du-an/index.html" class="inline-flex items-center text-brand-primary hover:text-red-700 font-bold transition-colors text-sm">
-                    Xem chi tiết
-                    <svg class="w-4 h-4 ml-1.5 transition-transform duration-300 group-hover:translate-x-1" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
-                      <path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3"/>
-                    </svg>
-                  </a>
-                </div>
+                <!-- CLONE Card 3: HARUTAKA (At start for infinite loop) -->
+                <a href="./du-an/index.html" class="block w-[322px] h-[469px] shrink-0 relative bg-white group select-none">
+                  <img src="./src/assets/images/zenkigen-project.png" alt="Dự án HARUTAKA" class="w-full h-full object-cover absolute inset-0 z-0">
+                  <div class="absolute inset-0 bg-[#f9f9f9]/90 z-10"></div>
+                  <div class="absolute bottom-0 left-0 right-0 p-8 md:p-10 space-y-4 z-20">
+                    <div class="text-xs uppercase tracking-wider text-brand-body font-bold">
+                      ZENKIGEN
+                    </div>
+                    <h3 class="text-2xl font-heading font-bold text-brand-heading transition-colors duration-300 group-hover:text-brand-primary">
+                      Dự án HARUTAKA
+                    </h3>
+                    <p class="text-brand-body text-sm md:text-[15px] font-sans leading-relaxed">
+                      Dịch vụ phỏng vấn trên nền tảng web/video giúp tối ưu quy trình tuyển dụng.
+                    </p>
+                    <div class="pt-2">
+                      <span class="inline-flex items-center text-brand-primary font-bold text-sm">
+                        Xem chi tiết
+                        <svg class="w-4 h-4 ml-1.5 transition-transform duration-300 group-hover:translate-x-1" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+                          <path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3"/>
+                        </svg>
+                      </span>
+                    </div>
+                  </div>
+                </a>
+
+                <!-- Card 1: KURASHICOM -->
+                <a href="./du-an/index.html" class="block w-[322px] h-[469px] shrink-0 relative bg-white group select-none">
+                  <img src="./src/assets/images/Kurashicom.png" alt="Dự án KURASHICOM" class="w-full h-full object-cover absolute inset-0 z-0">
+                  <div class="absolute inset-0 bg-[#f9f9f9]/90 z-10"></div>
+                  <div class="absolute bottom-0 left-0 right-0 p-8 md:p-10 space-y-4 z-20">
+                    <div class="text-xs uppercase tracking-wider text-brand-body font-bold">
+                      Kurashicom Inc
+                    </div>
+                    <h3 class="text-2xl font-heading font-bold text-brand-heading transition-colors duration-300 group-hover:text-brand-primary">
+                      Dự án KURASHICOM
+                    </h3>
+                    <p class="text-brand-body text-sm md:text-[15px] font-sans leading-relaxed">
+                      Phát triển App giúp hiện thực hóa phong cách sống theo ý muốn.
+                    </p>
+                    <div class="pt-2">
+                      <span class="inline-flex items-center text-brand-primary font-bold text-sm">
+                        Xem chi tiết
+                        <svg class="w-4 h-4 ml-1.5 transition-transform duration-300 group-hover:translate-x-1" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+                          <path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3"/>
+                        </svg>
+                      </span>
+                    </div>
+                  </div>
+                </a>
+
+                <!-- Card 2: SSK -->
+                <a href="./du-an/index.html" class="block w-[322px] h-[469px] shrink-0 relative bg-white group select-none">
+                  <img src="./src/assets/images/ssk-project.png" alt="Dự án SSK" class="w-full h-full object-cover absolute inset-0 z-0">
+                  <div class="absolute inset-0 bg-[#f9f9f9]/90 z-10"></div>
+                  <div class="absolute bottom-0 left-0 right-0 p-8 md:p-10 space-y-4 z-20">
+                    <div class="text-xs uppercase tracking-wider text-brand-body font-bold">
+                      Công ty TNHH SSK
+                    </div>
+                    <h3 class="text-2xl font-heading font-bold text-brand-heading transition-colors duration-300 group-hover:text-brand-primary">
+                      Dự án SSK
+                    </h3>
+                    <p class="text-brand-body text-sm md:text-[15px] font-sans leading-relaxed">
+                      Thử thách để tiếp thêm năng lượng cho mọi người và xã hội với sports data.
+                    </p>
+                    <div class="pt-2">
+                      <span class="inline-flex items-center text-brand-primary font-bold text-sm">
+                        Xem chi tiết
+                        <svg class="w-4 h-4 ml-1.5 transition-transform duration-300 group-hover:translate-x-1" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+                          <path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3"/>
+                        </svg>
+                      </span>
+                    </div>
+                  </div>
+                </a>
+
+                <!-- Card 3: HARUTAKA -->
+                <a href="./du-an/index.html" class="block w-[322px] h-[469px] shrink-0 relative bg-white group select-none">
+                  <img src="./src/assets/images/zenkigen-project.png" alt="Dự án HARUTAKA" class="w-full h-full object-cover absolute inset-0 z-0">
+                  <div class="absolute inset-0 bg-[#f9f9f9]/90 z-10"></div>
+                  <div class="absolute bottom-0 left-0 right-0 p-8 md:p-10 space-y-4 z-20">
+                    <div class="text-xs uppercase tracking-wider text-brand-body font-bold">
+                      ZENKIGEN
+                    </div>
+                    <h3 class="text-2xl font-heading font-bold text-brand-heading transition-colors duration-300 group-hover:text-brand-primary">
+                      Dự án HARUTAKA
+                    </h3>
+                    <p class="text-brand-body text-sm md:text-[15px] font-sans leading-relaxed">
+                      Dịch vụ phỏng vấn trên nền tảng web/video giúp tối ưu quy trình tuyển dụng.
+                    </p>
+                    <div class="pt-2">
+                      <span class="inline-flex items-center text-brand-primary font-bold text-sm">
+                        Xem chi tiết
+                        <svg class="w-4 h-4 ml-1.5 transition-transform duration-300 group-hover:translate-x-1" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+                          <path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3"/>
+                        </svg>
+                      </span>
+                    </div>
+                  </div>
+                </a>
+
+                <!-- CLONE Card 1: KURASHICOM (At end for infinite loop) -->
+                <a href="./du-an/index.html" class="block w-[322px] h-[469px] shrink-0 relative bg-white group select-none">
+                  <img src="./src/assets/images/Kurashicom.png" alt="Dự án KURASHICOM" class="w-full h-full object-cover absolute inset-0 z-0">
+                  <div class="absolute inset-0 bg-[#f9f9f9]/90 z-10"></div>
+                  <div class="absolute bottom-0 left-0 right-0 p-8 md:p-10 space-y-4 z-20">
+                    <div class="text-xs uppercase tracking-wider text-brand-body font-bold">
+                      Kurashicom Inc
+                    </div>
+                    <h3 class="text-2xl font-heading font-bold text-brand-heading transition-colors duration-300 group-hover:text-brand-primary">
+                      Dự án KURASHICOM
+                    </h3>
+                    <p class="text-brand-body text-sm md:text-[15px] font-sans leading-relaxed">
+                      Phát triển App giúp hiện thực hóa phong cách sống theo ý muốn.
+                    </p>
+                    <div class="pt-2">
+                      <span class="inline-flex items-center text-brand-primary font-bold text-sm">
+                        Xem chi tiết
+                        <svg class="w-4 h-4 ml-1.5 transition-transform duration-300 group-hover:translate-x-1" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+                          <path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3"/>
+                        </svg>
+                      </span>
+                    </div>
+                  </div>
+                </a>
+
               </div>
             </div>
 
-            <!-- Carousel Navigation Arrows (Aligned with Card) -->
-            <div class="flex justify-end gap-3 mt-6 max-w-[342px] mx-auto lg:ml-auto">
+            <!-- Carousel Navigation Arrows (Aligned with Card, max-w-[322px], aligned to right edge) -->
+            <div class="flex justify-end gap-3 mt-6 w-[322px] mx-auto lg:ml-auto">
               <button id="prev-project" class="w-12 h-12 rounded-full border border-gray-200 flex items-center justify-center hover:bg-gray-50 transition-colors" aria-label="Previous project">
                 <svg class="w-5 h-5 text-brand-body" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
                   <path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7"/>
@@ -314,11 +414,267 @@
                 </svg>
               </button>
             </div>
+            <!-- Section-project:before decoration dot (anchored to right column bottom) -->
+            <span class="absolute right-[-90px] bottom-[-40px] w-[71px] h-[71px] rounded-full bg-[#ffeff0] z-20 pointer-events-none"></span>
           </div>
 
+      </div> <!-- Close Projects content -->
+
+      <!-- ==================== CAREER OPPORTUNITIES SECTION ==================== -->
+      <div class="pt-24 relative overflow-visible">
+        <!-- Card Container with background image and solid red overlay -->
+        <div class="relative bg-cover bg-center rounded-[16px] overflow-hidden min-h-[480px] flex flex-col items-center justify-center p-8 text-center" style="background-image: url('./src/assets/images/career-bg.jpg');">
+          <!-- rgba(192, 17, 17, 0.9) red overlay -->
+          <div class="absolute inset-0 bg-[#c01111]/90 z-10"></div>
+          
+          <!-- Content content -->
+          <div class="relative w-full z-20 flex flex-col items-center text-white">
+            <!-- Decorative circle on top left of the card (exact top/left: 75px, size: 42px) -->
+            <span class="absolute top-[30px] left-[45px] w-[42px] h-[42px] rounded-full bg-[#ef3f45] z-20 pointer-events-none"></span>
+
+            <!-- Big red transparent background circle behind the main text (200x200px) -->
+            <div class="absolute w-[200px] h-[200px] rounded-full bg-[#d82329;] -z-10 top-[110px] left-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-none"></div>
+
+            <!-- Sun Asterisk (sub-title: 18px font-weight 300) -->
+            <div class="text-[18px] font-[300] text-white/80 uppercase tracking-widest mb-2 font-sans pt-12 md:pt-16">
+              Sun Asterisk
+            </div>
+            
+            <!-- Cơ hội nghề nghiệp  -->
+            <h2 class="md:text-[56px] font-[700] leading-[1.5] text-white mb-[80px] font-heading">
+              Cơ hội nghề nghiệp
+            </h2>
+
+            <!-- Headline  -->
+            <h3 class=" text-[32px] font-heading font-bold text-white tracking-wide uppercase px-4 leading-snug mb-[30px]">
+              Join us & MAKE AWESOME THINGS THAT MATTER.
+            </h3>
+
+            <!-- Descriptions (Changed to text-[24px]) -->
+            <div class="space-y-2 px-4 text-[24px] font-sans leading-relaxed">
+              <p class="text-white/95">
+                Sun* luôn tìm kiếm những con người đam mê thử thách để tạo nên những giá trị<br>"Awesome".
+              </p>
+              <p class="text-white/95">
+                Cùng trở thành một phần của Sun* ngay hôm nay.
+              </p>
+            </div>
+
+            <!-- Button Wrapper (Kept margin-top: 50px, padding-bottom: 50px) -->
+            <div class="mt-[50px] pb-[30px]">
+              <a href="./co-hoi-nghe-nghiep/index.html" class="btn-card-left w-auto !h-auto !px-20 !py-6">
+                Gia nhập đội ngũ Sun*
+                <span class="btn-arrow">
+                  <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3"/>
+                  </svg>
+                </span>
+              </a>
+            </div>
+          </div>
         </div>
       </div>
-    </section>
+
+      <!-- ==================== WORK ENVIRONMENT SECTION ==================== -->
+      <div class="border-t border-gray-100 pt-24 relative overflow-visible">
+
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 items-start">
+          <!-- Left Column (Title and list of 3 items with exact Haru layout) -->
+          <div class="w-full">
+            <!-- Section Title (Inside the column) -->
+            <h2 class="text-[40px] font-heading font-bold text-brand-heading mt-[20px] mb-[10px]">
+              Môi trường làm việc
+            </h2>
+            <div class="haru-list-content haru-list-content--style-2 list-content-home mt-6">
+              <ul class="space-y-8">
+                <!-- Item 1 -->
+                <li class="flex items-start gap-4">
+                  <div class="haru-list-content__icon flex-shrink-0 w-10 h-10 flex items-center justify-center">
+                    <i class="haru-icon haru-icon-check flex items-center justify-center text-[#c01111]">
+                      <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/>
+                      </svg>
+                    </i>
+                  </div>
+                  <div class="haru-list-content__content pt-1">
+                    <div class="haru-list-content__title text-[18px] text-[#4d5969] mb-[10px] font-sans leading-relaxed">
+                      #ActiveChallenge: Chủ động tạo ra công việc thử thách liên tục cho bản thân.
+                    </div>
+                  </div>
+                </li>
+                <!-- Item 2 -->
+                <li class="flex items-start gap-4">
+                  <div class="haru-list-content__icon flex-shrink-0 w-10 h-10 flex items-center justify-center">
+                    <i class="haru-icon haru-icon-check flex items-center justify-center text-[#c01111]">
+                      <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/>
+                      </svg>
+                    </i>
+                  </div>
+                  <div class="haru-list-content__content pt-1">
+                    <div class="haru-list-content__title text-[18px] text-[#4d5969] mb-[10px] font-sans leading-relaxed">
+                      #ActiveLearn: Học tập trong một tổ chức có đầy đủ các thành phần tố: môi trường học tập, cơ hội học tập, năng lực học tập.
+                    </div>
+                  </div>
+                </li>
+                <!-- Item 3 -->
+                <li class="flex items-start gap-4">
+                  <div class="haru-list-content__icon flex-shrink-0 w-10 h-10 flex items-center justify-center">
+                    <i class="haru-icon haru-icon-check flex items-center justify-center text-[#c01111]">
+                      <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/>
+                      </svg>
+                    </i>
+                  </div>
+                  <div class="haru-list-content__content pt-1">
+                    <div class="haru-list-content__title text-[18px] text-[#4d5969] mb-[10px] font-sans leading-relaxed">
+                      #ActiveJoy: Sống trong môi trường văn hóa hướng tới giá trị nhân văn, và hạnh phúc cho mọi người.
+                    </div>
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </div>
+
+          <!-- Right Column (Illustration with absolute overlay button - pushed down below title level) -->
+          <div class="w-full relative flex flex-col items-center lg:pt-[70px]">
+            <!-- Illustration Image Wrapper (increased to w-full to make the image larger) -->
+            <div class="relative w-full max-w-[520px] mx-auto overflow-visible">
+              <img src="./src/assets/images/human-centered.png" alt="Môi trường làm việc" class="w-full h-auto block">
+              
+              <!-- Absolute Button overlaying the keyboard bottom area (scaled down to w-[60%] and forced !h-[70px]) -->
+              <a href="./moi-truong-lam-viec/index.html" class="btn-card-right absolute bottom-[105px] left-1/2 -translate-x-1/2 w-[60%] !h-[70px] z-20 shadow-lg">
+                Xem chi tiết
+                <span class="btn-arrow">
+                  <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3"/>
+                  </svg>
+                </span>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ==================== CULTURE AND EVENTS SECTION ==================== -->
+      <div class="border-t border-gray-100 pt-24 relative overflow-visible">
+        <!-- Section Header with Arrows -->
+        <div class="flex justify-between items-center mb-[40px]">
+          <h2 class="text-[40px] font-heading font-bold text-brand-heading">
+            Văn hóa - Sự kiện
+          </h2>
+          <!-- Carousel Navigation Chevrons -->
+          <div class="flex gap-2">
+            <button class="w-10 h-10 rounded-full border border-gray-200 flex items-center justify-center hover:bg-gray-50 transition-colors" aria-label="Previous post">
+              <svg class="w-4 h-4 text-brand-body" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7"/>
+              </svg>
+            </button>
+            <button class="w-10 h-10 rounded-full border border-gray-200 flex items-center justify-center hover:bg-gray-50 transition-colors" aria-label="Next post">
+              <svg class="w-4 h-4 text-brand-body" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/>
+              </svg>
+            </button>
+          </div>
+        </div>
+
+        <!-- News Cards Grid -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <!-- Card 1 -->
+          <a href="./tin-tuc/index.html" class="relative group flex flex-col border border-transparent p-6 rounded-[8px] bg-white transition-all duration-300 hover:border-gray-200/80 hover:shadow-sm">
+            <!-- Image Area (overflow-visible to allow badge to hang outside) -->
+            <div class="relative aspect-[16/9] bg-gray-100 mb-4 overflow-visible">
+              <span class="absolute top-[-10px] right-[-10px] block text-white bg-[#c01111] font-bold rounded-[34px] leading-[32px] px-[20px] z-10 text-xs">Tin nóng</span>
+              <img src="./src/assets/images/news-1.png" alt="TechUp #2" class="w-full h-full object-cover rounded-[8px]">
+            </div>
+            <!-- Title (14px, bold, mt: 30px, mb: 20px) -->
+            <h4 class="text-[14px] font-bold text-[#2B3441] leading-snug mt-[30px] mb-[20px] transition-colors group-hover:text-[#c01111] font-sans">
+              Hé lộ bộ tài liệu độc quyền siêu HOT và giải đáp toàn bộ thắc mắc kỹ thuật sau TechUp #2
+            </h4>
+            <!-- Body text -->
+            <div class="space-y-3 flex-grow flex flex-col justify-between">
+              <p class="text-[#4d5969] text-xs md:text-[14px] leading-relaxed line-clamp-4 font-sans">
+                “Tôi đã quẹt thẻ 10$ mua Copilot ngay trong phần chia sẻ thiết thực của diễn giả” - một lập trình viên đã tâm sự với BTC sau khi tham gia TechUp #2.
+              </p>
+              <div class="pt-2">
+                <span class="inline-flex items-center text-[#c01111] text-sm font-bold group-hover:underline">
+                  Xem chi tiết
+                  <svg class="w-3.5 h-3.5 ml-1" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3"/>
+                  </svg>
+                </span>
+              </div>
+            </div>
+          </a>
+
+          <!-- Card 2 -->
+          <a href="./tin-tuc/index.html" class="relative group flex flex-col border border-transparent p-6 rounded-[8px] bg-white transition-all duration-300 hover:border-gray-200/80 hover:shadow-sm">
+            <!-- Image Area -->
+            <div class="relative rounded-[8px] overflow-hidden aspect-[16/9] bg-gray-100 mb-4">
+              <img src="./src/assets/images/news-2.jpg" alt="6 tháng cùng chiến dịch" class="w-full h-full object-cover">
+            </div>
+            <!-- Title (14px, bold, mt: 30px, mb: 20px) -->
+            <h4 class="text-[14px] font-bold text-[#2B3441] leading-snug mt-[30px] mb-[20px] transition-colors group-hover:text-[#c01111] font-sans">
+              6 tháng cùng chiến lược “Toàn Sun* học tập và thực hành liên tục", chúng ta đã có những kết quả như thế nào?
+            </h4>
+            <!-- Body text -->
+            <div class="space-y-3 flex-grow flex flex-col justify-between">
+              <p class="text-[#4d5969] text-xs md:text-[14px] leading-relaxed line-clamp-4 font-sans">
+                Để nuôi dưỡng và phát triển mạnh mẽ văn hóa học tập, từ đó trở thành "Tổ chức học tập" (Learning Organization), 6 tháng qua, với chiến lược “Toàn Sun* học tập và thực hành liên tục", chúng ta đã có những kết quả học tập tích cực.
+              </p>
+              <div class="pt-2">
+                <span class="inline-flex items-center text-[#c01111] text-sm font-bold group-hover:underline">
+                  Xem chi tiết
+                  <svg class="w-3.5 h-3.5 ml-1" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3"/>
+                  </svg>
+                </span>
+              </div>
+            </div>
+          </a>
+
+          <!-- Card 3 -->
+          <a href="./tin-tuc/index.html" class="relative group flex flex-col border border-transparent p-6 rounded-[8px] bg-white transition-all duration-300 hover:border-gray-200/80 hover:shadow-sm">
+            <!-- Image Area -->
+            <div class="relative rounded-[8px] overflow-hidden aspect-[16/9] bg-gray-100 mb-4">
+              <img src="./src/assets/images/news-3.png" alt="Chinh phục chứng chỉ CKA 2024" class="w-full h-full object-cover">
+            </div>
+            <!-- Title (14px, bold, mt: 30px, mb: 20px) -->
+            <h4 class="text-[14px] font-bold text-[#2B3441] leading-snug mt-[30px] mb-[20px] transition-colors group-hover:text-[#c01111] font-sans">
+              Chinh phục chứng chỉ CKA 2024 cùng Hữu Kim (R&D): "Kịch tính và nhiều kinh nghiệm xương máu"
+            </h4>
+            <!-- Body text -->
+            <div class="space-y-3 flex-grow flex flex-col justify-between">
+              <p class="text-[#4d5969] text-xs md:text-[14px] leading-relaxed line-clamp-4 font-sans">
+                Sunner Hữu Kim (R&D) vừa trải qua hành trình thi chứng chỉ CKA (Certified Kubernetes Administrator) trong năm 2024. Nhắc đến cuộc thi này, kịch tính và nhiều bài học xương máu là những gì Kim ấn tượng nhất.
+              </p>
+              <div class="pt-2">
+                <span class="inline-flex items-center text-[#c01111] text-sm font-bold group-hover:underline">
+                  Xem chi tiết
+                  <svg class="w-3.5 h-3.5 ml-1" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3"/>
+                  </svg>
+                </span>
+              </div>
+            </div>
+          </a>
+        </div>
+
+        <!-- See more news button (styled with btn-card-right and custom padding) -->
+        <!-- See more news button (styled with btn-card-right, exact 366px x 80px size) -->
+        <div class="flex justify-center mt-16">
+          <a href="./tin-tuc/index.html" class="btn-card-right !w-[366px] shadow-md">
+            Xem nhiều tin hơn
+            <span class="btn-arrow">
+              <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3"/>
+              </svg>
+            </span>
+          </a>
+        </div>
+      </div>
+      
+    </div> <!-- Close MAIN CONTENT WRAPPER -->
   </main>
 
   <!-- ==================== FOOTER ==================== -->
