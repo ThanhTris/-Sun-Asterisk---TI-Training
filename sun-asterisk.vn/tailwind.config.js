@@ -1,12 +1,9 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   content: [
-    "./index.html",
-    "./ve-chung-toi/**/*.html",
-    "./du-an/**/*.html",
-    "./co-hoi-nghe-nghiep/**/*.html",
-    "./moi-truong-lam-viec/**/*.html",
-    "./tin-tuc/**/*.html",
+    "./src/index.html",
+    "./src/pages/**/*.html",
+    "./src/components/**/*.html",
     "./src/js/**/*.js"
   ],
   theme: {
