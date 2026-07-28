@@ -1,57 +1,174 @@
+/* ==========================================================================
+   CSS Custom Properties (Design Tokens)
+   ========================================================================== */
 :root {
-  --color-brand-primary: #C01111;
-  --color-brand-heading: #2B3441;
-  --color-brand-body: #4D5969;
-  --color-footer-bg: #f7f7f7;
-  --color-footer-text: #949ba4;
-  --color-footer-title: #4d5969;
-  --color-border-gray: #E4E4E4;
-  --color-circle-accent: #E4E4E4;
+  /* Core brand colors */
+  --color-brand-primary:  #C01111;
+  --color-brand-heading:  #2B3441;
+  --color-brand-body:     #4D5969;
+  /* Footer */
+  --color-footer-bg:      #f7f7f7;
+  --color-footer-text:    #949ba4;
+  --color-footer-title:   #4d5969;
+  /* Borders & accent circles */
+  --color-border-gray:    #E4E4E4;
+  --color-circle-accent:  #E4E4E4;
+  /* Stat counter gradient stop */
+  --color-stat-gradient:  #E05252;
 }
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
+/* ==========================================================================
+   Base Layer
+   ========================================================================== */
 @layer base {
   body {
     @apply text-brand-body font-sans bg-white;
   }
-  
+
   h1, h2, h3, h4, h5, h6 {
     @apply text-brand-heading font-heading font-bold;
   }
 }
 
+/* ==========================================================================
+   Component Layer — Reusable UI building blocks
+   ========================================================================== */
 @layer components {
-  /* Reusable Buttons */
+
+  /* ------------------------------------------------------------------
+   * Buttons (pill-shaped base)
+   * ------------------------------------------------------------------ */
   .btn {
     @apply inline-flex items-center justify-center px-6 py-3 font-semibold rounded-full transition-all duration-300 transform active:scale-95 cursor-pointer;
   }
-  
+
   .btn-primary {
-    @apply btn bg-brand-primary text-white hover:bg-red-700 hover:shadow-lg hover:shadow-red-500/20;
+    @apply inline-flex items-center justify-center px-6 py-3 font-semibold rounded-full transition-all duration-300 transform active:scale-95 cursor-pointer bg-brand-primary text-white hover:bg-red-700 hover:shadow-lg hover:shadow-brand-primary/20;
   }
-  
+
   .btn-secondary {
-    @apply btn bg-brand-heading text-white hover:bg-black hover:shadow-lg hover:shadow-slate-500/20;
+    @apply inline-flex items-center justify-center px-6 py-3 font-semibold rounded-full transition-all duration-300 transform active:scale-95 cursor-pointer bg-brand-heading text-white hover:bg-black hover:shadow-lg hover:shadow-brand-heading/20;
   }
-  
+
   .btn-outline {
-    @apply btn border-2 border-brand-heading text-brand-heading hover:bg-brand-heading hover:text-white;
+    @apply inline-flex items-center justify-center px-6 py-3 font-semibold rounded-full transition-all duration-300 transform active:scale-95 cursor-pointer border-2 border-brand-heading text-brand-heading hover:bg-brand-heading hover:text-white;
   }
 
   .btn-outline-primary {
-    @apply btn border-2 border-brand-primary text-brand-primary hover:bg-brand-primary hover:text-white;
+    @apply inline-flex items-center justify-center px-6 py-3 font-semibold rounded-full transition-all duration-300 transform active:scale-95 cursor-pointer border-2 border-brand-primary text-brand-primary hover:bg-brand-primary hover:text-white;
   }
-  
-  /* Container utility */
+
+  /* ------------------------------------------------------------------
+   * Section Title — shared across all homepage sections
+   * ------------------------------------------------------------------ */
+  .section-title {
+    @apply text-[40px] font-heading font-bold text-brand-heading mt-[20px] mb-[10px] pb-[25px];
+  }
+
+  /* ------------------------------------------------------------------
+   * News Card — used in the Culture & Events section
+   * ------------------------------------------------------------------ */
+  .news-card {
+    @apply relative flex flex-col border border-transparent p-6 rounded-[8px] bg-white transition-all duration-300;
+  }
+
+  .news-card:hover {
+    border-color: rgba(229, 231, 235, 0.8); /* gray-200/80 */
+    box-shadow: 0 1px 2px 0 rgba(0,0,0,0.05);
+  }
+
+  .news-card__image {
+    @apply relative aspect-[16/9] bg-gray-100 mb-4;
+  }
+
+  .news-card__image--overflow {
+    @apply overflow-visible;
+  }
+
+  .news-card__image--clipped {
+    @apply rounded-[8px] overflow-hidden;
+  }
+
+  .news-card__title {
+    @apply text-[14px] font-bold text-brand-heading leading-snug mt-[30px] mb-[20px] transition-colors font-sans;
+  }
+
+  .news-card:hover .news-card__title {
+    @apply text-brand-primary;
+  }
+
+  .news-card__excerpt {
+    @apply text-brand-body text-xs md:text-[14px] leading-relaxed line-clamp-4 font-sans;
+  }
+
+  .news-card__link {
+    @apply inline-flex items-center text-brand-primary text-sm font-bold;
+  }
+
+  .news-card:hover .news-card__link {
+    @apply underline;
+  }
+
+  /* ------------------------------------------------------------------
+   * News Badge — "Tin nóng" pill badge overlaid on card image
+   * ------------------------------------------------------------------ */
+  .news-badge {
+    @apply absolute block text-white bg-brand-primary font-bold rounded-[34px] leading-[32px] px-[20px] z-10 text-xs;
+  }
+
+  /* ------------------------------------------------------------------
+   * Haru List Item — Work Environment #Active... list
+   * ------------------------------------------------------------------ */
+  .haru-list-item {
+    @apply flex items-start gap-4;
+  }
+
+  .haru-list-item__icon-wrap {
+    @apply flex-shrink-0 w-10 h-10 flex items-center justify-center;
+  }
+
+  .haru-list-item__icon {
+    @apply flex items-center justify-center text-brand-primary;
+  }
+
+  .haru-list-item__text {
+    @apply text-[18px] text-brand-body mb-[10px] font-sans leading-relaxed;
+  }
+
+  /* ------------------------------------------------------------------
+   * Navigation Chevron — carousel prev/next button
+   * ------------------------------------------------------------------ */
+  .nav-chevron {
+    @apply w-10 h-10 rounded-full border border-gray-200 flex items-center justify-center hover:bg-gray-50 transition-colors;
+  }
+
+  /* ------------------------------------------------------------------
+   * Footer Heading with accent circle decoration
+   * ------------------------------------------------------------------ */
+  .footer-heading {
+    @apply relative font-bold text-brand-footerTitle text-[18px] mb-6 pl-2;
+  }
+
+  .footer-heading__accent {
+    @apply absolute left-[-10px] top-1/2 -translate-y-1/2 w-[38px] h-[38px] rounded-full bg-brand-circleAccent -z-10;
+  }
+
+  /* ------------------------------------------------------------------
+   * Container utility
+   * ------------------------------------------------------------------ */
   .container-custom {
-    @apply max-width-custom mx-auto px-4 sm:px-6 lg:px-8;
+    @apply mx-auto px-4 sm:px-6 lg:px-8;
+    max-width: 1200px;
   }
 }
 
-/* Custom styles not easily done in Tailwind */
+/* ==========================================================================
+   Utilities
+   ========================================================================== */
 .max-width-custom {
   max-width: 1200px;
 }

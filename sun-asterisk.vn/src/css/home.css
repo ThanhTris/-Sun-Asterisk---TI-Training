@@ -1,5 +1,6 @@
 /* ==========================================================================
    Home Page Specific Styles (Trang chủ)
+   All hex values replaced with CSS custom properties from :root in main.css
    ========================================================================== */
 
 /* 1. Hero Section (Banner / Video background) */
@@ -24,7 +25,7 @@
 .home-hero-overlay {
   position: absolute;
   inset: 0;
-  background: rgba(43, 52, 65, 0.4); /* Dark overlay matching brand-heading */
+  background: rgba(43, 52, 65, 0.4); /* brand-heading at 40% opacity */
   z-index: 0;
 }
 
@@ -56,7 +57,7 @@
 
 .stat-number {
   font-family: 'Roboto Slab', serif;
-  background: linear-gradient(135deg, var(--color-brand-primary), #E05252);
+  background: linear-gradient(135deg, var(--color-brand-primary), var(--color-stat-gradient));
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
@@ -80,20 +81,21 @@
   height: 80px;
   border-radius: 8px;
   font-weight: 700;
-  font-size: 18px; /* Updated to 18px */
+  font-size: 18px;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: 12px; /* Slight gap increase */
+  gap: 12px;
   width: 100%;
   overflow: hidden;
   z-index: 1;
   transition: color 0.4s, background-color 0.4s;
 }
 
+/* btn-card-left: white bg / red text → slides to dark (#2B3441) on hover */
 .btn-card-left {
   background-color: #fff;
-  color: #c01111;
+  color: var(--color-brand-primary);
 }
 
 .btn-card-left::before {
@@ -103,7 +105,7 @@
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: #2b3441; /* black of right button */
+  background-color: var(--color-brand-heading); /* dark brand-heading */
   z-index: -1;
   opacity: 0;
   transform: scale3d(0.7, 1, 1);
@@ -115,7 +117,7 @@
   width: 32px;
   height: 32px;
   border-radius: 50%;
-  background-color: rgba(192, 17, 17, 0.1); /* light red */
+  background-color: rgba(192, 17, 17, 0.1); /* brand-primary at 10% */
   display: flex;
   align-items: center;
   justify-content: center;
@@ -132,12 +134,13 @@
 }
 
 .btn-card-left:hover .btn-arrow {
-  background-color: rgba(255, 255, 255, 0.2); /* light white on hover black background */
+  background-color: rgba(255, 255, 255, 0.2);
   color: #fff;
 }
 
+/* btn-card-right: dark bg / white text → slides to red on hover */
 .btn-card-right {
-  background-color: #2b3441;
+  background-color: var(--color-brand-heading);
   color: #fff;
 }
 
@@ -148,7 +151,7 @@
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: #c01111; /* red of left button */
+  background-color: var(--color-brand-primary);
   z-index: -1;
   opacity: 0;
   transform: scale3d(0.7, 1, 1);
@@ -160,7 +163,7 @@
   width: 32px;
   height: 32px;
   border-radius: 50%;
-  background-color: rgba(255, 255, 255, 0.1); /* light white */
+  background-color: rgba(255, 255, 255, 0.1);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -177,8 +180,6 @@
 }
 
 .btn-card-right:hover .btn-arrow {
-  background-color: rgba(255, 255, 255, 0.2); /* light white on hover red background */
+  background-color: rgba(255, 255, 255, 0.2);
   color: #fff;
 }
-
-

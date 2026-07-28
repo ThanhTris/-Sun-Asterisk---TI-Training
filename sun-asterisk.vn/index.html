@@ -114,17 +114,17 @@
       <div id="sectors">
         
         <!-- Section Title (No effect background circle, exact 40px Open Sans specs) -->
-        <h2 class="text-[40px] font-heading font-bold text-brand-heading mt-[20px] mb-[10px] pb-[25px]">
+        <h2 class="section-title">
           Lĩnh vực kinh doanh
         </h2>
 
         <!-- Introduction Wrapper -->
         <div class="relative w-full overflow-visible mb-[80px]">
-          <!-- Stacked Card Protrusion on the Left (6px border #f9f9f9, rounded-l-16px, bg-white, 60% height) -->
-          <span class="absolute left-[-40px] top-1/2 -translate-y-1/2 w-[80px] h-[60%] bg-white border-[6px] border-[#f9f9f9] rounded-l-[16px] z-0 pointer-events-none"></span>
+          <!-- Stacked Card Protrusion on the Left (6px border brand-cardBg, rounded-l-16px, bg-white, 60% height) -->
+          <span class="absolute left-[-40px] top-1/2 -translate-y-1/2 w-[80px] h-[60%] bg-white border-[6px] border-brand-cardBg rounded-l-[16px] z-0 pointer-events-none"></span>
 
-          <!-- Main Card (6px border #f9f9f9, rounded-16px) -->
-          <div class="relative bg-white rounded-[16px] border-[6px] border-[#f9f9f9] shadow-sm p-8 md:p-12 min-h-[322px] flex flex-col lg:flex-row items-center overflow-visible z-10">
+          <!-- Main Card (6px border brand-cardBg, rounded-16px) -->
+          <div class="relative bg-white rounded-[16px] border-[6px] border-brand-cardBg shadow-sm p-8 md:p-12 min-h-[322px] flex flex-col lg:flex-row items-center overflow-visible z-10">
             <!-- Text intro (Left 48%) -->
             <div class="w-full lg:w-[48%] space-y-6 text-[16px] leading-relaxed text-brand-body z-10">
             <p>
@@ -148,7 +148,7 @@
           <!-- Card 1: Creative & Engineering (Overflow visible) -->
           <div class="relative bg-brand-primary text-white p-10 md:p-12 rounded-[20px] shadow-lg flex flex-col justify-between overflow-visible min-h-[420px]">
             <!-- Red dot 66px top right edge -->
-            <span class="absolute right-[50px] top-0 -translate-y-1/2 w-[66px] h-[66px] rounded-full bg-[#d82329] z-20 pointer-events-none"></span>
+            <span class="absolute right-[50px] top-0 -translate-y-1/2 w-[66px] h-[66px] rounded-full bg-brand-accentRedDark z-20 pointer-events-none"></span>
             
             <div class="space-y-8">
               <!-- Badge (Plain text with a transparent white circle behind) -->
@@ -179,14 +179,14 @@
           </div>
 
           <!-- Card 2: Talent Platform (Overflow visible) -->
-          <div class="relative bg-white text-brand-heading p-12 rounded-[16px] border border-[#d7dadc] flex flex-col justify-between overflow-visible min-h-[420px]">
+          <div class="relative bg-white text-brand-heading p-12 rounded-[16px] border border-brand-cardBorder flex flex-col justify-between overflow-visible min-h-[420px]">
             <!-- Red dot 36px bottom right edge -->
-            <span class="absolute right-[-83px] bottom-[166px] -translate-y-1/2 w-[36px] h-[36px] rounded-full bg-[#c01111] z-20 pointer-events-none"></span>
+            <span class="absolute right-[-83px] bottom-[166px] -translate-y-1/2 w-[36px] h-[36px] rounded-full bg-brand-primary z-20 pointer-events-none"></span>
             
             <div class="space-y-8">
               <!-- Badge (Plain text with a light gray circle behind) -->
               <div class="relative inline-flex items-center h-8">
-                <span class="absolute left-0 w-8 h-8 rounded-full bg-[#E4E4E4]/40 z-0"></span>
+                <span class="absolute left-0 w-8 h-8 rounded-full bg-brand-circleAccent/40 z-0"></span>
                 <span class="relative z-10 text-brand-body text-[12px] pl-4 font-light tracking-wide">Digital Creative Studio</span>
               </div>
               <!-- Title -->
@@ -224,11 +224,11 @@
             <!-- Section Title (With before/after decoration dots, exact mb-20px) -->
             <div class="relative mb-[20px]">
               <!-- project-heading:before (Red dot) -->
-              <span class="absolute right-[25%] top-[-30px] -translate-y-1/2 w-[28px] h-[28px] rounded-full bg-[#c01111] z-20 pointer-events-none"></span>
+              <span class="absolute right-[25%] top-[-30px] -translate-y-1/2 w-[28px] h-[28px] rounded-full bg-brand-primary z-20 pointer-events-none"></span>
               <!-- project-heading:after (Light red dot) -->
-              <span class="absolute left-0 bottom-[-40px] w-[26px] h-[26px] rounded-full bg-[#c01111]/10 z-20 pointer-events-none"></span>
+              <span class="absolute left-0 bottom-[-40px] w-[26px] h-[26px] rounded-full bg-brand-primary/10 z-20 pointer-events-none"></span>
 
-              <h2 class="text-[40px] font-heading font-bold text-brand-heading mt-0 mb-[10px] pb-[25px]">
+              <h2 class="section-title mt-0">
                 Dự án của chúng tôi
               </h2>
             </div>
@@ -276,7 +276,7 @@
                 <!-- CLONE Card 3: HARUTAKA (At start for infinite loop) -->
                 <a href="./du-an/index.html" class="block w-[322px] h-[469px] shrink-0 relative bg-white group select-none">
                   <img src="./src/assets/images/zenkigen-project.png" alt="Dự án HARUTAKA" class="w-full h-full object-cover absolute inset-0 z-0">
-                  <div class="absolute inset-0 bg-[#f9f9f9]/90 z-10"></div>
+                  <div class="absolute inset-0 bg-brand-cardBg/90 z-10"></div>
                   <div class="absolute bottom-0 left-0 right-0 p-8 md:p-10 space-y-4 z-20">
                     <div class="text-xs uppercase tracking-wider text-brand-body font-bold">
                       ZENKIGEN
@@ -301,7 +301,7 @@
                 <!-- Card 1: KURASHICOM -->
                 <a href="./du-an/index.html" class="block w-[322px] h-[469px] shrink-0 relative bg-white group select-none">
                   <img src="./src/assets/images/Kurashicom.png" alt="Dự án KURASHICOM" class="w-full h-full object-cover absolute inset-0 z-0">
-                  <div class="absolute inset-0 bg-[#f9f9f9]/90 z-10"></div>
+                  <div class="absolute inset-0 bg-brand-cardBg/90 z-10"></div>
                   <div class="absolute bottom-0 left-0 right-0 p-8 md:p-10 space-y-4 z-20">
                     <div class="text-xs uppercase tracking-wider text-brand-body font-bold">
                       Kurashicom Inc
@@ -326,7 +326,7 @@
                 <!-- Card 2: SSK -->
                 <a href="./du-an/index.html" class="block w-[322px] h-[469px] shrink-0 relative bg-white group select-none">
                   <img src="./src/assets/images/ssk-project.png" alt="Dự án SSK" class="w-full h-full object-cover absolute inset-0 z-0">
-                  <div class="absolute inset-0 bg-[#f9f9f9]/90 z-10"></div>
+                  <div class="absolute inset-0 bg-brand-cardBg/90 z-10"></div>
                   <div class="absolute bottom-0 left-0 right-0 p-8 md:p-10 space-y-4 z-20">
                     <div class="text-xs uppercase tracking-wider text-brand-body font-bold">
                       Công ty TNHH SSK
@@ -351,7 +351,7 @@
                 <!-- Card 3: HARUTAKA -->
                 <a href="./du-an/index.html" class="block w-[322px] h-[469px] shrink-0 relative bg-white group select-none">
                   <img src="./src/assets/images/zenkigen-project.png" alt="Dự án HARUTAKA" class="w-full h-full object-cover absolute inset-0 z-0">
-                  <div class="absolute inset-0 bg-[#f9f9f9]/90 z-10"></div>
+                  <div class="absolute inset-0 bg-brand-cardBg/90 z-10"></div>
                   <div class="absolute bottom-0 left-0 right-0 p-8 md:p-10 space-y-4 z-20">
                     <div class="text-xs uppercase tracking-wider text-brand-body font-bold">
                       ZENKIGEN
@@ -376,7 +376,7 @@
                 <!-- CLONE Card 1: KURASHICOM (At end for infinite loop) -->
                 <a href="./du-an/index.html" class="block w-[322px] h-[469px] shrink-0 relative bg-white group select-none">
                   <img src="./src/assets/images/Kurashicom.png" alt="Dự án KURASHICOM" class="w-full h-full object-cover absolute inset-0 z-0">
-                  <div class="absolute inset-0 bg-[#f9f9f9]/90 z-10"></div>
+                  <div class="absolute inset-0 bg-brand-cardBg/90 z-10"></div>
                   <div class="absolute bottom-0 left-0 right-0 p-8 md:p-10 space-y-4 z-20">
                     <div class="text-xs uppercase tracking-wider text-brand-body font-bold">
                       Kurashicom Inc
@@ -415,7 +415,7 @@
               </button>
             </div>
             <!-- Section-project:before decoration dot (anchored to right column bottom) -->
-            <span class="absolute right-[-90px] bottom-[-40px] w-[71px] h-[71px] rounded-full bg-[#ffeff0] z-20 pointer-events-none"></span>
+            <span class="absolute right-[-90px] bottom-[-40px] w-[71px] h-[71px] rounded-full bg-brand-redTint z-20 pointer-events-none"></span>
           </div>
 
       </div> <!-- Close Projects content -->
@@ -425,15 +425,15 @@
         <!-- Card Container with background image and solid red overlay -->
         <div class="relative bg-cover bg-center rounded-[16px] overflow-hidden min-h-[480px] flex flex-col items-center justify-center p-8 text-center" style="background-image: url('./src/assets/images/career-bg.jpg');">
           <!-- rgba(192, 17, 17, 0.9) red overlay -->
-          <div class="absolute inset-0 bg-[#c01111]/90 z-10"></div>
+          <div class="absolute inset-0 bg-brand-primary/90 z-10"></div>
           
           <!-- Content content -->
           <div class="relative w-full z-20 flex flex-col items-center text-white">
             <!-- Decorative circle on top left of the card (exact top/left: 75px, size: 42px) -->
-            <span class="absolute top-[30px] left-[45px] w-[42px] h-[42px] rounded-full bg-[#ef3f45] z-20 pointer-events-none"></span>
+            <span class="absolute top-[30px] left-[45px] w-[42px] h-[42px] rounded-full bg-brand-accentRedLight z-20 pointer-events-none"></span>
 
             <!-- Big red transparent background circle behind the main text (200x200px) -->
-            <div class="absolute w-[200px] h-[200px] rounded-full bg-[#d82329;] -z-10 top-[110px] left-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-none"></div>
+            <div class="absolute w-[200px] h-[200px] rounded-full bg-brand-accentRedDark -z-10 top-[110px] left-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-none"></div>
 
             <!-- Sun Asterisk (sub-title: 18px font-weight 300) -->
             <div class="text-[18px] font-[300] text-white/80 uppercase tracking-widest mb-2 font-sans pt-12 md:pt-16">
@@ -482,7 +482,7 @@
           <!-- Left Column (Title and list of 3 items with exact Haru layout) -->
           <div class="w-full">
             <!-- Section Title (Inside the column) -->
-            <h2 class="text-[40px] font-heading font-bold text-brand-heading mt-[20px] mb-[10px]">
+            <h2 class="section-title mb-[10px]">
               Môi trường làm việc
             </h2>
             <div class="haru-list-content haru-list-content--style-2 list-content-home mt-6">
@@ -490,14 +490,14 @@
                 <!-- Item 1 -->
                 <li class="flex items-start gap-4">
                   <div class="haru-list-content__icon flex-shrink-0 w-10 h-10 flex items-center justify-center">
-                    <i class="haru-icon haru-icon-check flex items-center justify-center text-[#c01111]">
+                    <i class="haru-icon haru-icon-check flex items-center justify-center text-brand-primary">
                       <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/>
                       </svg>
                     </i>
                   </div>
                   <div class="haru-list-content__content pt-1">
-                    <div class="haru-list-content__title text-[18px] text-[#4d5969] mb-[10px] font-sans leading-relaxed">
+                    <div class="haru-list-content__title text-[18px] text-brand-body mb-[10px] font-sans leading-relaxed">
                       #ActiveChallenge: Chủ động tạo ra công việc thử thách liên tục cho bản thân.
                     </div>
                   </div>
@@ -505,14 +505,14 @@
                 <!-- Item 2 -->
                 <li class="flex items-start gap-4">
                   <div class="haru-list-content__icon flex-shrink-0 w-10 h-10 flex items-center justify-center">
-                    <i class="haru-icon haru-icon-check flex items-center justify-center text-[#c01111]">
+                    <i class="haru-icon haru-icon-check flex items-center justify-center text-brand-primary">
                       <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/>
                       </svg>
                     </i>
                   </div>
                   <div class="haru-list-content__content pt-1">
-                    <div class="haru-list-content__title text-[18px] text-[#4d5969] mb-[10px] font-sans leading-relaxed">
+                    <div class="haru-list-content__title text-[18px] text-brand-body mb-[10px] font-sans leading-relaxed">
                       #ActiveLearn: Học tập trong một tổ chức có đầy đủ các thành phần tố: môi trường học tập, cơ hội học tập, năng lực học tập.
                     </div>
                   </div>
@@ -520,14 +520,14 @@
                 <!-- Item 3 -->
                 <li class="flex items-start gap-4">
                   <div class="haru-list-content__icon flex-shrink-0 w-10 h-10 flex items-center justify-center">
-                    <i class="haru-icon haru-icon-check flex items-center justify-center text-[#c01111]">
+                    <i class="haru-icon haru-icon-check flex items-center justify-center text-brand-primary">
                       <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/>
                       </svg>
                     </i>
                   </div>
                   <div class="haru-list-content__content pt-1">
-                    <div class="haru-list-content__title text-[18px] text-[#4d5969] mb-[10px] font-sans leading-relaxed">
+                    <div class="haru-list-content__title text-[18px] text-brand-body mb-[10px] font-sans leading-relaxed">
                       #ActiveJoy: Sống trong môi trường văn hóa hướng tới giá trị nhân văn, và hạnh phúc cho mọi người.
                     </div>
                   </div>
@@ -560,17 +560,17 @@
       <div class="border-t border-gray-100 pt-24 relative overflow-visible">
         <!-- Section Header with Arrows -->
         <div class="flex justify-between items-center mb-[40px]">
-          <h2 class="text-[40px] font-heading font-bold text-brand-heading">
+          <h2 class="section-title pb-0 mb-0">
             Văn hóa - Sự kiện
           </h2>
           <!-- Carousel Navigation Chevrons -->
           <div class="flex gap-2">
-            <button class="w-10 h-10 rounded-full border border-gray-200 flex items-center justify-center hover:bg-gray-50 transition-colors" aria-label="Previous post">
+            <button class="nav-chevron" aria-label="Previous post">
               <svg class="w-4 h-4 text-brand-body" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7"/>
               </svg>
             </button>
-            <button class="w-10 h-10 rounded-full border border-gray-200 flex items-center justify-center hover:bg-gray-50 transition-colors" aria-label="Next post">
+            <button class="nav-chevron" aria-label="Next post">
               <svg class="w-4 h-4 text-brand-body" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/>
               </svg>
@@ -581,23 +581,23 @@
         <!-- News Cards Grid -->
         <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
           <!-- Card 1 -->
-          <a href="./tin-tuc/index.html" class="relative group flex flex-col border border-transparent p-6 rounded-[8px] bg-white transition-all duration-300 hover:border-gray-200/80 hover:shadow-sm">
-            <!-- Image Area (overflow-visible to allow badge to hang outside) -->
-            <div class="relative aspect-[16/9] bg-gray-100 mb-4 overflow-visible">
-              <span class="absolute top-[-10px] right-[-10px] block text-white bg-[#c01111] font-bold rounded-[34px] leading-[32px] px-[20px] z-10 text-xs">Tin nóng</span>
+          <a href="./tin-tuc/index.html" class="news-card group">
+            <!-- Image Area (overflow-visible to allow 'Tin nóng' badge to hang outside) -->
+            <div class="news-card__image news-card__image--overflow">
+              <span class="news-badge top-[-10px] right-[-10px]">Tin nóng</span>
               <img src="./src/assets/images/news-1.png" alt="TechUp #2" class="w-full h-full object-cover rounded-[8px]">
             </div>
-            <!-- Title (14px, bold, mt: 30px, mb: 20px) -->
-            <h4 class="text-[14px] font-bold text-[#2B3441] leading-snug mt-[30px] mb-[20px] transition-colors group-hover:text-[#c01111] font-sans">
+            <!-- Title -->
+            <h4 class="news-card__title">
               Hé lộ bộ tài liệu độc quyền siêu HOT và giải đáp toàn bộ thắc mắc kỹ thuật sau TechUp #2
             </h4>
             <!-- Body text -->
             <div class="space-y-3 flex-grow flex flex-col justify-between">
-              <p class="text-[#4d5969] text-xs md:text-[14px] leading-relaxed line-clamp-4 font-sans">
+              <p class="news-card__excerpt">
                 “Tôi đã quẹt thẻ 10$ mua Copilot ngay trong phần chia sẻ thiết thực của diễn giả” - một lập trình viên đã tâm sự với BTC sau khi tham gia TechUp #2.
               </p>
               <div class="pt-2">
-                <span class="inline-flex items-center text-[#c01111] text-sm font-bold group-hover:underline">
+                <span class="news-card__link">
                   Xem chi tiết
                   <svg class="w-3.5 h-3.5 ml-1" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3"/>
@@ -608,22 +608,22 @@
           </a>
 
           <!-- Card 2 -->
-          <a href="./tin-tuc/index.html" class="relative group flex flex-col border border-transparent p-6 rounded-[8px] bg-white transition-all duration-300 hover:border-gray-200/80 hover:shadow-sm">
+          <a href="./tin-tuc/index.html" class="news-card group">
             <!-- Image Area -->
-            <div class="relative rounded-[8px] overflow-hidden aspect-[16/9] bg-gray-100 mb-4">
+            <div class="news-card__image news-card__image--clipped">
               <img src="./src/assets/images/news-2.jpg" alt="6 tháng cùng chiến dịch" class="w-full h-full object-cover">
             </div>
-            <!-- Title (14px, bold, mt: 30px, mb: 20px) -->
-            <h4 class="text-[14px] font-bold text-[#2B3441] leading-snug mt-[30px] mb-[20px] transition-colors group-hover:text-[#c01111] font-sans">
+            <!-- Title -->
+            <h4 class="news-card__title">
               6 tháng cùng chiến lược “Toàn Sun* học tập và thực hành liên tục", chúng ta đã có những kết quả như thế nào?
             </h4>
             <!-- Body text -->
             <div class="space-y-3 flex-grow flex flex-col justify-between">
-              <p class="text-[#4d5969] text-xs md:text-[14px] leading-relaxed line-clamp-4 font-sans">
+              <p class="news-card__excerpt">
                 Để nuôi dưỡng và phát triển mạnh mẽ văn hóa học tập, từ đó trở thành "Tổ chức học tập" (Learning Organization), 6 tháng qua, với chiến lược “Toàn Sun* học tập và thực hành liên tục", chúng ta đã có những kết quả học tập tích cực.
               </p>
               <div class="pt-2">
-                <span class="inline-flex items-center text-[#c01111] text-sm font-bold group-hover:underline">
+                <span class="news-card__link">
                   Xem chi tiết
                   <svg class="w-3.5 h-3.5 ml-1" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3"/>
@@ -634,22 +634,22 @@
           </a>
 
           <!-- Card 3 -->
-          <a href="./tin-tuc/index.html" class="relative group flex flex-col border border-transparent p-6 rounded-[8px] bg-white transition-all duration-300 hover:border-gray-200/80 hover:shadow-sm">
+          <a href="./tin-tuc/index.html" class="news-card group">
             <!-- Image Area -->
-            <div class="relative rounded-[8px] overflow-hidden aspect-[16/9] bg-gray-100 mb-4">
+            <div class="news-card__image news-card__image--clipped">
               <img src="./src/assets/images/news-3.png" alt="Chinh phục chứng chỉ CKA 2024" class="w-full h-full object-cover">
             </div>
-            <!-- Title (14px, bold, mt: 30px, mb: 20px) -->
-            <h4 class="text-[14px] font-bold text-[#2B3441] leading-snug mt-[30px] mb-[20px] transition-colors group-hover:text-[#c01111] font-sans">
+            <!-- Title -->
+            <h4 class="news-card__title">
               Chinh phục chứng chỉ CKA 2024 cùng Hữu Kim (R&D): "Kịch tính và nhiều kinh nghiệm xương máu"
             </h4>
             <!-- Body text -->
             <div class="space-y-3 flex-grow flex flex-col justify-between">
-              <p class="text-[#4d5969] text-xs md:text-[14px] leading-relaxed line-clamp-4 font-sans">
+              <p class="news-card__excerpt">
                 Sunner Hữu Kim (R&D) vừa trải qua hành trình thi chứng chỉ CKA (Certified Kubernetes Administrator) trong năm 2024. Nhắc đến cuộc thi này, kịch tính và nhiều bài học xương máu là những gì Kim ấn tượng nhất.
               </p>
               <div class="pt-2">
-                <span class="inline-flex items-center text-[#c01111] text-sm font-bold group-hover:underline">
+                <span class="news-card__link">
                   Xem chi tiết
                   <svg class="w-3.5 h-3.5 ml-1" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3"/>
@@ -660,8 +660,7 @@
           </a>
         </div>
 
-        <!-- See more news button (styled with btn-card-right and custom padding) -->
-        <!-- See more news button (styled with btn-card-right, exact 366px x 80px size) -->
+        <!-- See more news button (btn-card-right, exact 366px x 80px) -->
         <div class="flex justify-center mt-16">
           <a href="./tin-tuc/index.html" class="btn-card-right !w-[366px] shadow-md">
             Xem nhiều tin hơn
