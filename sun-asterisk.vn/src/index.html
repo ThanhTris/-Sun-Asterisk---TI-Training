@@ -50,7 +50,7 @@
             <!-- Text intro (Left 48%) -->
             <div class="w-full lg:w-[48%] space-y-6 text-[16px] leading-relaxed text-brand-body z-10">
             <p>
-              Là một Digital Creative Studio, Sun* luôn đề cao tinh thần làm chủ sản phẩm, tư duy sáng tạo trong mỗi dự án để mang đến những trải nghiệm <strong class="text-brand-primary font-bold">"Awesome"</strong> nhất cho end-user.
+              Là một Digital Creative Studio, Sun* luôn đề cao tinh thần làm chủ sản phẩm, tư duy sáng tạo trong mỗi dự án để mang đến những trải nghiệm <strong class="font-bold">"Awesome"</strong> nhất cho end-user.
             </p>
             <p>
               Với hai dòng dịch vụ là <strong class="text-brand-heading font-bold">"Creative & Engineering"</strong> và <strong class="text-brand-heading font-bold">"Talent Platform"</strong>, Sun* đã và đang từng bước cùng công nghệ tạo ra những giá trị tốt đẹp cho xã hội.
@@ -68,9 +68,7 @@
         <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-[160px]">
           
           <!-- Card 1: Creative & Engineering (Overflow visible) -->
-          <div class="relative bg-brand-primary text-white p-10 md:p-12 rounded-[20px] shadow-lg flex flex-col justify-between overflow-visible min-h-[420px]">
-            <!-- Red dot 66px top right edge -->
-            <span class="absolute right-[50px] top-0 -translate-y-1/2 w-[66px] h-[66px] rounded-full bg-brand-accentRedDark z-20 pointer-events-none"></span>
+          <div class="relative bg-brand-primary text-white p-10 md:p-12 rounded-[20px] shadow-lg flex flex-col justify-between overflow-visible min-h-[420px] after:content-[''] after:absolute after:right-[50px] after:top-0 after:-translate-y-1/2 after:w-[66px] after:h-[66px] after:rounded-full after:bg-brand-accentRedDark after:z-20 after:pointer-events-none">
             
             <div class="space-y-8">
               <!-- Badge (Plain text with a transparent white circle behind) -->
@@ -101,14 +99,12 @@
           </div>
 
           <!-- Card 2: Talent Platform (Overflow visible) -->
-          <div class="relative bg-white text-brand-heading p-12 rounded-[16px] border border-brand-cardBorder flex flex-col justify-between overflow-visible min-h-[420px]">
-            <!-- Red dot 36px bottom right edge -->
-            <span class="absolute right-[-83px] bottom-[166px] -translate-y-1/2 w-[36px] h-[36px] rounded-full bg-brand-primary z-20 pointer-events-none"></span>
+          <div class="relative bg-white text-brand-heading p-12 rounded-[16px] border border-brand-cardBorder flex flex-col justify-between overflow-visible min-h-[420px] after:content-[''] after:absolute after:right-[-83px] after:bottom-[166px] after:-translate-y-1/2 after:w-[36px] after:h-[36px] after:rounded-full after:bg-brand-primary after:z-20 after:pointer-events-none">
             
             <div class="space-y-8">
               <!-- Badge (Plain text with a light gray circle behind) -->
               <div class="relative inline-flex items-center h-8">
-                <span class="absolute left-0 w-8 h-8 rounded-full bg-brand-circleAccent/40 z-0"></span>
+                <span class="absolute left-0 w-8 h-8 rounded-full bg-[#E4E4E4]/40 z-0"></span>
                 <span class="relative z-10 text-brand-body text-[12px] pl-4 font-light tracking-wide">Digital Creative Studio</span>
               </div>
               <!-- Title -->
@@ -144,12 +140,7 @@
           <!-- Left Stats (Now including Title inside, exact 10px padding, aligned top) -->
           <div class="lg:col-span-6 p-[10px] pt-0">
             <!-- Section Title (With before/after decoration dots, exact mb-20px) -->
-            <div class="relative mb-[20px]">
-              <!-- project-heading:before (Red dot) -->
-              <span class="absolute right-[25%] top-[-30px] -translate-y-1/2 w-[28px] h-[28px] rounded-full bg-brand-primary z-20 pointer-events-none"></span>
-              <!-- project-heading:after (Light red dot) -->
-              <span class="absolute left-0 bottom-[-40px] w-[26px] h-[26px] rounded-full bg-brand-primary/10 z-20 pointer-events-none"></span>
-
+            <div class="relative mb-[20px] before:content-[''] before:absolute before:right-[25%] before:top-[-30px] before:-translate-y-1/2 before:w-[28px] before:h-[28px] before:rounded-full before:bg-brand-primary before:z-20 before:pointer-events-none after:content-[''] after:absolute after:left-0 after:bottom-[-40px] after:w-[26px] after:h-[26px] after:rounded-full after:bg-brand-primary/10 after:z-20 after:pointer-events-none">
               <h2 class="section-title mt-0">
                 Dự án của chúng tôi
               </h2>
@@ -189,7 +180,7 @@
           </div>
 
           <!-- Right Featured Project Card (Constrained to exact 322x469px size) -->
-          <div class="lg:col-span-6 relative overflow-visible">
+          <div class="lg:col-span-6 relative overflow-visible after:content-[''] after:absolute after:right-[-90px] after:bottom-[-40px] after:w-[71px] after:h-[71px] after:rounded-full after:bg-brand-redTint after:z-20 after:pointer-events-none">
             <!-- Slider Viewport (rounded-8px, exact 322x469px, aligned to right edge) -->
             <div class="overflow-hidden w-[322px] h-[469px] mx-auto lg:ml-auto rounded-[8px] border border-gray-100 shadow-sm hover:shadow-md transition-shadow duration-300">
               <!-- Slider Track (Start at translateX(-100%) to show Card 1) -->
@@ -336,8 +327,6 @@
                 </svg>
               </button>
             </div>
-            <!-- Section-project:before decoration dot (anchored to right column bottom) -->
-            <span class="absolute right-[-90px] bottom-[-40px] w-[71px] h-[71px] rounded-full bg-brand-redTint z-20 pointer-events-none"></span>
           </div>
 
       </div> <!-- Close Projects content -->
@@ -350,13 +339,7 @@
           <div class="absolute inset-0 bg-[#c01111]/90 z-10"></div>
           
           <!-- Content content -->
-          <div class="relative w-full z-20 flex flex-col items-center text-white">
-            <!-- Decorative circle on top left of the card (exact top/left: 75px, size: 42px) -->
-            <span class="absolute top-[30px] left-[45px] w-[42px] h-[42px] rounded-full bg-brand-accentRedLight z-20 pointer-events-none"></span>
-
-            <!-- Big red transparent background circle behind the main text (200x200px) -->
-            <div class="absolute w-[200px] h-[200px] rounded-full bg-brand-accentRedDark -z-10 top-[110px] left-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-none"></div>
-
+          <div class="relative w-full z-20 flex flex-col items-center text-white before:content-[''] before:absolute before:top-[30px] before:left-[45px] before:w-[42px] before:h-[42px] before:rounded-full before:bg-brand-accentRedLight before:z-20 before:pointer-events-none after:content-[''] after:absolute after:w-[200px] after:h-[200px] after:rounded-full after:bg-brand-accentRedDark after:-z-10 after:top-[110px] after:left-1/2 after:-translate-x-1/2 after:-translate-y-1/2 after:pointer-events-none">
             <!-- Sun Asterisk (sub-title: 18px font-weight 300) -->
             <div class="text-[18px] font-[300] text-white/80 uppercase tracking-widest mb-2 font-sans pt-12 md:pt-16">
               Sun Asterisk
@@ -481,7 +464,8 @@
       <!-- ==================== CULTURE AND EVENTS SECTION ==================== -->
       <div class="border-t border-gray-100 pt-24 relative overflow-visible">
         <!-- Section Header with Arrows -->
-        <div class="flex justify-between items-center mb-[40px]">
+        <div class="relative flex justify-between items-center mb-[40px] after:content-[''] after:absolute after:left-[28%] after:top-[-10%] after:w-[28px] after:h-[28px] after:rounded-full after:bg-brand-primary after:z-20 after:pointer-events-none">
+          
           <h2 class="section-title pb-0 mb-0">
             Văn hóa - Sự kiện
           </h2>
