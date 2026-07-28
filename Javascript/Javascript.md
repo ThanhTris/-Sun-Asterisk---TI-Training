@@ -482,3 +482,505 @@ Một câu lệnh `switch` gồm một hoặc nhiều khối `case` để so kh�
   }
   ```
 
+---
+
+## 7. Function basic
+
+Hàm (Functions) là những "khối xây dựng" chính (building blocks) của chương trình. Chúng cho phép thực thi một đoạn mã nguồn nhiều lần tại các vị trí khác nhau mà không cần lặp lại mã nguồn.
+
+### 7.1. Introduction to Functions (Giới thiệu chung)
+- **Hàm tích hợp sẵn (Built-in functions):** JavaScript cung cấp sẵn nhiều hàm như `alert(message)`, `prompt(message, default)` và `confirm(question)`.
+- **Hàm tự định nghĩa:** Ngoài các hàm có sẵn, chúng ta có thể tự tạo ra các hàm riêng của mình để xử lý các logic nghiệp vụ cụ thể.
+
+---
+
+### 7.2. Function Declaration (Khai báo hàm)
+Để tạo một hàm mới, ta sử dụng cú pháp khai báo hàm (`Function Declaration`).
+- **Cấu trúc:** Từ khóa `function` đi trước, tiếp theo là tên hàm, danh sách các tham số (parameters) đặt trong dấu ngoặc đơn `()` (phân cách bởi dấu phẩy, có thể để trống), và cuối cùng là phần mã lệnh của hàm đặt trong cặp ngoặc nhọn `{}`.
+- **Mã nguồn mẫu:**
+  ```javascript
+  // Khai báo hàm
+  function showMessage() {
+    alert('Hello everyone!');
+  }
+
+  // Gọi hàm chạy thực thi bằng tên hàm kèm cặp ngoặc tròn
+  showMessage();
+  ```
+
+---
+
+### 7.3. Local variables (Biến cục bộ)
+Một biến được khai báo bên trong một hàm chỉ có thể được nhìn thấy và sử dụng bên trong chính hàm đó. Biến này gọi là **biến cục bộ**.
+- **Mã nguồn mẫu:**
+  ```javascript
+  function showMessage() {
+    let message = "Hello, I'm JavaScript!"; // Biến cục bộ
+    alert(message);
+  }
+
+  showMessage(); // Hiển thị: "Hello, I'm JavaScript!"
+  
+  // Gọi biến bên ngoài phạm vi hàm sẽ gây ra lỗi lập trình
+  alert(message); // Lỗi! Biến message chỉ tồn tại cục bộ bên trong hàm
+  ```
+
+---
+
+### 7.4. Outer variables (Biến bên ngoài / Biến toàn cục)
+Một hàm hoàn toàn có quyền truy cập và chỉnh sửa giá trị của các biến được khai báo bên ngoài hàm (outer variables / global variables).
+- **Mã nguồn mẫu:**
+  ```javascript
+  let userName = 'John'; // Biến bên ngoài hàm
+
+  function showMessage() {
+    let message = 'Hello, ' + userName; // Truy cập biến bên ngoài
+    alert(message);
+  }
+
+  showMessage(); // Hiển thị: "Hello, John"
+  ```
+
+---
+
+### 7.5. Returning a value (Trả về giá trị từ hàm)
+Một hàm có thể trả một giá trị kết quả ngược lại cho đoạn mã gọi nó thông qua chỉ thị **`return`**.
+- **Mã nguồn mẫu:**
+  ```javascript
+  function sum(a, b) {
+    return a + b; // Trả về tổng hai số
+  }
+
+  let result = sum(1, 2);
+  alert(result); // Hiển thị: 3
+  ```
+- **Cơ chế hoạt động:**
+  - Chỉ thị `return` có thể được đặt ở bất kỳ vị trí nào bên trong hàm. Khi chương trình thực thi chạm tới từ khóa `return`, hàm sẽ **dừng lại ngay lập tức** và trả giá trị đi kèm về cho mã gọi hàm.
+  - Một hàm chứa từ khóa `return` trống (không kèm giá trị) hoặc một hàm hoàn toàn không chứa từ khóa `return` sẽ mặc định trả về giá trị **`undefined`**.
+
+---
+
+### 7.6. Arrow functions (Hàm mũi tên)
+Hàm mũi tên (`Arrow functions`) cung cấp một cú pháp viết tắt cực kỳ ngắn gọn và trực quan để tạo hàm trong JavaScript.
+
+- **Cú pháp cơ bản (Một dòng):**
+  ```javascript
+  let func = (arg1, arg2, ..., argN) => expression;
+  ```
+
+- **Hàm mũi tên nhiều dòng (Multiline arrow functions):**
+  Chúng ta có thể bao quanh thân hàm mũi tên bằng cặp ngoặc nhọn `{}` giống hàm thông thường. Điểm khác biệt cốt lõi là **ngoặc nhọn yêu cầu phải có từ khóa `return` tường minh** nếu muốn trả về một giá trị.
+  - **Mã nguồn mẫu:**
+    ```javascript
+    let sum = (a, b) => { // Dấu ngoặc nhọn mở đầu một hàm nhiều dòng
+      let result = a + b;
+      return result; // Bắt buộc phải viết return khi sử dụng ngoặc nhọn
+    };
+    alert(sum(1, 2)); // Hiển thị: 3
+    ```
+
+- **Đặc trưng nâng cao của Hàm mũi tên:**
+  1. **Không có ngữ cảnh `this` riêng (No `this`):** Hàm mũi tên không tự định nghĩa từ khóa `this` của riêng nó. Nếu `this` được truy cập bên trong hàm mũi tên, giá trị của nó sẽ được lấy trực tiếp từ phạm vi bên ngoài (outer context).
+     - **Mã nguồn mẫu:**
+       ```javascript
+       let group = {
+         title: "Our Group",
+         students: ["John", "Pete", "Alice"],
+         showList() {
+           // this ở dòng dưới trỏ tới đối tượng group nhờ hàm mũi tên
+           this.students.forEach(
+             student => alert(this.title + ': ' + student)
+           );
+         }
+       };
+       group.showList();
+       ```
+  2. **Không có biến đối số `arguments` (No `arguments`):** Hàm mũi tên không hỗ trợ biến cục bộ ẩn `arguments` vốn chứa danh sách các đối số truyền vào hàm giống như hàm thông thường.
+
+---
+
+### 7.7. Naming a function (Quy tắc đặt tên hàm)
+Hàm đại diện cho các hành động thực thi, vì thế tên hàm thông thường **nên bắt đầu bằng một động từ**.
+- **Yêu cầu:** Tên hàm cần ngắn gọn, mô tả chính xác nhất có thể nhiệm vụ mà hàm thực hiện, giúp người đọc code hiểu được ngay chức năng của hàm đó.
+- **Các tiền tố đặt tên hàm phổ biến (Function starting with...):**
+  - **`get...`** : Trả về một giá trị (Ví dụ: `getFullName`, `getAge`).
+  - **`calc...`** : Tính toán một giá trị nào đó (Ví dụ: `calcTax`, `calcSum`).
+  - **`create...`** : Tạo mới một đối tượng/thành phần (Ví dụ: `createForm`, `createElement`).
+  - **`check...`** : Kiểm tra một điều kiện và trả về giá trị kiểu logic Boolean (Ví dụ: `checkPermission`, `checkEmail`).
+
+---
+
+## 8. Function expressions
+
+Trong JavaScript, cú pháp khai báo hàm truyền thống không phải là cách duy nhất để tạo ra một hàm. Ta có thể sử dụng biểu thức hàm (`Function Expressions`).
+
+### 8.1. Function is a value (Bản chất Hàm là một giá trị)
+Một hàm trong JavaScript bản chất **là một giá trị**. Nó giống như các kiểu dữ liệu khác như chuỗi hay số, nhưng là một "giá trị có thể thực thi".
+- **Lưu trữ và in mã nguồn:** Bạn có thể lưu trữ một hàm vào một biến số. Nếu in biến đó ra trình duyệt mà không kèm cặp dấu ngoặc tròn `()`, trình duyệt sẽ hiển thị toàn bộ mã nguồn của hàm đó.
+  ```javascript
+  function sayHi() {
+    alert("Hello");
+  }
+
+  alert(sayHi); // Hiển thị mã nguồn của hàm sayHi thay vì thực thi hàm
+  ```
+- **Sao chép hàm sang một biến khác:** Vì hàm là một giá trị, bạn hoàn toàn có thể gán biến chứa hàm đó cho một biến mới (sao chép tham chiếu của hàm).
+  ```javascript
+  function sayHi() { // (1) Tạo hàm
+    alert("Hello");
+  }
+
+  let func = sayHi; // (2) Sao chép hàm sang biến mới (chú ý KHÔNG viết dấu ngoặc tròn ở sayHi)
+
+  func();  // (3) Thực thi hàm sao chép thành công! (Hiển thị "Hello")
+  sayHi(); // Hàm gốc vẫn hoạt động bình thường! (Hiển thị "Hello")
+  ```
+
+---
+
+### 8.2. Callback functions (Hàm gọi lại - Callbacks)
+Một hàm gọi lại (callback function) là một hàm được truyền vào một hàm khác như một **đối số** (argument), sau đó hàm callback này sẽ được kích hoạt/gọi chạy bên trong hàm nhận để hoàn thành một nhiệm vụ nào đó.
+- **Mã nguồn mẫu:**
+  ```javascript
+  // Hàm callback
+  function greeting(name) {
+    alert(`Hello, ${name}`);
+  }
+
+  // Hàm nhận callback làm tham số
+  function processUserInput(callback) {
+    const name = prompt("Please enter your name.");
+    callback(name); // Kích hoạt chạy hàm callback bên trong
+  }
+
+  // Truyền greeting như một đối số cho processUserInput
+  processUserInput(greeting);
+  ```
+
+---
+
+### 8.3. Function Expression vs Function Declaration (So sánh Biểu thức hàm và Khai báo hàm)
+
+Chúng ta có hai cách chính để định nghĩa một hàm trong JavaScript thông thường:
+
+| Tiêu chí | Function Declaration (Khai báo hàm) | Function Expression (Biểu thức hàm) |
+| :--- | :--- | :--- |
+| **Cú pháp** | Định nghĩa độc lập như một câu lệnh riêng biệt trong luồng code chính. <br>`function sum(a, b) { return a + b; }` | Định nghĩa bên trong một biểu thức hoặc bên phải của một phép gán `=`. <br>`let sum = function(a, b) { return a + b; };` |
+| **Thời điểm khởi tạo** | Được khởi tạo **trước khi** bất kỳ khối mã nào trong phạm vi đó được thực thi (nhờ cơ chế Hoisting của JS). | Chỉ được tạo ra khi luồng thực thi của chương trình chạy chạm tới dòng mã khai báo biểu thức đó. |
+| **Khả năng gọi trước** | **Có thể được gọi trước** khi dòng code định nghĩa hàm được viết. | **Không thể gọi trước**, chỉ sử dụng được từ thời điểm dòng khai báo được thực thi trở đi. |
+
+---
+
+## 9. Objects
+
+Trong JavaScript, hầu hết các kiểu dữ liệu đều là "dữ liệu nguyên thủy" (primitive) vì chúng chỉ chứa một giá trị duy nhất đơn giản. Ngược lại, **Object (Đối tượng)** là kiểu dữ liệu đặc biệt được sử dụng để lưu trữ các bộ sưu tập dữ liệu có cấu trúc phức tạp dưới dạng các cặp khóa-giá trị.
+
+### 9.1. Introduction to Objects (Giới thiệu chung)
+- **Đặc trưng:** Object đại diện cho các thực thể đời thực hoặc các luồng dữ liệu phức tạp.
+- **Cấu trúc:** Một Object được tạo thành bởi cặp dấu ngoặc nhọn `{...}` chứa danh sách các thuộc tính (properties) tùy chọn. 
+- **Cặp thuộc tính (Key-Value):** Mỗi thuộc tính là một cặp `"khóa: giá trị"`, trong đó:
+  - **Khóa (Key):** Là một chuỗi văn bản đại diện cho tên của thuộc tính (property name).
+  - **Giá trị (Value):** Có thể nhận bất kỳ kiểu dữ liệu nào (chuỗi, số, boolean, hàm, hoặc một object khác).
+
+---
+
+### 9.2. Literals and properties (Cú pháp khởi tạo và các thuộc tính)
+- **Cú pháp khởi tạo trực tiếp (Object Literal):**
+  ```javascript
+  let user = {
+    name: "John", // Thuộc tính "name" chứa chuỗi "John"
+    age: 30       // Thuộc tính "age" chứa số 30
+  };
+  ```
+  *Hình tượng hóa:* Bạn có thể tưởng tượng đối tượng `user` giống như một chiếc tủ tài liệu có hai ngăn được đánh nhãn tên là `"name"` và `"age"`.
+- **Thao tác thuộc tính:** Bạn có thể thêm, xóa, hoặc đọc giá trị từ tủ tài liệu này bất kỳ lúc nào.
+- **Tên thuộc tính chứa nhiều từ (Multiword property names):** Đối với các tên thuộc tính có khoảng trắng (chứa nhiều từ ghép lại), bắt buộc phải đặt tên thuộc tính đó trong dấu ngoặc kép:
+  ```javascript
+  let user = {
+    name: "John",
+    age: 30,
+    "likes birds": true // Tên thuộc tính chứa khoảng trắng bắt buộc phải bọc dấu ngoặc kép
+  };
+  ```
+
+---
+
+### 9.3. Property value shorthand (Cách viết rút gọn thuộc tính)
+Trong lập trình thực tế, chúng ta thường xuyên sử dụng giá trị của các biến có sẵn để gán làm giá trị cho các thuộc tính trùng tên trong Object.
+- **Cách viết thông thường:**
+  ```javascript
+  function makeUser(name, age) {
+    return {
+      name: name,
+      age: age
+      // ... các thuộc tính khác
+    };
+  }
+  let user = makeUser("John", 30);
+  alert(user.name); // Hiển thị: John
+  ```
+- **Sử dụng cú pháp rút gọn thuộc tính (Property Value Shorthand):** Để mã nguồn ngắn gọn hơn, khi tên thuộc tính và tên biến chứa giá trị trùng nhau hoàn toàn, ta chỉ cần viết tên thuộc tính một lần duy nhất:
+  ```javascript
+  function makeUser(name, age) {
+    // Viết rút gọn thay thế cho name: name và age: age
+    return {
+      name,
+      age
+      // ...
+    };
+  }
+  ```
+
+---
+
+### 9.4. The "for..in" loop (Vòng lặp duyệt đối tượng for..in)
+Để duyệt qua tất cả các thuộc tính (khóa - keys) của một đối tượng, JavaScript cung cấp cấu trúc vòng lặp chuyên dụng **`for..in`**. Lưu ý đây là cấu trúc hoàn toàn độc lập và khác biệt với vòng lặp `for(;;)` thông thường.
+- **Cú pháp:**
+  ```javascript
+  for (key in object) {
+    // Khối mã này sẽ chạy lặp qua từng thuộc tính "key" bên trong "object"
+  }
+  ```
+- **Mã nguồn mẫu thực tế:**
+  ```javascript
+  let user = {
+    name: "John",
+    age: 30,
+    isAdmin: true
+  };
+
+  for (let key in user) {
+    // In ra tên khóa (key) và giá trị tương ứng của khóa đó (user[key])
+    alert(key);       // Hiển thị lần lượt: name, age, isAdmin
+    alert(user[key]); // Hiển thị lần lượt: "John", 30, true
+  }
+  ```
+
+---
+
+## 10. Object references and copying
+
+Sự khác biệt căn bản nhất giữa Object và các kiểu dữ liệu nguyên thủy nằm ở cách chúng được lưu trữ và sao chép trong bộ nhớ.
+
+### 10.1. Introduction to References (Khái niệm về Tham chiếu)
+- **Cơ chế lưu trữ:** Một biến được gán cho một đối tượng (object) không trực tiếp lưu trữ toàn bộ bản thân đối tượng đó, mà chỉ lưu trữ **"địa chỉ vùng nhớ"** (address in memory) của nó – hay nói cách khác là một **tham chiếu** (reference) trỏ tới đối tượng trong bộ nhớ.
+- **Cơ chế sao chép:** Khi một biến đối tượng được sao chép sang biến khác, chỉ có **địa chỉ tham chiếu** được sao chép, đối tượng thực tế trong bộ nhớ không hề được nhân bản. Cả hai biến lúc này cùng trỏ chung vào một đối tượng duy nhất.
+- **Mã nguồn mẫu:**
+  ```javascript
+  let user = { name: 'John' };
+  let admin = user; // Sao chép địa chỉ tham chiếu
+  
+  admin.name = 'Pete'; // Thay đổi dữ liệu thông qua tham chiếu "admin"
+  
+  alert(user.name); // Hiển thị: 'Pete' (sự thay đổi phản ánh lên cả biến "user")
+  ```
+
+---
+
+### 10.2. Comparison by reference (So sánh bằng tham chiếu)
+Hai đối tượng trong JavaScript chỉ được coi là bằng nhau (`==` hoặc `===`) khi và chỉ khi chúng **cùng là một đối tượng duy nhất** trong bộ nhớ (chung tham chiếu).
+- **Mã nguồn mẫu:**
+  ```javascript
+  // Trường hợp 1: Chung tham chiếu
+  let a = {};
+  let b = a; // Sao chép tham chiếu
+  alert(a == b);  // Kết quả: true
+  alert(a === b); // Kết quả: true
+
+  // Trường hợp 2: Hai đối tượng độc lập hoàn toàn (dù thuộc tính rỗng giống nhau)
+  let c = {};
+  let d = {}; 
+  alert(c == d);  // Kết quả: false (hai vùng nhớ khác nhau)
+  ```
+
+---
+
+### 10.3. Const objects can be modified (Chỉnh sửa thuộc tính đối tượng hằng số)
+- **Đặc trưng:** Một đối tượng được khai báo với từ khóa `const` vẫn **hoàn toàn có thể chỉnh sửa** các giá trị thuộc tính bên trong nó.
+- **Lý do:** Từ khóa `const` chỉ bảo vệ biến không bị gán lại sang một địa chỉ/đối tượng khác (`const user = ...`), chứ không khóa các giá trị thuộc tính bên trong đối tượng mà nó trỏ tới.
+- **Mã nguồn mẫu:**
+  ```javascript
+  const user = { name: "John" };
+  user.name = "Pete"; // Thực thi thành công không có lỗi!
+  
+  // user = { name: "Bob" }; // LỖI! Không thể gán lại biến const sang đối tượng mới
+  ```
+
+---
+
+### 10.4. Cloning and merging (Nhân bản thủ công bằng vòng lặp)
+Để thực sự nhân bản một đối tượng thành một bản sao hoàn toàn độc lập (thay vì chỉ sao chép tham chiếu), ta có thể tạo một đối tượng rỗng mới và lặp qua tất cả thuộc tính của đối tượng cũ để gán sang.
+- **Mã nguồn mẫu:**
+  ```javascript
+  let user = {
+    name: "John",
+    age: 30
+  };
+
+  let clone = {}; // Tạo đối tượng trống mới
+
+  // Lặp duyệt qua các thuộc tính và sao chép giá trị nguyên thủy
+  for (let key in user) {
+    clone[key] = user[key];
+  }
+
+  clone.name = "Pete"; // Thay đổi thuộc tính trên bản clone
+  
+  alert(user.name); // Vẫn hiển thị: "John" (không bị ảnh hưởng)
+  ```
+
+---
+
+### 10.5. Object.assign (Sao chép và gộp đối tượng bằng Object.assign)
+Phương thức tích hợp sẵn **`Object.assign()`** cho phép sao chép tất cả các thuộc tính từ một hoặc nhiều đối tượng nguồn (sources) vào một đối tượng đích (destination/target).
+- **Cú pháp:**
+  ```javascript
+  Object.assign(dest, ...sources)
+  ```
+  - `dest`: Đối tượng đích nhận thuộc tính.
+  - `sources`: Danh sách một hoặc nhiều đối tượng nguồn cần sao chép sang.
+  - *Giá trị trả về:* Trả về đối tượng đích `dest` sau khi đã được chỉnh sửa.
+- **Mã nguồn mẫu:**
+  ```javascript
+  let user = { name: "John" };
+  let permissions1 = { canView: true };
+  let permissions2 = { canEdit: true };
+
+  // Gộp thuộc tính từ permissions1 và permissions2 vào đối tượng user
+  Object.assign(user, permissions1, permissions2);
+
+  // Lúc này đối tượng user có cấu trúc:
+  // user = { name: "John", canView: true, canEdit: true }
+  alert(user.canView); // Hiển thị: true
+  ```
+
+---
+
+### 10.6. Nested cloning (Nhân bản lồng nhau bằng structuredClone)
+Khi một đối tượng chứa các thuộc tính có kiểu dữ liệu là đối tượng khác (đối tượng lồng nhau - nested objects), việc sao chép bằng vòng lặp cạn hay `Object.assign()` chỉ sao chép tham chiếu của các đối tượng con đó (sao chép nông - shallow copy). Để thực hiện sao chép sâu (deep clone) hoàn toàn:
+
+- **Giải pháp:** Sử dụng phương thức tích hợp sẵn **`structuredClone(object)`** để nhân bản đối tượng cùng toàn bộ tất cả các thuộc tính lồng nhau của nó.
+- **Khả năng:** Phương thức `structuredClone` có thể sao chép sâu hầu hết các kiểu dữ liệu phổ biến bao gồm các đối tượng (objects), mảng (arrays), và các giá trị nguyên thủy (primitive values).
+- **Hỗ trợ tham chiếu vòng (Circular references):** `structuredClone` hỗ trợ nhân bản cấu trúc tham chiếu vòng (khi một thuộc tính của đối tượng trỏ ngược lại chính bản thân đối tượng đó trực tiếp hoặc gián tiếp qua một chuỗi các liên kết).
+- **Mã nguồn mẫu:**
+  ```javascript
+  let user = {};
+  
+  // Tạo một tham chiếu vòng (user.me trỏ tới chính đối tượng user)
+  user.me = user;
+
+  // Tiến hành nhân bản sâu đối tượng
+  let clone = structuredClone(user);
+  
+  alert(clone.me === clone); // Kết quả trả về: true
+  ```
+
+---
+
+## 11. Arrays
+
+Mặc dù `Object` rất thích hợp để lưu trữ tập hợp dữ liệu theo nhãn, nhưng trong thực tế chúng ta thường xuyên cần các tập hợp dữ liệu có thứ tự tuần tự (phần tử thứ nhất, thứ hai, thứ ba...). Để đáp ứng nhu cầu này, JavaScript cung cấp cấu trúc dữ liệu chuyên dụng gọi là **Array (Mảng)**.
+
+### 11.1. Introduction to Arrays (Giới thiệu chung về Mảng)
+- **Hạn chế của Object:** Object không cung cấp các phương thức tích hợp sẵn để quản lý và duy trì thứ tự tuần tự của các phần tử. Bạn không thể chèn một thuộc tính mới vào "giữa" các thuộc tính đang có.
+- **Array (Mảng):** Là cấu trúc dữ liệu lưu trữ các danh sách có thứ tự (như danh sách người dùng, hàng hóa, thẻ HTML...).
+- **Chỉ số mảng (Index):** Các phần tử trong mảng được đánh số chỉ mục có thứ tự bắt đầu từ số **`0`**.
+
+---
+
+### 11.2. Declaration (Khai báo mảng)
+Có hai cú pháp chính để khởi tạo một mảng rỗng trong JavaScript:
+1. **Sử dụng cú pháp Constructor:**
+   ```javascript
+   let arr = new Array();
+   ```
+2. **Sử dụng cặp ngoặc vuông (Khuyên dùng phổ biến):**
+   ```javascript
+   let arr = [];
+   ```
+- **Khai báo mảng chứa giá trị ban đầu:**
+  ```javascript
+  let fruits = ["Apple", "Orange", "Plum"];
+  ```
+
+---
+
+### 11.3. Methods pop/push, shift/unshift (Các phương thức tương tác phần tử mảng)
+Trong khoa học máy tính, mảng trong JavaScript hoạt động cực kỳ linh hoạt như một cấu trúc dữ liệu **Deque** (Double-Ended Queue - Hàng đợi hai đầu). Nó cho phép hoạt động đồng thời như một **hàng đợi (Queue - FIFO)** hoặc một **ngăn xếp (Stack - LIFO)** nhờ hỗ trợ thêm/xóa phần tử ở cả đầu và cuối mảng.
+
+---
+
+#### A. pop (Xóa phần tử cuối cùng)
+- **Chức năng:** Trích xuất phần tử cuối cùng ra khỏi mảng, trả về giá trị của phần tử đó và đồng thời rút ngắn mảng đi 1 phần tử.
+- **Mã nguồn mẫu:**
+  ```javascript
+  let fruits = ["Apple", "Orange", "Pear"];
+  alert(fruits.pop()); // Loại bỏ "Pear" và hiển thị nó
+  alert(fruits);        // Lúc này mảng chỉ còn: "Apple", "Orange"
+  ```
+- *So sánh:* Cả `fruits.pop()` và `fruits.at(-1)` đều trả về giá trị của phần tử cuối cùng trong mảng, nhưng điểm khác biệt là `fruits.pop()` thực hiện xóa và thay đổi mảng gốc còn `fruits.at(-1)` chỉ đọc giá trị mà không làm thay đổi mảng.
+
+---
+
+#### B. push (Thêm phần tử vào cuối)
+- **Chức năng:** Thêm một hoặc nhiều phần tử vào vị trí cuối cùng của mảng.
+- **Mã nguồn mẫu:**
+  ```javascript
+  let fruits = ["Apple", "Orange"];
+  fruits.push("Pear"); // Thêm "Pear" vào cuối mảng
+  alert(fruits);       // Kết quả: "Apple", "Orange", "Pear"
+  ```
+- *Cơ chế:* Hành động `fruits.push(item)` tương đương với việc thực hiện gán thủ công vào chỉ mục cuối mảng: `fruits[fruits.length] = item`.
+
+---
+
+#### C. shift (Xóa phần tử đầu tiên)
+- **Chức năng:** Trích xuất phần tử đầu tiên (vị trí số 0) ra khỏi mảng, trả về giá trị của nó và dịch chuyển các phần tử tiếp theo lên trước.
+- **Mã nguồn mẫu:**
+  ```javascript
+  let fruits = ["Apple", "Orange", "Pear"];
+  alert(fruits.shift()); // Loại bỏ "Apple" ở đầu và hiển thị nó
+  alert(fruits);         // Lúc này mảng dịch chuyển còn: "Orange", "Pear"
+  ```
+
+---
+
+#### D. unshift (Thêm phần tử vào đầu)
+- **Chức năng:** Thêm một hoặc nhiều phần tử vào vị trí đầu tiên của mảng và đẩy các phần tử hiện có lùi về sau.
+- **Mã nguồn mẫu:**
+  ```javascript
+  let fruits = ["Orange", "Pear"];
+  fruits.unshift('Apple'); // Thêm 'Apple' vào đầu mảng
+  alert(fruits);           // Kết quả: "Apple", "Orange", "Pear"
+  ```
+
+---
+
+### 11.4. Loops over arrays (Các phương thức duyệt mảng bằng vòng lặp)
+Để duyệt qua tất cả các phần tử có trong một mảng, chúng ta có hai cách phổ biến sau:
+
+- **Cách 1: Sử dụng vòng lặp `for` truyền thống qua chỉ số (for loop over indexes):**
+  Đây là một trong những cách lâu đời và cơ bản nhất. Ta lặp biến đếm chạy từ `0` cho đến khi nhỏ hơn độ dài của mảng (`arr.length`).
+  ```javascript
+  let arr = ["Apple", "Orange", "Pear"];
+  
+  for (let i = 0; i < arr.length; i++) {
+    alert(arr[i]); // Truy cập và hiển thị phần tử thông qua chỉ số i
+  }
+  ```
+- **Cách 2: Sử dụng vòng lặp `for..of` hiện đại (Duyệt trực tiếp phần tử):**
+  Đối với mảng, JavaScript cung cấp cú pháp `for..of` ngắn gọn hơn. Vòng lặp này duyệt trực tiếp qua các giá trị phần tử của mảng mà không cần sử dụng biến đếm chỉ số.
+  ```javascript
+  let fruits = ["Apple", "Orange", "Plum"];
+  
+  // Duyệt trực tiếp qua từng phần tử fruit trong mảng fruits
+  for (let fruit of fruits) {
+    alert(fruit); // Hiển thị trực tiếp giá trị của phần tử
+  }
+  ```
+
+
+
+
+
+
