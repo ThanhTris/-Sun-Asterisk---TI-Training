@@ -11,8 +11,11 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@300;400;700&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
   
+  <!-- Font Awesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
   <!-- Base Style & Pure CSS -->
-  <link rel="stylesheet" href="../../dist/css/style.css">
+  <link rel="stylesheet" href="../../../dist/css/style.css">
   <link rel="stylesheet" href="../../css/about.css">
 </head>
 <body class="about-page">
@@ -132,15 +135,15 @@
             <h2 class="about-section-title">Giá trị cốt lõi</h2>
             <ul class="about-core__list">
               <li class="about-core__list-item active" data-slide="0">
-                <i class="haru-icon haru-icon-check about-core__check-icon"></i>
+                <i class="haru-icon haru-icon-check"></i>
                 <span class="about-core__list-name">AIM HIGH</span>
               </li>
               <li class="about-core__list-item" data-slide="1">
-                <i class="haru-icon haru-icon-check about-core__check-icon"></i>
+                <i class="haru-icon haru-icon-check"></i>
                 <span class="about-core__list-name">BE AGILE</span>
               </li>
               <li class="about-core__list-item" data-slide="2">
-                <i class="haru-icon haru-icon-check about-core__check-icon"></i>
+                <i class="haru-icon haru-icon-check"></i>
                 <span class="about-core__list-name">WASSHOI</span>
               </li>
             </ul>
@@ -194,117 +197,173 @@
 
       <!-- ==================== 5. BUSINESS SECTORS SECTION ==================== -->
       <section class="about-sectors">
-        <h2 class="about-section-title text-center">Lĩnh vực kinh doanh</h2>
-        <p class="about-sectors__intro text-center">
-          Đứng ở điểm giao thoa giữa công nghệ, kinh doanh và giáo dục, Sun* mang lại sự thay đổi tích cực cho xã hội qua hai dòng dịch vụ chính:
-        </p>
 
-        <div class="about-sectors__grid">
-          <div class="about-sectors__card about-sectors__card--primary">
-            <div class="about-sectors__badge">Digital Creative Studio</div>
-            <h3 class="about-sectors__card-title">Creative & Engineering</h3>
-            <p class="about-sectors__card-desc">
-              Đội ngũ nhân lực dồi dào chuyên về công nghệ, thiết kế và kinh doanh nhằm hiện thực hóa các ý tưởng đột phá.
-            </p>
-            <a href="#" class="about-sectors__link">Tìm hiểu thêm &rarr;</a>
+        <h2 class="about-section-title">Lĩnh vực kinh doanh</h2>
+
+        <div class="sectors__grid">
+
+          <!-- Card 1: Creative & Engineering -->
+          <div class="sectors__card sectors__card--red">
+            <div class="sectors__body">
+              <div class="sectors__badge">
+                <span class="sectors__badge-dot"></span>
+                <span class="sectors__badge-label">Digital Creative Studio</span>
+              </div>
+              <h3 class="sectors__title">Creative<br>&amp; Engineering</h3>
+              <p class="sectors__desc">Đội ngũ nhân lực dồi dào chuyên về công nghệ, thiết kế và kinh doanh.</p>
+            </div>
+            <a href="#" class="sectors__btn sectors__btn--light">
+              Tìm hiểu thêm
+              <span class="sectors__btn-icon">
+                <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3"/>
+                </svg>
+              </span>
+            </a>
           </div>
 
-          <div class="about-sectors__card about-sectors__card--secondary">
-            <div class="about-sectors__badge">Digital Creative Studio</div>
-            <h3 class="about-sectors__card-title">Talent Platform</h3>
-            <p class="about-sectors__card-desc">
-              Các giải pháp nguồn nhân lực chất lượng cao hỗ trợ tăng trưởng kinh doanh và chuyển đổi số bền vững.
-            </p>
-            <a href="#" class="about-sectors__link">Tìm hiểu thêm &rarr;</a>
+          <!-- Card 2: Talent Platform -->
+          <div class="sectors__card sectors__card--white">
+            <div class="sectors__body">
+              <div class="sectors__badge sectors__badge--gray">
+                <span class="sectors__badge-dot"></span>
+                <span class="sectors__badge-label">Digital Creative Studio</span>
+              </div>
+              <h3 class="sectors__title sectors__title--dark">Talent<br>Platform</h3>
+              <p class="sectors__desc sectors__desc--dark">Các giải pháp nguồn nhân lực hỗ trợ tăng trưởng kinh doanh bền vững.</p>
+            </div>
+            <a href="#" class="sectors__btn sectors__btn--dark">
+              Tìm hiểu thêm
+              <span class="sectors__btn-icon">
+                <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3"/>
+                </svg>
+              </span>
+            </a>
           </div>
+
         </div>
       </section>
 
+
       <!-- ==================== 6. CEO MESSAGE SECTION ==================== -->
       <section class="about-ceo">
-        <div class="about-ceo__grid">
-          <div class="about-ceo__photo">
-            <div class="about-ceo__avatar">TK</div>
+        <div class="ceo__inner">
+          <!-- Avatar -->
+          <div class="ceo__avatar-wrap">
+            <img src="../../assets/images/ceo-kobayashi.jpg" alt="Taihei Kobayashi - CEO" class="ceo__avatar">
           </div>
-          <div class="about-ceo__quote-box">
-            <span class="about-ceo__label">CEO Message</span>
-            <h3 class="about-ceo__name">Taihei Kobayashi</h3>
-            <blockquote class="about-ceo__blockquote">
-              "Là một Digital Creative Studio, mục tiêu của Sun* là tạo ra thế giới nơi mọi người có thể say mê tạo ra các giá trị. Được chìm đắm trong việc tạo ra các giá trị mới chính là hạnh phúc trong tầm tay. Nếu bạn đang muốn thử thách bản thân một điều gì đó mới mẻ nhưng vẫn còn băn khoăn, hãy đến với Sun*, chúng ta cùng nhau tạo ra thật nhiều điều Awesome cho xã hội."
+          <!-- Content -->
+          <div class="ceo__content">
+            <span class="ceo__label">CEO</span>
+            <h3 class="ceo__name">Taihei Kobayashi</h3>
+            <blockquote class="ceo__quote">
+              "Là một Digital Creative Studio, mục tiêu của Sun* là tạo ra thế giới nơi mọi người có thể say mê tạo ra các giá trị.
+              <br><br>
+              Khi sinh sống tại Nhật Bản, có những lúc tôi cảm thấy thật tồi tệ. Tôi biết rằng, có những người cảm thấy ngột thở khi ngày mới bắt đầu. Việc mọi người có thể sống một cách vui vẻ là điều tuyệt vời nhất. Và chẳng phải, được chìm đắm trong việc tạo ra các giá trị mới chính là hạnh phúc trong tầm tay sao?
+              <br><br>
+              Nếu bạn đang muốn thử thách bản thân một điều gì đó mới mẻ, nhưng lại không biết phải làm gì và vẫn còn băn khoăn với điều đó, hãy đến với Sun*, chúng ta cùng nhau tạo ra thật nhiều điều Awesome cho xã hội."
             </blockquote>
+            <a href="#" class="ceo__link">Tìm hiểu thêm &nbsp;&rarr;</a>
           </div>
         </div>
       </section>
 
       <!-- ==================== 7. OFFICES SECTION ==================== -->
       <section class="about-offices">
-        <h2 class="about-section-title text-center">Văn phòng làm việc</h2>
-        
-        <div class="about-offices__wrapper">
-          <div class="about-offices__nav">
-            <button class="about-offices__btn active" data-office="hn">Hà Nội</button>
-            <button class="about-offices__btn" data-office="dn">Đà Nẵng</button>
-            <button class="about-offices__btn" data-office="hcm">TP. Hồ Chí Minh</button>
-            <button class="about-offices__btn" data-office="intl">Quốc tế</button>
+
+        <!-- Section Title -->
+        <h2 class="offices__heading">Văn phòng</h2>
+
+        <!-- Tab Navigation Container -->
+        <div class="offices__tabs-wrap">
+          <div class="offices__tabs">
+            <button class="offices__tab active" data-office="hn">Văn phòng Hà Nội</button>
+            <button class="offices__tab" data-office="dn">Văn phòng Đà Nẵng</button>
+            <button class="offices__tab" data-office="hcm">Văn phòng TP Hồ Chí Minh</button>
+            <button class="offices__tab" data-office="intl">Văn phòng Quốc tế</button>
           </div>
-          
-          <div class="about-offices__content">
-            <div class="about-offices__pane active" id="office-hn">
-              <div class="about-offices__grid">
-                <div class="about-offices__info">
-                  <h3 class="about-offices__name">Keangnam Landmark 72</h3>
-                  <p class="about-offices__address">📍 Tầng 13, tòa Keangnam Landmark 72, đường Phạm Hùng, quận Nam Từ Liêm, Tp. Hà Nội</p>
-                  <p class="about-offices__desc">Trụ sở chính tại Việt Nam với không gian làm việc mở sáng tạo, hiện đại, sở hữu view toàn thành phố từ tòa nhà cao nhất Hà Nội.</p>
-                  <a href="https://maps.google.com" target="_blank" class="about-offices__link">Xem bản đồ &rarr;</a>
-                </div>
-                <div class="about-offices__preview">
-                  <div class="about-offices__img-box office-hn">Hanoi Office View</div>
-                </div>
-              </div>
-            </div>
+        </div>
 
-            <div class="about-offices__pane" id="office-dn">
-              <div class="about-offices__grid">
-                <div class="about-offices__info">
-                  <h3 class="about-offices__name">Vĩnh Trung Plaza</h3>
-                  <p class="about-offices__address">📍 Tầng 7, tòa nhà Vĩnh Trung Plaza, 255-257 Hùng Vương, phường Vĩnh Trung, quận Thanh Khê, Tp. Đà Nẵng</p>
-                  <p class="about-offices__desc">Nằm tại trung tâm thành phố biển Đà Nẵng năng động, văn phòng mang lại môi trường làm việc tươi trẻ, thân thiện và đầy nhiệt huyết.</p>
-                  <a href="https://maps.google.com" target="_blank" class="about-offices__link">Xem bản đồ &rarr;</a>
-                </div>
-                <div class="about-offices__preview">
-                  <div class="about-offices__img-box office-dn">Danang Office View</div>
-                </div>
-              </div>
-            </div>
+        <!-- Tab Panels (100% full screen width, 3 equal columns) -->
+        <div class="offices__panels">
 
-            <div class="about-offices__pane" id="office-hcm">
-              <div class="about-offices__grid">
-                <div class="about-offices__info">
-                  <h3 class="about-offices__name">Tòa nhà Hải Âu</h3>
-                  <p class="about-offices__address">📍 Tầng 6, tòa nhà Hải Âu, 39B Trường Sơn, phường 4, quận Tân Bình, Tp. Hồ Chí Minh</p>
-                  <p class="about-offices__desc">Văn phòng phía Nam sầm uất, kết nối gần sân bay Tân Sơn Nhất, là cái nôi của các dự án công nghệ sáng tạo hàng đầu khu vực.</p>
-                  <a href="https://maps.google.com" target="_blank" class="about-offices__link">Xem bản đồ &rarr;</a>
+          <!-- HN -->
+          <div class="offices__panel active" id="office-hn">
+            <div class="offices__panel-img" style="background-image: url('../../assets/images/office-hn-1.jpg')"></div>
+            <div class="offices__panel-info" style="background-image: url('../../assets/images/office-hn-2.jpg')">
+              <div class="offices__info-overlay"></div>
+              <div class="offices__info-content">
+                <div class="offices__info-header">
+                  <span class="offices__info-title">Văn phòng Hà Nội</span>
+                  <a href="https://maps.google.com" target="_blank" class="offices__map-link">Xem bản đồ</a>
                 </div>
-                <div class="about-offices__preview">
-                  <div class="about-offices__img-box office-hcm">HCMC Office View</div>
-                </div>
+                <p class="offices__info-address">
+                  <i class="fas fa-map-marker-alt offices__pin-icon"></i>
+                  Tầng 13, tòa Keangnam Landmark 72, đường Phạm Hùng, quận Nam Từ Liêm, Tp. Hà Nội
+                </p>
               </div>
             </div>
-
-            <div class="about-offices__pane" id="office-intl">
-              <div class="about-offices__grid">
-                <div class="about-offices__info">
-                  <h3 class="about-offices__name">Tokyo Head Office & Global Branches</h3>
-                  <p class="about-offices__address">📍 Nhật Bản (Tokyo) & các chi nhánh toàn cầu</p>
-                  <p class="about-offices__desc">Kết nối mạng lưới công nghệ quốc tế vững chắc, mang lại cơ hội làm việc trong môi trường đa quốc gia chuẩn chỉ toàn cầu.</p>
-                  <a href="https://maps.google.com" target="_blank" class="about-offices__link">Xem bản đồ &rarr;</a>
-                </div>
-                <div class="about-offices__preview">
-                  <div class="about-offices__img-box office-intl">Global Offices</div>
-                </div>
-              </div>
-            </div>
+            <div class="offices__panel-img" style="background-image: url('../../assets/images/office-hn-3.jpg')"></div>
           </div>
+
+          <!-- DN -->
+          <div class="offices__panel" id="office-dn">
+            <div class="offices__panel-img" style="background-image: url('../../assets/images/office-dn-1.jpg')"></div>
+            <div class="offices__panel-info" style="background-image: url('../../assets/images/office-dn-2.jpg')">
+              <div class="offices__info-overlay"></div>
+              <div class="offices__info-content">
+                <div class="offices__info-header">
+                  <span class="offices__info-title">Văn phòng Đà Nẵng</span>
+                  <a href="https://maps.google.com" target="_blank" class="offices__map-link">Xem bản đồ</a>
+                </div>
+                <p class="offices__info-address">
+                  <i class="fas fa-map-marker-alt offices__pin-icon"></i>
+                  Tầng 4, tòa FHome Building, số 16 Lý Thường Kiệt, quận Hải Châu, Tp. Đà Nẵng
+                </p>
+              </div>
+            </div>
+            <div class="offices__panel-img" style="background-image: url('../../assets/images/office-dn-3.jpg')"></div>
+          </div>
+
+          <!-- HCM -->
+          <div class="offices__panel" id="office-hcm">
+            <div class="offices__panel-img" style="background-image: url('../../assets/images/office-hcm-1.jpg')"></div>
+            <div class="offices__panel-info" style="background-image: url('../../assets/images/office-hcm-2.jpg')">
+              <div class="offices__info-overlay"></div>
+              <div class="offices__info-content">
+                <div class="offices__info-header">
+                  <span class="offices__info-title">Văn phòng TP Hồ Chí Minh</span>
+                  <a href="https://maps.google.com" target="_blank" class="offices__map-link">Xem bản đồ</a>
+                </div>
+                <p class="offices__info-address">
+                  <i class="fas fa-map-marker-alt offices__pin-icon"></i>
+                  Tầng 9, L'Mak Long Tower, số 101-103 Nguyễn Cửu Vân, Phường 17, Quận Bình Thạnh, Thành phố Hồ Chí Minh, Việt Nam.
+                </p>
+              </div>
+            </div>
+            <div class="offices__panel-img" style="background-image: url('../../assets/images/office-hcm-3.jpg')"></div>
+          </div>
+
+          <!-- INTL -->
+          <div class="offices__panel" id="office-intl">
+            <div class="offices__panel-img" style="background-image: url('../../assets/images/office-intl-1.jpg')"></div>
+            <div class="offices__panel-info" style="background-image: url('../../assets/images/office-intl-2.jpg')">
+              <div class="offices__info-overlay"></div>
+              <div class="offices__info-content">
+                <div class="offices__info-header">
+                  <span class="offices__info-title">Văn phòng Quốc tế</span>
+                </div>
+                <ul class="offices__info-list">
+                  <li><i class="fas fa-map-marker-alt offices__pin-icon"></i> Văn phòng Tokyo</li>
+                  <li><i class="fas fa-map-marker-alt offices__pin-icon"></i> Văn phòng Cebu</li>
+                  <li><i class="fas fa-map-marker-alt offices__pin-icon"></i> Văn phòng Phnom Penh</li>
+                </ul>
+              </div>
+            </div>
+            <div class="offices__panel-img" style="background-image: url('../../assets/images/office-intl-3.jpg')"></div>
+          </div>
+
         </div>
       </section>
 
@@ -363,21 +422,21 @@
       }
 
       // 2. Office Location Tabs
-      const officeBtns = document.querySelectorAll('.about-offices__btn');
-      const officePanes = document.querySelectorAll('.about-offices__pane');
+      const officeTabs = document.querySelectorAll('.offices__tab');
+      const officePanels = document.querySelectorAll('.offices__panel');
 
-      officeBtns.forEach(btn => {
-        btn.addEventListener('click', () => {
-          const targetOffice = btn.getAttribute('data-office');
+      officeTabs.forEach(tab => {
+        tab.addEventListener('click', () => {
+          const targetOffice = tab.getAttribute('data-office');
 
-          officeBtns.forEach(b => b.classList.remove('active'));
-          btn.classList.add('active');
+          officeTabs.forEach(t => t.classList.remove('active'));
+          tab.classList.add('active');
 
-          officePanes.forEach(pane => {
-            if (pane.id === `office-${targetOffice}`) {
-              pane.classList.add('active');
+          officePanels.forEach(panel => {
+            if (panel.id === `office-${targetOffice}`) {
+              panel.classList.add('active');
             } else {
-              pane.classList.remove('active');
+              panel.classList.remove('active');
             }
           });
         });
@@ -391,9 +450,12 @@
       let currentCoreSlide = 0;
 
       function goToCoreSlide(index) {
+        const oldIndex = currentCoreSlide;
         if (index < 0) index = coreSlides.length - 1;
         if (index >= coreSlides.length) index = 0;
         
+        if (index === oldIndex) return;
+        const direction = index > oldIndex ? 'next' : 'prev';
         currentCoreSlide = index;
 
         coreListItems.forEach((item, idx) => {
@@ -405,10 +467,20 @@
         });
 
         coreSlides.forEach((slide, idx) => {
+          slide.classList.remove('active', 'slide-left-out', 'slide-right-out', 'slide-left-in', 'slide-right-in');
           if (idx === currentCoreSlide) {
             slide.classList.add('active');
-          } else {
-            slide.classList.remove('active');
+            if (direction === 'next') {
+              slide.classList.add('slide-right-in');
+            } else {
+              slide.classList.add('slide-left-in');
+            }
+          } else if (idx === oldIndex) {
+            if (direction === 'next') {
+              slide.classList.add('slide-left-out');
+            } else {
+              slide.classList.add('slide-right-out');
+            }
           }
         });
       }
@@ -421,13 +493,15 @@
 
       if (prevCoreBtn) {
         prevCoreBtn.addEventListener('click', () => {
-          goToCoreSlide(currentCoreSlide - 1);
+          const targetIndex = currentCoreSlide - 1 < 0 ? coreSlides.length - 1 : currentCoreSlide - 1;
+          goToCoreSlide(targetIndex);
         });
       }
 
       if (nextCoreBtn) {
         nextCoreBtn.addEventListener('click', () => {
-          goToCoreSlide(currentCoreSlide + 1);
+          const targetIndex = currentCoreSlide + 1 >= coreSlides.length ? 0 : currentCoreSlide + 1;
+          goToCoreSlide(targetIndex);
         });
       }
     }
