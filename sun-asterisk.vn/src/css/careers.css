@@ -1,6 +1,6 @@
 .career-page {
   font-family: "Roboto", sans-serif;
-  color: #4D5969;
+  color: var(--color-brand-body);
   background-color: #fff;
   padding-top: 99px;
   margin: 0;
@@ -33,7 +33,7 @@
 .career-hero .career-hero__content .career-hero__sub-title {
   font-size: 1rem;
   font-weight: 700;
-  color: #C01111;
+  color: var(--color-brand-primary);
   text-transform: uppercase;
   letter-spacing: 1.5px;
   margin-bottom: 12px;
@@ -43,14 +43,14 @@
   font-family: "Roboto Slab", serif;
   font-size: 2.75rem;
   font-weight: 700;
-  color: #2B3441;
+  color: var(--color-brand-heading);
   line-height: 1.2;
   margin-bottom: 24px;
 }
 .career-hero .career-hero__content .career-hero__desc {
   font-size: 1.05rem;
   line-height: 1.7;
-  color: #4D5969;
+  color: var(--color-brand-body);
   margin-bottom: 30px;
 }
 .career-hero .career-hero__image-wrap {
@@ -95,17 +95,17 @@
   border-radius: 30px;
   font-size: 0.95rem;
   font-family: "Roboto", sans-serif;
-  color: #2B3441;
+  color: var(--color-brand-heading);
   outline: none;
   background-color: #fff;
   transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
 }
 .career-search-box .search-input:focus, .career-search-box .search-select:focus {
-  border-color: #C01111;
+  border-color: var(--color-brand-primary);
   box-shadow: 0 0 0 3px rgba(192, 17, 17, 0.1);
 }
 .career-search-box .btn-search {
-  background-color: #C01111;
+  background-color: var(--color-brand-primary);
   color: #ffffff;
   border: none;
   border-radius: 30px;
@@ -120,7 +120,7 @@
   transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
 }
 .career-search-box .btn-search:hover {
-  background-color: rgb(60.5955530538%, 5.36523126%, 5.36523126%);
+  background-color: #a00e0e;
   box-shadow: 0 6px 16px rgba(192, 17, 17, 0.3);
 }
 
@@ -131,7 +131,7 @@
   font-family: "Roboto Slab", serif;
   font-size: 2.25rem;
   font-weight: 700;
-  color: #2B3441;
+  color: var(--color-brand-heading);
   margin-bottom: 40px;
   position: relative;
   padding-bottom: 15px;
@@ -143,7 +143,7 @@
   left: 0;
   width: 45px;
   height: 3px;
-  background-color: #C01111;
+  background-color: var(--color-brand-primary);
 }
 .career-teams-section .teams-grid {
   display: grid;
@@ -178,7 +178,7 @@
   transform: scale(1.08);
 }
 .career-teams-section .team-card:hover .team-card__more {
-  color: #C01111;
+  color: var(--color-brand-primary);
 }
 .career-teams-section .team-card .team-card__image-box {
   height: 200px;
@@ -202,20 +202,20 @@
   font-family: "Roboto Slab", serif;
   font-size: 1.25rem;
   font-weight: 700;
-  color: #2B3441;
+  color: var(--color-brand-heading);
   margin-bottom: 12px;
 }
 .career-teams-section .team-card .team-card__content p {
   font-size: 0.925rem;
   line-height: 1.6;
-  color: #4D5969;
+  color: var(--color-brand-body);
   margin-bottom: 20px;
   flex-grow: 1;
 }
 .career-teams-section .team-card .team-card__more {
   font-weight: 700;
   font-size: 0.9rem;
-  color: #2B3441;
+  color: var(--color-brand-heading);
   text-decoration: none;
   display: inline-flex;
   align-items: center;

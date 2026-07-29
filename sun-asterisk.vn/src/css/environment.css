@@ -3,9 +3,9 @@
    ========================================================================== */
 
 :root {
-  --color-primary: #C01111;
-  --color-dark: #2B3441;
-  --color-body: #4D5969;
+  --color-primary: var(--color-brand-primary);
+  --color-dark: var(--color-brand-heading);
+  --color-body: var(--color-brand-body);
   --color-bg-gray: #F8F9FA;
   --color-border: #E9ECEF;
   --font-heading: 'Roboto Slab', serif;

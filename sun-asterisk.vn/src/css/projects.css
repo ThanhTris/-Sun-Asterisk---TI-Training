@@ -3,9 +3,9 @@
    ========================================================================== */
 
 :root {
-  --sun-red: #C01111;
-  --sun-dark: #2B3441;
-  --sun-body: #4D5969;
+  --sun-red: var(--color-brand-primary);
+  --sun-dark: var(--color-brand-heading);
+  --sun-body: var(--color-brand-body);
   --sun-bg-gray: #F8F9FA;
 }
 

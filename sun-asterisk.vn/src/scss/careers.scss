@@ -1,12 +1,10 @@
-@use "sass:color";
-
 // ==========================================================================
 // SCSS Variables & Mixins - Careers Page
 // ==========================================================================
 
-$color-primary: #C01111;
-$color-dark: #2B3441;
-$color-body: #4D5969;
+$color-primary: var(--color-brand-primary);
+$color-dark: var(--color-brand-heading);
+$color-body: var(--color-brand-body);
 $color-light-bg: #F8F9FA;
 $color-border: #E9ECEF;
 
@@ -158,7 +156,7 @@ $font-sans: 'Roboto', sans-serif;
     @include transition-standard;
 
     &:hover {
-      background-color: color.adjust($color-primary, $lightness: -8%);
+      background-color: #a00e0e;
       box-shadow: 0 6px 16px rgba(192, 17, 17, 0.3);
     }
   }
