@@ -5,14 +5,15 @@
   "main": "index.html",
   "scripts": {
     "tailwind": "npx tailwindcss -i ./src/css/main.css -o ./dist/css/style.css --watch",
+    "sass": "sass src/scss/careers.scss src/css/careers.css --watch",
     "serve": "npx lite-server",
-    "dev": "npx concurrently \"npm run tailwind\" \"npm run serve\"",
-    "build": "npx tailwindcss -i ./src/css/main.css -o ./dist/css/style.css --minify"
+    "dev": "npx concurrently \"npm run tailwind\" \"npm run sass\" \"npm run serve\"",
+    "build": "npx tailwindcss -i ./src/css/main.css -o ./dist/css/style.css --minify && sass src/scss/careers.scss src/css/careers.css"
   },
-  "dependencies": {},
   "devDependencies": {
     "concurrently": "^8.2.2",
     "lite-server": "^2.6.1",
+    "sass": "^1.102.0",
     "tailwindcss": "^3.4.1"
   }
 }

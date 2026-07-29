@@ -1,0 +1,276 @@
+@use "sass:color";
+
+// ==========================================================================
+// SCSS Variables & Mixins - Careers Page
+// ==========================================================================
+
+$color-primary: #C01111;
+$color-dark: #2B3441;
+$color-body: #4D5969;
+$color-light-bg: #F8F9FA;
+$color-border: #E9ECEF;
+
+$font-heading: 'Roboto Slab', serif;
+$font-sans: 'Roboto', sans-serif;
+
+@mixin flex-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@mixin transition-standard {
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+// Base page structure
+.career-page {
+  font-family: $font-sans;
+  color: $color-body;
+  background-color: #fff;
+  padding-top: 99px;
+  margin: 0;
+
+  #header-component {
+    min-height: 99px;
+  }
+}
+
+// Container
+.career-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+// Hero Section
+.career-hero {
+  padding: 60px 0;
+  background-color: #fff;
+
+  .career-hero__grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+    align-items: center;
+
+    @media (max-width: 991px) {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  .career-hero__content {
+    .career-hero__sub-title {
+      font-size: 1rem;
+      font-weight: 700;
+      color: $color-primary;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      margin-bottom: 12px;
+      display: block;
+    }
+
+    .career-hero__title {
+      font-family: $font-heading;
+      font-size: 2.75rem;
+      font-weight: 700;
+      color: $color-dark;
+      line-height: 1.2;
+      margin-bottom: 24px;
+    }
+
+    .career-hero__desc {
+      font-size: 1.05rem;
+      line-height: 1.7;
+      color: $color-body;
+      margin-bottom: 30px;
+    }
+  }
+
+  .career-hero__image-wrap {
+    position: relative;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+
+    img {
+      width: 100%;
+      height: auto;
+      display: block;
+      object-fit: cover;
+      @include transition-standard;
+    }
+
+    &:hover img {
+      transform: scale(1.03);
+    }
+  }
+}
+
+// Search & Filter UI
+.career-search-box {
+  background: #ffffff;
+  border: 1px solid $color-border;
+  border-radius: 16px;
+  padding: 24px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+  margin-bottom: 60px;
+
+  .career-search-form {
+    display: grid;
+    grid-template-columns: 2fr 1fr 140px;
+    gap: 16px;
+
+    @media (max-width: 768px) {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  .search-input, .search-select {
+    width: 100%;
+    padding: 14px 20px;
+    border: 1px solid #DCE1E7;
+    border-radius: 30px;
+    font-size: 0.95rem;
+    font-family: $font-sans;
+    color: $color-dark;
+    outline: none;
+    background-color: #fff;
+    @include transition-standard;
+
+    &:focus {
+      border-color: $color-primary;
+      box-shadow: 0 0 0 3px rgba(192, 17, 17, 0.1);
+    }
+  }
+
+  .btn-search {
+    background-color: $color-primary;
+    color: #ffffff;
+    border: none;
+    border-radius: 30px;
+    padding: 14px 28px;
+    font-weight: 700;
+    font-size: 0.95rem;
+    cursor: pointer;
+    @include flex-center;
+    gap: 8px;
+    @include transition-standard;
+
+    &:hover {
+      background-color: color.adjust($color-primary, $lightness: -8%);
+      box-shadow: 0 6px 16px rgba(192, 17, 17, 0.3);
+    }
+  }
+}
+
+// Team Cards Section
+.career-teams-section {
+  padding-bottom: 80px;
+
+  .section-heading {
+    font-family: $font-heading;
+    font-size: 2.25rem;
+    font-weight: 700;
+    color: $color-dark;
+    margin-bottom: 40px;
+    position: relative;
+    padding-bottom: 15px;
+
+    &::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 45px;
+      height: 3px;
+      background-color: $color-primary;
+    }
+  }
+
+  .teams-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px;
+
+    @media (max-width: 991px) {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    @media (max-width: 600px) {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  .team-card {
+    background: #ffffff;
+    border: 1px solid $color-border;
+    border-radius: 16px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    @include transition-standard;
+
+    &:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+      border-color: transparent;
+
+      .team-card__image {
+        transform: scale(1.08);
+      }
+
+      .team-card__more {
+        color: $color-primary;
+      }
+    }
+
+    .team-card__image-box {
+      height: 200px;
+      overflow: hidden;
+      position: relative;
+      background-color: #eee;
+    }
+
+    .team-card__image {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      @include transition-standard;
+    }
+
+    .team-card__content {
+      padding: 24px;
+      display: flex;
+      flex-direction: column;
+      flex-grow: 1;
+
+      h3 {
+        font-family: $font-heading;
+        font-size: 1.25rem;
+        font-weight: 700;
+        color: $color-dark;
+        margin-bottom: 12px;
+      }
+
+      p {
+        font-size: 0.925rem;
+        line-height: 1.6;
+        color: $color-body;
+        margin-bottom: 20px;
+        flex-grow: 1;
+      }
+    }
+
+    .team-card__more {
+      font-weight: 700;
+      font-size: 0.9rem;
+      color: $color-dark;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      @include transition-standard;
+    }
+  }
+}

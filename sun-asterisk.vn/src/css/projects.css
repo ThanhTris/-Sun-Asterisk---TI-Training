@@ -1,1 +1,207 @@
-/* Custom CSS specific to the Projects Page (Dự án) */
+/* ==========================================================================
+   Dự án (Projects) Page Styles - Built using Bootstrap 5 framework extensions
+   ========================================================================== */
+
+:root {
+  --sun-red: #C01111;
+  --sun-dark: #2B3441;
+  --sun-body: #4D5969;
+  --sun-bg-gray: #F8F9FA;
+}
+
+body.projects-page {
+  font-family: 'Roboto', 'Open Sans', sans-serif;
+  color: var(--sun-body);
+  background-color: #fff;
+  padding-top: 99px;
+}
+
+/* Header Adjustments */
+#header-component {
+  min-height: 99px;
+}
+
+/* Page Header Title */
+.projects-header-banner {
+  padding: 40px 0 20px;
+  background-color: #fff;
+}
+
+.projects-title {
+  font-family: 'Roboto Slab', serif;
+  font-weight: 700;
+  font-size: 2.25rem;
+  color: var(--sun-dark);
+  position: relative;
+  display: inline-block;
+}
+
+.projects-title::after {
+  content: "";
+  display: block;
+  width: 50px;
+  height: 3px;
+  background-color: var(--sun-red);
+  margin-top: 10px;
+}
+
+/* Hero Carousel */
+.featured-project-card {
+  background-color: #1a1e24;
+  border-radius: 16px;
+  overflow: hidden;
+  color: #fff;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.featured-project-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 30px rgba(0,0,0,0.15);
+}
+
+.featured-content-col {
+  padding: 3rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.featured-subtitle {
+  color: #a0aec0;
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 0.5rem;
+}
+
+.featured-title {
+  font-family: 'Roboto Slab', serif;
+  font-size: 2rem;
+  font-weight: 700;
+  color: #ffffff;
+  margin-bottom: 1rem;
+}
+
+.featured-desc {
+  color: #cbd5e0;
+  font-size: 1rem;
+  line-height: 1.6;
+  margin-bottom: 1.5rem;
+}
+
+.featured-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background-color: var(--sun-red);
+  color: #fff;
+  border-radius: 30px;
+  padding: 10px 24px;
+  font-weight: 600;
+  text-decoration: none;
+  width: fit-content;
+  transition: background-color 0.2s ease;
+}
+
+.featured-btn:hover {
+  background-color: #a00e0e;
+  color: #fff;
+}
+
+/* Project Items Grid */
+.project-card {
+  background: #ffffff;
+  border: 1px solid #e9ecef;
+  border-radius: 12px;
+  overflow: hidden;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  transition: all 0.3s ease;
+}
+
+.project-card:hover {
+  border-color: #dee2e6;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+  transform: translateY(-4px);
+}
+
+.project-card-img-wrap {
+  aspect-ratio: 16 / 10;
+  overflow: hidden;
+  background-color: #f1f3f5;
+  position: relative;
+}
+
+.project-card-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.4s ease;
+}
+
+.project-card:hover .project-card-img {
+  transform: scale(1.05);
+}
+
+.project-card-body {
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+.project-client-name {
+  font-size: 0.85rem;
+  color: var(--sun-red);
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+}
+
+.project-item-title {
+  font-family: 'Roboto Slab', serif;
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--sun-dark);
+  margin-bottom: 0.75rem;
+  line-height: 1.3;
+}
+
+.project-item-desc {
+  font-size: 0.925rem;
+  color: var(--sun-body);
+  line-height: 1.5;
+  margin-bottom: 1.25rem;
+  flex-grow: 1;
+}
+
+.btn-detail-link {
+  color: var(--sun-red);
+  font-weight: 700;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.9rem;
+  transition: gap 0.2s ease;
+}
+
+.project-card:hover .btn-detail-link {
+  gap: 10px;
+}
+
+.btn-load-more {
+  background-color: var(--sun-dark);
+  color: #fff;
+  border-radius: 30px;
+  padding: 12px 36px;
+  font-weight: 600;
+  border: none;
+  transition: all 0.3s ease;
+}
+
+.btn-load-more:hover {
+  background-color: #000;
+  color: #fff;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+}

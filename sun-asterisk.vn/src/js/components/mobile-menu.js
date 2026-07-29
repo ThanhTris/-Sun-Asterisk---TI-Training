@@ -45,7 +45,7 @@ function highlightActiveMenuItem(header) {
 
   const isAboutPage = path.includes('/about') || path.includes('/ve-chung-toi');
   const isProjectsPage = path.includes('/du-an') || path.includes('/projects');
-  const isCareerPage = path.includes('/co-hoi-nghe-nghiep') || path.includes('/jobs');
+  const isCareerPage = path.includes('/co-hoi-nghe-nghiep') || path.includes('/careers') || path.includes('/jobs');
   const isEnvPage = path.includes('/moi-truong-lam-viec') || path.includes('/environment');
   const isNewsPage = path.includes('/tin-tuc') || path.includes('/news');
   const isHomePage = !isAboutPage && !isProjectsPage && !isCareerPage && !isEnvPage && !isNewsPage;
