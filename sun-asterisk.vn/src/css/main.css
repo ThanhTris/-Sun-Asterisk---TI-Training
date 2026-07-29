@@ -6,6 +6,9 @@
   --color-brand-primary:  #C01111;
   --color-brand-heading:  #2B3441;
   --color-brand-body:     #4D5969;
+  /* White & Light background */
+  --color-white:          #ffffff;
+  --color-bg-light:       #F8F9FA;
   /* Footer */
   --color-footer-bg:      #f7f7f7;
   --color-footer-text:    #949ba4;

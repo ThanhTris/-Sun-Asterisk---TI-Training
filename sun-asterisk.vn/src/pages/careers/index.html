@@ -29,44 +29,52 @@
       
       <!-- ==================== 1. HERO BANNER ==================== -->
       <section class="career-hero">
-        <div class="career-hero__grid">
-          <div class="career-hero__content">
-            <span class="career-hero__sub-title">Sun-asterisk</span>
-            <h1 class="career-hero__title">JOIN US & Make Awesome Things That Matter.</h1>
-            <p class="career-hero__desc">
-              Thế giới mà Sun* đang hướng tới là nơi tất cả mọi người đều được tự do tạo ra những giá trị tuyệt vời, mang lại sự thay đổi tích cực cho toàn xã hội. Thời kỳ kỹ sư chỉ biết kỹ thuật đã qua, đây là kỷ nguyên của những Creator thực thụ, có tầm ảnh hưởng ở mọi nơi.<br><br>
-              Tại Sun*, chúng tôi luôn tìm kiếm những con người đam mê thử thách để hiện thực hóa những khát vọng trên. Nếu bạn là một người như vậy, hãy gia nhập đội ngũ Sun* để cùng nhau chúng ta sẽ chinh phục những điều phi thường thay đổi thế giới.
-            </p>
-          </div>
-
-          <div class="career-hero__image-wrap">
-            <img src="../../assets/images/career-hero.jpg" alt="Sun* Career Hero">
+        <span class="career-hero__protrusion"></span>
+        <div class="career-hero__card">
+          <div class="career-hero__grid">
+            <div class="career-hero__title-col">
+              <h1 class="career-hero__title">JOIN US &<br>Make Awesome Things That Matter.</h1>
+            </div>
+            
+            <div class="career-hero__desc-col">
+              <div class="career-hero__desc">
+                Thế giới mà Sun* đang hướng tới là nơi tất cả mọi người đều được tự do tạo ra những giá trị tuyệt vời, mang lại sự thay đổi tích cực cho toàn xã hội. Thời kỳ kỹ sư chỉ biết kỹ thuật đã qua, đây là kỷ nguyên của những Creator thực thụ, có tầm ảnh hưởng ở mọi nơi.<br><br>
+                Tại Sun*, chúng tôi luôn tìm kiếm những con người đam mê thử thách để hiện thực hóa những khát vọng trên. Nếu bạn là một người như vậy, hãy gia nhập đội ngũ Sun* để cùng nhau chúng ta sẽ chinh phục những điều phi thường thay đổi thế giới.
+              </div>
+            </div>
+            
+            <div class="career-hero__img-col">
+              <div class="career-hero__img-box">
+                <img src="../../assets/images/career-hero.jpg" alt="Sun* Career Hero" class="career-hero__img">
+              </div>
+            </div>
           </div>
         </div>
       </section>
 
-      <!-- ==================== 2. SEARCH & FILTER BOX (UI ONLY) ==================== -->
-      <section class="career-search-box">
-        <form class="career-search-form" onsubmit="return false;">
-          <input type="text" class="search-input" placeholder="Nhập từ khóa tìm kiếm vị trí..." readonly>
-          <select class="search-select">
-            <option value="">Tất cả địa điểm</option>
-            <option value="ha-noi">Hà Nội</option>
-            <option value="da-nang">Đà Nẵng</option>
-            <option value="ho-chi-minh">Hồ Chí Minh</option>
-            <option value="japan">Nhật Bản</option>
-            <option value="online">Online</option>
-          </select>
-          <button type="button" class="btn-search">
-            <i class="fa-solid fa-magnifying-glass"></i>
-            <span>Tìm kiếm</span>
-          </button>
-        </form>
-      </section>
-
-      <!-- ==================== 3. CHỌN TEAM CỦA BẠN (9 TEAMS) ==================== -->
+      
+      <!-- ==================== 2. CHỌN TEAM CỦA BẠN (9 TEAMS) ==================== -->
       <section class="career-teams-section">
         <h2 class="section-heading">Chọn team của bạn</h2>
+
+        <!-- ==================== 3. SEARCH & FILTER BOX (UI ONLY) ==================== -->
+        <section class="career-search-box">
+          <form class="career-search-form" onsubmit="return false;">
+            <input type="text" class="search-input" placeholder="Nhập từ khóa..." readonly>
+            <select class="search-select">
+              <option value="">Địa điểm</option>
+              <option value="ha-noi">Hà Nội</option>
+              <option value="da-nang">Đà Nẵng</option>
+              <option value="ho-chi-minh">Hồ Chí Minh</option>
+              <option value="japan">Japan</option>
+              <option value="online">Online</option>
+            </select>
+            <button type="button" class="btn-search">
+              <i class="fa-solid fa-magnifying-glass"></i>
+              <span>Tìm kiếm</span>
+            </button>
+          </form>
+        </section>
 
         <div class="teams-grid">
           
@@ -78,7 +86,7 @@
             <div class="team-card__content">
               <h3>Software Engineer</h3>
               <p>Chúng tôi là những Creators đam mê tạo ra các giá trị. Cùng với đồng đội tài năng, linh hoạt và đầy nhiệt huyết...</p>
-              <a href="#" class="team-card__more">Xem chi tiết <i class="fa-solid fa-arrow-right"></i></a>
+              <a href="#" class="team-card__more">Xem chi tiết </a>
             </div>
           </div>
 
@@ -90,7 +98,7 @@
             <div class="team-card__content">
               <h3>BrSE & Communicator</h3>
               <p>Đội ngũ kỹ sư cầu nối ở Sun* hội tụ đầy đủ năng lực quản lý, nền tảng kiến thức kỹ thuật tốt, năng lực ngôn ngữ xuất sắc...</p>
-              <a href="#" class="team-card__more">Xem chi tiết <i class="fa-solid fa-arrow-right"></i></a>
+              <a href="#" class="team-card__more">Xem chi tiết </a>
             </div>
           </div>
 
@@ -102,7 +110,7 @@
             <div class="team-card__content">
               <h3>Quality Assurance</h3>
               <p>QA Team tập hợp những thành viên có óc phán đoán nhạy bén, kỹ năng thuần thục và luôn truy cầu sự hoàn hảo trong chất lượng sản phẩm...</p>
-              <a href="#" class="team-card__more">Xem chi tiết <i class="fa-solid fa-arrow-right"></i></a>
+              <a href="#" class="team-card__more">Xem chi tiết </a>
             </div>
           </div>
 
@@ -114,7 +122,7 @@
             <div class="team-card__content">
               <h3>Intern / Fresher</h3>
               <p>Chúng tôi tìm kiếm những bạn trẻ có ước mơ cùng công nghệ tạo ra những thay đổi tích cực cho xã hội. Tuổi trẻ nhiệt huyết và không ngại thử thách...</p>
-              <a href="#" class="team-card__more">Xem chi tiết <i class="fa-solid fa-arrow-right"></i></a>
+              <a href="#" class="team-card__more">Xem chi tiết </a>
             </div>
           </div>
 
@@ -126,7 +134,7 @@
             <div class="team-card__content">
               <h3>Education</h3>
               <p>Nếu bạn có đam mê tạo nên vườn ươm chất lượng cho những bạn sinh viên IT, những người trẻ đầy nhiệt huyết với công nghệ...</p>
-              <a href="#" class="team-card__more">Xem chi tiết <i class="fa-solid fa-arrow-right"></i></a>
+              <a href="#" class="team-card__more">Xem chi tiết </a>
             </div>
           </div>
 
@@ -138,7 +146,7 @@
             <div class="team-card__content">
               <h3>Communications & Marketing</h3>
               <p>Mang trong mình sứ mệnh "giữ hồn cho thương hiệu", đội ngũ Communications & Marketing ở Sun* trang bị đầy đủ những kiến thức chuyên môn...</p>
-              <a href="#" class="team-card__more">Xem chi tiết <i class="fa-solid fa-arrow-right"></i></a>
+              <a href="#" class="team-card__more">Xem chi tiết </a>
             </div>
           </div>
 
@@ -150,7 +158,7 @@
             <div class="team-card__content">
               <h3>Management</h3>
               <p>Là những nhà quản lý giàu kinh nghiệm, đặc biệt với các dự án trong lĩnh vực CNTT, chúng tôi luôn sẵn sàng dẫn dắt đội ngũ gặt hái thành công...</p>
-              <a href="#" class="team-card__more">Xem chi tiết <i class="fa-solid fa-arrow-right"></i></a>
+              <a href="#" class="team-card__more">Xem chi tiết </a>
             </div>
           </div>
 
@@ -162,7 +170,7 @@
             <div class="team-card__content">
               <h3>Administration & Support</h3>
               <p>Bằng tất cả sự chỉn chu, nhiệt huyết, chúng tôi đang nỗ lực từng ngày để cung cấp giải pháp hành chính, hỗ trợ chuyên nghiệp cho đại gia đình Sun*...</p>
-              <a href="#" class="team-card__more">Xem chi tiết <i class="fa-solid fa-arrow-right"></i></a>
+              <a href="#" class="team-card__more">Xem chi tiết </a>
             </div>
           </div>
 
@@ -174,7 +182,7 @@
             <div class="team-card__content">
               <h3>Human Resources</h3>
               <p>Sun* Human Resources Unit là nơi hội tụ những thành viên có lý tưởng phát triển con người để đóng góp vào sự phát triển bền vững của tổ chức...</p>
-              <a href="#" class="team-card__more">Xem chi tiết <i class="fa-solid fa-arrow-right"></i></a>
+              <a href="#" class="team-card__more">Xem chi tiết </a>
             </div>
           </div>
 

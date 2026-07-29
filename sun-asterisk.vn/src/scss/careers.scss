@@ -5,8 +5,9 @@
 $color-primary: var(--color-brand-primary);
 $color-dark: var(--color-brand-heading);
 $color-body: var(--color-brand-body);
-$color-light-bg: #F8F9FA;
-$color-border: #E9ECEF;
+$color-light-bg: var(--color-bg-light, #F8F9FA);
+$color-border: var(--color-border-gray, #E4E4E4);
+$color-text: var(--color-footer-text);
 
 $font-heading: 'Roboto Slab', serif;
 $font-sans: 'Roboto', sans-serif;
@@ -25,7 +26,7 @@ $font-sans: 'Roboto', sans-serif;
 .career-page {
   font-family: $font-sans;
   color: $color-body;
-  background-color: #fff;
+  background-color: var(--color-white, #ffffff);
   padding-top: 99px;
   margin: 0;
 
@@ -43,80 +44,152 @@ $font-sans: 'Roboto', sans-serif;
 
 // Hero Section
 .career-hero {
-  padding: 60px 0;
-  background-color: #fff;
+  position: relative;
+  overflow: visible;
+  padding: 0;
+  background-color: transparent;
+
+  .career-hero__protrusion {
+    position: absolute;
+    left: -40px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 40px;
+    height: 60%;
+    background-color: var(--color-white, #ffffff);
+    border: 6px solid #f9f9f9;
+    border-right: none;
+    border-radius: 16px 0 0 16px;
+    z-index: 3;
+    pointer-events: none;
+  }
+
+  .career-hero__card {
+    position: relative;
+    background-color: var(--color-white, #ffffff);
+    border-radius: 16px;
+    border: 6px solid #f9f9f9;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.03);
+    padding: 60px 48px;
+    z-index: 2;
+    overflow: visible;
+
+    @media (min-width: 992px) {
+      padding-right: 220px;
+    }
+
+    &::before {
+      content: '';
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      background-color: $color-primary;
+      position: absolute;
+      left: 10%;
+      bottom: 0;
+      transform: translateY(50%);
+      z-index: 4;
+    }
+  }
 
   .career-hero__grid {
     display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 40px;
+    grid-template-columns: 1fr 1.8fr;
+    gap: 30px;
     align-items: center;
 
     @media (max-width: 991px) {
       grid-template-columns: 1fr;
+      gap: 40px;
     }
   }
 
-  .career-hero__content {
-    .career-hero__sub-title {
-      font-size: 1rem;
-      font-weight: 700;
-      color: $color-primary;
-      text-transform: uppercase;
-      letter-spacing: 1.5px;
-      margin-bottom: 12px;
-      display: block;
-    }
+  .career-hero__title-col {
+    // left column
+  }
 
-    .career-hero__title {
-      font-family: $font-heading;
-      font-size: 2.75rem;
-      font-weight: 700;
-      color: $color-dark;
-      line-height: 1.2;
-      margin-bottom: 24px;
-    }
+  .career-hero__subtitle {
+    font-size: 14px;
+    font-weight: 700;
+    text-transform: uppercase;
+    color: $color-primary;
+    letter-spacing: 2px;
+    display: block;
+    margin-bottom: 12px;
+  }
 
-    .career-hero__desc {
-      font-size: 1.05rem;
-      line-height: 1.7;
-      color: $color-body;
-      margin-bottom: 30px;
+  .career-hero__title {
+    font-family: $font-heading;
+    font-size: 48px;
+    font-weight: 700;
+    color: $color-dark;
+    margin: -10px 0 0;
+    line-height: 1.25;
+  }
+
+  .career-hero__desc-col {
+    box-sizing: border-box;
+    padding-left: 10px;
+
+    @media (max-width: 991px) {
+      padding-left: 0;
     }
   }
 
-  .career-hero__image-wrap {
+  .career-hero__desc {
+    font-family: $font-sans;
+    font-size: 16px;
+    line-height: 1.7;
+    color: $color-text;
+  }
+
+  .career-hero__img-col {
     position: relative;
-    border-radius: 20px;
-    overflow: hidden;
-    box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+    display: flex;
+    justify-content: center;
+    align-items: center;
 
-    img {
-      width: 100%;
-      height: auto;
-      display: block;
-      object-fit: cover;
-      @include transition-standard;
+    @media (min-width: 992px) {
+      position: absolute;
+      right: 0;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 0;
+      height: 0;
+      z-index: 10;
     }
+  }
 
-    &:hover img {
-      transform: scale(1.03);
+  .career-hero__img-box {
+    position: relative;
+    width: 340px;
+    height: 340px;
+
+    @media (min-width: 992px) {
+      position: absolute;
+      left: -170px;
+      top: -170px;
     }
+  }
+
+  .career-hero__img {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 6px solid var(--color-white, #ffffff);
+    box-shadow: 0 10px 35px rgba(0, 0, 0, 0.08);
   }
 }
 
 // Search & Filter UI
 .career-search-box {
-  background: #ffffff;
-  border: 1px solid $color-border;
-  border-radius: 16px;
   padding: 24px;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.05);
   margin-bottom: 60px;
 
   .career-search-form {
     display: grid;
-    grid-template-columns: 2fr 1fr 140px;
+    grid-template-columns: 2fr 1.2fr 180px;
     gap: 16px;
 
     @media (max-width: 768px) {
@@ -127,147 +200,140 @@ $font-sans: 'Roboto', sans-serif;
   .search-input, .search-select {
     width: 100%;
     padding: 14px 20px;
-    border: 1px solid #DCE1E7;
-    border-radius: 30px;
-    font-size: 0.95rem;
+    border: 1px solid transparent;
+    border-radius: 8px;
+    font-size: 16px;
+    height: 48px;
+    line-height: 48px;
     font-family: $font-sans;
-    color: $color-dark;
+    color: $color-body;
     outline: none;
-    background-color: #fff;
+    background-color: #f9f9f9;
     @include transition-standard;
-
-    &:focus {
-      border-color: $color-primary;
-      box-shadow: 0 0 0 3px rgba(192, 17, 17, 0.1);
-    }
   }
 
   .btn-search {
-    background-color: $color-primary;
-    color: #ffffff;
+    background-color: $color-dark;
+    color: var(--color-white, #ffffff);
     border: none;
-    border-radius: 30px;
+    border-radius: 8px;
     padding: 14px 28px;
     font-weight: 700;
-    font-size: 0.95rem;
+    font-size: 16px;
     cursor: pointer;
     @include flex-center;
     gap: 8px;
+    white-space: nowrap;
     @include transition-standard;
 
     &:hover {
-      background-color: #a00e0e;
-      box-shadow: 0 6px 16px rgba(192, 17, 17, 0.3);
+      background-color: $color-primary;
     }
   }
 }
 
 // Team Cards Section
 .career-teams-section {
-  padding-bottom: 80px;
+  margin: 50px 0;
 
   .section-heading {
     font-family: $font-heading;
-    font-size: 2.25rem;
+    font-size: 40px;
     font-weight: 700;
     color: $color-dark;
-    margin-bottom: 40px;
-    position: relative;
-    padding-bottom: 15px;
-
-    &::after {
-      content: '';
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      width: 45px;
-      height: 3px;
-      background-color: $color-primary;
-    }
   }
 
   .teams-grid {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(2, 1fr);
     gap: 30px;
 
     @media (max-width: 991px) {
-      grid-template-columns: repeat(2, 1fr);
-    }
-
-    @media (max-width: 600px) {
       grid-template-columns: 1fr;
     }
   }
 
   .team-card {
-    background: #ffffff;
+    background: var(--color-white, #ffffff);
     border: 1px solid $color-border;
     border-radius: 16px;
     overflow: hidden;
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     @include transition-standard;
 
+    @media (max-width: 576px) {
+      flex-direction: column;
+    }
+
     &:hover {
-      transform: translateY(-6px);
-      box-shadow: 0 15px 35px rgba(0,0,0,0.1);
-      border-color: transparent;
-
-      .team-card__image {
-        transform: scale(1.08);
-      }
-
-      .team-card__more {
-        color: $color-primary;
-      }
+      border-color: $color-primary;
     }
 
     .team-card__image-box {
-      height: 200px;
+      width: 40%;
+      min-height: 220px;
       overflow: hidden;
       position: relative;
-      background-color: #eee;
+      background-color: $color-light-bg;
+      flex-shrink: 0;
+
+      @media (max-width: 576px) {
+        width: 100%;
+        height: 200px;
+        min-height: auto;
+      }
     }
 
     .team-card__image {
       width: 100%;
       height: 100%;
       object-fit: cover;
+      display: block;
       @include transition-standard;
     }
 
     .team-card__content {
+      width: 60%;
       padding: 24px;
       display: flex;
       flex-direction: column;
+      justify-content: center;
       flex-grow: 1;
+
+      @media (max-width: 576px) {
+        width: 100%;
+      }
 
       h3 {
         font-family: $font-heading;
         font-size: 1.25rem;
         font-weight: 700;
         color: $color-dark;
-        margin-bottom: 12px;
+        margin-bottom: 8px;
       }
 
       p {
-        font-size: 0.925rem;
+        font-size: 0.9rem;
         line-height: 1.6;
         color: $color-body;
-        margin-bottom: 20px;
-        flex-grow: 1;
+        margin-bottom: 16px;
+        display: -webkit-box;
+        -webkit-line-clamp: 3;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
       }
     }
 
     .team-card__more {
       font-weight: 700;
       font-size: 0.9rem;
-      color: $color-dark;
+      color: $color-primary;
       text-decoration: none;
       display: inline-flex;
       align-items: center;
       gap: 6px;
+      margin-top: auto;
       @include transition-standard;
     }
   }
