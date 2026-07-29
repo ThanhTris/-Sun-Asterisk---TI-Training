@@ -2,23 +2,17 @@
    Dự án (Projects) Page Styles - Built using Bootstrap 5 framework extensions
    ========================================================================== */
 
-:root {
-  --sun-red: var(--color-brand-primary);
-  --sun-dark: var(--color-brand-heading);
-  --sun-body: var(--color-brand-body);
-  --sun-bg-gray: #F8F9FA;
-}
-
 body.projects-page {
   font-family: 'Roboto', 'Open Sans', sans-serif;
-  color: var(--sun-body);
+  color: var(--color-brand-body);
   background-color: #fff;
   padding-top: 99px;
 }
 
-/* Header Adjustments */
-#header-component {
-  min-height: 99px;
+body.projects-page .container {
+  max-width: 1140px;
+  margin: 0 auto;
+  padding: 0;
 }
 
 /* Page Header Title */
@@ -31,103 +25,133 @@ body.projects-page {
   font-family: 'Roboto Slab', serif;
   font-weight: 700;
   font-size: 2.25rem;
-  color: var(--sun-dark);
-  position: relative;
-  display: inline-block;
-}
-
-.projects-title::after {
-  content: "";
-  display: block;
-  width: 50px;
-  height: 3px;
-  background-color: var(--sun-red);
-  margin-top: 10px;
+  color: var(--color-brand-heading);
 }
 
 /* Hero Carousel */
-.featured-project-card {
-  background-color: #1a1e24;
-  border-radius: 16px;
-  overflow: hidden;
-  color: #fff;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.featured-project-card:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 12px 30px rgba(0,0,0,0.15);
+.carousel-featured-container {
+  background-color: #ffffff;
+  padding: 40px 0;
 }
 
 .featured-content-col {
-  padding: 3rem;
+  padding: 1.5rem;
   display: flex;
   flex-direction: column;
   justify-content: center;
+  height: 100%;
 }
 
 .featured-subtitle {
-  color: #a0aec0;
-  font-size: 0.9rem;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-  margin-bottom: 0.5rem;
+  color: var(--color-brand-body);
+  font-size: 1rem;
+  font-weight: 300;
 }
 
 .featured-title {
   font-family: 'Roboto Slab', serif;
-  font-size: 2rem;
+  font-size: 2.5rem;
   font-weight: 700;
-  color: #ffffff;
-  margin-bottom: 1rem;
+  color: var(--color-brand-heading);
+  margin: 2rem 0;
 }
 
 .featured-desc {
-  color: #cbd5e0;
-  font-size: 1rem;
-  line-height: 1.6;
-  margin-bottom: 1.5rem;
+  color: var(--color-brand-body);
+  font-size: 16px;
+  line-height: 1.7;
+  margin-bottom: 2rem;
+  min-height: 110px; /* Cố định chiều cao tối thiểu để nút bấm không bị xê dịch */
 }
 
-.featured-btn {
-  display: inline-flex;
+.featured-img-wrap {
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+}
+
+.featured-img-wrap img {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+  display: block;
+}
+
+/* Custom Navigation Controls */
+.carousel-nav-group {
+  display: flex;
+  gap: 12px;
+  margin-top: 1.5rem;
+  z-index: 10;
+}
+
+@media (min-width: 992px) {
+  .carousel-nav-group {
+    position: absolute;
+    bottom: 24px;
+    left: 24px;
+    margin-top: 0;
+  }
+}
+
+.btn-carousel-nav {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background-color: #f1f3f5;
+  border: none;
+  display: flex;
   align-items: center;
-  gap: 8px;
-  background-color: var(--sun-red);
-  color: #fff;
-  border-radius: 30px;
-  padding: 10px 24px;
-  font-weight: 600;
-  text-decoration: none;
-  width: fit-content;
-  transition: background-color 0.2s ease;
+  justify-content: center;
+  color: var(--color-footer-text);
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: all 0.25s ease;
 }
 
-.featured-btn:hover {
-  background-color: #a00e0e;
-  color: #fff;
+.btn-carousel-nav:hover {
+  background-color: var(--color-brand-primary); /* Đổi màu nền sang đỏ từ root */
+  color: #ffffff;                                /* Đổi icon sang trắng */
+  transform: scale(1.05);
 }
 
+.btn-carousel-nav:active {
+  transform: scale(0.95);
+}
+
+/* Custom 40% Text and 60% Image layout */
+.col-featured-text {
+  width: 40%;
+  flex: 0 0 40%;
+  max-width: 40%;
+}
+.col-featured-img {
+  width: 60%;
+  flex: 0 0 60%;
+  max-width: 60%;
+}
 /* Project Items Grid */
 .project-card {
+  position: relative;
   background: #ffffff;
-  border: 1px solid #e9ecef;
   border-radius: 12px;
   overflow: hidden;
-  height: 100%;
-  display: flex;
-  flex-direction: column;
+  height: auto;
+  margin-bottom: 24px;
+  display: block;
   transition: all 0.3s ease;
+  border: none !important;
+  box-shadow: none !important;
 }
 
 .project-card:hover {
-  border-color: #dee2e6;
-  box-shadow: 0 10px 25px rgba(0,0,0,0.08);
-  transform: translateY(-4px);
+  border: none !important;
+  box-shadow: none !important;
 }
 
 .project-card-img-wrap {
-  aspect-ratio: 16 / 10;
+  width: 100%;
+  height: 100%;
   overflow: hidden;
   background-color: #f1f3f5;
   position: relative;
@@ -137,24 +161,55 @@ body.projects-page {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  transition: transform 0.4s ease;
+  display: block;
+  transition: transform 0.5s ease;
+}
+
+/* Staggered Heights for Masonry Layout (Không dùng responsive) */
+.project-height-1 .project-card-img-wrap { height: 320px; }
+.project-height-2 .project-card-img-wrap { height: 420px; }
+.project-height-3 .project-card-img-wrap { height: 500px; }
+.project-height-4 .project-card-img-wrap { height: 440px; }
+.project-height-5 .project-card-img-wrap { height: 350px; }
+.project-height-6 .project-card-img-wrap { height: 300px; }
+.project-height-7 .project-card-img-wrap { height: 400px; }
+.project-height-8 .project-card-img-wrap { height: 520px; }
+.project-height-9 .project-card-img-wrap { height: 380px; }
+
+/* Overlay details on Hover (Xem ảnh 2) */
+.project-card-body {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(255, 255, 255, 0.96);
+  padding: 2.5rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: flex-start;
+  text-align: left;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.35s ease;
+  z-index: 2;
+  border: none !important;
+}
+
+.project-card:hover .project-card-body {
+  opacity: 1;
+  visibility: visible;
 }
 
 .project-card:hover .project-card-img {
-  transform: scale(1.05);
-}
-
-.project-card-body {
-  padding: 1.5rem;
-  display: flex;
-  flex-direction: column;
-  flex-grow: 1;
+  transform: scale(1.08);
 }
 
 .project-client-name {
-  font-size: 0.85rem;
-  color: var(--sun-red);
-  font-weight: 600;
+  font-size: 14px;
+  color: var(--color-brand-body);
+  font-weight: 500;
   margin-bottom: 0.5rem;
 }
 
@@ -162,46 +217,116 @@ body.projects-page {
   font-family: 'Roboto Slab', serif;
   font-size: 1.25rem;
   font-weight: 700;
-  color: var(--sun-dark);
-  margin-bottom: 0.75rem;
+  color: var(--color-brand-heading);
+  margin-bottom: 1rem;
   line-height: 1.3;
 }
 
 .project-item-desc {
-  font-size: 0.925rem;
-  color: var(--sun-body);
-  line-height: 1.5;
-  margin-bottom: 1.25rem;
-  flex-grow: 1;
+  font-size: 14px;
+  color: var(--color-brand-body);
+  line-height: 1.6;
+  margin-bottom: 1.5rem;
 }
 
 .btn-detail-link {
-  color: var(--sun-red);
+  color: var(--color-brand-primary);
   font-weight: 700;
   text-decoration: none;
   display: inline-flex;
   align-items: center;
-  gap: 6px;
-  font-size: 0.9rem;
+  gap: 8px;
+  font-size: 14px;
   transition: gap 0.2s ease;
 }
 
-.project-card:hover .btn-detail-link {
-  gap: 10px;
+.btn-detail-link i {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background-color: rgba(192, 17, 17, 0.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.75rem;
+  transition: background-color 0.2s ease, color 0.2s ease;
 }
 
+
 .btn-load-more {
-  background-color: var(--sun-dark);
+  position: relative;
+  height: 80px;
+  min-width: 320px;
+  background-color: var(--color-brand-heading);
   color: #fff;
-  border-radius: 30px;
-  padding: 12px 36px;
-  font-weight: 600;
+  font-size: 18px;
+  border-radius: 8px;
+  font-weight: 700;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
   border: none;
-  transition: all 0.3s ease;
+  overflow: hidden;
+  z-index: 1;
+  transition: color 0.4s ease;
+  cursor: pointer;
+}
+
+.btn-load-more::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: var(--color-brand-primary);
+  z-index: -1;
+  opacity: 0;
+  transform: scale3d(0.7, 1, 1);
+  transition: transform 0.4s, opacity 0.4s;
+  transition-timing-function: cubic-bezier(.2, 1, .3, 1);
+}
+
+.btn-load-more .btn-arrow {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background-color: rgba(255, 255, 255, 0.1);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.4s, color 0.4s;
 }
 
 .btn-load-more:hover {
-  background-color: #000;
   color: #fff;
-  box-shadow: 0 4px 15px rgba(0,0,0,0.2);
 }
+
+.btn-load-more:hover::before {
+  opacity: 1;
+  transform: scale3d(1, 1, 1);
+}
+
+.btn-load-more:hover .btn-arrow {
+  background-color: rgba(255, 255, 255, 0.2);
+  color: #fff;
+}
+
+/* Red Bubble Badge on top of the first project card (Item 1) */
+.project-badge-wrapper {
+  position: relative;
+}
+
+.project-badge-wrapper::before {
+  content: "";
+  width: 28px;
+  height: 28px;
+  background-color: var(--color-brand-primary);
+  border-radius: 50%;
+  position: absolute;
+  top: -14px;
+  left: 100px;
+  z-index: 10;
+}
+

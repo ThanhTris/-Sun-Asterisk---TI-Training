@@ -2,20 +2,10 @@
    Môi trường làm việc (Work Environment) Page Styles - Pure Vanilla CSS
    ========================================================================== */
 
-:root {
-  --color-primary: var(--color-brand-primary);
-  --color-dark: var(--color-brand-heading);
-  --color-body: var(--color-brand-body);
-  --color-bg-gray: #F8F9FA;
-  --color-border: #E9ECEF;
-  --font-heading: 'Roboto Slab', serif;
-  --font-sans: 'Roboto', sans-serif;
-}
-
 body.environment-page {
-  font-family: var(--font-sans);
-  color: var(--color-body);
-  background-color: #ffffff;
+  font-family: 'Roboto', sans-serif;
+  color: var(--color-brand-body);
+  background-color: var(--color-white, #ffffff);
   padding-top: 99px;
   margin: 0;
   line-height: 1.6;
@@ -26,7 +16,7 @@ body.environment-page {
 }
 
 .env-container {
-  max-width: 1200px;
+  max-width: 1140px;
   margin: 0 auto;
   padding: 0 20px;
 }
@@ -35,12 +25,12 @@ body.environment-page {
 .env-hero {
   padding: 60px 0 40px;
   text-align: center;
-  background: linear-gradient(180deg, #FFFFFF 0%, #F8F9FA 100%);
-  border-bottom: 1px solid var(--color-border);
+  background: linear-gradient(180deg, #FFFFFF 0%, var(--color-bg-light, #F8F9FA) 100%);
+  border-bottom: 1px solid var(--color-border-gray, #E4E4E4);
 }
 
 .env-hero__subtitle {
-  color: var(--color-primary);
+  color: var(--color-brand-primary);
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 2px;
@@ -50,9 +40,9 @@ body.environment-page {
 }
 
 .env-hero__title {
-  font-family: var(--font-heading);
+  font-family: 'Roboto Slab', serif;
   font-size: 2.75rem;
-  color: var(--color-dark);
+  color: var(--color-brand-heading);
   font-weight: 700;
   margin: 0 0 20px 0;
 }
@@ -61,7 +51,7 @@ body.environment-page {
   max-width: 800px;
   margin: 0 auto;
   font-size: 1.1rem;
-  color: var(--color-body);
+  color: var(--color-brand-body);
   line-height: 1.8;
 }
 
@@ -84,10 +74,10 @@ body.environment-page {
 }
 
 .env-section-title {
-  font-family: var(--font-heading);
+  font-family: 'Roboto Slab', serif;
   font-size: 2.25rem;
   font-weight: 700;
-  color: var(--color-dark);
+  color: var(--color-brand-heading);
   margin-bottom: 30px;
   position: relative;
   padding-bottom: 15px;
@@ -100,7 +90,7 @@ body.environment-page {
   left: 0;
   width: 45px;
   height: 3px;
-  background-color: var(--color-primary);
+  background-color: var(--color-brand-primary);
 }
 
 .env-culture-list {
@@ -121,7 +111,7 @@ body.environment-page {
   height: 48px;
   border-radius: 50%;
   background-color: rgba(192, 17, 17, 0.1);
-  color: var(--color-primary);
+  color: var(--color-brand-primary);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -132,13 +122,13 @@ body.environment-page {
 .env-culture-item__title {
   font-weight: 700;
   font-size: 1.15rem;
-  color: var(--color-dark);
+  color: var(--color-brand-heading);
   margin-bottom: 6px;
 }
 
 .env-culture-item__desc {
   font-size: 0.95rem;
-  color: var(--color-body);
+  color: var(--color-brand-body);
 }
 
 .env-culture__image {
@@ -151,7 +141,7 @@ body.environment-page {
 /* ==================== 3. OFFICES GALLERY ==================== */
 .env-offices {
   padding: 80px 0;
-  background-color: var(--color-bg-gray);
+  background-color: var(--color-bg-light, #F8F9FA);
 }
 
 .env-office-city {
@@ -159,10 +149,10 @@ body.environment-page {
 }
 
 .env-office-city__name {
-  font-family: var(--font-heading);
+  font-family: 'Roboto Slab', serif;
   font-size: 1.5rem;
   font-weight: 700;
-  color: var(--color-dark);
+  color: var(--color-brand-heading);
   margin-bottom: 20px;
   display: flex;
   align-items: center;
@@ -170,7 +160,7 @@ body.environment-page {
 }
 
 .env-office-city__name i {
-  color: var(--color-primary);
+  color: var(--color-brand-primary);
 }
 
 .env-office-gallery {
@@ -189,7 +179,7 @@ body.environment-page {
   border-radius: 12px;
   overflow: hidden;
   box-shadow: 0 4px 12px rgba(0,0,0,0.05);
-  background: #fff;
+  background: var(--color-white, #ffffff);
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
@@ -229,33 +219,33 @@ body.environment-page {
 }
 
 .env-benefit-card {
-  border: 1px solid var(--color-border);
+  border: 1px solid var(--color-border-gray, #E4E4E4);
   border-radius: 16px;
   padding: 30px;
-  background: #fff;
+  background: var(--color-white, #ffffff);
   transition: all 0.3s ease;
 }
 
 .env-benefit-card:hover {
-  border-color: var(--color-primary);
+  border-color: var(--color-brand-primary);
   box-shadow: 0 10px 30px rgba(192, 17, 17, 0.08);
 }
 
 .env-benefit-card__icon {
   font-size: 2rem;
-  color: var(--color-primary);
+  color: var(--color-brand-primary);
   margin-bottom: 20px;
 }
 
 .env-benefit-card__title {
-  font-family: var(--font-heading);
+  font-family: 'Roboto Slab', serif;
   font-size: 1.2rem;
   font-weight: 700;
-  color: var(--color-dark);
+  color: var(--color-brand-heading);
   margin-bottom: 10px;
 }
 
 .env-benefit-card__desc {
   font-size: 0.925rem;
-  color: var(--color-body);
+  color: var(--color-brand-body);
 }
