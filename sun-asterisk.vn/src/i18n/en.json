@@ -1,0 +1,327 @@
+{
+  "common": {
+    "nav": {
+      "home": "Home",
+      "about": "About Us",
+      "projects": "Projects",
+      "careers": "Careers",
+      "environment": "Environment",
+      "news": "News"
+    },
+    "footer": {
+      "col1": {
+        "title": "Who we are",
+        "link1": "Vision & Mission",
+        "link2": "Core Values",
+        "link3": "Meaning of Sun*"
+      },
+      "col2": {
+        "title": "What we do",
+        "link3": "Our Projects"
+      },
+      "col3": {
+        "title": "Latest News",
+        "link1": "Culture & Events",
+        "link2": "Careers",
+        "link3": "Benefits Policy"
+      },
+      "contact": {
+        "title": "Contact",
+        "phoneLabel": "Phone",
+        "emailLabel": "Email"
+      },
+      "offices": {
+        "title": "Offices",
+        "hanoi": "T13 Keangnam Hanoi Landmark Tower, E6 Cau Giay New Urban Area, Yen Hoa Ward, Hanoi City, Vietnam.",
+        "danang": "4th Floor, 16 Ly Thuong Kiet, Hai Chau Ward, Da Nang City, Vietnam.",
+        "hcm": "9th & 10th Floor, L'Mak Long Tower, 101-103 Nguyen Cuu Van, Gia Dinh Ward, Ho Chi Minh City, Vietnam.",
+        "overseas": "Tokyo Office - Cebu Office - Phnom Penh Office"
+      },
+      "legal": {
+        "line1": "Business Registration Certificate: 0106045931 first issued by Hanoi Department of Planning and Investment on 29/10/2012",
+        "line2": "Employment Service License: 03/2022 first issued by Hanoi Department of Labor, Invalids and Social Affairs on 10/01/2022",
+        "line3": "Legal representative: KOBAYASHI TAIHEI - CEO"
+      }
+    }
+  },
+  "pages": {
+    "home": {
+      "meta": {
+        "title": "Home - Sun* Inc. Careers | Digital Creative Studio",
+        "description": "As a Digital Creative Studio, Sun* always champions product ownership and creative thinking in every project to deliver the most \"Awesome\" experiences."
+      },
+      "hero": {
+        "videoFallback": "Your browser does not support HTML5 video."
+      },
+      "sectors": {
+        "title": "Business Sectors",
+        "intro1": "As a Digital Creative Studio, Sun* always champions product ownership and creative thinking in every project to deliver the most <strong class=\"font-bold\">\"Awesome\"</strong> experiences for end-users.",
+        "intro2": "With two service lines - <strong class=\"text-brand-heading font-bold\">\"Creative & Engineering\"</strong> and <strong class=\"text-brand-heading font-bold\">\"Talent Platform\"</strong> - Sun* has been steadily using technology to create positive value for society.",
+        "badge": "Digital Creative Studio",
+        "learnMore": "Learn more",
+        "card1": { "title": "Creative<br>& Engineering", "desc": "An abundant workforce specializing in technology, design, and business." },
+        "card2": { "title": "Talent<br>Platform", "desc": "HR solutions that support sustainable business growth." }
+      },
+      "projects": {
+        "title": "Our Projects",
+        "stat1Label": "Partners",
+        "stat2Label": "Services supported",
+        "viewAll": "View all projects",
+        "slider": {
+          "cta": "Read more",
+          "harutaka": { "alt": "HARUTAKA project", "title": "HARUTAKA project", "desc": "A web/video-based interview service that optimizes the recruitment process." },
+          "kurashicom": { "alt": "KURASHICOM project", "title": "KURASHICOM project", "desc": "Developing an app to help bring people's desired lifestyle to life." },
+          "ssk": { "alt": "SSK project", "title": "SSK project", "desc": "A challenge to bring more energy to people and society through sports data.", "company": "SSK Co., Ltd" }
+        }
+      },
+      "career": {
+        "title": "Careers",
+        "desc1": "Sun* is always looking for people who are passionate about challenges to create<br>\"Awesome\" value.",
+        "desc2": "Become part of Sun* today.",
+        "cta": "Join the Sun* team"
+      },
+      "environment": {
+        "title": "Work Environment",
+        "item1": "#ActiveChallenge: Proactively creating continuous challenges for yourself.",
+        "item2": "#ActiveLearn: Learning within an organization with all the right pieces in place - learning environment, learning opportunities, and learning capability.",
+        "item3": "#ActiveJoy: Living in a culture that values humanity and happiness for everyone.",
+        "cta": "Learn more"
+      },
+      "culture": {
+        "title": "Culture & Events",
+        "badge": "Hot",
+        "cta": "Read more",
+        "loadMore": "Load more news",
+        "card1": {
+          "title": "Exclusive resource pack revealed and all technical questions answered after TechUp #2",
+          "desc": "\"I swiped my card for $10 to buy Copilot right during the speaker's hands-on session\" - a developer confided to the organizers after attending TechUp #2."
+        },
+        "card2": {
+          "alt": "6 months into the strategy",
+          "title": "6 months into the \"All of Sun* learning and practicing continuously\" strategy - what results have we seen?",
+          "desc": "To nurture and strongly develop a learning culture and become a \"Learning Organization,\" over the past 6 months, with the \"All of Sun* learning and practicing continuously\" strategy, we've achieved positive learning results."
+        },
+        "card3": {
+          "alt": "Conquering the CKA 2024 certification",
+          "title": "Conquering the CKA 2024 certification with Huu Kim (R&D): \"A dramatic journey full of hard-won lessons\"",
+          "desc": "Sunner Huu Kim (R&D) just went through the journey of taking the CKA (Certified Kubernetes Administrator) exam in 2024. Speaking of this exam, drama and hard-won lessons are what impressed Kim the most."
+        }
+      }
+    },
+    "about": {
+      "meta": {
+        "title": "About Us - Sun* Inc. Careers | Digital Creative Studio",
+        "description": "We are a group of people passionate about creating breakthrough, positive value for society as a whole."
+      },
+      "hero": {
+        "desc": "Imagine a world where everyone is free to create amazing value with the power to change lives. We pursue our own passions while looking toward the future together. We don't just exist - we live to make dreams a reality.<br>\n                Standing at the intersection of technology, business, and education, we will bring positive change to society as a whole."
+      },
+      "meaning": {
+        "title": "Sun Asterisk: Name & Meaning",
+        "desc": "Sun Asterisk holds the dream and goal of creating as much good for society as possible, brought to life by a collective of sun warriors.",
+        "learnMore": "Learn more",
+        "companyNameLine": "<strong>Company name:</strong> <strong class=\"text-primary\">Sun Asterisk</strong>",
+        "shortNameLine": "<strong>Short name:</strong> <strong class=\"text-primary\">Sun*</strong>",
+        "sunExplain": "The word <strong>\"Sun\"</strong> in our company name means \"the sun\" - the very foundation that sustains all life on Earth. We aim to become the strongest platform, using our light to illuminate and nurture the \"seeds\" of innovators as well as pioneering, transformative services. By becoming a platform that helps build \"Awesome\" value, Sun* awakens the creative passion each of us was born with, creating \"an equal world where everyone has the chance to bring 'Awesome' value.\"",
+        "asteriskExplain": "<strong>* - \"Asterisk\"</strong> is the symbol for multiplication in many programming languages. Crossing the barriers between startups and large enterprises, we bring together and build the most suitable team to create \"Awesome\" value, driving positive change for society through digital transformation (DX)."
+      },
+      "vision": {
+        "title": "Vision <br>& Mission",
+        "visionLabel": "Vision",
+        "visionDesc": "A free world where everyone is passionate about creating Awesome value.",
+        "missionLabel": "Mission",
+        "missionDesc": "Together with people who are ready to embrace every challenge, we build a better society through groundbreaking products and business activities."
+      },
+      "core": {
+        "title": "Core Values",
+        "aimHigh": "Having defined Sun*'s vision as \"creating a world where everyone is free to create amazing value,\" we're ready to embrace a journey full of challenges and obstacles. The key to overcoming these challenges is the ability to set challenging goals every day, continuously pushing ourselves beyond our comfort zone to conquer things we once thought impossible.",
+        "beAgile": "We believe that change is the very nature of how the universe moves, the foundation of evolution, and an opportunity to nurture the creativity within each of us. Flexibility to change and transform is arguably our most important weapon - not just to survive, but to keep growing sustainably. Let's master change together with flexibility, creativity, and the mindset of pioneers.",
+        "wasshoi": "\"Wasshoi\" - the traditional chant heard at Japan's classic festivals - is the sound that best captures Sun*'s spirit of unity. That spirit of unity only truly comes alive when we're teammates who share the same direction, always trusting and supporting one another through every challenge. That bond includes every Sun* member and all of Sun*'s partners, regardless of role, region, or nationality. By shouting \"Wasshoi\" loud and proud, we find the courage to strive together, stumble together, stand back up together, and move steadily forward together.",
+        "prevSlide": "Previous slide",
+        "nextSlide": "Next slide"
+      },
+      "sectors": {
+        "title": "Business Sectors",
+        "badge": "Digital Creative Studio",
+        "learnMore": "Learn more",
+        "card1": { "title": "Creative<br>&amp; Engineering", "desc": "An abundant workforce specializing in technology, design, and business." },
+        "card2": { "title": "Talent<br>Platform", "desc": "HR solutions that support sustainable business growth." }
+      },
+      "ceo": {
+        "quote": "\"As a Digital Creative Studio, Sun*'s goal is to create a world where people can be passionate about creating value.\n              <br><br>\n              Living in Japan, there were times I felt truly awful. I know there are people who feel suffocated as each new day begins. Being able to live joyfully is the most wonderful thing of all. And isn't being immersed in creating new value happiness within reach?\n              <br><br>\n              If you want to challenge yourself with something new, but don't know where to start and are still hesitant, come to Sun* - together, let's create so many Awesome things for society.\"",
+        "link": "Learn more  →"
+      },
+      "offices": {
+        "title": "Offices",
+        "hanoi": "Hanoi Office",
+        "danang": "Da Nang Office",
+        "hcm": "Ho Chi Minh City Office",
+        "intl": "International Offices",
+        "viewMap": "View map",
+        "hanoiAddress": "13th Floor, Keangnam Landmark 72, Pham Hung Street, Nam Tu Liem District, Hanoi",
+        "danangAddress": "4th Floor, FHome Building, 16 Ly Thuong Kiet, Hai Chau District, Da Nang",
+        "hcmAddress": "9th Floor, L'Mak Long Tower, 101-103 Nguyen Cuu Van, Ward 17, Binh Thanh District, Ho Chi Minh City, Vietnam.",
+        "tokyo": "Tokyo Office",
+        "cebu": "Cebu Office",
+        "phnomPenh": "Phnom Penh Office"
+      }
+    },
+    "news": {
+      "meta": {
+        "title": "Culture & Events - Sun* Inc. Careers | Digital Creative Studio",
+        "description": "Stay updated with the latest news about culture, people, technology, and standout events at Sun* Vietnam."
+      },
+      "carousel": {
+        "slide1": {
+          "title": "CSS Success Story - Wacom EC Magento (CEV07)",
+          "desc": "Understanding that \"the measure of success is customer satisfaction,\" the Wacom EC Magento project team - with the mindset that \"clients aren't the opposition, they're comrades\" - worked hard to build genuine relationships with clients, gradually reaping the rewards of becoming one of Sun*'s top CSS-scoring projects in the first half of 2024.",
+          "author": "Posted by H.Vy",
+          "views": "993 views"
+        },
+        "slide2": {
+          "title": "Fun team-bonding activities among Sun* people at work",
+          "desc": "Sun* is well known for its progressive working environment - no matter the role, every member takes pride in being a Sunner. That spirit is built on core values and the whole team's shared effort to create good value for society. In 2024, staying true to the \"Wasshoi\" core value, team-bonding activities among Sun* people have been diverse, fresh, and meaningful.",
+          "author": "Posted by QNT",
+          "views": "1,077 views"
+        },
+        "slide3": {
+          "title": "Insurance SaaS Development Support: Golang and VueJS become the \"catalyst\" for Sunners to push their limits",
+          "desc": "\"The tougher the challenge, the more exciting it is to take on,\" \"a new language isn't a barrier, it's a chance to prove your ability\" - these are the catchphrases the Insurance SaaS project members keep repeating when asked how they conquer tough client requirements and maintain a CSS score above 90 for three years running.",
+          "author": "Posted by Tan.",
+          "views": "1,076 views"
+        }
+      },
+      "grid": {
+        "sectionTitle": "Latest News",
+        "cta": "Read more",
+        "article1": {
+          "alt": "15 Summer Trip programs 2024",
+          "title": "15 exciting Summer Trip programs revealed for Sun* people this summer",
+          "desc": "Continuing the department-led travel format, this year's Summer Trip officially returns with an even more vibrant atmosphere."
+        },
+        "article2": {
+          "alt": "Conquering the CKA 2024 certification with Huu Kim",
+          "title": "Conquering the CKA 2024 certification with Huu Kim (R&D): \"A dramatic journey full of hard-won lessons\"",
+          "desc": "Sunner Huu Kim (R&D) just went through the journey of taking the CKA (Certified Kubernetes Administrator) exam in 2024. Speaking of the exam..."
+        },
+        "article3": {
+          "alt": "TechUp #2 registration officially opens",
+          "title": "Hot: TechUp #2 registration is officially open - Using AI to improve coding productivity and build breakthrough products",
+          "desc": "After the resounding success of the first edition in 2023, TechUp - the tech event \"hosted by Sun*\" - is officially returning with a new edition."
+        },
+        "article4": {
+          "alt": "23 artworks by Sun* people",
+          "title": "Looking back: 23 one-of-a-kind artworks by Sun* people for the company's special occasion",
+          "desc": "Brilliant minds and artistic eyes \"that don't do things by halves\" among Sun* people were on full display through 23 impressive artworks."
+        },
+        "article5": {
+          "alt": "EAP mental health support program",
+          "title": "EAP - Sun*'s employee mental health support program returns, refreshed",
+          "desc": "The Employee Assistance Program (EAP) will officially relaunch on 01/03/2024. Sunners, get ready..."
+        },
+        "article6": {
+          "alt": "Sun* Day: Our 11",
+          "title": "Sun* Day: Our 11 - The much-awaited \"comeback\" Sunners have been waiting for is finally here!!",
+          "desc": "So after a year, the birthday celebration Sunners have been eagerly awaiting is officially back with a brand-new, spectacular look: Sun* Day: Our..."
+        }
+      },
+      "badge": {
+        "hot": "Hot"
+      },
+      "loadMore": "Load more news",
+      "sidebar": {
+        "title": "Trending News",
+        "item1": { "title": "Insurance SaaS Development Support: Golang, VueJS become the \"ca...", "excerpt": "\"The tougher the challenge, the more..." },
+        "item2": { "title": "6 months into the \"All of Sun* learning and practicing continuously\" strategy, here's what we...", "excerpt": "To nurture and develop..." },
+        "item3": { "title": "Introducing the K8s server for CEVs to freely build internal projects", "excerpt": "In just 2 months, the tea..." },
+        "item4": { "title": "Conquering the CKA 2024 certification with Huu Kim (R&D): \"A dramatic jour...", "excerpt": "Sunner Huu Kim (R&D) just..." },
+        "item5": { "title": "Exclusive resource pack revealed and all technical questions from...", "excerpt": "\"I swiped my card for $10 to..." },
+        "item6": { "title": "Hot: TechUp #2 registration is officially open - Using AI to improve codi...", "excerpt": "After the resounding success of the first edition..." }
+      }
+    },
+    "projects": {
+      "meta": {
+        "title": "Projects - Sun* Inc. Careers | Digital Creative Studio",
+        "description": "Explore the creative, technology-driven projects Sun* has built together with partners around the world."
+      },
+      "zenkigen": "ZENKIGEN Co., Ltd",
+      "ssk": "SSK Co., Ltd",
+      "monoful": "Monoful Co., Ltd",
+      "carousel": {
+        "slide1": { "title": "Kurashicom Project", "desc": "Kurashicom is rolling out a web service that helps customers find the \"things\" and \"experiences\" that suit them and express the lifestyle they want." },
+        "slide2": { "subtitle": "SSK Joint Stock Company", "title": "SSK Project", "desc": "A challenge to bring more energy to people and society through sports data." },
+        "slide3": { "title": "HARUTAKA Project", "desc": "To create timely meetings between talent and companies, \"HARUTAKA\" was born to solve these problems with a web-based interview service featuring video interviews." }
+      },
+      "grid": {
+        "title": "Projects",
+        "cta": "Read more",
+        "item1": { "title": "KURASHICOM Project", "desc": "Developing an app to help bring people's desired lifestyle to life..." },
+        "item2": { "title": "LINE Pay Project", "desc": "Revealing the representative cultural value of Ueno art in Japan through a technology solution..." },
+        "item3": { "title": "SSK Project", "desc": "A challenge to bring more energy to people and society through Sports Data..." },
+        "item4": { "title": "HARUTAKA Project", "desc": "Driving DX for the recruitment process with Startup/Studio ZENKIGEN..." },
+        "item5": { "title": "Monoful Project", "desc": "Transforming the goods distribution industry. Creating a new, more efficient way of working..." },
+        "item6": { "title": "Tilani Project – Matching Platform", "desc": "A leading connection platform in Vietnam that creates great opportunities to network..." },
+        "item7": { "title": "Smart League SAAI Project", "desc": "A product developed for the SAAI Wonder Working Community creative center..." },
+        "item8": { "title": "Kids Taxi Project", "desc": "A Mobility Tech solution that makes picking up and dropping off children safe and convenient..." },
+        "item9": { "title": "Softbank / MeeTruck Project", "desc": "A vehicle dispatch system taking on the challenge of digital transformation in transportation..." }
+      },
+      "loadMore": "Load more"
+    },
+    "careers": {
+      "meta": {
+        "title": "Careers - Sun* Inc. Careers | Digital Creative Studio",
+        "description": "Join the Sun* team to create amazing value that brings positive change to society."
+      },
+      "hero": {
+        "desc": "The world Sun* is working toward is one where everyone is free to create amazing value that brings positive change to society as a whole. The era of engineers who only know technology is over - this is the era of true Creators with influence everywhere.<br><br>\n                At Sun*, we're always looking for people who are passionate about challenges to make these aspirations a reality. If that's you, join the Sun* team and together we'll conquer extraordinary things that change the world."
+      },
+      "teamsHeading": "Choose your team",
+      "search": {
+        "placeholder": "Enter keyword...",
+        "location": "Location",
+        "hanoi": "Hanoi",
+        "danang": "Da Nang",
+        "hcm": "Ho Chi Minh City",
+        "button": "Search"
+      },
+      "moreLink": "Read more ",
+      "team1": { "desc": "We are Creators passionate about creating value. Together with talented, agile, and dedicated teammates..." },
+      "team2": { "desc": "Sun*'s bridge engineer team brings together strong management skills, a solid technical foundation, and excellent language ability..." },
+      "team3": { "desc": "The QA Team brings together members with sharp judgment, refined skills, and a constant pursuit of product quality perfection..." },
+      "team4": { "desc": "We're looking for young people who dream of using technology to create positive change for society. Passionate, and never afraid of a challenge..." },
+      "team5": { "desc": "If you're passionate about nurturing a quality environment for IT students - young people full of enthusiasm for technology..." },
+      "team6": { "desc": "Carrying the mission of \"keeping the brand's soul alive,\" Sun*'s Communications & Marketing team is equipped with comprehensive expertise..." },
+      "team7": { "desc": "As experienced managers, especially for IT projects, we're always ready to lead the team to success..." },
+      "team8": { "desc": "With meticulous care and dedication, we work every day to provide professional administrative solutions and support for the Sun* family..." },
+      "team9": { "desc": "The Sun* Human Resources Unit brings together members who share an ideal of developing people to contribute to the organization's sustainable growth..." }
+    },
+    "environment": {
+      "meta": {
+        "title": "Work Environment - Sun* Inc. Careers | Digital Creative Studio",
+        "description": "Discover Sun* Vietnam's people-centered, dynamic work environment and outstanding benefits policies."
+      },
+      "intro": {
+        "title": "Work<br>Environment",
+        "desc": "In striving to achieve Sun*'s mission, creating an environment where every member can bring out their own strengths is paramount. That's why the first thing I ask all of Sun*'s leaders to pay special attention to when setting their goals is motivation, psychological safety, and the growth of their people.",
+        "imgAlt": "Work environment at Sun*"
+      },
+      "challenge": {
+        "title": "#ActiveChallenge: Proactively creating continuous challenges for yourself",
+        "p1": "Sun* is an environment that always champions innovative, creative ideas. With a team of \"servant leaders\" ready to unlock members' potential and motivation, Sun* always stands alongside talented people pursuing their own passions.",
+        "p2": "To turn those passions into achievements, every Sunner proactively creates interesting, challenging work for themselves through effort and a deep understanding of the organization - rather than waiting to be told what to do and how to do it."
+      },
+      "learn": {
+        "title": "#ActiveLearn: Learning within an organization with all the right pieces in place - learning environment, learning opportunities, and learning capability.",
+        "intro": "With a philosophy centered on people's growth, Sun* proactively builds a comprehensive, highly personalized learning organization, sparking members' interest and motivation to learn:",
+        "item1": "<strong>Learning environment</strong>: Sunners are given an optimal space with a learning-experience platform, an extensive resource library, a standard competency framework, a continuously upgraded training plan, and a relentless Coaching & Sharing culture.",
+        "item2": "<strong>Learning opportunities</strong>: Alongside outstanding colleagues, Sunners get a \"tailored\" learning plan with diverse online and offline courses, reputable learning sponsorship packages, and challenging opportunities to put theory into practice in their own work.",
+        "item3": "<strong>Learning capability</strong>: Sunners are equipped with a smart learning method through the IDP - Individual Development Plan tool - along with the 70-20-10 model (learning from real work, learning from others, learning from books and theory), making learning goal-oriented and tailored to each individual."
+      },
+      "joy": {
+        "title": "#ActiveJoy: Living in a culture that values humanity and happiness for everyone",
+        "p1": "Each member's thoughts and feelings are the top priority in any decision Sun* makes. Sunners are nurtured and developed to build on their strengths, gaining peace of mind through genuine care - not just for themselves, but for their families too.",
+        "p2": "Rooted in that sincerity, every connection-building and culture-building activity is aimed at one shared goal: creating happiness, joy, and a sense of belonging for Sunners. No matter the role, every member is proud to be a Sunner!"
+      }
+    }
+  }
+}

@@ -2,6 +2,7 @@ import { loadComponent } from './components/loader.js';
 import { initHeader } from './components/mobile-menu.js';
 import { initCounter } from './components/counter.js';
 import { initProjectSlider } from './components/slider.js';
+import { initI18n } from './i18n/i18n.js';
 
 // Wait for DOM to be fully loaded
 document.addEventListener('DOMContentLoaded', async () => {
@@ -14,7 +15,8 @@ document.addEventListener('DOMContentLoaded', async () => {
 
   // 2. Sau khi components đã được chèn vào DOM, khởi tạo các hiệu ứng tương tác
   initHeader();
-  
+  await initI18n('./i18n/');
+
   // Khởi tạo các phần khác trên trang chủ
   initCounter();
   initProjectSlider();

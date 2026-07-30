@@ -53,16 +53,16 @@ function highlightActiveMenuItem(header) {
   // Desktop Nav Items
   const navLinks = header.querySelectorAll('nav a');
   navLinks.forEach(link => {
-    const text = link.textContent.trim().toLowerCase();
+    const linkPath = link.pathname.toLowerCase();
     const span = link.querySelector('span');
 
     let isActive = false;
-    if (isHomePage && text.includes('trang chủ')) isActive = true;
-    if (isAboutPage && (text.includes('về chúng tôi') || text.includes('about us'))) isActive = true;
-    if (isProjectsPage && (text.includes('dự án') || text.includes('projects'))) isActive = true;
-    if (isCareerPage && (text.includes('cơ hội nghề nghiệp') || text.includes('career'))) isActive = true;
-    if (isEnvPage && (text.includes('môi trường làm việc') || text.includes('environment'))) isActive = true;
-    if (isNewsPage && (text.includes('tin tức') || text.includes('news'))) isActive = true;
+    if (isHomePage && !linkPath.includes('/pages/')) isActive = true;
+    if (isAboutPage && linkPath.includes('/pages/about/')) isActive = true;
+    if (isProjectsPage && linkPath.includes('/pages/projects/')) isActive = true;
+    if (isCareerPage && linkPath.includes('/pages/careers/')) isActive = true;
+    if (isEnvPage && linkPath.includes('/pages/environment/')) isActive = true;
+    if (isNewsPage && linkPath.includes('/pages/news/')) isActive = true;
 
     if (isActive) {
       link.classList.remove('text-brand-body');
@@ -84,15 +84,15 @@ function highlightActiveMenuItem(header) {
   // Mobile Menu Items
   const mobileLinks = header.querySelectorAll('#mobile-menu a');
   mobileLinks.forEach(link => {
-    const text = link.textContent.trim().toLowerCase();
+    const linkPath = link.pathname.toLowerCase();
 
     let isActive = false;
-    if (isHomePage && text.includes('trang chủ')) isActive = true;
-    if (isAboutPage && (text.includes('về chúng tôi') || text.includes('about us'))) isActive = true;
-    if (isProjectsPage && (text.includes('dự án') || text.includes('projects'))) isActive = true;
-    if (isCareerPage && (text.includes('cơ hội nghề nghiệp') || text.includes('career'))) isActive = true;
-    if (isEnvPage && (text.includes('môi trường làm việc') || text.includes('environment'))) isActive = true;
-    if (isNewsPage && (text.includes('tin tức') || text.includes('news'))) isActive = true;
+    if (isHomePage && !linkPath.includes('/pages/')) isActive = true;
+    if (isAboutPage && linkPath.includes('/pages/about/')) isActive = true;
+    if (isProjectsPage && linkPath.includes('/pages/projects/')) isActive = true;
+    if (isCareerPage && linkPath.includes('/pages/careers/')) isActive = true;
+    if (isEnvPage && linkPath.includes('/pages/environment/')) isActive = true;
+    if (isNewsPage && linkPath.includes('/pages/news/')) isActive = true;
 
     if (isActive) {
       link.className = 'block font-normal text-white bg-brand-primary px-6 py-4';

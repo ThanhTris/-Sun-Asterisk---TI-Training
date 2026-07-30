@@ -1,0 +1,327 @@
+{
+  "common": {
+    "nav": {
+      "home": "Trang chủ",
+      "about": "Về chúng tôi",
+      "projects": "Dự án",
+      "careers": "Cơ hội nghề nghiệp",
+      "environment": "Môi trường làm việc",
+      "news": "Tin tức"
+    },
+    "footer": {
+      "col1": {
+        "title": "Chúng tôi là ai?",
+        "link1": "Tầm nhìn, sứ mệnh",
+        "link2": "Giá trị cốt lõi",
+        "link3": "Ý nghĩa tên Sun*"
+      },
+      "col2": {
+        "title": "Chúng tôi làm gì?",
+        "link3": "Dự án của chúng tôi"
+      },
+      "col3": {
+        "title": "Cập nhật tin tức",
+        "link1": "Văn hóa - Sự kiện",
+        "link2": "Tuyển dụng",
+        "link3": "Chính sách phúc lợi"
+      },
+      "contact": {
+        "title": "Liên hệ",
+        "phoneLabel": "SĐT",
+        "emailLabel": "Email"
+      },
+      "offices": {
+        "title": "Văn phòng",
+        "hanoi": "T13 Keangnam Hanoi Landmark Tower, khu E6 khu ĐTM Cầu Giấy, Phường Yên Hòa, Thành phố Hà Nội, Việt Nam.",
+        "danang": "Tầng 4, 16 Lý Thường Kiệt, Phường Hải Châu, Thành phố Đà Nẵng, Việt Nam.",
+        "hcm": "Tầng 9 và Tầng 10, L'Mak Long Tower, số 101-103 Nguyễn Cửu Vân, Phường Gia Định, Thành phố Hồ Chí Minh, Việt Nam.",
+        "overseas": "Văn phòng Tokyo - Văn phòng Cebu - Văn phòng Phnom Penh"
+      },
+      "legal": {
+        "line1": "Giấy chứng nhận ĐKDN: 0106045931 do Sở KHĐT TP Hà Nội cấp lần đầu ngày 29/10/2012",
+        "line2": "Giấy phép hoạt động DVVL: 03/2022 do Sở LĐTBXH TP Hà Nội cấp lần đầu ngày 10/01/2022",
+        "line3": "Người đại diện theo pháp luật: KOBAYASHI TAIHEI - Tổng giám đốc"
+      }
+    }
+  },
+  "pages": {
+    "home": {
+      "meta": {
+        "title": "Trang chủ - Sun* Inc. Tuyển Dụng | Digital Creative Studio",
+        "description": "Là một Digital Creative Studio, Sun* luôn đề cao tinh thần làm chủ sản phẩm, tư duy sáng tạo trong mỗi dự án để mang đến những trải nghiệm Awesome nhất."
+      },
+      "hero": {
+        "videoFallback": "Trình duyệt của bạn không hỗ trợ video HTML5."
+      },
+      "sectors": {
+        "title": "Lĩnh vực kinh doanh",
+        "intro1": "Là một Digital Creative Studio, Sun* luôn đề cao tinh thần làm chủ sản phẩm, tư duy sáng tạo trong mỗi dự án để mang đến những trải nghiệm <strong class=\"font-bold\">\"Awesome\"</strong> nhất cho end-user.",
+        "intro2": "Với hai dòng dịch vụ là <strong class=\"text-brand-heading font-bold\">\"Creative & Engineering\"</strong> và <strong class=\"text-brand-heading font-bold\">\"Talent Platform\"</strong>, Sun* đã và đang từng bước cùng công nghệ tạo ra những giá trị tốt đẹp cho xã hội.",
+        "badge": "Digital Creative Studio",
+        "learnMore": "Tìm hiểu thêm",
+        "card1": { "title": "Creative<br>& Engineering", "desc": "Đội ngũ nhân lực dồi dào chuyên về công nghệ, thiết kế và kinh doanh." },
+        "card2": { "title": "Talent<br>Platform", "desc": "Các giải pháp nguồn nhân lực hỗ trợ tăng trưởng kinh doanh bền vững." }
+      },
+      "projects": {
+        "title": "Dự án của chúng tôi",
+        "stat1Label": "Đối tác",
+        "stat2Label": "Dịch vụ được hỗ trợ",
+        "viewAll": "Xem tất cả dự án",
+        "slider": {
+          "cta": "Xem chi tiết",
+          "harutaka": { "alt": "Dự án HARUTAKA", "title": "Dự án HARUTAKA", "desc": "Dịch vụ phỏng vấn trên nền tảng web/video giúp tối ưu quy trình tuyển dụng." },
+          "kurashicom": { "alt": "Dự án KURASHICOM", "title": "Dự án KURASHICOM", "desc": "Phát triển App giúp hiện thực hóa phong cách sống theo ý muốn." },
+          "ssk": { "alt": "Dự án SSK", "title": "Dự án SSK", "desc": "Thử thách để tiếp thêm năng lượng cho mọi người và xã hội với sports data.", "company": "Công ty TNHH SSK" }
+        }
+      },
+      "career": {
+        "title": "Cơ hội nghề nghiệp",
+        "desc1": "Sun* luôn tìm kiếm những con người đam mê thử thách để tạo nên những giá trị<br>\"Awesome\".",
+        "desc2": "Cùng trở thành một phần của Sun* ngay hôm nay.",
+        "cta": "Gia nhập đội ngũ Sun*"
+      },
+      "environment": {
+        "title": "Môi trường làm việc",
+        "item1": "#ActiveChallenge: Chủ động tạo ra công việc thử thách liên tục cho bản thân.",
+        "item2": "#ActiveLearn: Học tập trong một tổ chức có đầy đủ các thành phần tố: môi trường học tập, cơ hội học tập, năng lực học tập.",
+        "item3": "#ActiveJoy: Sống trong môi trường văn hóa hướng tới giá trị nhân văn, và hạnh phúc cho mọi người.",
+        "cta": "Xem chi tiết"
+      },
+      "culture": {
+        "title": "Văn hóa - Sự kiện",
+        "badge": "Tin nóng",
+        "cta": "Xem chi tiết",
+        "loadMore": "Xem nhiều tin hơn",
+        "card1": {
+          "title": "Hé lộ bộ tài liệu độc quyền siêu HOT và giải đáp toàn bộ thắc mắc kỹ thuật sau TechUp #2",
+          "desc": "“Tôi đã quẹt thẻ 10$ mua Copilot ngay trong phần chia sẻ thiết thực của diễn giả” - một lập trình viên đã tâm sự với BTC sau khi tham gia TechUp #2."
+        },
+        "card2": {
+          "alt": "6 tháng cùng chiến dịch",
+          "title": "6 tháng cùng chiến lược “Toàn Sun* học tập và thực hành liên tục\", chúng ta đã có những kết quả như thế nào?",
+          "desc": "Để nuôi dưỡng và phát triển mạnh mẽ văn hóa học tập, từ đó trở thành \"Tổ chức học tập\" (Learning Organization), 6 tháng qua, với chiến lược “Toàn Sun* học tập và thực hành liên tục\", chúng ta đã có những kết quả học tập tích cực."
+        },
+        "card3": {
+          "alt": "Chinh phục chứng chỉ CKA 2024",
+          "title": "Chinh phục chứng chỉ CKA 2024 cùng Hữu Kim (R&D): \"Kịch tính và nhiều kinh nghiệm xương máu\"",
+          "desc": "Sunner Hữu Kim (R&D) vừa trải qua hành trình thi chứng chỉ CKA (Certified Kubernetes Administrator) trong năm 2024. Nhắc đến cuộc thi này, kịch tính và nhiều bài học xương máu là những gì Kim ấn tượng nhất."
+        }
+      }
+    },
+    "about": {
+      "meta": {
+        "title": "Về chúng tôi - Sun* Inc. Tuyển Dụng | Digital Creative Studio",
+        "description": "Chúng tôi là tập thể những con người say mê kiến tạo những giá trị tốt đẹp mang tính đột phá cho toàn xã hội."
+      },
+      "hero": {
+        "desc": "Hãy tưởng tượng ra một thế giới nơi tất cả mọi người đều được tự do tạo ra những giá trị tuyệt vời, có sức mạnh thay đổi cuộc sống. Chúng tôi theo đuổi đam mê của chính mình, cùng nhìn về tương lai. Không chỉ tồn tại, chúng tôi sống để thực hiện hóa những ước mơ.<br>\n                Đứng ở điểm giao thoa giữa công nghệ, kinh doanh và giáo dục, chúng tôi sẽ mang lại sự thay đổi tích cực cho toàn xã hội.."
+      },
+      "meaning": {
+        "title": "Sun Asterisk : Tên gọi và ý nghĩa",
+        "desc": "Sun Asterisk chứa đựng ước mơ và mục tiêu kiến tạo nên thật nhiều những điều tốt đẹp cho xã hội của tập thể những chiến binh mặt trời.",
+        "learnMore": "Tìm hiểu thêm",
+        "companyNameLine": "<strong>Tên công ty:</strong> <strong class=\"text-primary\">Sun Asterisk</strong>",
+        "shortNameLine": "<strong>Viết tắt:</strong> <strong class=\"text-primary\">Sun*</strong>",
+        "sunExplain": "Từ <strong>\"Sun\"</strong> trong tên công ty chính là \"Mặt trời\". Đây chính là nền tảng nuôi dưỡng mọi sự sống trên Trái Đất. Chúng tôi hướng tới trở thành nền tảng mạnh nhất dùng ánh sáng của mình để chiếu sáng và nuôi dưỡng các \"mầm ươm\" của những người thực hiện công cuộc đổi mới (innovator) cũng như những dịch vụ tiên tiến mang tính cải cách. Bằng việc trở thành nền tảng giúp xây dựng các giá trị \"Awesome\", Sun* sẽ đánh thức nhiệt huyết sáng tạo mà mỗi con người chúng ta đều mang trong mình ngay từ khi mới sinh ra và tạo ra \"thế giới bình đẳng nơi mỗi người đều có cơ hội mang lại những giá trị \"Awesome\"\".",
+        "asteriskExplain": "<strong>* - \"Asterisk\"</strong> là biểu tượng thể hiện cho phép nhân trong nhiều ngôn ngữ lập trình. Vượt qua rào cản của các doanh nghiệp startup và các doanh nghiệp lớn, tập hợp và xây dựng đội ngũ thích hợp nhất để xây dựng các giá trị \"Awesome\", tạo ra thay đổi tích cực cho xã hội thông qua việc thúc đẩy chuyển đổi số (DX)."
+      },
+      "vision": {
+        "title": "Tầm nhìn <br>& Sứ mệnh",
+        "visionLabel": "Tầm nhìn",
+        "visionDesc": "Một thế giới tự do nơi mỗi người đều say mê kiến tạo những giá trị Awesome.",
+        "missionLabel": "Sứ mệnh",
+        "missionDesc": "Cùng với những con người sẵn sàng đón nhận mọi thử thách, chúng tôi tạo nên một xã hội tốt đẹp hơn bằng những sản phẩm và hoạt động kinh doanh mang tính đột phá."
+      },
+      "core": {
+        "title": "Giá trị cốt lõi",
+        "aimHigh": "Khi xác định tầm nhìn của Sun* là \"kiến tạo nên một thế giới nơi mỗi người đều được tự do tạo nên những giá trị tuyệt vời\", chúng ta đã sẵn sàng đón nhận một hành trình đầy ắp thử thách và chông gai. Chìa khóa để vượt qua những thử thách ấy chính là khả năng đặt ra những mục tiêu thách thức mỗi ngày, từ đó thúc đẩy bản thân liên tục mở rộng vùng an toàn, để chinh phục những điều mà chúng ta từng nghĩ rằng mình không thể.",
+        "beAgile": "Chúng ta tin rằng thay đổi chính là bản chất vận động của vũ trụ, là nền tảng của tiến hoá, cũng là cơ hội giúp nuôi dưỡng khả năng sáng tạo bên trong mỗi người. Có thể nói, sự linh hoạt để thay đổi và chuyển mình chính là vũ khí quan trọng nhất giúp chúng ta không chỉ tồn tại, mà còn tiếp tục phát triển bền vững. Hãy cùng nhau làm chủ thay đổi bằng sự linh hoạt, sức sáng tạo và tâm thế của những nhà tiên phong.",
+        "wasshoi": "“Wasshoi” - tiếng hô truyền thống trong những lễ hội cổ truyền Nhật Bản chính là âm thanh thể hiện rõ ràng nhất tinh thần đoàn kết của Sun*. Tinh thần đoàn kết đó chỉ thật sự phát huy sức mạnh khi chúng ta là những người đồng đội có chung chí hướng, luôn tin tưởng và hỗ trợ nhau vượt qua mọi thử thách. Mối liên kết ấy bao gồm thành viên Sun* và tất cả đối tác của Sun *, bất kể vai trò, vùng miền hay quốc tịch. Bằng việc hô to hai tiếng “Wasshoi” hào sảng và khí thế, chúng ta có dũng khí để cùng nỗ lực, cùng vấp ngã, cùng đứng dậy, và cùng nhau vững vàng tiến về phía trước.",
+        "prevSlide": "Slide trước",
+        "nextSlide": "Slide tiếp theo"
+      },
+      "sectors": {
+        "title": "Lĩnh vực kinh doanh",
+        "badge": "Digital Creative Studio",
+        "learnMore": "Tìm hiểu thêm",
+        "card1": { "title": "Creative<br>&amp; Engineering", "desc": "Đội ngũ nhân lực dồi dào chuyên về công nghệ, thiết kế và kinh doanh." },
+        "card2": { "title": "Talent<br>Platform", "desc": "Các giải pháp nguồn nhân lực hỗ trợ tăng trưởng kinh doanh bền vững." }
+      },
+      "ceo": {
+        "quote": "\"Là một Digital Creative Studio, mục tiêu của Sun* là tạo ra thế giới nơi mọi người có thể say mê tạo ra các giá trị.\n              <br><br>\n              Khi sinh sống tại Nhật Bản, có những lúc tôi cảm thấy thật tồi tệ. Tôi biết rằng, có những người cảm thấy ngột thở khi ngày mới bắt đầu. Việc mọi người có thể sống một cách vui vẻ là điều tuyệt vời nhất. Và chẳng phải, được chìm đắm trong việc tạo ra các giá trị mới chính là hạnh phúc trong tầm tay sao?\n              <br><br>\n              Nếu bạn đang muốn thử thách bản thân một điều gì đó mới mẻ, nhưng lại không biết phải làm gì và vẫn còn băn khoăn với điều đó, hãy đến với Sun*, chúng ta cùng nhau tạo ra thật nhiều điều Awesome cho xã hội.\"",
+        "link": "Tìm hiểu thêm  →"
+      },
+      "offices": {
+        "title": "Văn phòng",
+        "hanoi": "Văn phòng Hà Nội",
+        "danang": "Văn phòng Đà Nẵng",
+        "hcm": "Văn phòng TP Hồ Chí Minh",
+        "intl": "Văn phòng Quốc tế",
+        "viewMap": "Xem bản đồ",
+        "hanoiAddress": "Tầng 13, tòa Keangnam Landmark 72, đường Phạm Hùng, quận Nam Từ Liêm, Tp. Hà Nội",
+        "danangAddress": "Tầng 4, tòa FHome Building, số 16 Lý Thường Kiệt, quận Hải Châu, Tp. Đà Nẵng",
+        "hcmAddress": "Tầng 9, L'Mak Long Tower, số 101-103 Nguyễn Cửu Vân, Phường 17, Quận Bình Thạnh, Thành phố Hồ Chí Minh, Việt Nam.",
+        "tokyo": "Văn phòng Tokyo",
+        "cebu": "Văn phòng Cebu",
+        "phnomPenh": "Văn phòng Phnom Penh"
+      }
+    },
+    "news": {
+      "meta": {
+        "title": "Văn hóa - Sự kiện - Sun* Inc. Tuyển Dụng | Digital Creative Studio",
+        "description": "Cập nhật những tin tức mới nhất về văn hóa, con người, công nghệ và các sự kiện nổi bật tại Sun* Vietnam."
+      },
+      "carousel": {
+        "slide1": {
+          "title": "Dự án kì tích CSS - Wacom EC Magento (CEV07)",
+          "desc": "Hiểu rõ “thước đo của sự thành công chính là mức độ hài lòng của khách hàng”, team dự án Wacom EC Magento với tâm thế “Khách hàng không phải phe đối lập, họ là chiến hữu” đã nỗ lực để tạo lập mối quan hệ thân tình cùng khách hàng, từ đó từng bước gặt hái \"trái ngọt\" tuyệt vời khi trở thành dự án đạt điểm số CSS cao top đầu Sun* 6 tháng đầu năm 2024.",
+          "author": "Đăng bởi H.Vy",
+          "views": "993 Lượt xem"
+        },
+        "slide2": {
+          "title": "Các hoạt động gắn kết thú vị của người Sun* trong công việc",
+          "desc": "Sun* luôn được biết đến với môi trường làm việc văn minh, dù ở vị trí nào, mỗi thành viên đều tự hào khi là một Sunner. Tinh thần ấy có được dựa trên những giá trị cốt lõi, cùng nỗ lực của cả tập thể trong việc chung tay tạo ra giá trị tốt đẹp cho xã hội. Năm 2024, bám sát tinh thần core value “Wasshoi”, các hoạt động gắn kết trong công việc của người Sun* được thể hiện vừa đa dạng, mới mẻ, vừa sâu sắc, ý nghĩa.",
+          "author": "Đăng bởi QNT",
+          "views": "1077 Lượt xem"
+        },
+        "slide3": {
+          "title": "Dự án Insurance SaaS Development Support: Golang, VueJS trở thành “chất xúc tác” để Sunner vượt giới hạn",
+          "desc": "“Đề bài càng hóc búa, càng hấp dẫn để xông pha”, “Ngôn ngữ mới không phải rào cản, mà chính là cơ hội để chứng minh năng lực” là những câu cửa miệng các thành viên dự án Insurance SaaS liên tục nhấn mạnh khi được hỏi về cách chinh phục bài toán khó từ khách hàng và duy trì điểm CSS trên 90 suốt ba năm vận hành.",
+          "author": "Đăng bởi Tan.",
+          "views": "1076 Lượt xem"
+        }
+      },
+      "grid": {
+        "sectionTitle": "Tin tức tổng hợp",
+        "cta": "Xem chi tiết",
+        "article1": {
+          "alt": "15 chương trình Summer Trip 2024",
+          "title": "Hé lộ kế hoạch thú vị tại 15 chương trình Summer Trip của người Sun* hè năm nay",
+          "desc": "Tiếp tục triển khai phương thức du lịch theo đơn vị phòng/ban, Summer Trip năm nay chính thức quay trở lại với không khí sôi động hơn."
+        },
+        "article2": {
+          "alt": "Chinh phục chứng chỉ CKA 2024 cùng Hữu Kim",
+          "title": "Chinh phục chứng chỉ CKA 2024 cùng Hữu Kim (R&D): \"Kịch tính và nhiều kinh nghiệm xương máu\"",
+          "desc": "Sunner Hữu Kim (R&D) vừa trải qua hành trình thi chứng chỉ CKA (Certified Kubernetes Administrator) trong năm 2024. Nhắc đến cuộc thi..."
+        },
+        "article3": {
+          "alt": "Chính thức mở đăng ký TechUp #2",
+          "title": "Nóng: Chính thức mở đăng ký TechUp #2 - Ứng dụng AI để cải tiến hiệu suất lập trình và tạo ra sản phẩm đột phá",
+          "desc": "Sau thành công vang dội của số đầu tiên vào năm 2023, TechUp - sự kiện công nghệ \"hosted by Sun*\" sẽ chính thức quay trở lại cùng phiên bản mới."
+        },
+        "article4": {
+          "alt": "23 tác phẩm nghệ thuật của người Sun*",
+          "title": "Nhìn lại: 23 tác phẩm nghệ thuật có 1-0-2 của người Sun* nhân dịp đặc biệt của Công ty",
+          "desc": "Những bộ óc thiên tài, những con mắt nghệ thuật \"không phải dạng vừa\" của người Sun* đã được thể hiện qua 23 tác phẩm nghệ thuật."
+        },
+        "article5": {
+          "alt": "Chương trình EAP hỗ trợ sức khỏe tinh thần",
+          "title": "EAP - Chương trình hỗ trợ chăm sóc sức khỏe tinh thần cho nhân viên Sun* trở lại mới mẻ",
+          "desc": "Chương trình hỗ trợ nhân viên - Employee Assistance Program (EAP) sẽ chính thức tái khởi động từ 01/03/2024. Sunners cùng chờ đón..."
+        },
+        "article6": {
+          "alt": "Sun* Day: Our 11",
+          "title": "Sun* Day: Our 11 - Màn \"comeback\" được đông đảo Sunner chờ đón đã đến rồi đây!!",
+          "desc": "Vậy là sau 1 năm, ngày sinh nhật được đông đảo Sunner chờ đón đã chính thức quay trở lại với một tấm áo mới cực oách: Sun* Day: Our..."
+        }
+      },
+      "badge": {
+        "hot": "Tin nóng"
+      },
+      "loadMore": "Xem nhiều tin hơn",
+      "sidebar": {
+        "title": "Tin tức nổi bật",
+        "item1": { "title": "Dự án Insurance SaaS Development Support: Golang, VueJS trở thành \"ch...", "excerpt": "\"Đề bài càng hóc búa, càng..." },
+        "item2": { "title": "6 tháng cùng chiến lược \"Toàn Sun* học tập và thực hành liên tục\", chúng ta đã ...", "excerpt": "Để nuôi dưỡng và phát triển..." },
+        "item3": { "title": "\"Trình làng\" server K8S cho các CEV thỏa sức thực hiện dự án nội bộ", "excerpt": "Chỉ trong vòng 2 tháng, tea..." },
+        "item4": { "title": "Chinh phục chứng chỉ CKA 2024 cùng Hữu Kim (R&D): \"Kịch tính và nhiều kinh...", "excerpt": "Sunner Hữu Kim (R&D) vừa..." },
+        "item5": { "title": "Hé lộ bộ tài liệu độc quyền siêu HOT và giải đáp toàn bộ thắc mắc kỹ thuật sau...", "excerpt": "\"Tôi đã quẹt thẻ 10$ mua..." },
+        "item6": { "title": "Nóng: Chính thức mở đăng ký TechUp #2 - Ứng dụng AI để cải tiến hiệu suất lập trìn...", "excerpt": "Sau thành công vang dội của số đầu tiên vào..." }
+      }
+    },
+    "projects": {
+      "meta": {
+        "title": "Dự án - Sun* Inc. Tuyển Dụng | Digital Creative Studio",
+        "description": "Khám phá các dự án sáng tạo và đột phá công nghệ do Sun* thực hiện cùng các đối tác toàn cầu."
+      },
+      "zenkigen": "Công ty TNHH ZENKIGEN",
+      "ssk": "Công ty TNHH SSK",
+      "monoful": "Công ty TNHH Monoful",
+      "carousel": {
+        "slide1": { "title": "Dự án Kurashicom", "desc": "Kurashicom đang triển khai WEB service nhằm giúp khách hàng gặp được “vật”, “việc” phù hợp với bản thân mình và thể hiện được phong cách sống theo ý muốn của bản thân." },
+        "slide2": { "subtitle": "Công ty cổ phần SSK", "title": "Dự án SSK", "desc": "Thử thách để tiếp thêm năng lượng cho mọi người và xã hội với sports data." },
+        "slide3": { "title": "Dự án HARUTAKA", "desc": "Nhằm tạo ra những cuộc gặp gỡ đúng lúc giữa những nhân tài và công ty, \"HARUTAKA\" ra đời để giải quyết các vấn đề trên bằng dịch vụ phỏng vấn trên WEB có chức năng phỏng vấn video." }
+      },
+      "grid": {
+        "title": "Dự án",
+        "cta": "Xem chi tiết",
+        "item1": { "title": "Dự án KURASHICOM", "desc": "Phát triển App giúp hiện thực hóa phong cách sống theo ý muốn của bản thân..." },
+        "item2": { "title": "Dự án LINE Pay", "desc": "Hé lộ giá trị nghệ thuật văn hóa Ueno mang tính đại diện tại Nhật Bản qua giải pháp công nghệ..." },
+        "item3": { "title": "Dự án SSK", "desc": "Thử thách để tiếp thêm năng lượng cho mọi người và xã hội với Sports Data..." },
+        "item4": { "title": "Dự án HARUTAKA", "desc": "Thực hiện DX của quy trình tuyển dụng với Startup/Studio ZENKIGEN..." },
+        "item5": { "title": "Dự án Monoful", "desc": "Chuyển đổi ngành phân phối hàng hóa. Khởi tạo một công việc mới hiệu quả hơn..." },
+        "item6": { "title": "Dự án Tilani – Matching Platform", "desc": "Nền tảng kết nối hàng đầu tại Việt Nam giúp tạo ra cơ hội giao lưu tuyệt vời..." },
+        "item7": { "title": "Dự án Smart league SAAI", "desc": "Sản phẩm phát triển cho trung tâm sáng tạo SAAI Wonder Working Community..." },
+        "item8": { "title": "Dự án Kids Taxi", "desc": "Hình thức phát triển Mobility Tech giúp đưa đón trẻ em an toàn và tiện lợi..." },
+        "item9": { "title": "Dự án Softbank / MeeTruck", "desc": "Hệ thống điều động xe, thách thức chuyển đổi số ngành vận tải..." }
+      },
+      "loadMore": "Xem thêm"
+    },
+    "careers": {
+      "meta": {
+        "title": "Cơ hội nghề nghiệp - Sun* Inc. Tuyển Dụng | Digital Creative Studio",
+        "description": "Gia nhập đội ngũ Sun* để cùng nhau tạo ra những giá trị tuyệt vời mang lại sự thay đổi tích cực cho xã hội."
+      },
+      "hero": {
+        "desc": "Thế giới mà Sun* đang hướng tới là nơi tất cả mọi người đều được tự do tạo ra những giá trị tuyệt vời, mang lại sự thay đổi tích cực cho toàn xã hội. Thời kỳ kỹ sư chỉ biết kỹ thuật đã qua, đây là kỷ nguyên của những Creator thực thụ, có tầm ảnh hưởng ở mọi nơi.<br><br>\n                Tại Sun*, chúng tôi luôn tìm kiếm những con người đam mê thử thách để hiện thực hóa những khát vọng trên. Nếu bạn là một người như vậy, hãy gia nhập đội ngũ Sun* để cùng nhau chúng ta sẽ chinh phục những điều phi thường thay đổi thế giới."
+      },
+      "teamsHeading": "Chọn team của bạn",
+      "search": {
+        "placeholder": "Nhập từ khóa...",
+        "location": "Địa điểm",
+        "hanoi": "Hà Nội",
+        "danang": "Đà Nẵng",
+        "hcm": "Hồ Chí Minh",
+        "button": "Tìm kiếm"
+      },
+      "moreLink": "Xem chi tiết ",
+      "team1": { "desc": "Chúng tôi là những Creators đam mê tạo ra các giá trị. Cùng với đồng đội tài năng, linh hoạt và đầy nhiệt huyết..." },
+      "team2": { "desc": "Đội ngũ kỹ sư cầu nối ở Sun* hội tụ đầy đủ năng lực quản lý, nền tảng kiến thức kỹ thuật tốt, năng lực ngôn ngữ xuất sắc..." },
+      "team3": { "desc": "QA Team tập hợp những thành viên có óc phán đoán nhạy bén, kỹ năng thuần thục và luôn truy cầu sự hoàn hảo trong chất lượng sản phẩm..." },
+      "team4": { "desc": "Chúng tôi tìm kiếm những bạn trẻ có ước mơ cùng công nghệ tạo ra những thay đổi tích cực cho xã hội. Tuổi trẻ nhiệt huyết và không ngại thử thách..." },
+      "team5": { "desc": "Nếu bạn có đam mê tạo nên vườn ươm chất lượng cho những bạn sinh viên IT, những người trẻ đầy nhiệt huyết với công nghệ..." },
+      "team6": { "desc": "Mang trong mình sứ mệnh \"giữ hồn cho thương hiệu\", đội ngũ Communications & Marketing ở Sun* trang bị đầy đủ những kiến thức chuyên môn..." },
+      "team7": { "desc": "Là những nhà quản lý giàu kinh nghiệm, đặc biệt với các dự án trong lĩnh vực CNTT, chúng tôi luôn sẵn sàng dẫn dắt đội ngũ gặt hái thành công..." },
+      "team8": { "desc": "Bằng tất cả sự chỉn chu, nhiệt huyết, chúng tôi đang nỗ lực từng ngày để cung cấp giải pháp hành chính, hỗ trợ chuyên nghiệp cho đại gia đình Sun*..." },
+      "team9": { "desc": "Sun* Human Resources Unit là nơi hội tụ những thành viên có lý tưởng phát triển con người để đóng góp vào sự phát triển bền vững của tổ chức..." }
+    },
+    "environment": {
+      "meta": {
+        "title": "Môi trường làm việc - Sun* Inc. Tuyển Dụng | Digital Creative Studio",
+        "description": "Khám phá môi trường làm việc nhân văn, năng động và các chính sách phúc lợi vượt trội tại Sun* Vietnam."
+      },
+      "intro": {
+        "title": "Môi trường<br>làm việc",
+        "desc": "Trong nỗ lực để đạt đến sứ mệnh của Sun*, việc tạo ra một môi trường – nơi tất cả các thành viên có thể phát huy điểm mạnh riêng là tối quan trọng. Vì thế, điều đầu tiên tôi mong tất cả lãnh đạo của Sun* đặc biệt lưu ý trong việc thiết lập mục tiêu của mình, đó là vấn đề động lực, sự an tâm về mặt tâm lý và sự phát triển của nhân viên.",
+        "imgAlt": "Môi trường làm việc tại Sun*"
+      },
+      "challenge": {
+        "title": "#ActiveChallenge: Chủ động tạo ra công việc thử thách liên tục cho bản thân",
+        "p1": "Sun* là một môi trường luôn đề cao những ý tưởng đổi mới, sáng tạo. Với đội ngũ “lãnh đạo phục vụ” sẵn sàng thúc đẩy tiềm năng và động lực của các thành viên, Sun* luôn đồng hành cùng những con người tài năng thực hiện đam mê của chính mình.",
+        "p2": "Để những đam mê ấy trở thành thành tựu, mỗi Sunner đều chủ động tạo ra những công việc thú vị, mang tính thử thách cho bản thân thông qua sự nỗ lực và thấu hiểu tổ chức, thay vì chờ đợi người khác nói rằng mình cần làm gì và làm như thế nào."
+      },
+      "learn": {
+        "title": "#ActiveLearn: Học tập trong một tổ chức có đầy đủ các thành tố: môi trường học tập, cơ hội học tập, năng lực học tập.",
+        "intro": "Với triết lý lấy sự phát triển con người là trọng tâm, Sun* chủ động xây dựng một tổ chức học tập toàn diện và tính cá nhân hóa cao, từ đó thúc đẩy thành viên có hứng thú, động lực với việc học hỏi:",
+        "item1": "<strong>Môi trường học tập</strong>: Sunners được cung cấp một không gian tối ưu với nền tảng trải nghiệm học tập, thư viện tài liệu đồ sộ, khung năng lực tiêu chuẩn, kế hoạch đào tạo được nâng cấp liên tục và văn hóa Coaching & Sharing không ngừng nghỉ.",
+        "item2": "<strong>Cơ hội học tập</strong>: Cùng những người đồng nghiệp xuất sắc, Sunners được “may đo” kế hoạch học tập với những khóa học online, offline đa dạng, các gói tài trợ học tập uy tín và cơ hội thực hành lý thuyết đầy tính thử thách trong công việc của bản thân.",
+        "item3": "<strong>Năng lực học tập</strong>: Sunners được trang bị phương pháp học tập thông minh với công cụ IDP – Individual Development Plan cùng mô hình 70-20-10 (học tập từ công việc thực tế – học tập từ người khác – học tập từ sách vở lý thuyết), giúp việc học có tính định hướng và phù hợp với từng cá nhân."
+      },
+      "joy": {
+        "title": "#ActiveJoy: Sống trong môi trường văn hóa hướng tới giá trị nhân văn, và hạnh phúc cho mọi người",
+        "p1": "Suy nghĩ và cảm nhận của mỗi thành viên là yếu tố quan trọng hàng đầu trong bất cứ việc ra quyết định nào của Sun*. Sunners được nuôi dưỡng và phát triển thế mạnh của mình, tạo dựng sự an tâm bởi sự quan tâm chân thành nhất không chỉ tới mỗi cá nhân mà cả với gia đình của mình.",
+        "p2": "Xuất phát từ sự chân thành ấy, mọi hoạt động kết nối, xây dựng văn hóa tổ chức đều hướng tới mục tiêu chung là tạo ra hạnh phúc, niềm vui và sự gắn bó của Sunners. Dù ở vị trí nào, mỗi thành viên luôn tự hào mình là một Sunner!"
+      }
+    }
+  }
+}

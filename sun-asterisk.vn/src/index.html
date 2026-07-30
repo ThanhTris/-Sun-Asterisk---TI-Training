@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Trang chủ - Sun* Inc. Tuyển Dụng | Digital Creative Studio</title>
-  <meta name="description" content="Là một Digital Creative Studio, Sun* luôn đề cao tinh thần làm chủ sản phẩm, tư duy sáng tạo trong mỗi dự án để mang đến những trải nghiệm Awesome nhất.">
+  <title data-i18n="pages.home.meta.title">Trang chủ - Sun* Inc. Tuyển Dụng | Digital Creative Studio</title>
+  <meta name="description" data-i18n-content="pages.home.meta.description" content="Là một Digital Creative Studio, Sun* luôn đề cao tinh thần làm chủ sản phẩm, tư duy sáng tạo trong mỗi dự án để mang đến những trải nghiệm Awesome nhất.">
   <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -25,7 +25,7 @@
       <!-- Video background -->
       <video class="home-hero-video" autoplay muted loop playsinline>
         <source src="./assets/video/mv-pc.mp4" type="video/mp4">
-        Trình duyệt của bạn không hỗ trợ video HTML5.
+        <span data-i18n="pages.home.hero.videoFallback">Trình duyệt của bạn không hỗ trợ video HTML5.</span>
       </video>
     </section>
 
@@ -36,7 +36,7 @@
       <div id="sectors">
         
         <!-- Section Title (No effect background circle, exact 40px Open Sans specs) -->
-        <h2 class="section-title">
+        <h2 class="section-title" data-i18n="pages.home.sectors.title">
           Lĩnh vực kinh doanh
         </h2>
 
@@ -49,17 +49,17 @@
           <div class="relative bg-white rounded-[16px] border-[6px] border-brand-cardBg shadow-sm p-8 md:p-12 min-h-[322px] flex flex-col lg:flex-row items-center overflow-visible z-10">
             <!-- Text intro (Left 48%) -->
             <div class="w-full lg:w-[48%] space-y-6 text-[16px] leading-relaxed text-brand-body z-10">
-            <p>
+            <p data-i18n-html="pages.home.sectors.intro1">
               Là một Digital Creative Studio, Sun* luôn đề cao tinh thần làm chủ sản phẩm, tư duy sáng tạo trong mỗi dự án để mang đến những trải nghiệm <strong class="font-bold">"Awesome"</strong> nhất cho end-user.
             </p>
-            <p>
+            <p data-i18n-html="pages.home.sectors.intro2">
               Với hai dòng dịch vụ là <strong class="text-brand-heading font-bold">"Creative & Engineering"</strong> và <strong class="text-brand-heading font-bold">"Talent Platform"</strong>, Sun* đã và đang từng bước cùng công nghệ tạo ra những giá trị tốt đẹp cho xã hội.
             </p>
           </div>
-          
+
           <!-- Illustration (Right 58% - Overflowing absolute position on desktop) -->
           <div class="w-full lg:w-[58%] lg:absolute lg:-right-[4%] lg:top-1/2 lg:-translate-y-1/2 mt-8 lg:mt-0 flex justify-center z-0 overflow-visible">
-            <img src="./assets/images/intro-business.png" alt="Lĩnh vực kinh doanh" class="w-full h-auto object-contain transform lg:scale-115 origin-center">
+            <img src="./assets/images/intro-business.png" data-i18n-alt="pages.home.sectors.title" alt="Lĩnh vực kinh doanh" class="w-full h-auto object-contain transform lg:scale-115 origin-center">
           </div>
         </div>
       </div>
@@ -74,21 +74,21 @@
               <!-- Badge (Plain text with a transparent white circle behind) -->
               <div class="relative inline-flex items-center h-8">
                 <span class="absolute left-0 w-8 h-8 rounded-full bg-white/10 z-0"></span>
-                <span class="relative z-10 text-white text-[12px] pl-4 font-light tracking-wide">Digital Creative Studio</span>
+                <span class="relative z-10 text-white text-[12px] pl-4 font-light tracking-wide" data-i18n="pages.home.sectors.badge">Digital Creative Studio</span>
               </div>
               <!-- Title -->
-              <h3 class="text-3xl md:text-[32px] font-heading font-bold leading-tight text-white">
+              <h3 class="text-3xl md:text-[32px] font-heading font-bold leading-tight text-white" data-i18n-html="pages.home.sectors.card1.title">
                 Creative<br>& Engineering
               </h3>
               <!-- Description -->
-              <p class="text-white text-[14px] md:text-[16px] font-light leading-relaxed max-w-sm mb-[40px]">
+              <p class="text-white text-[14px] md:text-[16px] font-light leading-relaxed max-w-sm mb-[40px]" data-i18n="pages.home.sectors.card1.desc">
                 Đội ngũ nhân lực dồi dào chuyên về công nghệ, thiết kế và kinh doanh.
               </p>
             </div>
             <!-- Button (Rectangular, wide padding) -->
             <div>
               <a href="./pages/about/index.html" class="btn-card-left">
-                Tìm hiểu thêm
+                <span data-i18n="pages.home.sectors.learnMore">Tìm hiểu thêm</span>
                 <span class="btn-arrow">
                   <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3"/>
@@ -105,21 +105,21 @@
               <!-- Badge (Plain text with a light gray circle behind) -->
               <div class="relative inline-flex items-center h-8">
                 <span class="absolute left-0 w-8 h-8 rounded-full bg-[#E4E4E4]/40 z-0"></span>
-                <span class="relative z-10 text-brand-body text-[12px] pl-4 font-light tracking-wide">Digital Creative Studio</span>
+                <span class="relative z-10 text-brand-body text-[12px] pl-4 font-light tracking-wide" data-i18n="pages.home.sectors.badge">Digital Creative Studio</span>
               </div>
               <!-- Title -->
-              <h3 class="text-3xl md:text-[32px] font-heading font-bold leading-tight text-brand-heading">
+              <h3 class="text-3xl md:text-[32px] font-heading font-bold leading-tight text-brand-heading" data-i18n-html="pages.home.sectors.card2.title">
                 Talent<br>Platform
               </h3>
               <!-- Description -->
-              <p class="text-brand-body text-[14px] md:text-[16px] font-light leading-relaxed max-w-sm mb-[40px]">
+              <p class="text-brand-body text-[14px] md:text-[16px] font-light leading-relaxed max-w-sm mb-[40px]" data-i18n="pages.home.sectors.card2.desc">
                 Các giải pháp nguồn nhân lực hỗ trợ tăng trưởng kinh doanh bền vững.
               </p>
             </div>
             <!-- Button (Rectangular, wide padding) -->
             <div>
               <a href="./pages/about/index.html" class="btn-card-right">
-                Tìm hiểu thêm
+                <span data-i18n="pages.home.sectors.learnMore">Tìm hiểu thêm</span>
                 <span class="btn-arrow">
                   <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3"/>
@@ -141,7 +141,7 @@
           <div class="lg:col-span-6 p-[10px] pt-0">
             <!-- Section Title (With before/after decoration dots, exact mb-20px) -->
             <div class="relative mb-[20px] before:content-[''] before:absolute before:right-[25%] before:top-[-30px] before:-translate-y-1/2 before:w-[28px] before:h-[28px] before:rounded-full before:bg-brand-primary before:z-20 before:pointer-events-none after:content-[''] after:absolute after:left-0 after:bottom-[-40px] after:w-[26px] after:h-[26px] after:rounded-full after:bg-brand-primary/10 after:z-20 after:pointer-events-none">
-              <h2 class="section-title mt-0">
+              <h2 class="section-title mt-0" data-i18n="pages.home.projects.title">
                 Dự án của chúng tôi
               </h2>
             </div>
@@ -153,23 +153,23 @@
                   <span class="text-6xl md:text-[80px] font-heading font-bold text-brand-primary stat-number" data-target="200">200</span>
                   <span class="text-3xl md:text-4xl font-heading font-bold text-brand-primary">++</span>
                 </div>
-                <p class="text-[16px] text-brand-body font-sans mt-2">Đối tác</p>
+                <p class="text-[16px] text-brand-body font-sans mt-2" data-i18n="pages.home.projects.stat1Label">Đối tác</p>
               </div>
-              
+
               <!-- Stat 2 (Exact mb-50px) -->
               <div class="stat-item mb-[50px]">
                 <div class="flex items-baseline gap-2">
                   <span class="text-6xl md:text-[80px] font-heading font-bold text-brand-primary stat-number" data-target="300">300</span>
                   <span class="text-3xl md:text-4xl font-heading font-bold text-brand-primary">++</span>
                 </div>
-                <p class="text-[16px] text-brand-body font-sans mt-2">Dịch vụ được hỗ trợ</p>
+                <p class="text-[16px] text-brand-body font-sans mt-2" data-i18n="pages.home.projects.stat2Label">Dịch vụ được hỗ trợ</p>
               </div>
             </div>
 
             <!-- "Xem tất cả dự án" Button -->
             <div>
               <a href="./pages/projects/index.html" class="btn-card-right w-[270px]">
-                Xem tất cả dự án
+                <span data-i18n="pages.home.projects.viewAll">Xem tất cả dự án</span>
                 <span class="btn-arrow">
                   <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3"/>
@@ -188,21 +188,21 @@
                 
                 <!-- CLONE Card 3: HARUTAKA (At start for infinite loop) -->
                 <a href="./pages/projects/index.html" class="block w-[322px] h-[469px] shrink-0 relative bg-white group select-none">
-                  <img src="./assets/images/zenkigen-project.png" alt="Dự án HARUTAKA" class="w-full h-full object-cover absolute inset-0 z-0">
+                  <img src="./assets/images/zenkigen-project.png" data-i18n-alt="pages.home.projects.slider.harutaka.alt" alt="Dự án HARUTAKA" class="w-full h-full object-cover absolute inset-0 z-0">
                   <div class="absolute inset-0 bg-brand-cardBg/90 z-10"></div>
                   <div class="absolute bottom-0 left-0 right-0 p-8 md:p-10 space-y-4 z-20">
                     <div class="text-xs uppercase tracking-wider text-brand-body font-bold">
                       ZENKIGEN
                     </div>
-                    <h3 class="text-2xl font-heading font-bold text-brand-heading transition-colors duration-300 group-hover:text-brand-primary">
+                    <h3 class="text-2xl font-heading font-bold text-brand-heading transition-colors duration-300 group-hover:text-brand-primary" data-i18n="pages.home.projects.slider.harutaka.title">
                       Dự án HARUTAKA
                     </h3>
-                    <p class="text-brand-body text-sm md:text-[15px] font-sans leading-relaxed">
+                    <p class="text-brand-body text-sm md:text-[15px] font-sans leading-relaxed" data-i18n="pages.home.projects.slider.harutaka.desc">
                       Dịch vụ phỏng vấn trên nền tảng web/video giúp tối ưu quy trình tuyển dụng.
                     </p>
                     <div class="pt-2">
                       <span class="inline-flex items-center text-brand-primary font-bold text-sm">
-                        Xem chi tiết
+                        <span data-i18n="pages.home.projects.slider.cta">Xem chi tiết</span>
                         <svg class="w-4 h-4 ml-1.5 transition-transform duration-300 group-hover:translate-x-1" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
                           <path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3"/>
                         </svg>
@@ -213,21 +213,21 @@
 
                 <!-- Card 1: KURASHICOM -->
                 <a href="./pages/projects/index.html" class="block w-[322px] h-[469px] shrink-0 relative bg-white group select-none">
-                  <img src="./assets/images/Kurashicom.png" alt="Dự án KURASHICOM" class="w-full h-full object-cover absolute inset-0 z-0">
+                  <img src="./assets/images/Kurashicom.png" data-i18n-alt="pages.home.projects.slider.kurashicom.alt" alt="Dự án KURASHICOM" class="w-full h-full object-cover absolute inset-0 z-0">
                   <div class="absolute inset-0 bg-brand-cardBg/90 z-10"></div>
                   <div class="absolute bottom-0 left-0 right-0 p-8 md:p-10 space-y-4 z-20">
                     <div class="text-xs uppercase tracking-wider text-brand-body font-bold">
                       Kurashicom Inc
                     </div>
-                    <h3 class="text-2xl font-heading font-bold text-brand-heading transition-colors duration-300 group-hover:text-brand-primary">
+                    <h3 class="text-2xl font-heading font-bold text-brand-heading transition-colors duration-300 group-hover:text-brand-primary" data-i18n="pages.home.projects.slider.kurashicom.title">
                       Dự án KURASHICOM
                     </h3>
-                    <p class="text-brand-body text-sm md:text-[15px] font-sans leading-relaxed">
+                    <p class="text-brand-body text-sm md:text-[15px] font-sans leading-relaxed" data-i18n="pages.home.projects.slider.kurashicom.desc">
                       Phát triển App giúp hiện thực hóa phong cách sống theo ý muốn.
                     </p>
                     <div class="pt-2">
                       <span class="inline-flex items-center text-brand-primary font-bold text-sm">
-                        Xem chi tiết
+                        <span data-i18n="pages.home.projects.slider.cta">Xem chi tiết</span>
                         <svg class="w-4 h-4 ml-1.5 transition-transform duration-300 group-hover:translate-x-1" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
                           <path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3"/>
                         </svg>
@@ -238,21 +238,21 @@
 
                 <!-- Card 2: SSK -->
                 <a href="./pages/projects/index.html" class="block w-[322px] h-[469px] shrink-0 relative bg-white group select-none">
-                  <img src="./assets/images/ssk-project.png" alt="Dự án SSK" class="w-full h-full object-cover absolute inset-0 z-0">
+                  <img src="./assets/images/ssk-project.png" data-i18n-alt="pages.home.projects.slider.ssk.alt" alt="Dự án SSK" class="w-full h-full object-cover absolute inset-0 z-0">
                   <div class="absolute inset-0 bg-brand-cardBg/90 z-10"></div>
                   <div class="absolute bottom-0 left-0 right-0 p-8 md:p-10 space-y-4 z-20">
-                    <div class="text-xs uppercase tracking-wider text-brand-body font-bold">
+                    <div class="text-xs uppercase tracking-wider text-brand-body font-bold" data-i18n="pages.home.projects.slider.ssk.company">
                       Công ty TNHH SSK
                     </div>
-                    <h3 class="text-2xl font-heading font-bold text-brand-heading transition-colors duration-300 group-hover:text-brand-primary">
+                    <h3 class="text-2xl font-heading font-bold text-brand-heading transition-colors duration-300 group-hover:text-brand-primary" data-i18n="pages.home.projects.slider.ssk.title">
                       Dự án SSK
                     </h3>
-                    <p class="text-brand-body text-sm md:text-[15px] font-sans leading-relaxed">
+                    <p class="text-brand-body text-sm md:text-[15px] font-sans leading-relaxed" data-i18n="pages.home.projects.slider.ssk.desc">
                       Thử thách để tiếp thêm năng lượng cho mọi người và xã hội với sports data.
                     </p>
                     <div class="pt-2">
                       <span class="inline-flex items-center text-brand-primary font-bold text-sm">
-                        Xem chi tiết
+                        <span data-i18n="pages.home.projects.slider.cta">Xem chi tiết</span>
                         <svg class="w-4 h-4 ml-1.5 transition-transform duration-300 group-hover:translate-x-1" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
                           <path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3"/>
                         </svg>
@@ -263,21 +263,21 @@
 
                 <!-- Card 3: HARUTAKA -->
                 <a href="./pages/projects/index.html" class="block w-[322px] h-[469px] shrink-0 relative bg-white group select-none">
-                  <img src="./assets/images/zenkigen-project.png" alt="Dự án HARUTAKA" class="w-full h-full object-cover absolute inset-0 z-0">
+                  <img src="./assets/images/zenkigen-project.png" data-i18n-alt="pages.home.projects.slider.harutaka.alt" alt="Dự án HARUTAKA" class="w-full h-full object-cover absolute inset-0 z-0">
                   <div class="absolute inset-0 bg-brand-cardBg/90 z-10"></div>
                   <div class="absolute bottom-0 left-0 right-0 p-8 md:p-10 space-y-4 z-20">
                     <div class="text-xs uppercase tracking-wider text-brand-body font-bold">
                       ZENKIGEN
                     </div>
-                    <h3 class="text-2xl font-heading font-bold text-brand-heading transition-colors duration-300 group-hover:text-brand-primary">
+                    <h3 class="text-2xl font-heading font-bold text-brand-heading transition-colors duration-300 group-hover:text-brand-primary" data-i18n="pages.home.projects.slider.harutaka.title">
                       Dự án HARUTAKA
                     </h3>
-                    <p class="text-brand-body text-sm md:text-[15px] font-sans leading-relaxed">
+                    <p class="text-brand-body text-sm md:text-[15px] font-sans leading-relaxed" data-i18n="pages.home.projects.slider.harutaka.desc">
                       Dịch vụ phỏng vấn trên nền tảng web/video giúp tối ưu quy trình tuyển dụng.
                     </p>
                     <div class="pt-2">
                       <span class="inline-flex items-center text-brand-primary font-bold text-sm">
-                        Xem chi tiết
+                        <span data-i18n="pages.home.projects.slider.cta">Xem chi tiết</span>
                         <svg class="w-4 h-4 ml-1.5 transition-transform duration-300 group-hover:translate-x-1" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
                           <path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3"/>
                         </svg>
@@ -288,21 +288,21 @@
 
                 <!-- CLONE Card 1: KURASHICOM (At end for infinite loop) -->
                 <a href="./pages/projects/index.html" class="block w-[322px] h-[469px] shrink-0 relative bg-white group select-none">
-                  <img src="./assets/images/Kurashicom.png" alt="Dự án KURASHICOM" class="w-full h-full object-cover absolute inset-0 z-0">
+                  <img src="./assets/images/Kurashicom.png" data-i18n-alt="pages.home.projects.slider.kurashicom.alt" alt="Dự án KURASHICOM" class="w-full h-full object-cover absolute inset-0 z-0">
                   <div class="absolute inset-0 bg-brand-cardBg/90 z-10"></div>
                   <div class="absolute bottom-0 left-0 right-0 p-8 md:p-10 space-y-4 z-20">
                     <div class="text-xs uppercase tracking-wider text-brand-body font-bold">
                       Kurashicom Inc
                     </div>
-                    <h3 class="text-2xl font-heading font-bold text-brand-heading transition-colors duration-300 group-hover:text-brand-primary">
+                    <h3 class="text-2xl font-heading font-bold text-brand-heading transition-colors duration-300 group-hover:text-brand-primary" data-i18n="pages.home.projects.slider.kurashicom.title">
                       Dự án KURASHICOM
                     </h3>
-                    <p class="text-brand-body text-sm md:text-[15px] font-sans leading-relaxed">
+                    <p class="text-brand-body text-sm md:text-[15px] font-sans leading-relaxed" data-i18n="pages.home.projects.slider.kurashicom.desc">
                       Phát triển App giúp hiện thực hóa phong cách sống theo ý muốn.
                     </p>
                     <div class="pt-2">
                       <span class="inline-flex items-center text-brand-primary font-bold text-sm">
-                        Xem chi tiết
+                        <span data-i18n="pages.home.projects.slider.cta">Xem chi tiết</span>
                         <svg class="w-4 h-4 ml-1.5 transition-transform duration-300 group-hover:translate-x-1" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
                           <path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3"/>
                         </svg>
@@ -346,7 +346,7 @@
             </div>
             
             <!-- Cơ hội nghề nghiệp  -->
-            <h2 class="md:text-[56px] font-[700] leading-[1.5] text-white mb-[80px] font-heading">
+            <h2 class="md:text-[56px] font-[700] leading-[1.5] text-white mb-[80px] font-heading" data-i18n="pages.home.career.title">
               Cơ hội nghề nghiệp
             </h2>
 
@@ -357,10 +357,10 @@
 
             <!-- Descriptions (Changed to text-[24px]) -->
             <div class="space-y-2 px-4 text-[24px] font-sans leading-relaxed">
-              <p class="text-white/95">
+              <p class="text-white/95" data-i18n-html="pages.home.career.desc1">
                 Sun* luôn tìm kiếm những con người đam mê thử thách để tạo nên những giá trị<br>"Awesome".
               </p>
-              <p class="text-white/95">
+              <p class="text-white/95" data-i18n="pages.home.career.desc2">
                 Cùng trở thành một phần của Sun* ngay hôm nay.
               </p>
             </div>
@@ -368,7 +368,7 @@
             <!-- Button Wrapper (Kept margin-top: 50px, padding-bottom: 50px) -->
             <div class="mt-[50px] pb-[30px]">
               <a href="./pages/careers/index.html" class="btn-card-left w-auto !h-auto !px-20 !py-6">
-                Gia nhập đội ngũ Sun*
+                <span data-i18n="pages.home.career.cta">Gia nhập đội ngũ Sun*</span>
                 <span class="btn-arrow">
                   <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3"/>
@@ -387,7 +387,7 @@
           <!-- Left Column (Title and list of 3 items with exact Haru layout) -->
           <div class="w-full">
             <!-- Section Title (Inside the column) -->
-            <h2 class="section-title mb-[10px]">
+            <h2 class="section-title mb-[10px]" data-i18n="pages.home.environment.title">
               Môi trường làm việc
             </h2>
             <div class="haru-list-content haru-list-content--style-2 list-content-home mt-6">
@@ -402,7 +402,7 @@
                     </i>
                   </div>
                   <div class="haru-list-content__content pt-1">
-                    <div class="haru-list-content__title text-[18px] text-brand-body mb-[10px] font-sans leading-relaxed">
+                    <div class="haru-list-content__title text-[18px] text-brand-body mb-[10px] font-sans leading-relaxed" data-i18n="pages.home.environment.item1">
                       #ActiveChallenge: Chủ động tạo ra công việc thử thách liên tục cho bản thân.
                     </div>
                   </div>
@@ -417,7 +417,7 @@
                     </i>
                   </div>
                   <div class="haru-list-content__content pt-1">
-                    <div class="haru-list-content__title text-[18px] text-brand-body mb-[10px] font-sans leading-relaxed">
+                    <div class="haru-list-content__title text-[18px] text-brand-body mb-[10px] font-sans leading-relaxed" data-i18n="pages.home.environment.item2">
                       #ActiveLearn: Học tập trong một tổ chức có đầy đủ các thành phần tố: môi trường học tập, cơ hội học tập, năng lực học tập.
                     </div>
                   </div>
@@ -432,7 +432,7 @@
                     </i>
                   </div>
                   <div class="haru-list-content__content pt-1">
-                    <div class="haru-list-content__title text-[18px] text-brand-body mb-[10px] font-sans leading-relaxed">
+                    <div class="haru-list-content__title text-[18px] text-brand-body mb-[10px] font-sans leading-relaxed" data-i18n="pages.home.environment.item3">
                       #ActiveJoy: Sống trong môi trường văn hóa hướng tới giá trị nhân văn, và hạnh phúc cho mọi người.
                     </div>
                   </div>
@@ -445,11 +445,11 @@
           <div class="w-full relative flex flex-col items-center lg:pt-[70px]">
             <!-- Illustration Image Wrapper (increased to w-full to make the image larger) -->
             <div class="relative w-full max-w-[520px] mx-auto overflow-visible">
-              <img src="./src/assets/images/human-centered.png" alt="Môi trường làm việc" class="w-full h-auto block">
-              
+              <img src="./src/assets/images/human-centered.png" data-i18n-alt="pages.home.environment.title" alt="Môi trường làm việc" class="w-full h-auto block">
+
               <!-- Absolute Button overlaying the keyboard bottom area (scaled down to w-[60%] and forced !h-[70px]) -->
               <a href="./pages/environment/index.html" class="btn-card-right absolute bottom-[105px] left-1/2 -translate-x-1/2 w-[60%] !h-[70px] z-20 shadow-lg">
-                Xem chi tiết
+                <span data-i18n="pages.home.environment.cta">Xem chi tiết</span>
                 <span class="btn-arrow">
                   <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3"/>
@@ -466,7 +466,7 @@
         <!-- Section Header with Arrows -->
         <div class="relative flex justify-between items-center mb-[40px] after:content-[''] after:absolute after:left-[28%] after:top-[-10%] after:w-[28px] after:h-[28px] after:rounded-full after:bg-brand-primary after:z-20 after:pointer-events-none">
           
-          <h2 class="section-title pb-0 mb-0">
+          <h2 class="section-title pb-0 mb-0" data-i18n="pages.home.culture.title">
             Văn hóa - Sự kiện
           </h2>
           <!-- Carousel Navigation Chevrons -->
@@ -490,21 +490,21 @@
           <a href="./pages/news/index.html" class="news-card group">
             <!-- Image Area (overflow-visible to allow 'Tin nóng' badge to hang outside) -->
             <div class="news-card__image news-card__image--overflow">
-              <span class="news-badge top-[-10px] right-[-10px]">Tin nóng</span>
+              <span class="news-badge top-[-10px] right-[-10px]" data-i18n="pages.home.culture.badge">Tin nóng</span>
               <img src="./assets/images/news-1.png" alt="TechUp #2" class="w-full h-full object-cover rounded-[8px]">
             </div>
             <!-- Title -->
-            <h4 class="news-card__title">
+            <h4 class="news-card__title" data-i18n="pages.home.culture.card1.title">
               Hé lộ bộ tài liệu độc quyền siêu HOT và giải đáp toàn bộ thắc mắc kỹ thuật sau TechUp #2
             </h4>
             <!-- Body text -->
             <div class="space-y-3 flex-grow flex flex-col justify-between">
-              <p class="news-card__excerpt">
+              <p class="news-card__excerpt" data-i18n="pages.home.culture.card1.desc">
                 “Tôi đã quẹt thẻ 10$ mua Copilot ngay trong phần chia sẻ thiết thực của diễn giả” - một lập trình viên đã tâm sự với BTC sau khi tham gia TechUp #2.
               </p>
               <div class="pt-2">
                 <span class="news-card__link">
-                  Xem chi tiết
+                  <span data-i18n="pages.home.culture.cta">Xem chi tiết</span>
                   <svg class="w-3.5 h-3.5 ml-1" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3"/>
                   </svg>
@@ -517,20 +517,20 @@
           <a href="./pages/news/index.html" class="news-card group">
             <!-- Image Area -->
             <div class="news-card__image news-card__image--clipped">
-              <img src="./assets/images/news-2.jpg" alt="6 tháng cùng chiến dịch" class="w-full h-full object-cover">
+              <img src="./assets/images/news-2.jpg" data-i18n-alt="pages.home.culture.card2.alt" alt="6 tháng cùng chiến dịch" class="w-full h-full object-cover">
             </div>
             <!-- Title -->
-            <h4 class="news-card__title">
+            <h4 class="news-card__title" data-i18n="pages.home.culture.card2.title">
               6 tháng cùng chiến lược “Toàn Sun* học tập và thực hành liên tục", chúng ta đã có những kết quả như thế nào?
             </h4>
             <!-- Body text -->
             <div class="space-y-3 flex-grow flex flex-col justify-between">
-              <p class="news-card__excerpt">
+              <p class="news-card__excerpt" data-i18n="pages.home.culture.card2.desc">
                 Để nuôi dưỡng và phát triển mạnh mẽ văn hóa học tập, từ đó trở thành "Tổ chức học tập" (Learning Organization), 6 tháng qua, với chiến lược “Toàn Sun* học tập và thực hành liên tục", chúng ta đã có những kết quả học tập tích cực.
               </p>
               <div class="pt-2">
                 <span class="news-card__link">
-                  Xem chi tiết
+                  <span data-i18n="pages.home.culture.cta">Xem chi tiết</span>
                   <svg class="w-3.5 h-3.5 ml-1" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3"/>
                   </svg>
@@ -543,20 +543,20 @@
           <a href="./pages/news/index.html" class="news-card group">
             <!-- Image Area -->
             <div class="news-card__image news-card__image--clipped">
-              <img src="./assets/images/news-3.png" alt="Chinh phục chứng chỉ CKA 2024" class="w-full h-full object-cover">
+              <img src="./assets/images/news-3.png" data-i18n-alt="pages.home.culture.card3.alt" alt="Chinh phục chứng chỉ CKA 2024" class="w-full h-full object-cover">
             </div>
             <!-- Title -->
-            <h4 class="news-card__title">
+            <h4 class="news-card__title" data-i18n="pages.home.culture.card3.title">
               Chinh phục chứng chỉ CKA 2024 cùng Hữu Kim (R&D): "Kịch tính và nhiều kinh nghiệm xương máu"
             </h4>
             <!-- Body text -->
             <div class="space-y-3 flex-grow flex flex-col justify-between">
-              <p class="news-card__excerpt">
+              <p class="news-card__excerpt" data-i18n="pages.home.culture.card3.desc">
                 Sunner Hữu Kim (R&D) vừa trải qua hành trình thi chứng chỉ CKA (Certified Kubernetes Administrator) trong năm 2024. Nhắc đến cuộc thi này, kịch tính và nhiều bài học xương máu là những gì Kim ấn tượng nhất.
               </p>
               <div class="pt-2">
                 <span class="news-card__link">
-                  Xem chi tiết
+                  <span data-i18n="pages.home.culture.cta">Xem chi tiết</span>
                   <svg class="w-3.5 h-3.5 ml-1" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3"/>
                   </svg>
@@ -569,7 +569,7 @@
         <!-- See more news button (btn-card-right, exact 366px x 80px) -->
         <div class="flex justify-center mt-16">
           <a href="./pages/news/index.html" class="btn-card-right !w-[366px] shadow-md">
-            Xem nhiều tin hơn
+            <span data-i18n="pages.home.culture.loadMore">Xem nhiều tin hơn</span>
             <span class="btn-arrow">
               <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3"/>

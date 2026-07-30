@@ -17,37 +17,37 @@
           <!-- Trang chủ [ACTIVE] -->
           <a href="./index.html" class="relative group py-[30px] text-[14px] font-sans font-normal text-brand-primary transition-colors whitespace-nowrap mr-[35px]">
             <span class="absolute top-0 left-1/2 -translate-x-1/2 w-[60%] h-[6px] rounded-[5px] bg-brand-primary transition-all duration-300 opacity-100 translate-y-0"></span>
-            Trang chủ
+            <span data-i18n="common.nav.home">Trang chủ</span>
           </a>
 
           <!-- Về chúng tôi -->
           <a href="./pages/about/index.html" class="relative group py-[30px] text-[14px] font-sans font-normal text-brand-body hover:text-brand-primary transition-colors whitespace-nowrap mr-[35px]">
             <span class="absolute top-0 left-1/2 -translate-x-1/2 w-[60%] h-[6px] rounded-[5px] bg-brand-primary transition-all duration-300 opacity-0 -translate-y-[10px] group-hover:opacity-100 group-hover:translate-y-0"></span>
-            Về chúng tôi
+            <span data-i18n="common.nav.about">Về chúng tôi</span>
           </a>
 
           <!-- Dự án -->
           <a href="./pages/projects/index.html" class="relative group py-[30px] text-[14px] font-sans font-normal text-brand-body hover:text-brand-primary transition-colors whitespace-nowrap mr-[35px]">
             <span class="absolute top-0 left-1/2 -translate-x-1/2 w-[60%] h-[6px] rounded-[5px] bg-brand-primary transition-all duration-300 opacity-0 -translate-y-[10px] group-hover:opacity-100 group-hover:translate-y-0"></span>
-            Dự án
+            <span data-i18n="common.nav.projects">Dự án</span>
           </a>
 
           <!-- Cơ hội nghề nghiệp -->
           <a href="./pages/careers/index.html" class="relative group py-[30px] text-[14px] font-sans font-normal text-brand-body hover:text-brand-primary transition-colors whitespace-nowrap mr-[35px]">
             <span class="absolute top-0 left-1/2 -translate-x-1/2 w-[60%] h-[6px] rounded-[5px] bg-brand-primary transition-all duration-300 opacity-0 -translate-y-[10px] group-hover:opacity-100 group-hover:translate-y-0"></span>
-            Cơ hội nghề nghiệp
+            <span data-i18n="common.nav.careers">Cơ hội nghề nghiệp</span>
           </a>
 
           <!-- Môi trường làm việc -->
           <a href="./pages/environment/index.html" class="relative group py-[30px] text-[14px] font-sans font-normal text-brand-body hover:text-brand-primary transition-colors whitespace-nowrap mr-[35px]">
             <span class="absolute top-0 left-1/2 -translate-x-1/2 w-[60%] h-[6px] rounded-[5px] bg-brand-primary transition-all duration-300 opacity-0 -translate-y-[10px] group-hover:opacity-100 group-hover:translate-y-0"></span>
-            Môi trường làm việc
+            <span data-i18n="common.nav.environment">Môi trường làm việc</span>
           </a>
 
           <!-- Tin tức -->
           <a href="./pages/news/index.html" class="relative group py-[30px] text-[14px] font-sans font-normal text-brand-body hover:text-brand-primary transition-colors whitespace-nowrap">
             <span class="absolute top-0 left-1/2 -translate-x-1/2 w-[60%] h-[6px] rounded-[5px] bg-brand-primary transition-all duration-300 opacity-0 -translate-y-[10px] group-hover:opacity-100 group-hover:translate-y-0"></span>
-            Tin tức
+            <span data-i18n="common.nav.news">Tin tức</span>
           </a>
 
         </nav>
@@ -68,9 +68,9 @@
         </button>
 
         <!-- Language Switcher -->
-        <div class="flex items-center gap-3 text-[12px] font-sans">
-          <a href="#" class="font-bold text-brand-primary px-3 py-1 border border-brand-primary rounded-[4px]">VI</a>
-          <a href="#" class="font-bold text-gray-400 hover:text-brand-primary transition-colors px-1 py-1">EN</a>
+        <div class="flex items-center gap-3 text-[12px] font-sans" role="group" aria-label="Language switcher">
+          <button type="button" data-lang="vi" aria-pressed="true" class="font-bold text-brand-primary px-3 py-1 border border-brand-primary rounded-[4px] transition-colors">VI</button>
+          <button type="button" data-lang="en" aria-pressed="false" class="font-bold text-gray-400 hover:text-brand-primary transition-colors px-1 py-1">EN</button>
         </div>
       </div>
 
@@ -79,12 +79,12 @@
 
   <!-- Mobile Dropdown Menu -->
   <div id="mobile-menu" class="hidden lg:hidden flex-col bg-white border-t border-gray-100 shadow-xl absolute top-full left-0 right-0 py-0 transition-all duration-300">
-    <a href="./index.html" class="block font-normal text-white bg-brand-primary px-6 py-4">Trang chủ</a>
-    <a href="./pages/about/index.html" class="block font-normal text-brand-heading hover:bg-gray-50 px-6 py-4 border-b border-gray-50">Về chúng tôi</a>
-    <a href="./pages/projects/index.html" class="block font-normal text-brand-heading hover:bg-gray-50 px-6 py-4 border-b border-gray-50">Dự án</a>
-    <a href="./pages/careers/index.html" class="block font-normal text-brand-heading hover:bg-gray-50 px-6 py-4 border-b border-gray-50">Cơ hội nghề nghiệp</a>
-    <a href="./pages/environment/index.html" class="block font-normal text-brand-heading hover:bg-gray-50 px-6 py-4 border-b border-gray-50">Môi trường làm việc</a>
-    <a href="./pages/news/index.html" class="block font-normal text-brand-heading hover:bg-gray-50 px-6 py-4">Tin tức</a>
+    <a href="./index.html" class="block font-normal text-white bg-brand-primary px-6 py-4" data-i18n="common.nav.home">Trang chủ</a>
+    <a href="./pages/about/index.html" class="block font-normal text-brand-heading hover:bg-gray-50 px-6 py-4 border-b border-gray-50" data-i18n="common.nav.about">Về chúng tôi</a>
+    <a href="./pages/projects/index.html" class="block font-normal text-brand-heading hover:bg-gray-50 px-6 py-4 border-b border-gray-50" data-i18n="common.nav.projects">Dự án</a>
+    <a href="./pages/careers/index.html" class="block font-normal text-brand-heading hover:bg-gray-50 px-6 py-4 border-b border-gray-50" data-i18n="common.nav.careers">Cơ hội nghề nghiệp</a>
+    <a href="./pages/environment/index.html" class="block font-normal text-brand-heading hover:bg-gray-50 px-6 py-4 border-b border-gray-50" data-i18n="common.nav.environment">Môi trường làm việc</a>
+    <a href="./pages/news/index.html" class="block font-normal text-brand-heading hover:bg-gray-50 px-6 py-4" data-i18n="common.nav.news">Tin tức</a>
   </div>
 </header>
 <!-- ==================== END HEADER ==================== -->
