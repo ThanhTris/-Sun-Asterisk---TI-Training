@@ -1,1 +1,361 @@
 /* Custom CSS specific to the News Page (Tin tức) */
+
+/* Featured news carousel (reused from projects.css) */
+.carousel-featured-container {
+  background-color: var(--color-white);
+  padding: 40px 0;
+  height: 560px;
+  overflow: hidden;
+}
+
+.featured-content-col {
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  min-height: 100%;
+}
+
+.featured-title {
+  font-family: 'Roboto Slab', serif;
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--color-brand-heading);
+  margin: 0 0 1.5rem 0;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+  overflow: hidden;
+}
+
+.featured-desc {
+  color: var(--color-brand-body);
+  font-size: 16px;
+  line-height: 1.7;
+  margin-bottom: 1.5rem;
+}
+
+.featured-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  color: var(--color-brand-body);
+  font-size: 14px;
+  opacity: 0.75;
+}
+
+.featured-img-wrap {
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 10px 30px rgba(var(--color-black-rgb), 0.05);
+  aspect-ratio: 880 / 496;
+}
+
+.featured-img-wrap img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* Shared nav controls for all 3 carousel slides */
+.carousel-nav-group {
+  display: flex;
+  gap: 12px;
+  z-index: 10;
+  position: absolute;
+  bottom: 24px;
+  right: 24px;
+}
+
+.btn-carousel-nav {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background-color: var(--color-icon-bg);
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-footer-text);
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+
+.btn-carousel-nav:hover {
+  background-color: var(--color-brand-primary);
+  color: var(--color-white);
+  transform: scale(1.05);
+}
+
+.btn-carousel-nav:active {
+  transform: scale(0.95);
+}
+
+/* Custom 40% Text and 60% Image layout */
+.col-featured-text {
+  width: 40%;
+  flex: 0 0 40%;
+  max-width: 40%;
+}
+
+.col-featured-img {
+  width: 60%;
+  flex: 0 0 60%;
+  max-width: 60%;
+}
+
+/* Tin tuc tong hop: 2-col grid + sidebar */
+.news-tile {
+  display: flex;
+  flex-direction: column;
+  border-radius: 20px;
+  padding: 16px;
+}
+
+.news-tile:hover {
+  border: 1px solid var(--color-border-gray);
+}
+
+.news-tile__img {
+  position: relative;
+  aspect-ratio: 16 / 9;
+  border-radius: 16px;
+  overflow: hidden;
+  background-color: var(--color-bg-light);
+}
+
+.news-tile__img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.news-tile__body {
+  position: relative;
+  padding-top: 20px;
+}
+
+.news-tile__title {
+  font-family: 'Roboto Slab', serif;
+  font-weight: 700;
+  font-size: 17px;
+  line-height: 1.4;
+  color: var(--color-brand-heading);
+  margin: 0 0 14px 0;
+  transition: color 0.2s ease;
+}
+
+.news-tile__title::before {
+  content: '';
+  position: absolute;
+  top: 10px;
+  left: -15px;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: var(--color-circle-accent);
+  z-index: -1;
+}
+
+.news-tile:hover .news-tile__title {
+  color: var(--color-brand-primary);
+}
+
+.news-tile__desc {
+  color: var(--color-brand-body);
+  font-size: 14px;
+  line-height: 1.7;
+  margin-bottom: 16px;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+  line-clamp: 3;
+  overflow: hidden;
+}
+
+.news-tile__link {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  color: var(--color-brand-primary);
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.news-tile__link i {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background-color: rgba(var(--color-brand-primary-rgb), 0.1);
+  font-size: 11px;
+}
+
+/* Sidebar: Tin tức nổi bật */
+.news-sidebar {
+  background-color: var(--color-white);
+  border: 1px solid var(--color-border-gray);
+  border-radius: 20px;
+  padding: 28px 24px;
+}
+
+.news-sidebar__header {
+  position: relative;
+  margin-bottom: 20px;
+}
+
+.news-sidebar__header::before {
+  content: '';
+  position: absolute;
+  left: -15px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background-color: rgba(var(--color-brand-primary-rgb), 0.1);
+  z-index: 1;
+}
+
+.news-sidebar__header h3 {
+  font-family: 'Roboto Slab', serif;
+  font-weight: 700;
+  font-size: 20px;
+  color: var(--color-brand-heading);
+  margin-bottom: 20px;
+}
+
+.news-sidebar__list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.news-sidebar__item {
+  margin: 16px 0;
+}
+
+.news-sidebar__link {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+}
+
+.news-sidebar__thumb {
+  flex: 0 0 100px;
+  width: 100px;
+  height: 60px;
+  border-radius: 10px;
+  overflow: hidden;
+  background-color: var(--color-bg-light);
+}
+
+.news-sidebar__thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.news-sidebar__text {
+  flex: 1;
+  min-width: 0;
+}
+
+.news-sidebar__title {
+  font-family: 'Roboto Slab', serif;
+  font-weight: 300;
+  font-size: 14px;
+  line-height: 1.45;
+  color: var(--color-brand-heading);
+  margin: 0 0 6px 0;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+  line-clamp: 3;
+  overflow: hidden;
+  transition: color 0.2s ease;
+}
+
+.news-sidebar__link:hover .news-sidebar__title {
+  color: var(--color-brand-primary);
+}
+
+.news-sidebar__excerpt {
+  color: var(--color-footer-text);
+  font-size: 13px;
+  line-height: 1.5;
+  margin: 0;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 1;
+  line-clamp: 1;
+  overflow: hidden;
+}
+
+@media (max-width: 1023px) {
+  .news-sidebar {
+    position: static;
+  }
+}
+
+/* Load-more button, ripple hover like Projects page */
+.news-loadmore {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  padding: 26px 90px;
+  background-color: var(--color-brand-heading);
+  color: var(--color-white);
+  font-size: 18px;
+  font-weight: 700;
+  border-radius: 8px;
+  border: none;
+  overflow: hidden;
+  z-index: 1;
+  cursor: pointer;
+  transition: color 0.4s ease;
+}
+
+.news-loadmore::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: var(--color-brand-primary);
+  z-index: -1;
+  opacity: 0;
+  transform: scale3d(0.7, 1, 1);
+  transition: transform 0.4s, opacity 0.4s;
+  transition-timing-function: cubic-bezier(.2, 1, .3, 1);
+}
+
+.news-loadmore:hover::before {
+  opacity: 1;
+  transform: scale3d(1, 1, 1);
+}
+
+.news-loadmore i {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background-color: rgba(var(--color-white-rgb), 0.15);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  transition: background-color 0.3s ease;
+}
+
+.news-loadmore:hover i {
+  background-color: rgba(var(--color-white-rgb), 0.25);
+}

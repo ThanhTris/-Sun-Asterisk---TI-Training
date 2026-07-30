@@ -13,9 +13,13 @@
   
   <!-- Font Awesome Icons -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  
+
+  <!-- Bootstrap 5 CSS (carousel component for Featured News) -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
+
   <!-- Compiled Tailwind CSS for News Page -->
   <link rel="stylesheet" href="../../../dist/css/style.css">
+  <link rel="stylesheet" href="../../css/news.css">
 </head>
 <body class="bg-white text-brand-body font-sans pt-[99px]">
 
@@ -25,145 +29,321 @@
   <!-- Main Content -->
   <main class="py-12">
     <div class="max-w-[1140px] mx-auto px-4 sm:px-6 lg:px-8">
-      
-      <!-- Page Header Banner -->
-      <div class="mb-12 border-b border-gray-100 pb-8">
-        <span class="text-brand-primary font-bold text-sm uppercase tracking-widest block mb-2">Sun* News</span>
-        <h1 class="text-3xl md:text-4xl font-heading font-bold text-brand-heading mb-4">Văn hóa - Sự kiện</h1>
-        <p class="text-brand-body text-base max-w-2xl">
-          Nơi cập nhật những hoạt động văn hóa sôi nổi, các dự án nội bộ đột phá và những khoảnh khắc đáng nhớ của gia đình Sun*.
-        </p>
-      </div>
+      <!-- ==================== FEATURED NEWS CAROUSEL ==================== -->
+      <section class="mb-12">
+        <div id="featuredNewsCarousel" class="carousel slide" data-bs-ride="carousel">
+          <div class="carousel-inner carousel-featured-container">
 
-      <!-- Featured News Hero Card -->
-      <div class="mb-12 bg-gray-50 rounded-2xl overflow-hidden border border-gray-100 grid grid-cols-1 lg:grid-cols-12 gap-0 shadow-sm hover:shadow-md transition-shadow">
-        <div class="lg:col-span-7 overflow-hidden">
-          <img src="../../assets/images/news-1.png" alt="Featured News" class="w-full h-full min-h-[320px] object-cover hover:scale-105 transition-transform duration-500">
+            <!-- Slide 1: CSS Wacom EC Magento -->
+            <div class="carousel-item active">
+              <div class="row">
+                <div class="col-featured-text">
+                  <div class="featured-content-col">
+                    <h2 class="featured-title">Dự án kì tích CSS - Wacom EC Magento (CEV07)</h2>
+                    <p class="featured-desc">Hiểu rõ “thước đo của sự thành công chính là mức độ hài lòng của khách hàng”, team dự án Wacom EC Magento với tâm thế “Khách hàng không phải phe đối lập, họ là chiến hữu” đã nỗ lực để tạo lập mối quan hệ thân tình cùng khách hàng, từ đó từng bước gặt hái "trái ngọt" tuyệt vời khi trở thành dự án đạt điểm số CSS cao top đầu Sun* 6 tháng đầu năm 2024.</p>
+                    <div class="featured-meta">
+                      <span>Đăng bởi H.Vy</span>
+                      <span>993 Lượt xem</span>
+                      <span>2024-09-06</span>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-featured-img">
+                  <div class="featured-img-wrap">
+                    <a href="https://news.sun-asterisk.com/vi/p/du-an-ki-tich-css-wacom-ec-magento-cev07-YXAYl2YvpXL" target="_blank" rel="noopener">
+                      <img src="../../assets/images/news-css-wacom.jpg" alt="Dự án kì tích CSS - Wacom EC Magento">
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Slide 2: Team bonding / Wasshoi -->
+            <div class="carousel-item">
+              <div class="row">
+                <div class="col-featured-text">
+                  <div class="featured-content-col">
+                    <h2 class="featured-title">Các hoạt động gắn kết thú vị của người Sun* trong công việc</h2>
+                    <p class="featured-desc">Sun* luôn được biết đến với môi trường làm việc văn minh, dù ở vị trí nào, mỗi thành viên đều tự hào khi là một Sunner. Tinh thần ấy có được dựa trên những giá trị cốt lõi, cùng nỗ lực của cả tập thể trong việc chung tay tạo ra giá trị tốt đẹp cho xã hội. Năm 2024, bám sát tinh thần core value “Wasshoi”, các hoạt động gắn kết trong công việc của người Sun* được thể hiện vừa đa dạng, mới mẻ, vừa sâu sắc, ý nghĩa.</p>
+                    <div class="featured-meta">
+                      <span>Đăng bởi QNT</span>
+                      <span>1077 Lượt xem</span>
+                      <span>2024-07-30</span>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-featured-img">
+                  <div class="featured-img-wrap">
+                    <a href="https://news.sun-asterisk.com/vi/p/cac-hoat-dong-gan-ket-thu-vi-cua-nguoi-sun-trong-cong-viec-E0Z9KNlNDzQ" target="_blank" rel="noopener">
+                      <img src="../../assets/images/news-teambonding.jpg" alt="Các hoạt động gắn kết thú vị của người Sun*">
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Slide 3: Insurance SaaS -->
+            <div class="carousel-item">
+              <div class="row">
+                <div class="col-featured-text">
+                  <div class="featured-content-col">
+                    <h2 class="featured-title">Dự án Insurance SaaS Development Support: Golang, VueJS trở thành “chất xúc tác” để Sunner vượt giới hạn</h2>
+                    <p class="featured-desc">“Đề bài càng hóc búa, càng hấp dẫn để xông pha”, “Ngôn ngữ mới không phải rào cản, mà chính là cơ hội để chứng minh năng lực” là những câu cửa miệng các thành viên dự án Insurance SaaS liên tục nhấn mạnh khi được hỏi về cách chinh phục bài toán khó từ khách hàng và duy trì điểm CSS trên 90 suốt ba năm vận hành.</p>
+                    <div class="featured-meta">
+                      <span>Đăng bởi Tan.</span>
+                      <span>1076 Lượt xem</span>
+                      <span>2024-07-23</span>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-featured-img">
+                  <div class="featured-img-wrap">
+                    <a href="https://news.sun-asterisk.com/vi/p/du-an-insurance-saas-development-support-golang-vuejs-tro-thanh-chat-xuc-tac-de-sunner-vuot-gioi-han-2Z0ebeNq6om" target="_blank" rel="noopener">
+                      <img src="../../assets/images/news-insurance-saas.jpg" alt="Dự án Insurance SaaS Development Support">
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- Single Static Navigation Controls (outside carousel-inner) -->
+          <div class="carousel-nav-group">
+            <button class="btn-carousel-nav" type="button" data-bs-target="#featuredNewsCarousel" data-bs-slide="prev" aria-label="Previous">
+              <i class="fa-solid fa-chevron-left"></i>
+            </button>
+            <button class="btn-carousel-nav" type="button" data-bs-target="#featuredNewsCarousel" data-bs-slide="next" aria-label="Next">
+              <i class="fa-solid fa-chevron-right"></i>
+            </button>
+          </div>
         </div>
-        <div class="lg:col-span-5 p-8 flex flex-col justify-center">
-          <div class="inline-block bg-brand-primary text-white text-xs font-bold px-3 py-1 rounded-full mb-4 w-max">Tin nổi bật</div>
-          <h2 class="text-xl md:text-2xl font-heading font-bold text-brand-heading mb-4 hover:text-brand-primary transition-colors cursor-pointer leading-snug">
-            Dự án Insurance SaaS Development Support: Golang, VueJS trở thành “chất xúc tác” để Sunner vượt giới hạn
-          </h2>
-          <p class="text-brand-body text-sm leading-relaxed mb-6 line-clamp-3">
-            “Đề bài càng hóc búa, càng hấp dẫn để xông pha”, “Ngôn ngữ mới không phải rào cản, mà chính là cơ hội để chứng minh năng lực” là những câu cửa miệng các thành viên dự án Insurance SaaS liên tục nhấn mạnh...
-          </p>
-          <a href="https://news.sun-asterisk.com/vi" target="_blank" class="inline-flex items-center text-brand-primary font-bold text-sm group">
-            <span>Đọc tiếp trên Sun* News</span>
-            <i class="fa-solid fa-arrow-right ml-2 group-hover:translate-x-1 transition-transform"></i>
-          </a>
+      </section>
+
+      <!-- ==================== TIN TỨC TỔNG HỢP (2-column grid + sidebar) ==================== -->
+      <section>
+        <h2 class="font-heading text-3xl md:text-4xl font-bold text-brand-heading mb-8">Tin tức tổng hợp</h2>
+
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-x-8 gap-y-12">
+
+          <!-- Left: 2-column article grid (independent column heights via display:contents) -->
+          <div class="lg:col-span-2 grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-10">
+
+            <div class="contents sm:flex sm:flex-col sm:gap-y-10">
+
+            <!-- Article 1 -->
+            <article class="news-tile">
+              <div class="news-tile__img">
+                <a href="https://news.sun-asterisk.com/vi" target="_blank" rel="noopener">
+                  <img src="../../assets/images/news-summer-trip.jpg" alt="15 chương trình Summer Trip 2024">
+                </a>
+              </div>
+              <div class="news-tile__body">
+                <h3 class="news-tile__title">
+                  <a href="https://news.sun-asterisk.com/vi" target="_blank" rel="noopener">Hé lộ kế hoạch thú vị tại 15 chương trình Summer Trip của người Sun* hè năm nay</a>
+                </h3>
+                <p class="news-tile__desc">
+                  Tiếp tục triển khai phương thức du lịch theo đơn vị phòng/ban, Summer Trip năm nay chính thức quay trở lại với không khí sôi động hơn.
+                </p>
+                <a href="https://news.sun-asterisk.com/vi" target="_blank" rel="noopener" class="news-tile__link">
+                  Xem chi tiết <i class="fa-solid fa-arrow-right"></i>
+                </a>
+              </div>
+            </article>
+
+            <!-- Article 3 -->
+            <article class="news-tile">
+              <div class="news-tile__img">
+                <span class="news-badge top-3 left-3">Tin nóng</span>
+                <a href="https://news.sun-asterisk.com/vi" target="_blank" rel="noopener">
+                  <img src="../../assets/images/news-techup2-open.png" alt="Chính thức mở đăng ký TechUp #2">
+                </a>
+              </div>
+              <div class="news-tile__body">
+                <h3 class="news-tile__title">
+                  <a href="https://news.sun-asterisk.com/vi" target="_blank" rel="noopener">Nóng: Chính thức mở đăng ký TechUp #2 - Ứng dụng AI để cải tiến hiệu suất lập trình và tạo ra sản phẩm đột phá</a>
+                </h3>
+                <p class="news-tile__desc">
+                  Sau thành công vang dội của số đầu tiên vào năm 2023, TechUp - sự kiện công nghệ "hosted by Sun*" sẽ chính thức quay trở lại cùng phiên bản mới.
+                </p>
+                <a href="https://news.sun-asterisk.com/vi" target="_blank" rel="noopener" class="news-tile__link">
+                  Xem chi tiết <i class="fa-solid fa-arrow-right"></i>
+                </a>
+              </div>
+            </article>
+
+            <!-- Article 5 -->
+            <article class="news-tile">
+              <div class="news-tile__img">
+                <span class="news-badge top-3 left-3">Tin nóng</span>
+                <a href="https://news.sun-asterisk.com/vi" target="_blank" rel="noopener">
+                  <img src="../../assets/images/news-eap.jpg" alt="Chương trình EAP hỗ trợ sức khỏe tinh thần">
+                </a>
+              </div>
+              <div class="news-tile__body">
+                <h3 class="news-tile__title">
+                  <a href="https://news.sun-asterisk.com/vi" target="_blank" rel="noopener">EAP - Chương trình hỗ trợ chăm sóc sức khỏe tinh thần cho nhân viên Sun* trở lại mới mẻ</a>
+                </h3>
+                <p class="news-tile__desc">
+                  Chương trình hỗ trợ nhân viên - Employee Assistance Program (EAP) sẽ chính thức tái khởi động từ 01/03/2024. Sunners cùng chờ đón...
+                </p>
+                <a href="https://news.sun-asterisk.com/vi" target="_blank" rel="noopener" class="news-tile__link">
+                  Xem chi tiết <i class="fa-solid fa-arrow-right"></i>
+                </a>
+              </div>
+            </article>
+
+            </div>
+
+            <div class="contents sm:flex sm:flex-col sm:gap-y-10">
+
+            <!-- Article 2 -->
+            <article class="news-tile">
+              <div class="news-tile__img">
+                <a href="https://news.sun-asterisk.com/vi" target="_blank" rel="noopener">
+                  <img src="../../assets/images/news-cka.png" alt="Chinh phục chứng chỉ CKA 2024 cùng Hữu Kim">
+                </a>
+              </div>
+              <div class="news-tile__body">
+                <h3 class="news-tile__title">
+                  <a href="https://news.sun-asterisk.com/vi" target="_blank" rel="noopener">Chinh phục chứng chỉ CKA 2024 cùng Hữu Kim (R&D): "Kịch tính và nhiều kinh nghiệm xương máu"</a>
+                </h3>
+                <p class="news-tile__desc">
+                  Sunner Hữu Kim (R&D) vừa trải qua hành trình thi chứng chỉ CKA (Certified Kubernetes Administrator) trong năm 2024. Nhắc đến cuộc thi...
+                </p>
+                <a href="https://news.sun-asterisk.com/vi" target="_blank" rel="noopener" class="news-tile__link">
+                  Xem chi tiết <i class="fa-solid fa-arrow-right"></i>
+                </a>
+              </div>
+            </article>
+
+            <!-- Article 4 -->
+            <article class="news-tile">
+              <div class="news-tile__img">
+                <a href="https://news.sun-asterisk.com/vi" target="_blank" rel="noopener">
+                  <img src="../../assets/images/news-art-exhibition.jpg" alt="23 tác phẩm nghệ thuật của người Sun*">
+                </a>
+              </div>
+              <div class="news-tile__body">
+                <h3 class="news-tile__title">
+                  <a href="https://news.sun-asterisk.com/vi" target="_blank" rel="noopener">Nhìn lại: 23 tác phẩm nghệ thuật có 1-0-2 của người Sun* nhân dịp đặc biệt của Công ty</a>
+                </h3>
+                <p class="news-tile__desc">
+                  Những bộ óc thiên tài, những con mắt nghệ thuật "không phải dạng vừa" của người Sun* đã được thể hiện qua 23 tác phẩm nghệ thuật.
+                </p>
+                <a href="https://news.sun-asterisk.com/vi" target="_blank" rel="noopener" class="news-tile__link">
+                  Xem chi tiết <i class="fa-solid fa-arrow-right"></i>
+                </a>
+              </div>
+            </article>
+
+            <!-- Article 6 -->
+            <article class="news-tile">
+              <div class="news-tile__img">
+                <a href="https://news.sun-asterisk.com/vi" target="_blank" rel="noopener">
+                  <img src="../../assets/images/news-sunday.png" alt="Sun* Day: Our 11">
+                </a>
+              </div>
+              <div class="news-tile__body">
+                <h3 class="news-tile__title">
+                  <a href="https://news.sun-asterisk.com/vi" target="_blank" rel="noopener">Sun* Day: Our 11 - Màn "comeback" được đông đảo Sunner chờ đón đã đến rồi đây!!</a>
+                </h3>
+                <p class="news-tile__desc">
+                  Vậy là sau 1 năm, ngày sinh nhật được đông đảo Sunner chờ đón đã chính thức quay trở lại với một tấm áo mới cực oách: Sun* Day: Our...
+                </p>
+                <a href="https://news.sun-asterisk.com/vi" target="_blank" rel="noopener" class="news-tile__link">
+                  Xem chi tiết <i class="fa-solid fa-arrow-right"></i>
+                </a>
+              </div>
+            </article>
+
+            </div>
+
+            <!-- Load More Button -->
+            <div class="col-span-full text-center mt-2">
+              <button class="news-loadmore">
+                Xem nhiều tin hơn <i class="fa-solid fa-arrow-right"></i>
+              </button>
+            </div>
+
+          </div>
+
+          <!-- Right: Sidebar - Tin tức nổi bật -->
+          <div class="news-sidebar-col">
+          <aside class="news-sidebar">
+            <div class="news-sidebar__header">
+              <h3>Tin tức nổi bật</h3>
+            </div>
+            <ul class="news-sidebar__list">
+              <li class="news-sidebar__item">
+                <a href="https://news.sun-asterisk.com/vi/p/du-an-insurance-saas-development-support-golang-vuejs-tro-thanh-chat-xuc-tac-de-sunner-vuot-gioi-han-2Z0ebeNq6om" target="_blank" rel="noopener" class="news-sidebar__link">
+                  <div class="news-sidebar__thumb"><img src="../../assets/images/news-insurance-saas.jpg" alt="Dự án Insurance SaaS"></div>
+                  <div class="news-sidebar__text">
+                    <h4 class="news-sidebar__title">Dự án Insurance SaaS Development Support: Golang, VueJS trở thành "ch...</h4>
+                    <p class="news-sidebar__excerpt">"Đề bài càng hóc búa, càng...</p>
+                  </div>
+                </a>
+              </li>
+              <li class="news-sidebar__item">
+                <a href="https://news.sun-asterisk.com/vi" target="_blank" rel="noopener" class="news-sidebar__link">
+                  <div class="news-sidebar__thumb"><img src="../../assets/images/news-learning-strategy.png" alt="6 tháng chiến lược học tập"></div>
+                  <div class="news-sidebar__text">
+                    <h4 class="news-sidebar__title">6 tháng cùng chiến lược "Toàn Sun* học tập và thực hành liên tục", chúng ta đã ...</h4>
+                    <p class="news-sidebar__excerpt">Để nuôi dưỡng và phát triển...</p>
+                  </div>
+                </a>
+              </li>
+              <li class="news-sidebar__item">
+                <a href="https://news.sun-asterisk.com/vi" target="_blank" rel="noopener" class="news-sidebar__link">
+                  <div class="news-sidebar__thumb"><img src="../../assets/images/news-k8s-server.jpg" alt="Server K8S cho CEV"></div>
+                  <div class="news-sidebar__text">
+                    <h4 class="news-sidebar__title">"Trình làng" server K8S cho các CEV thỏa sức thực hiện dự án nội bộ</h4>
+                    <p class="news-sidebar__excerpt">Chỉ trong vòng 2 tháng, tea...</p>
+                  </div>
+                </a>
+              </li>
+              <li class="news-sidebar__item">
+                <a href="https://news.sun-asterisk.com/vi" target="_blank" rel="noopener" class="news-sidebar__link">
+                  <div class="news-sidebar__thumb"><img src="../../assets/images/news-cka.png" alt="Chứng chỉ CKA 2024"></div>
+                  <div class="news-sidebar__text">
+                    <h4 class="news-sidebar__title">Chinh phục chứng chỉ CKA 2024 cùng Hữu Kim (R&D): "Kịch tính và nhiều kinh...</h4>
+                    <p class="news-sidebar__excerpt">Sunner Hữu Kim (R&D) vừa...</p>
+                  </div>
+                </a>
+              </li>
+              <li class="news-sidebar__item">
+                <a href="https://news.sun-asterisk.com/vi" target="_blank" rel="noopener" class="news-sidebar__link">
+                  <div class="news-sidebar__thumb"><img src="../../assets/images/news-techup2-materials.png" alt="Tài liệu độc quyền TechUp #2"></div>
+                  <div class="news-sidebar__text">
+                    <h4 class="news-sidebar__title">Hé lộ bộ tài liệu độc quyền siêu HOT và giải đáp toàn bộ thắc mắc kỹ thuật sau...</h4>
+                    <p class="news-sidebar__excerpt">"Tôi đã quẹt thẻ 10$ mua...</p>
+                  </div>
+                </a>
+              </li>
+              <li class="news-sidebar__item">
+                <a href="https://news.sun-asterisk.com/vi" target="_blank" rel="noopener" class="news-sidebar__link">
+                  <div class="news-sidebar__thumb"><img src="../../assets/images/news-techup2-open.png" alt="Chính thức mở đăng ký TechUp #2"></div>
+                  <div class="news-sidebar__text">
+                    <h4 class="news-sidebar__title">Nóng: Chính thức mở đăng ký TechUp #2 - Ứng dụng AI để cải tiến hiệu suất lập trìn...</h4>
+                    <p class="news-sidebar__excerpt">Sau thành công vang dội của số đầu tiên vào...</p>
+                  </div>
+                </a>
+              </li>
+            </ul>
+          </aside>
+          </div>
+
         </div>
-      </div>
-
-      <!-- News Articles Grid -->
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-        
-        <!-- News Item 1 -->
-        <article class="bg-white rounded-xl border border-gray-100 overflow-hidden flex flex-col hover:shadow-lg hover:-translate-y-1 transition-all duration-300">
-          <div class="aspect-video relative overflow-hidden bg-gray-100">
-            <span class="news-badge top-3 left-3">Tin nóng</span>
-            <img src="../../assets/images/news-2.jpg" alt="Article 2" class="w-full h-full object-cover hover:scale-105 transition-transform duration-500">
-          </div>
-          <div class="p-6 flex flex-col flex-grow">
-            <h3 class="font-heading font-bold text-base text-brand-heading mb-3 line-clamp-2 hover:text-brand-primary transition-colors cursor-pointer">
-              6 tháng cùng chiến lược “Toàn Sun* học tập và thực hành liên tục", chúng ta đã có những kết quả như thế nào?
-            </h3>
-            <p class="text-xs text-brand-body leading-relaxed mb-4 line-clamp-3 flex-grow">
-              Để nuôi dưỡng và phát triển mạnh mẽ văn hóa học tập, từ đó trở thành "Tổ chức học tập" (Learning Organization), 6 tháng qua chúng ta đã đạt nhiều kết quả tích cực...
-            </p>
-            <a href="https://news.sun-asterisk.com/vi" target="_blank" class="inline-flex items-center text-brand-primary text-xs font-bold hover:underline">
-              Xem chi tiết <i class="fa-solid fa-arrow-right ml-1"></i>
-            </a>
-          </div>
-        </article>
-
-        <!-- News Item 2 -->
-        <article class="bg-white rounded-xl border border-gray-100 overflow-hidden flex flex-col hover:shadow-lg hover:-translate-y-1 transition-all duration-300">
-          <div class="aspect-video relative overflow-hidden bg-gray-100">
-            <img src="../../assets/images/news-3.png" alt="Article 3" class="w-full h-full object-cover hover:scale-105 transition-transform duration-500">
-          </div>
-          <div class="p-6 flex flex-col flex-grow">
-            <h3 class="font-heading font-bold text-base text-brand-heading mb-3 line-clamp-2 hover:text-brand-primary transition-colors cursor-pointer">
-              "Trình làng" server K8S cho các CEV thỏa sức thực hiện dự án nội bộ
-            </h3>
-            <p class="text-xs text-brand-body leading-relaxed mb-4 line-clamp-3 flex-grow">
-              Chỉ trong vòng 2 tháng, team dự án server K8s của IFU đã release thành công. Hiện các CEV tại Sun* đã có thể sử dụng server K8s để tối ưu nguồn lực server...
-            </p>
-            <a href="https://news.sun-asterisk.com/vi" target="_blank" class="inline-flex items-center text-brand-primary text-xs font-bold hover:underline">
-              Xem chi tiết <i class="fa-solid fa-arrow-right ml-1"></i>
-            </a>
-          </div>
-        </article>
-
-        <!-- News Item 3 -->
-        <article class="bg-white rounded-xl border border-gray-100 overflow-hidden flex flex-col hover:shadow-lg hover:-translate-y-1 transition-all duration-300">
-          <div class="aspect-video relative overflow-hidden bg-gray-100">
-            <img src="../../assets/images/news-1.png" alt="Article 4" class="w-full h-full object-cover hover:scale-105 transition-transform duration-500">
-          </div>
-          <div class="p-6 flex flex-col flex-grow">
-            <h3 class="font-heading font-bold text-base text-brand-heading mb-3 line-clamp-2 hover:text-brand-primary transition-colors cursor-pointer">
-              Chinh phục chứng chỉ CKA 2024 cùng Hữu Kim (R&D): "Kịch tính và nhiều kinh nghiệm xương máu"
-            </h3>
-            <p class="text-xs text-brand-body leading-relaxed mb-4 line-clamp-3 flex-grow">
-              Sunner Hữu Kim (R&D) vừa trải qua hành trình thi chứng chỉ CKA (Certified Kubernetes Administrator) trong năm 2024 với nhiều kỷ niệm đáng nhớ...
-            </p>
-            <a href="https://news.sun-asterisk.com/vi" target="_blank" class="inline-flex items-center text-brand-primary text-xs font-bold hover:underline">
-              Xem chi tiết <i class="fa-solid fa-arrow-right ml-1"></i>
-            </a>
-          </div>
-        </article>
-
-        <!-- News Item 4 -->
-        <article class="bg-white rounded-xl border border-gray-100 overflow-hidden flex flex-col hover:shadow-lg hover:-translate-y-1 transition-all duration-300">
-          <div class="aspect-video relative overflow-hidden bg-gray-100">
-            <span class="news-badge top-3 left-3">Tin nóng</span>
-            <img src="../../assets/images/news-2.jpg" alt="Article 5" class="w-full h-full object-cover hover:scale-105 transition-transform duration-500">
-          </div>
-          <div class="p-6 flex flex-col flex-grow">
-            <h3 class="font-heading font-bold text-base text-brand-heading mb-3 line-clamp-2 hover:text-brand-primary transition-colors cursor-pointer">
-              Hé lộ bộ tài liệu độc quyền siêu HOT và giải đáp toàn bộ thắc mắc kỹ thuật sau TechUp #2
-            </h3>
-            <p class="text-xs text-brand-body leading-relaxed mb-4 line-clamp-3 flex-grow">
-              “Tôi đã quẹt thẻ 10$ mua Copilot ngay trong phần chia sẻ thiết thực của diễn giả” - một lập trình viên đã tâm sự với BTC sau khi tham gia TechUp #2...
-            </p>
-            <a href="https://news.sun-asterisk.com/vi" target="_blank" class="inline-flex items-center text-brand-primary text-xs font-bold hover:underline">
-              Xem chi tiết <i class="fa-solid fa-arrow-right ml-1"></i>
-            </a>
-          </div>
-        </article>
-
-        <!-- News Item 5 -->
-        <article class="bg-white rounded-xl border border-gray-100 overflow-hidden flex flex-col hover:shadow-lg hover:-translate-y-1 transition-all duration-300">
-          <div class="aspect-video relative overflow-hidden bg-gray-100">
-            <img src="../../assets/images/news-3.png" alt="Article 6" class="w-full h-full object-cover hover:scale-105 transition-transform duration-500">
-          </div>
-          <div class="p-6 flex flex-col flex-grow">
-            <h3 class="font-heading font-bold text-base text-brand-heading mb-3 line-clamp-2 hover:text-brand-primary transition-colors cursor-pointer">
-              Sun* Annual Party: Đêm thăng hoa của nghệ thuật và tinh thần đồng đội Sunner
-            </h3>
-            <p class="text-xs text-brand-body leading-relaxed mb-4 line-clamp-3 flex-grow">
-              Sự kiện thường niên lớn nhất trong năm của gia đình Sun* đã khép lại với muôn vàn cảm xúc và ấn tượng sâu sắc đối với mỗi thành viên...
-            </p>
-            <a href="https://news.sun-asterisk.com/vi" target="_blank" class="inline-flex items-center text-brand-primary text-xs font-bold hover:underline">
-              Xem chi tiết <i class="fa-solid fa-arrow-right ml-1"></i>
-            </a>
-          </div>
-        </article>
-
-      </div>
-
-      <!-- Load More Button -->
-      <div class="text-center mt-12">
-        <button class="bg-brand-heading text-white text-sm font-bold px-8 py-3 rounded-full hover:bg-black hover:shadow-lg transition-all duration-300">
-          Xem thêm bài viết
-        </button>
-      </div>
+      </section>
 
     </div>
   </main>
 
   <!-- Footer Component Placeholder -->
   <div id="footer-component"></div>
+
+  <!-- Bootstrap 5 JS Bundle -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 
   <!-- Page Loader & Scripts -->
   <script type="module">
@@ -176,6 +356,32 @@
         loadComponent('#footer-component', '../../components/footer.html')
       ]);
       initHeader();
+
+      // Initialize the Bootstrap Carousel with 4 seconds auto-play interval
+      const carouselEl = document.querySelector('#featuredNewsCarousel');
+      if (carouselEl && typeof bootstrap !== 'undefined') {
+        const carouselInstance = new bootstrap.Carousel(carouselEl, {
+          interval: 4000,
+          ride: 'carousel',
+          wrap: true
+        });
+
+        // Add custom click handlers for prev/next buttons
+        const prevBtns = document.querySelectorAll('.btn-carousel-nav[data-bs-slide="prev"]');
+        const nextBtns = document.querySelectorAll('.btn-carousel-nav[data-bs-slide="next"]');
+
+        prevBtns.forEach(btn => {
+          btn.addEventListener('click', () => {
+            carouselInstance.prev();
+          });
+        });
+
+        nextBtns.forEach(btn => {
+          btn.addEventListener('click', () => {
+            carouselInstance.next();
+          });
+        });
+      }
     });
   </script>
 </body>

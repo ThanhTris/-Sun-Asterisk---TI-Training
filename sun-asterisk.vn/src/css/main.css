@@ -18,6 +18,12 @@
   --color-circle-accent:  #E4E4E4;
   /* Stat counter gradient stop */
   --color-stat-gradient:  #E05252;
+  /* Icon / nav button background */
+  --color-icon-bg:        #F1F3F5;
+  /* RGB triplets, for rgba() with alpha */
+  --color-brand-primary-rgb: 192, 17, 17;
+  --color-white-rgb:      255, 255, 255;
+  --color-black-rgb:      0, 0, 0;
 }
 
 @tailwind base;
