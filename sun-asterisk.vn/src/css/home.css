@@ -50,6 +50,16 @@
   display: none; /* Chrome/Safari/Webkit */
 }
 
+/* Culture & Events mobile carousel (1 card at a time, slides via chevrons/swipe) */
+.culture-track {
+  scroll-behavior: smooth;
+  scrollbar-width: none; /* Firefox */
+}
+
+.culture-track::-webkit-scrollbar {
+  display: none; /* Chrome/Safari/Webkit */
+}
+
 /* 4. Stats Counter (Số liệu thống kê ấn tượng) */
 .stat-item {
   position: relative;

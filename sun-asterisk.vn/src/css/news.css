@@ -298,9 +298,58 @@
   overflow: hidden;
 }
 
-@media (max-width: 1023px) {
+@media (max-width: 767px) {
   .news-sidebar {
     position: static;
+  }
+
+  .news-tile {
+    padding: 12px;
+  }
+
+  .news-tile__title {
+    font-size: 15px;
+    margin-bottom: 10px;
+  }
+
+  .news-tile__desc {
+    font-size: 13px;
+    margin-bottom: 12px;
+  }
+
+  .col-featured-text,
+  .col-featured-img {
+    width: 100%;
+    flex: 0 0 100%;
+    max-width: 100%;
+  }
+
+  /* Reference site shows the image first, then title/desc/meta below it on mobile */
+  .col-featured-img {
+    order: -1;
+  }
+
+  .carousel-nav-group {
+    position: static;
+    justify-content: flex-end;
+    margin-top: 1.5rem;
+  }
+
+  /* Fixed 560px height was sized for the desktop side-by-side layout;
+     stacking image-over-text on mobile needs the container to grow with content */
+  .carousel-featured-container {
+    height: auto;
+    overflow: visible;
+  }
+
+  /* 3-line clamp was tuned for the wide desktop column at 32px; on the full-width
+     mobile column longer titles were being cut off after only a few words */
+  .featured-title {
+    font-size: 24px;
+    display: block;
+    -webkit-line-clamp: unset;
+    line-clamp: unset;
+    overflow: visible;
   }
 }
 

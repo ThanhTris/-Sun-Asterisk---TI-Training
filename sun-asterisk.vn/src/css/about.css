@@ -40,7 +40,7 @@
   max-width: 1140px;
   margin: 0 auto;
   width: 100%;
-  padding: 96px 16px;
+  padding: 96px 32px;
   position: relative;
   overflow: visible;
   box-sizing: border-box;
@@ -48,20 +48,6 @@
 
 .about-wrapper > * + * {
   margin-top: 96px;
-}
-
-@media (min-width: 640px) {
-  .about-wrapper {
-    padding-left: 24px;
-    padding-right: 24px;
-  }
-}
-
-@media (min-width: 1024px) {
-  .about-wrapper {
-    padding-left: 32px;
-    padding-right: 32px;
-  }
 }
 
 .about-section-title {
@@ -111,7 +97,7 @@
   border-radius: 16px;
   border: 6px solid var(--color-card-bg);
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.03);
-  padding: 60px 48px;
+  padding: 60px 220px 60px 48px;
   z-index: 2;
   overflow: visible;
 }
@@ -147,12 +133,6 @@
   grid-template-columns: 1fr 1.8fr;
   gap: 30px;
   align-items: center;
-}
-
-@media (min-width: 992px) {
-  .about-hero__card {
-    padding-right: 220px;
-  }
 }
 
 .about-hero__subtitle {
@@ -204,16 +184,21 @@
 }
 
 .about-hero__img-col {
-  position: relative;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 0;
+  height: 0;
+  z-index: 10;
 }
 
 .about-hero__img-box {
-  position: relative;
+  position: absolute;
   width: 340px;
   height: 340px;
+  left: -170px;
+  top: -170px;
 }
 
 .about-hero__img {
@@ -223,24 +208,6 @@
   object-fit: cover;
   border: 6px solid var(--color-white);
   box-shadow: 0 10px 35px rgba(0, 0, 0, 0.08);
-}
-
-@media (min-width: 992px) {
-  .about-hero__img-col {
-    position: absolute;
-    right: 0;
-    top: 50%;
-    transform: translateY(-50%);
-    width: 0;
-    height: 0;
-    z-index: 10;
-  }
-
-  .about-hero__img-box {
-    position: absolute;
-    left: -170px;
-    top: -170px;
-  }
 }
 
 /* ==========================================================================
@@ -1202,14 +1169,19 @@
 
 
 /* ==========================================================================
-   RESPONSIVE DESIGN (Media Queries)
+   RESPONSIVE DESIGN (Mobile only)
    ========================================================================== */
-@media (max-width: 991px) {
+@media (max-width: 767px) {
+  .about-wrapper {
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+
   .about-hero__grid {
     grid-template-columns: 1fr;
     gap: 40px;
   }
-  
+
   .about-hero__protrusion {
     display: none;
   }
@@ -1219,12 +1191,29 @@
   }
 
   .about-hero__img-col {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: auto;
+    height: auto;
     margin-top: 20px;
   }
 
+  .about-hero__img-box {
+    position: relative;
+    left: 0;
+    top: 0;
+  }
+
+  /* Title spans full width; Tầm nhìn/Sứ mệnh stay side by side as a 2-col row below it */
   .about-vision__grid {
-    grid-template-columns: 1fr;
-    gap: 40px;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px 20px;
+  }
+
+  .about-vision__title-box {
+    grid-column: 1 / -1;
   }
 
   .about-core__grid {
@@ -1232,23 +1221,53 @@
     gap: 20px;
   }
 
-  .about-sectors__grid {
+  .sectors__grid {
     grid-template-columns: 1fr;
     gap: 24px;
   }
 
-  .about-ceo__grid {
-    grid-template-columns: 1fr;
-    gap: 30px;
+  .ceo__inner {
+    flex-direction: column;
+    gap: 24px;
+    padding: 32px 24px;
   }
 
-  .about-offices__grid {
-    grid-template-columns: 1fr;
-    gap: 30px;
+  /* Offices: tabs become a stacked list; panel drops the two decorative side photos
+     and shows just the info card (which already carries a background image) */
+  .offices__tabs {
+    flex-direction: column;
+    gap: 0;
   }
-}
 
-@media (max-width: 768px) {
+  .offices__tab {
+    max-width: none;
+    width: 100%;
+    text-align: left;
+    border-top: none;
+    border-bottom: 1px solid var(--color-border-light);
+    padding: 16px 4px;
+  }
+
+  .offices__tab:hover,
+  .offices__tab.active {
+    border-top: none;
+    border-bottom-color: var(--color-primary);
+  }
+
+  .offices__panel {
+    grid-template-columns: 1fr;
+    height: auto;
+  }
+
+  .offices__panel-img {
+    display: none;
+  }
+
+  .offices__panel-info {
+    height: auto;
+    min-height: 320px;
+  }
+
   .about-meaning__banner {
     padding: 30px 24px;
   }
@@ -1268,9 +1287,7 @@
     align-items: center;
     text-align: center;
   }
-}
 
-@media (max-width: 575px) {
   .about-hero__title {
     font-size: 36px;
   }

@@ -28,7 +28,7 @@
 
   <!-- Main Content -->
   <main class="py-12">
-    <div class="max-w-[1140px] mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="max-w-[1140px] mx-auto px-4 md:px-8">
       <!-- ==================== FEATURED NEWS CAROUSEL ==================== -->
       <section class="mb-12">
         <div id="featuredNewsCarousel" class="carousel slide" data-bs-ride="carousel">
@@ -124,15 +124,15 @@
       <section>
         <h2 class="font-heading text-3xl md:text-4xl font-bold text-brand-heading mb-8" data-i18n="pages.news.grid.sectionTitle">Tin tức tổng hợp</h2>
 
-        <div class="grid grid-cols-1 lg:grid-cols-3 gap-x-8 gap-y-12">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-x-8 gap-y-12">
 
           <!-- Left: 2-column article grid (independent column heights via display:contents) -->
-          <div class="lg:col-span-2 grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-10">
+          <div class="md:col-span-2 grid grid-cols-1 md:grid-cols-2 gap-x-6 gap-y-10">
 
-            <div class="contents sm:flex sm:flex-col sm:gap-y-10">
+            <div class="contents md:flex md:flex-col md:gap-y-10">
 
             <!-- Article 1 -->
-            <article class="news-tile">
+            <article class="news-tile order-1 md:order-none">
               <div class="news-tile__img">
                 <a href="https://news.sun-asterisk.com/vi" target="_blank" rel="noopener">
                   <img src="../../assets/images/news-summer-trip.jpg" data-i18n-alt="pages.news.grid.article1.alt" alt="15 chương trình Summer Trip 2024">
@@ -152,7 +152,7 @@
             </article>
 
             <!-- Article 3 -->
-            <article class="news-tile">
+            <article class="news-tile order-3 md:order-none">
               <div class="news-tile__img">
                 <span class="news-badge top-3 left-3" data-i18n="pages.news.badge.hot">Tin nóng</span>
                 <a href="https://news.sun-asterisk.com/vi" target="_blank" rel="noopener">
@@ -173,7 +173,7 @@
             </article>
 
             <!-- Article 5 -->
-            <article class="news-tile">
+            <article class="news-tile order-5 md:order-none">
               <div class="news-tile__img">
                 <span class="news-badge top-3 left-3" data-i18n="pages.news.badge.hot">Tin nóng</span>
                 <a href="https://news.sun-asterisk.com/vi" target="_blank" rel="noopener">
@@ -195,10 +195,10 @@
 
             </div>
 
-            <div class="contents sm:flex sm:flex-col sm:gap-y-10">
+            <div class="contents md:flex md:flex-col md:gap-y-10">
 
             <!-- Article 2 -->
-            <article class="news-tile">
+            <article class="news-tile order-2 md:order-none">
               <div class="news-tile__img">
                 <a href="https://news.sun-asterisk.com/vi" target="_blank" rel="noopener">
                   <img src="../../assets/images/news-cka.png" data-i18n-alt="pages.news.grid.article2.alt" alt="Chinh phục chứng chỉ CKA 2024 cùng Hữu Kim">
@@ -218,7 +218,7 @@
             </article>
 
             <!-- Article 4 -->
-            <article class="news-tile">
+            <article class="news-tile order-4 md:order-none">
               <div class="news-tile__img">
                 <a href="https://news.sun-asterisk.com/vi" target="_blank" rel="noopener">
                   <img src="../../assets/images/news-art-exhibition.jpg" data-i18n-alt="pages.news.grid.article4.alt" alt="23 tác phẩm nghệ thuật của người Sun*">
@@ -238,7 +238,7 @@
             </article>
 
             <!-- Article 6 -->
-            <article class="news-tile">
+            <article class="news-tile order-6 md:order-none">
               <div class="news-tile__img">
                 <a href="https://news.sun-asterisk.com/vi" target="_blank" rel="noopener">
                   <img src="../../assets/images/news-sunday.png" data-i18n-alt="pages.news.grid.article6.alt" alt="Sun* Day: Our 11">
@@ -260,7 +260,7 @@
             </div>
 
             <!-- Load More Button -->
-            <div class="col-span-full text-center mt-2">
+            <div class="col-span-full text-center mt-2 order-last md:order-none">
               <button class="news-loadmore">
                 <span data-i18n="pages.news.loadMore">Xem nhiều tin hơn</span> <i class="fa-solid fa-arrow-right"></i>
               </button>

@@ -81,16 +81,17 @@ body.projects-page .container {
 .carousel-nav-group {
   display: flex;
   gap: 12px;
-  margin-top: 1.5rem;
+  margin-top: 0;
   z-index: 10;
+  position: absolute;
+  bottom: 24px;
+  left: 24px;
 }
 
-@media (min-width: 992px) {
+@media (max-width: 767px) {
   .carousel-nav-group {
-    position: absolute;
-    bottom: 24px;
-    left: 24px;
-    margin-top: 0;
+    position: static;
+    margin-top: 1.5rem;
   }
 }
 
@@ -328,5 +329,24 @@ body.projects-page .container {
   top: -14px;
   left: 100px;
   z-index: 10;
+}
+
+@media (max-width: 767px) {
+  .col-featured-text,
+  .col-featured-img {
+    width: 100%;
+    flex: 0 0 100%;
+    max-width: 100%;
+  }
+
+  /* Card text is normally a hover-reveal overlay (desktop only interaction);
+     on mobile there's no hover, so show it as static content below the image */
+  .project-card-body {
+    position: static;
+    opacity: 1;
+    visibility: visible;
+    padding: 1.25rem 0 0;
+    background: transparent;
+  }
 }
 

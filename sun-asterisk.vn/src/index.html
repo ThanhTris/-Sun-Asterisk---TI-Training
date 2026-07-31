@@ -30,7 +30,7 @@
     </section>
 
     <!-- ==================== MAIN CONTENT WRAPPER ==================== -->
-    <div class="max-w-[1140px] mx-auto px-4 sm:px-6 lg:px-8 w-full py-24 space-y-24 relative overflow-visible">
+    <div class="max-w-[1140px] mx-auto px-4 md:px-8 w-full py-24 space-y-24 relative overflow-visible">
       
       <!-- ==================== BUSINESS SECTORS SECTION ==================== -->
       <div id="sectors">
@@ -46,9 +46,9 @@
           <span class="absolute left-[-40px] top-1/2 -translate-y-1/2 w-[80px] h-[60%] bg-white border-[6px] border-brand-cardBg rounded-l-[16px] z-0 pointer-events-none"></span>
 
           <!-- Main Card (6px border brand-cardBg, rounded-16px) -->
-          <div class="relative bg-white rounded-[16px] border-[6px] border-brand-cardBg shadow-sm p-8 md:p-12 min-h-[322px] flex flex-col lg:flex-row items-center overflow-visible z-10">
+          <div class="relative bg-white rounded-[16px] border-[6px] border-brand-cardBg shadow-sm p-8 md:p-12 min-h-[322px] flex flex-col md:flex-row items-center overflow-visible z-10">
             <!-- Text intro (Left 48%) -->
-            <div class="w-full lg:w-[48%] space-y-6 text-[16px] leading-relaxed text-brand-body z-10">
+            <div class="w-full md:w-[48%] space-y-6 text-[16px] leading-relaxed text-brand-body z-10">
             <p data-i18n-html="pages.home.sectors.intro1">
               Là một Digital Creative Studio, Sun* luôn đề cao tinh thần làm chủ sản phẩm, tư duy sáng tạo trong mỗi dự án để mang đến những trải nghiệm <strong class="font-bold">"Awesome"</strong> nhất cho end-user.
             </p>
@@ -58,8 +58,8 @@
           </div>
 
           <!-- Illustration (Right 58% - Overflowing absolute position on desktop) -->
-          <div class="w-full lg:w-[58%] lg:absolute lg:-right-[4%] lg:top-1/2 lg:-translate-y-1/2 mt-8 lg:mt-0 flex justify-center z-0 overflow-visible">
-            <img src="./assets/images/intro-business.png" data-i18n-alt="pages.home.sectors.title" alt="Lĩnh vực kinh doanh" class="w-full h-auto object-contain transform lg:scale-115 origin-center">
+          <div class="w-full md:w-[58%] md:absolute md:-right-[4%] md:top-1/2 md:-translate-y-1/2 mt-8 md:mt-0 flex justify-center z-0 overflow-visible">
+            <img src="./assets/images/intro-business.png" data-i18n-alt="pages.home.sectors.title" alt="Lĩnh vực kinh doanh" class="w-full h-auto object-contain transform md:scale-115 origin-center">
           </div>
         </div>
       </div>
@@ -135,10 +135,10 @@
       <!-- ==================== PROJECTS SECTION ==================== -->
       <div class="border-t border-gray-100 pt-24 relative overflow-visible">
         
-        <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
+        <div class="grid grid-cols-1 md:grid-cols-12 gap-12 items-start">
           
           <!-- Left Stats (Now including Title inside, exact 10px padding, aligned top) -->
-          <div class="lg:col-span-6 p-[10px] pt-0">
+          <div class="md:col-span-6 p-[10px] pt-0">
             <!-- Section Title (With before/after decoration dots, exact mb-20px) -->
             <div class="relative mb-[20px] before:content-[''] before:absolute before:right-[25%] before:top-[-30px] before:-translate-y-1/2 before:w-[28px] before:h-[28px] before:rounded-full before:bg-brand-primary before:z-20 before:pointer-events-none after:content-[''] after:absolute after:left-0 after:bottom-[-40px] after:w-[26px] after:h-[26px] after:rounded-full after:bg-brand-primary/10 after:z-20 after:pointer-events-none">
               <h2 class="section-title mt-0" data-i18n="pages.home.projects.title">
@@ -180,14 +180,14 @@
           </div>
 
           <!-- Right Featured Project Card (Constrained to exact 322x469px size) -->
-          <div class="lg:col-span-6 relative overflow-visible after:content-[''] after:absolute after:right-[-90px] after:bottom-[-40px] after:w-[71px] after:h-[71px] after:rounded-full after:bg-brand-redTint after:z-20 after:pointer-events-none">
+          <div class="md:col-span-6 relative overflow-visible after:content-[''] after:absolute after:right-[-90px] after:bottom-[-40px] after:w-[71px] after:h-[71px] after:rounded-full after:bg-brand-redTint after:z-20 after:pointer-events-none">
             <!-- Slider Viewport (rounded-8px, exact 322x469px, aligned to right edge) -->
-            <div class="overflow-hidden w-[322px] h-[469px] mx-auto lg:ml-auto rounded-[8px] border border-gray-100 shadow-sm hover:shadow-md transition-shadow duration-300">
+            <div class="overflow-hidden w-full aspect-[322/469] mx-auto md:w-[322px] md:h-[469px] md:aspect-auto md:ml-auto rounded-[8px] border border-gray-100 shadow-sm hover:shadow-md transition-shadow duration-300">
               <!-- Slider Track (Start at translateX(-100%) to show Card 1) -->
               <div id="project-track" class="flex h-full" style="transform: translateX(-100%);">
                 
                 <!-- CLONE Card 3: HARUTAKA (At start for infinite loop) -->
-                <a href="./pages/projects/index.html" class="block w-[322px] h-[469px] shrink-0 relative bg-white group select-none">
+                <a href="./pages/projects/index.html" class="block w-full aspect-[322/469] shrink-0 relative bg-white group select-none md:w-[322px] md:h-[469px] md:aspect-auto">
                   <img src="./assets/images/zenkigen-project.png" data-i18n-alt="pages.home.projects.slider.harutaka.alt" alt="Dự án HARUTAKA" class="w-full h-full object-cover absolute inset-0 z-0">
                   <div class="absolute inset-0 bg-brand-cardBg/90 z-10"></div>
                   <div class="absolute bottom-0 left-0 right-0 p-8 md:p-10 space-y-4 z-20">
@@ -212,7 +212,7 @@
                 </a>
 
                 <!-- Card 1: KURASHICOM -->
-                <a href="./pages/projects/index.html" class="block w-[322px] h-[469px] shrink-0 relative bg-white group select-none">
+                <a href="./pages/projects/index.html" class="block w-full aspect-[322/469] shrink-0 relative bg-white group select-none md:w-[322px] md:h-[469px] md:aspect-auto">
                   <img src="./assets/images/Kurashicom.png" data-i18n-alt="pages.home.projects.slider.kurashicom.alt" alt="Dự án KURASHICOM" class="w-full h-full object-cover absolute inset-0 z-0">
                   <div class="absolute inset-0 bg-brand-cardBg/90 z-10"></div>
                   <div class="absolute bottom-0 left-0 right-0 p-8 md:p-10 space-y-4 z-20">
@@ -237,7 +237,7 @@
                 </a>
 
                 <!-- Card 2: SSK -->
-                <a href="./pages/projects/index.html" class="block w-[322px] h-[469px] shrink-0 relative bg-white group select-none">
+                <a href="./pages/projects/index.html" class="block w-full aspect-[322/469] shrink-0 relative bg-white group select-none md:w-[322px] md:h-[469px] md:aspect-auto">
                   <img src="./assets/images/ssk-project.png" data-i18n-alt="pages.home.projects.slider.ssk.alt" alt="Dự án SSK" class="w-full h-full object-cover absolute inset-0 z-0">
                   <div class="absolute inset-0 bg-brand-cardBg/90 z-10"></div>
                   <div class="absolute bottom-0 left-0 right-0 p-8 md:p-10 space-y-4 z-20">
@@ -262,7 +262,7 @@
                 </a>
 
                 <!-- Card 3: HARUTAKA -->
-                <a href="./pages/projects/index.html" class="block w-[322px] h-[469px] shrink-0 relative bg-white group select-none">
+                <a href="./pages/projects/index.html" class="block w-full aspect-[322/469] shrink-0 relative bg-white group select-none md:w-[322px] md:h-[469px] md:aspect-auto">
                   <img src="./assets/images/zenkigen-project.png" data-i18n-alt="pages.home.projects.slider.harutaka.alt" alt="Dự án HARUTAKA" class="w-full h-full object-cover absolute inset-0 z-0">
                   <div class="absolute inset-0 bg-brand-cardBg/90 z-10"></div>
                   <div class="absolute bottom-0 left-0 right-0 p-8 md:p-10 space-y-4 z-20">
@@ -287,7 +287,7 @@
                 </a>
 
                 <!-- CLONE Card 1: KURASHICOM (At end for infinite loop) -->
-                <a href="./pages/projects/index.html" class="block w-[322px] h-[469px] shrink-0 relative bg-white group select-none">
+                <a href="./pages/projects/index.html" class="block w-full aspect-[322/469] shrink-0 relative bg-white group select-none md:w-[322px] md:h-[469px] md:aspect-auto">
                   <img src="./assets/images/Kurashicom.png" data-i18n-alt="pages.home.projects.slider.kurashicom.alt" alt="Dự án KURASHICOM" class="w-full h-full object-cover absolute inset-0 z-0">
                   <div class="absolute inset-0 bg-brand-cardBg/90 z-10"></div>
                   <div class="absolute bottom-0 left-0 right-0 p-8 md:p-10 space-y-4 z-20">
@@ -315,7 +315,7 @@
             </div>
 
             <!-- Carousel Navigation Arrows (Aligned with Card, max-w-[322px], aligned to right edge) -->
-            <div class="flex justify-end gap-3 mt-6 w-[322px] mx-auto lg:ml-auto">
+            <div class="flex justify-end gap-3 mt-6 w-full mx-auto md:w-[322px] md:ml-auto">
               <button id="prev-project" class="w-12 h-12 rounded-full border border-gray-200 flex items-center justify-center hover:bg-gray-50 transition-colors" aria-label="Previous project">
                 <svg class="w-5 h-5 text-brand-body" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
                   <path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7"/>
@@ -383,7 +383,7 @@
       <!-- ==================== WORK ENVIRONMENT SECTION ==================== -->
       <div class="border-t border-gray-100 pt-24 relative overflow-visible">
 
-        <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 items-start">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-10 items-start">
           <!-- Left Column (Title and list of 3 items with exact Haru layout) -->
           <div class="w-full">
             <!-- Section Title (Inside the column) -->
@@ -395,7 +395,7 @@
                 <!-- Item 1 -->
                 <li class="flex items-start gap-4">
                   <div class="haru-list-content__icon flex-shrink-0 w-10 h-10 flex items-center justify-center">
-                    <i class="haru-icon haru-icon-check flex items-center justify-center text-brand-primary">
+                    <i class="flex items-center justify-center text-brand-primary">
                       <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/>
                       </svg>
@@ -410,7 +410,7 @@
                 <!-- Item 2 -->
                 <li class="flex items-start gap-4">
                   <div class="haru-list-content__icon flex-shrink-0 w-10 h-10 flex items-center justify-center">
-                    <i class="haru-icon haru-icon-check flex items-center justify-center text-brand-primary">
+                    <i class="flex items-center justify-center text-brand-primary">
                       <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/>
                       </svg>
@@ -425,7 +425,7 @@
                 <!-- Item 3 -->
                 <li class="flex items-start gap-4">
                   <div class="haru-list-content__icon flex-shrink-0 w-10 h-10 flex items-center justify-center">
-                    <i class="haru-icon haru-icon-check flex items-center justify-center text-brand-primary">
+                    <i class="flex items-center justify-center text-brand-primary">
                       <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/>
                       </svg>
@@ -442,7 +442,7 @@
           </div>
 
           <!-- Right Column (Illustration with absolute overlay button - pushed down below title level) -->
-          <div class="w-full relative flex flex-col items-center lg:pt-[70px]">
+          <div class="w-full relative flex flex-col items-center md:pt-[70px]">
             <!-- Illustration Image Wrapper (increased to w-full to make the image larger) -->
             <div class="relative w-full max-w-[520px] mx-auto overflow-visible">
               <img src="./src/assets/images/human-centered.png" data-i18n-alt="pages.home.environment.title" alt="Môi trường làm việc" class="w-full h-auto block">
@@ -471,12 +471,12 @@
           </h2>
           <!-- Carousel Navigation Chevrons -->
           <div class="flex gap-2">
-            <button class="nav-chevron" aria-label="Previous post">
+            <button id="prev-culture" class="nav-chevron" aria-label="Previous post">
               <svg class="w-4 h-4 text-brand-body" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7"/>
               </svg>
             </button>
-            <button class="nav-chevron" aria-label="Next post">
+            <button id="next-culture" class="nav-chevron" aria-label="Next post">
               <svg class="w-4 h-4 text-brand-body" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/>
               </svg>
@@ -484,10 +484,10 @@
           </div>
         </div>
 
-        <!-- News Cards Grid -->
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <!-- News Cards: horizontal 1-at-a-time carousel on mobile, 3-column grid on desktop -->
+        <div id="culture-track" class="culture-track flex overflow-x-auto snap-x snap-mandatory gap-8 md:grid md:grid-cols-3 md:overflow-visible">
           <!-- Card 1 -->
-          <a href="./pages/news/index.html" class="news-card group">
+          <a href="./pages/news/index.html" class="news-card group shrink-0 w-full snap-center">
             <!-- Image Area (overflow-visible to allow 'Tin nóng' badge to hang outside) -->
             <div class="news-card__image news-card__image--overflow">
               <span class="news-badge top-[-10px] right-[-10px]" data-i18n="pages.home.culture.badge">Tin nóng</span>
@@ -514,7 +514,7 @@
           </a>
 
           <!-- Card 2 -->
-          <a href="./pages/news/index.html" class="news-card group">
+          <a href="./pages/news/index.html" class="news-card group shrink-0 w-full snap-center">
             <!-- Image Area -->
             <div class="news-card__image news-card__image--clipped">
               <img src="./assets/images/news-2.jpg" data-i18n-alt="pages.home.culture.card2.alt" alt="6 tháng cùng chiến dịch" class="w-full h-full object-cover">
@@ -540,7 +540,7 @@
           </a>
 
           <!-- Card 3 -->
-          <a href="./pages/news/index.html" class="news-card group">
+          <a href="./pages/news/index.html" class="news-card group shrink-0 w-full snap-center">
             <!-- Image Area -->
             <div class="news-card__image news-card__image--clipped">
               <img src="./assets/images/news-3.png" data-i18n-alt="pages.home.culture.card3.alt" alt="Chinh phục chứng chỉ CKA 2024" class="w-full h-full object-cover">

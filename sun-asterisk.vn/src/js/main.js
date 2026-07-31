@@ -1,7 +1,7 @@
 import { loadComponent } from './components/loader.js';
 import { initHeader } from './components/mobile-menu.js';
 import { initCounter } from './components/counter.js';
-import { initProjectSlider } from './components/slider.js';
+import { initProjectSlider, initCultureCarousel } from './components/slider.js';
 import { initI18n } from './i18n/i18n.js';
 
 // Wait for DOM to be fully loaded
@@ -20,4 +20,5 @@ document.addEventListener('DOMContentLoaded', async () => {
   // Khởi tạo các phần khác trên trang chủ
   initCounter();
   initProjectSlider();
+  initCultureCarousel();
 });

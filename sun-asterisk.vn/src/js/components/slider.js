@@ -84,3 +84,73 @@ export function initProjectSlider() {
     viewport.addEventListener("mouseleave", startAutoSlide);
   }
 }
+
+// Culture & Events section: native horizontal scroll-snap carousel.
+// On mobile the track scrolls one card at a time via the chevrons (or swipe),
+// and auto-advances every 4s, looping back to the first card at the end.
+// On desktop the track becomes a static 3-column grid, so scrollTo is a no-op there.
+export function initCultureCarousel() {
+  const track = document.getElementById("culture-track");
+  const prevBtn = document.getElementById("prev-culture");
+  const nextBtn = document.getElementById("next-culture");
+
+  if (!track || !prevBtn || !nextBtn) return;
+
+  let autoSlideInterval;
+
+  function cardStep() {
+    const card = track.children[0];
+    if (!card) return 0;
+    const gap = parseFloat(getComputedStyle(track).columnGap) || 0;
+    return card.getBoundingClientRect().width + gap;
+  }
+
+  function currentIndex() {
+    const step = cardStep();
+    return step ? Math.round(track.scrollLeft / step) : 0;
+  }
+
+  function scrollToIndex(index) {
+    track.scrollTo({ left: index * cardStep(), behavior: "smooth" });
+  }
+
+  function nextSlide() {
+    const total = track.children.length;
+    scrollToIndex((currentIndex() + 1) % total);
+  }
+
+  function prevSlide() {
+    const total = track.children.length;
+    scrollToIndex((currentIndex() - 1 + total) % total);
+  }
+
+  function startAutoSlide() {
+    stopAutoSlide();
+    autoSlideInterval = setInterval(nextSlide, 4000);
+  }
+
+  function stopAutoSlide() {
+    if (autoSlideInterval) {
+      clearInterval(autoSlideInterval);
+    }
+  }
+
+  prevBtn.addEventListener("click", () => {
+    prevSlide();
+    startAutoSlide(); // Reset autoplay timer
+  });
+
+  nextBtn.addEventListener("click", () => {
+    nextSlide();
+    startAutoSlide(); // Reset autoplay timer
+  });
+
+  // Start initial autoplay
+  startAutoSlide();
+
+  // Pause on hover/touch so the user isn't fighting the timer while swiping
+  track.addEventListener("mouseenter", stopAutoSlide);
+  track.addEventListener("mouseleave", startAutoSlide);
+  track.addEventListener("touchstart", stopAutoSlide, { passive: true });
+  track.addEventListener("touchend", startAutoSlide);
+}

@@ -70,12 +70,12 @@ $font-sans: 'Roboto', sans-serif;
     border-radius: 16px;
     border: 6px solid #f9f9f9;
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.03);
-    padding: 60px 48px;
+    padding: 60px 220px 60px 48px;
     z-index: 2;
     overflow: visible;
 
-    @media (min-width: 992px) {
-      padding-right: 220px;
+    @media (max-width: 767px) {
+      padding: 40px 24px;
     }
 
     &::before {
@@ -98,7 +98,7 @@ $font-sans: 'Roboto', sans-serif;
     gap: 30px;
     align-items: center;
 
-    @media (max-width: 991px) {
+    @media (max-width: 767px) {
       grid-template-columns: 1fr;
       gap: 40px;
     }
@@ -131,7 +131,7 @@ $font-sans: 'Roboto', sans-serif;
     box-sizing: border-box;
     padding-left: 10px;
 
-    @media (max-width: 991px) {
+    @media (max-width: 767px) {
       padding-left: 0;
     }
   }
@@ -144,31 +144,36 @@ $font-sans: 'Roboto', sans-serif;
   }
 
   .career-hero__img-col {
-    position: relative;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 0;
+    height: 0;
+    z-index: 10;
 
-    @media (min-width: 992px) {
-      position: absolute;
-      right: 0;
-      top: 50%;
-      transform: translateY(-50%);
-      width: 0;
-      height: 0;
-      z-index: 10;
+    @media (max-width: 767px) {
+      position: relative;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: auto;
+      height: auto;
+      margin-top: 20px;
     }
   }
 
   .career-hero__img-box {
-    position: relative;
+    position: absolute;
     width: 340px;
     height: 340px;
+    left: -170px;
+    top: -170px;
 
-    @media (min-width: 992px) {
-      position: absolute;
-      left: -170px;
-      top: -170px;
+    @media (max-width: 767px) {
+      position: relative;
+      left: 0;
+      top: 0;
     }
   }
 
@@ -192,7 +197,7 @@ $font-sans: 'Roboto', sans-serif;
     grid-template-columns: 2fr 1.2fr 180px;
     gap: 16px;
 
-    @media (max-width: 768px) {
+    @media (max-width: 767px) {
       grid-template-columns: 1fr;
     }
   }
@@ -226,6 +231,11 @@ $font-sans: 'Roboto', sans-serif;
     white-space: nowrap;
     @include transition-standard;
 
+    @media (max-width: 767px) {
+      width: auto;
+      justify-self: start;
+    }
+
     &:hover {
       background-color: $color-primary;
     }
@@ -248,7 +258,7 @@ $font-sans: 'Roboto', sans-serif;
     grid-template-columns: repeat(2, 1fr);
     gap: 30px;
 
-    @media (max-width: 991px) {
+    @media (max-width: 767px) {
       grid-template-columns: 1fr;
     }
   }
@@ -262,7 +272,7 @@ $font-sans: 'Roboto', sans-serif;
     flex-direction: row;
     @include transition-standard;
 
-    @media (max-width: 576px) {
+    @media (max-width: 767px) {
       flex-direction: column;
     }
 
@@ -278,7 +288,7 @@ $font-sans: 'Roboto', sans-serif;
       background-color: $color-light-bg;
       flex-shrink: 0;
 
-      @media (max-width: 576px) {
+      @media (max-width: 767px) {
         width: 100%;
         height: 200px;
         min-height: auto;
@@ -301,7 +311,7 @@ $font-sans: 'Roboto', sans-serif;
       justify-content: center;
       flex-grow: 1;
 
-      @media (max-width: 576px) {
+      @media (max-width: 767px) {
         width: 100%;
       }
 

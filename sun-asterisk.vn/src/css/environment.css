@@ -19,7 +19,7 @@ body.environment-page {
   align-items: center;
 }
 
-@media (max-width: 991px) {
+@media (max-width: 767px) {
   .env-intro__grid {
     grid-template-columns: 1fr;
   }
@@ -85,13 +85,24 @@ body.environment-page {
   align-items: center;
 }
 
-@media (max-width: 991px) {
+@media (max-width: 767px) {
   .env-active__grid {
     grid-template-columns: 1fr;
   }
 
   .env-active__grid--img-left .env-active__image {
     order: -1;
+  }
+
+  .env-intro__title,
+  .env-active__title {
+    font-size: 20px;
+  }
+
+  .env-intro__desc,
+  .env-active__content p,
+  .env-active__list {
+    font-size: 14px;
   }
 }
 

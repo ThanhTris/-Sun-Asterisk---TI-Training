@@ -6,6 +6,9 @@ module.exports = {
     "./src/components/**/*.html",
     "./src/js/**/*.js"
   ],
+  corePlugins: {
+    container: false,
+  },
   theme: {
     extend: {
       colors: {
