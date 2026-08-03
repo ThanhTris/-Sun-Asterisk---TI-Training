@@ -1,4 +1,3 @@
-# ReactJS Summary
 
 ## Phần 1. Getting Started with ReactJS
 
