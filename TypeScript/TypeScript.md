@@ -1,19 +1,3 @@
-# TypeScript Summary
-
-## Mục lục
-- [Phần 1. JavaScript Fundamentals (ES6+)](#phần-1-javascript-fundamentals-es6)
-- [Phần 2. JavaScript ES6+ Advance](#phần-2-javascript-es6-advance-javascript-es6-nâng-cao)
-- [Phần 3. Understanding Static Typing](#phần-3-understanding-static-typing-tìm-hiểu-về-kiểu-dữ-liệu-tĩnh)
-- [Phần 4. TypeScript Introduction](#phần-4-typescript-introduction-giới-thiệu-về-typescript)
-- [Phần 5. Basic TypeScript and Basic Data Types](#phần-5-basic-typescript-and-basic-data-types-typescript-cơ-bản-và-các-kiểu-dữ-liệu-cơ-bản)
-- [Phần 6. Function and Compiler](#phần-6-function-and-compiler-hàm-và-trình-biên-dịch-trong-typescript)
-- [Phần 7. Classes and Interfaces](#phần-7-classes-and-interfaces-lớp-và-giao-diện-trong-typescript)
-- [Phần 8. Advanced Types and Generics](#phần-8-advanced-types-and-generics-kiểu-dữ-liệu-nâng-cao-và-generics)
-- [Phần 9. Decorators](#phần-9-decorators-bộ-trang-trí-trong-typescript)
-- [Phần 10. Modules and Namespaces](#phần-10-modules-and-namespaces-mô-đun-và-không-gian-tên)
-- [Phần 11. Validator](#phần-11-validator-thư-viện-bên-thứ-ba-và-xác-thực-dữ-liệu)
-
----
 
 ## Phần 1. JavaScript Fundamentals (ES6+)
 
