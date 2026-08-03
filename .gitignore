@@ -1,3 +1,6 @@
 # Ignore Claude / Antigravity settings
 .claude/
 .cluade/
+
+# Ignore in-progress features
+algolia-ecommerce-search/
