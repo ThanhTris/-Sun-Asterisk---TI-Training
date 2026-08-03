@@ -1,3 +1,19 @@
+# TypeScript Summary
+
+## Mục lục
+- [Phần 1. JavaScript Fundamentals (ES6+)](#phần-1-javascript-fundamentals-es6)
+- [Phần 2. JavaScript ES6+ Advance](#phần-2-javascript-es6-advance-javascript-es6-nâng-cao)
+- [Phần 3. Understanding Static Typing](#phần-3-understanding-static-typing-tìm-hiểu-về-kiểu-dữ-liệu-tĩnh)
+- [Phần 4. TypeScript Introduction](#phần-4-typescript-introduction-giới-thiệu-về-typescript)
+- [Phần 5. Basic TypeScript and Basic Data Types](#phần-5-basic-typescript-and-basic-data-types-typescript-cơ-bản-và-các-kiểu-dữ-liệu-cơ-bản)
+- [Phần 6. Function and Compiler](#phần-6-function-and-compiler-hàm-và-trình-biên-dịch-trong-typescript)
+- [Phần 7. Classes and Interfaces](#phần-7-classes-and-interfaces-lớp-và-giao-diện-trong-typescript)
+- [Phần 8. Advanced Types and Generics](#phần-8-advanced-types-and-generics-kiểu-dữ-liệu-nâng-cao-và-generics)
+- [Phần 9. Decorators](#phần-9-decorators-bộ-trang-trí-trong-typescript)
+- [Phần 10. Modules and Namespaces](#phần-10-modules-and-namespaces-mô-đun-và-không-gian-tên)
+- [Phần 11. Validator](#phần-11-validator-thư-viện-bên-thứ-ba-và-xác-thực-dữ-liệu)
+
+---
 
 ## Phần 1. JavaScript Fundamentals (ES6+)
 
@@ -1152,17 +1168,1837 @@ if (typeof userInput === 'string') {
 }
 ```
 
+---
 
+## Phần 6. Function and Compiler (Hàm và Trình biên dịch trong TypeScript)
 
+### 1. Hàm mũi tên (Arrow Function)
+Hàm mũi tên (Arrow Function) được giới thiệu từ ES6 giúp rút gọn cú pháp khai báo hàm truyền thống và liên kết ngữ cảnh `this` một cách tự động.
 
+#### 1.1 Khai báo hàm truyền thống vs Hàm mũi tên:
+*   **Hàm truyền thống (Traditional Function):**
+    ```typescript
+    function f_name() {
+      // Các câu lệnh xử lý...
+    }
+    ```
+*   **Hàm mũi tên (Arrow Function):** Sử dụng ký tự mũi tên `=>` (Arrow notation) để khai báo:
+    ```typescript
+    let f_name = () => {
+      // Các câu lệnh xử lý...
+    };
+    ```
 
+#### 1.2 Cú pháp trả về giá trị (Return Statement):
+*   **Hàm truyền thống:**
+    ```typescript
+    function f_name() {
+      return; // Lệnh return trả về kết quả
+    }
+    ```
+*   **Hàm mũi tên:**
+    ```typescript
+    let f_name = () => {
+      return; // Lệnh return trả về kết quả
+    };
+    ```
 
+---
+
+### 2. Định nghĩa kiểu dữ liệu trả về cho Hàm (Function Return Types)
+TypeScript cho phép bạn kiểm soát chặt chẽ kiểu dữ liệu trả về của một hàm (Function Return Type) bằng cách đặt dấu hai chấm `:` kèm tên kiểu sau cặp ngoặc đơn chứa tham số.
+
+#### 2.1 Cú pháp định nghĩa kiểu trả về:
+*   **Với hàm truyền thống:**
+    ```typescript
+    function Sum(): number {
+      return 10; // Bắt buộc phải trả về kiểu số
+    }
+    ```
+*   **Với hàm mũi tên:**
+    ```typescript
+    let Sum = (): number => {
+      return 10; // Bắt buộc phải trả về kiểu số
+    };
+    ```
+
+#### 2.2 Ví dụ thực tế gán hàm vào biến và lỗi thường gặp:
+```typescript
+function Sum(): string {
+  return "Result: 5";
+}
+
+let showSum; // Tự động suy luận là any
+showSum = Sum; // Gán tham chiếu hàm
+console.log(showSum()); // Gọi hàm thông qua biến => In ra: "Result: 5"
+
+let greeting = (): number => {
+  return 10;
+};
+
+// CẢNH BÁO LỖI LOGIC: In ra cả cấu trúc hàm do thiếu dấu gọi hàm ()
+console.log("Result: " + greeting); // Output: "Result: () => { return 10; }"
+console.log("Result: " + greeting()); // ĐÚNG: "Result: 10"
 ```
 
+---
 
+### 3. Tham số của hàm trong TypeScript (Function Parameters)
+Để nâng cao tính linh hoạt khi gọi hàm, TypeScript hỗ trợ 3 dạng tham số đặc biệt:
 
+$$\text{Function Parameter} \longrightarrow \begin{cases} \text{Optional Parameter (Tham số tùy chọn)} \\ \text{Default Parameter (Tham số mặc định)} \\ \text{Rest Parameter (Tham số gom)} \end{cases}$$
 
+1.  **Optional Parameter (Tham số tùy chọn):** Cho phép gọi hàm mà không bắt buộc truyền đối số đó. Được định nghĩa bằng dấu hỏi chấm `?` đặt sau tên tham số.
+2.  **Default Parameter (Tham số mặc định):** Thiết lập giá trị mặc định cho tham số nếu người gọi không truyền giá trị vào khi gọi hàm. Sử dụng dấu `=`.
+3.  **Rest Parameter (Tham số gom):** Cho phép truyền không giới hạn số lượng đối số dưới dạng một mảng các phần tử. Sử dụng cú pháp ba dấu chấm `...`.
 
+---
 
+### 4. Chi tiết về các loại tham số trong Hàm
+
+#### 4.1 Tham số mặc định (Default Parameter)
+Cho phép đặt giá trị mặc định cho tham số nếu người gọi không truyền giá trị hoặc truyền `undefined`.
+
+*   **Cú pháp:**
+    ```typescript
+    let f_name = (para1: type, para2: type = default-value) => {
+      return;
+    };
+    ```
+*   **Ví dụ thực tế và các hành vi đặc biệt:**
+    ```typescript
+    // Định nghĩa x có giá trị mặc định là 5, y là tham số bắt buộc kiểu number
+    let sum = (x: number = 5, y: number) => x + y;
+    const printOutput = (output: string | number) => console.log("Result: " + output);
+    
+    printOutput(sum(3)); 
+    // LỖI BIÊN DỊCH: An argument for 'y' was not provided.
+    // (Vì số 3 được gán cho x, còn y bị thiếu mà y lại là tham số bắt buộc)
+    
+    printOutput(sum(undefined, 5)); 
+    // HỢP LỆ => x nhận giá trị mặc định là 5, y nhận giá trị 5. Output: "Result: 10"
+    
+    printOutput(sum(3, 5)); 
+    // HỢP LỆ => x = 3, y = 5. Output: "Result: 8"
+    ```
+
+#### 4.2 Tham số tùy chọn (Optional Parameter)
+Cho phép một tham số có thể được truyền hoặc bỏ qua khi gọi hàm. Được định nghĩa bằng cách thêm dấu hỏi chấm `?` ngay sau tên tham số.
+
+*   **Cú pháp:**
+    ```typescript
+    let f_name = (para1: type, para2?: type) => {
+      return;
+    };
+    ```
+*   **Ví dụ thực tế và lưu ý:**
+    ```typescript
+    // y?: number là tham số tùy chọn (có thể là number hoặc undefined)
+    let sum = (x: number = 5, y?: number) => { 
+      return x + <number>y; // Sử dụng ép kiểu <number> để tránh lỗi kiểm tra undefined
+    };
+    const printOutput = (output: string | number) => console.log("Result: " + output);
+    
+    printOutput(sum(3)); 
+    // HỢP LỆ => y không truyền nên có giá trị là undefined. 3 + undefined = NaN. Output: "Result: NaN"
+    
+    printOutput(sum(undefined, 5)); 
+    // HỢP LỆ => x = 5 (mặc định), y = 5. Output: "Result: 10"
+    
+    printOutput(sum(3, 5)); 
+    // HỢP LỆ => x = 3, y = 5. Output: "Result: 8"
+    ```
+    > [!IMPORTANT]
+    > Khi khai báo tham số tùy chọn, tất cả các tham số tùy chọn bắt buộc phải được khai báo **ở sau** các tham số bắt buộc thông thường để tránh xung đột khi gán đối số.
+
+#### 4.3 Toán tử rải (Spread Operator)
+Toán tử rải (Spread Operator), ký hiệu là ba dấu chấm `...`, được sử dụng để sao chép, trích xuất hoặc gộp các đối tượng/mảng dễ dàng.
+
+*   **Gộp đối tượng (Merging Objects):**
+    ```typescript
+    let person: { name: string; age: number } = { name: 'Typescript', age: 11 };
+    const salary: { grade: string; basic: string } = { grade: 'A', basic: '$2900' };
+    
+    // Gộp hai đối tượng thành một đối tượng mới
+    const summary = { ...person, ...salary }; 
+    console.log(summary); // Output: { name: 'Typescript', age: 11, grade: 'A', basic: '$2900' }
+    ```
+*   **Gộp mảng và sao chép mảng (Merging & Copying Arrays):**
+    ```typescript
+    const hobbies = ['Sports', 'Cooking'];
+    const activehobbies = ['Hiking'];
+    
+    // activehobbies.push(hobbies); 
+    // LỖI: Argument of type 'string[]' is not assignable to parameter of type 'string'.
+    
+    activehobbies.push(...hobbies); // HỢP LỆ => Giải nén các phần tử mảng hobbies vào activehobbies
+    console.log(activehobbies); // Output: ['Hiking', 'Sports', 'Cooking']
+    ```
+
+#### 4.4 Tham số gom (Rest Parameter)
+Cho phép một hàm nhận vào số lượng đối số không giới hạn và tự động gom chúng lại dưới dạng một mảng.
+
+*   **Quy tắc bắt buộc khi sử dụng Rest Parameter:**
+    1. Chỉ được khai báo **tối đa một** tham số Rest Parameter trong một hàm.
+    2. Tham số Rest Parameter phải **luôn là tham số cuối cùng** trong danh sách tham số của hàm.
+    3. Kiểu dữ liệu khai báo của tham số này bắt buộc phải là **kiểu mảng** (ví dụ: `number[]`, `string[]`).
+
+*   **Ví dụ lỗi biên dịch và cách viết đúng:**
+    ```typescript
+    // SAI - Gây lỗi biên dịch:
+    // let addInputValues = function(...values: number[], output: string): string { ... }
+    // LỖI: A rest parameter must be last in a parameter list.
+    
+    // ĐÚNG: Đặt output lên trước tham số gom
+    let addInputValues = function(output: string, ...values: number[]): string {
+      let result = 0;
+      for (let val of values) {
+        result += val;
+      }
+      return output + ": " + result;
+    };
+    
+    console.log(addInputValues("Result", 1, 2, 3)); // Output: "Result: 6"
+    ```
+
+---
+
+### 5. Kiểu trả về `void` của Hàm (Function & void)
+Kiểu **`void`** được sử dụng để chỉ định rằng một hàm **không trả về bất kỳ giá trị nào** (hoặc không có câu lệnh `return`, hoặc chỉ có lệnh `return;` rỗng).
+
+*   **Ví dụ thực tế:**
+    ```typescript
+    let sum = (x: number = 5, y?: number) => { 
+      return x + <number>y; 
+    };
+    
+    // Hàm speech có kiểu trả về là void (không return dữ liệu)
+    let speech = (output: any): void => {
+      console.log("Result: " + output);
+    };
+    
+    speech(sum(5, 12)); // In ra: "Result: 17"
+    
+    console.log(speech(sum(8, 5)));
+    // Đầu tiên hàm speech in ra: "Result: 13"
+    ```
+
+---
+
+### 6. Kiểu dữ liệu đặc biệt `never` (Không bao giờ xảy ra)
+Kiểu **`never`** đại diện cho kiểu dữ liệu của các giá trị **không bao giờ xảy ra**. 
+
+#### 6.1 Sự khác biệt giữa `never` và `void`:
+*   **`void`:** Hàm chạy xong bình thường nhưng không trả về kết quả (hoặc trả về `undefined`). Có thể gán giá trị `undefined` cho biến kiểu `void`.
+*   **`never`:** Hàm **không bao giờ kết thúc** hoặc **luôn ném ra một lỗi** khiến luồng chạy của chương trình bị ngắt ngay lập tức. Không thể gán bất kỳ giá trị nào (kể cả `null` hay `undefined`) cho biến kiểu `never`.
+
+#### 6.2 Ví dụ thực tế:
+```typescript
+let something: void = undefined; // HỢP LỆ
+
+// let nothing: never = null; 
+// LỖI BIÊN DỊCH: Type 'null' is not assignable to type 'never'
+
+// Hàm ném ra lỗi luôn có kiểu trả về mặc định/suy luận là never
+function throwError(errorMsg: string): never {
+  throw new Error(errorMsg); // Kết thúc chương trình tại đây, không bao giờ return
+}
 ```
+
+---
+
+### 7. Hàm Callback trong TypeScript (Function & Callback)
+TypeScript cho phép bạn định nghĩa kiểu dữ liệu cho tham số là một hàm callback thông qua cú pháp Arrow Notation trong phần khai báo tham số.
+
+#### 7.1 Cú pháp khai báo kiểu cho Callback:
+```typescript
+function AddandHandle(x: number, y: number, cb: (num: number) => void) {
+  const result = x + y;
+  cb(result); // Gọi hàm callback truyền vào kết quả tính toán
+}
+
+// Gọi hàm và truyền vào callback
+AddandHandle(10, 20, (result) => {
+  console.log(result); // Output: 30
+});
+```
+*Lưu ý:* Việc định nghĩa `=> void` trong kiểu của callback thông báo cho TypeScript biết rằng bất kỳ giá trị trả về nào của hàm callback truyền vào sẽ được bỏ qua và không sử dụng đến.
+
+---
+
+### 8. Trình biên dịch TypeScript nâng cao (The TypeScript Compiler)
+
+#### 8.1 Chế độ theo dõi thay đổi tự động (Watch Mode)
+Để tránh việc phải gõ lệnh biên dịch `tsc` thủ công sau mỗi lần sửa đổi code, TypeScript hỗ trợ chế độ tự động theo dõi và tự động biên dịch lại khi phát hiện tệp tin thay đổi.
+
+*   **Các câu lệnh kích hoạt:**
+    ```bash
+    tsc -w
+    # Hoặc:
+    tsc --watch
+    ```
+*   > [!TIP]
+    > Giữ nguyên terminal đang chạy chế độ Watch Mode trong suốt quá trình phát triển mã nguồn của bạn. Khi muốn thoát chế độ này, nhấn tổ hợp phím **`Ctrl + C`**.
+
+#### 8.2 Biên dịch nhiều file cùng lúc (Compiling Multiple Files)
+Khi dự án lớn lên và chứa nhiều file `.ts` (ví dụ: `app.ts`, `analytics.ts`), bạn có thể biên dịch chúng theo hai cách:
+
+*   **Cách 1: Biên dịch thủ công danh sách file cụ thể:**
+    ```bash
+    tsc app.ts analytics.ts
+    ```
+*   **Cách 2: Sử dụng tệp cấu hình `tsconfig.json` (Khuyên dùng):**
+    1.  **Khởi tạo file cấu hình:** Chạy lệnh `tsc --init` (hoặc `tsc -init`) tại thư mục gốc để tự động sinh ra file `tsconfig.json`.
+    2.  **Biên dịch tự động:** Chỉ cần chạy lệnh `tsc` để biên dịch toàn bộ các file `.ts` trong thư mục.
+
+Sau khi biên dịch thành công ra các file JavaScript tương ứng, chúng ta sẽ nhúng chúng vào file HTML (ví dụ: `index.html`) bằng thuộc tính `defer` để đảm bảo thứ tự thực thi:
+```html
+<script src="app.js" defer></script>
+<script src="analytics.js" defer></script>
+```
+
+---
+
+### 9. Cấu hình file `tsconfig.json` chi tiết
+
+#### 9.1 Cấu hình `include` và `exclude` (Bao gồm và Loại trừ)
+Hai thuộc tính này cho phép bạn chỉ định rõ những tệp tin hoặc thư mục nào được phép biên dịch, hoặc bị loại trừ khỏi quá trình quét của `tsc`.
+
+*   **`include`:** Chỉ định mảng các đường dẫn/thư mục được phép biên dịch.
+*   **`exclude`:** Chỉ định mảng các đường dẫn/thư mục bị loại trừ (không biên dịch).
+    ```json
+    {
+      "include": [
+        "src/**/*",
+        "tests/**/*"
+      ],
+      "exclude": [
+        "scripts/**/*"
+      ]
+    }
+    ```
+
+**Ví dụ thực tế cấu trúc thư mục áp dụng cấu hình trên:**
+```text
+. (Root)
+├── scripts/              ❌ (Bị loại trừ do exclude)
+│   ├── lint.ts           ❌
+│   ├── update_deps.ts    ❌
+│   └── utils.ts          ❌
+├── src/                  ✔️ (Được biên dịch do include)
+│   ├── client/           ✔️
+│   │   ├── index.ts      ✔️
+│   │   └── utils.ts      ✔️
+│   └── server/           ✔️
+│       └── index.ts      ✔️
+├── tests/                ✔️ (Được biên dịch do include)
+│   ├── app.test.ts       ✔️
+│   ├── utils.ts          ✔️
+│   └── tests.d.ts        ✔️
+├── package.json
+├── tsconfig.json
+└── yarn.lock
+```
+
+#### 9.2 Cấu hình `target` và `lib`
+*   **`target`:** Chỉ định phiên bản cú pháp JavaScript đầu ra sau khi biên dịch (ví dụ: `"es5"`, `"es6"`...). Giúp đảm bảo mã nguồn JavaScript biên dịch ra tương thích tốt trên các trình duyệt cũ.
+*   **`lib`:** Chỉ định danh sách các thư viện định nghĩa kiểu dữ liệu mặc định (built-in JS APIs và môi trường chạy) được tích hợp trong dự án (ví dụ: DOM API, ES6 features...).
+    ```json
+    {
+      "compilerOptions": {
+        "target": "es5",
+        "module": "commonjs",
+        "lib": [
+          "dom",
+          "es6",
+          "DOM.Iterable",
+          "scripthost"
+        ]
+      }
+    }
+    ```
+
+#### 9.3 Cấu hình bổ sung và Source Map (Bản đồ mã nguồn)
+*   **`allowJs`:** Cho phép trình biên dịch TypeScript chấp nhận và xử lý cả các file đầu vào là JavaScript (`.js`) bên cạnh các file `.ts`.
+*   **`checkJs`:** Hoạt động song song với `allowJs`. Khi được bật, trình biên dịch sẽ quét và báo cáo tất cả các lỗi cú pháp phát hiện được trong các file `.js`.
+*   **`declaration`:** Tự động tạo ra các file định nghĩa kiểu dữ liệu có phần mở rộng `.d.ts` tương ứng cho các file `.ts` hoặc `.js` biên dịch được.
+*   **`sourceMap`:** 
+    *   Tự động sinh ra một file bản đồ nguồn `.js.map` nằm kế bên file `.js` đầu ra sau khi biên dịch.
+    *   Giúp ánh xạ và hiển thị trực quan tệp nguồn `.ts` ban đầu trên tab Sources của DevTools trình duyệt, cho phép lập trình viên đặt Breakpoint và Debug lỗi trực tiếp trên mã nguồn TypeScript khi chạy ứng dụng trên trình duyệt.
+
+```json
+{
+  "compilerOptions": {
+    "allowJs": true,
+    "checkJs": true,
+    "declaration": true,
+    "sourceMap": true
+  }
+}
+```
+
+#### 9.4 Cấu hình đường dẫn đầu vào và đầu ra (`rootDir` và `outDir`)
+Để tổ chức cấu trúc dự án sạch sẽ và ngăn nắp, chúng ta phân tách thư mục chứa mã nguồn chưa biên dịch và thư mục chứa sản phẩm JavaScript đầu ra.
+
+*   **`rootDir`:** Chỉ định đường dẫn thư mục chứa các file mã nguồn đầu vào `.ts` (ví dụ: `"./src"`).
+*   **`outDir`:** Chỉ định đường dẫn thư mục đầu ra sẽ chứa các file `.js` sau khi biên dịch thành công (ví dụ: `"./dist"`).
+
+```json
+{
+  "compilerOptions": {
+    "rootDir": "./src",
+    "outDir": "./dist"
+  }
+}
+```
+
+**Ví dụ cấu trúc dự án sau khi biên dịch:**
+```text
+. (Root)
+├── dist/                ✔️ (Thư mục đầu ra do outDir chỉ định)
+│   ├── analytics.js
+│   └── app.js
+├── src/                 ✔️ (Thư mục nguồn đầu vào do rootDir chỉ định)
+│   ├── analytics.ts
+│   └── app.ts
+├── tsconfig.json
+├── package.json
+└── index.html
+```
+
+---
+
+## Phần 7. Classes and Interfaces (Lớp và Giao diện trong TypeScript)
+
+### 1. Lớp (Classes)
+Tương tự như ES6, lớp (Class) trong TypeScript là bản thiết kế để tạo ra các đối tượng, hỗ trợ đầy đủ các tính năng lập trình hướng đối tượng (OOP).
+
+Một lớp trong TypeScript bao gồm 3 thành phần chính:
+*   **Properties (Thuộc tính):** Biến lưu trữ trạng thái của đối tượng.
+*   **Constructor (Hàm khởi tạo):** Phương thức đặc biệt tự động kích hoạt khi tạo mới một thực thể.
+*   **Methods (Phương thức):** Hàm xử lý các hành vi của đối tượng.
+
+**Ví dụ khai báo lớp cơ bản:**
+```typescript
+class Department {
+  name: string; // Khai báo thuộc tính trước
+
+  constructor(n: string) {
+    this.name = n;
+  }
+
+  describe() {
+    console.log('Department: ' + this.name);
+  }
+}
+```
+
+---
+
+### 2. Từ khóa `this` và Khởi tạo thực thể (`new`)
+*   Sử dụng từ khóa **`new`** để tạo mới một thực thể (instance) của lớp:
+    ```typescript
+    const accounting = new Department('Accounting');
+    accounting.describe(); // Output: "Department: Accounting"
+    ```
+*   **Vấn đề mất ngữ cảnh `this`:**
+    Khi bạn gán phương thức của đối tượng vào một biến hoặc đối tượng khác, ngữ cảnh `this` có thể bị thay đổi hoặc trở thành `undefined`:
+    ```typescript
+    const accountingCopy = { 
+      name: 'DUMMY', 
+      describe: accounting.describe 
+    };
+    
+    accountingCopy.describe(); // In ra: "Department: DUMMY" (vì this trỏ sang accountingCopy)
+    ```
+*   > [!TIP]
+    > **Ràng buộc kiểm tra kiểu `this`:** Để tránh lỗi gán sai ngữ cảnh, TypeScript cho phép bạn khai báo rõ kiểu của tham số giả định `this` trong chữ ký phương thức:
+    ```typescript
+    class Department {
+      name: string;
+      // ...
+      describe(this: Department) { // Ép buộc this gọi phương thức này phải là instance của Department
+        console.log('Department: ' + this.name);
+      }
+    }
+    // Lúc này: accountingCopy.describe() sẽ lập tức báo LỖI BIÊN DỊCH
+    ```
+
+---
+
+### 3. Phạm vi truy cập (Access Modifiers) và `readonly`
+TypeScript hỗ trợ các từ khóa điều khiển quyền truy cập (Access Modifiers) giúp tăng tính đóng gói (Encapsulation) dữ liệu:
+
+| Phạm vi truy cập | Quyền hạn truy cập |
+| :--- | :--- |
+| **`public`** (Mặc định) | Có thể truy cập tự do từ bất kỳ đâu (nội bộ class, class con, thực thể bên ngoài). |
+| **`private`** | Chỉ cho phép truy cập và sửa đổi trực tiếp từ bên trong định nghĩa của chính class đó. |
+| **`readonly`** | Cho phép truy cập đọc từ bên ngoài, nhưng giá trị của thuộc tính **không thể thay đổi** sau khi khởi tạo. |
+
+**Ví dụ thực tế:**
+```typescript
+class Department {
+  public name: string;
+  private employees: string[] = []; // Thuộc tính nội bộ, không cho truy cập từ bên ngoài
+
+  constructor(n: string) {
+    this.name = n;
+  }
+
+  addEmployee(employee: string) {
+    this.employees.push(employee); // Hợp lệ
+  }
+}
+
+const accounting = new Department('Accounting');
+accounting.name = 'NEW NAME'; // Hợp lệ (do name là public)
+// accounting.employees[0] = 'Anna'; // LỖI BIÊN DỊCH: Property 'employees' is private...
+```
+
+---
+
+### 4. Cơ chế Kế thừa (Inheritance)
+Kế thừa cho phép một lớp con (subclass/derived class) kế thừa và sử dụng lại các thuộc tính và phương thức từ một lớp cha (parent class/base class) bằng từ khóa **`extends`**.
+
+#### 4.1 Phân loại kế thừa (Inheritance Classification):
+*   **Single Inheritance (Kế thừa đơn):** Mỗi lớp con chỉ kế thừa duy nhất từ một lớp cha.
+*   **Multiple Inheritance (Đa kế thừa):** Một lớp kế thừa từ nhiều lớp cha cùng lúc. > [!IMPORTANT]
+    > **TypeScript KHÔNG hỗ trợ đa kế thừa.**
+*   **Multi-level Inheritance (Kế thừa nhiều cấp):** Lớp con kế thừa từ một lớp con khác tạo thành chuỗi kế thừa nhiều cấp.
+    *   *Ví dụ:* `class ITDepartment extends Department {}` và `class AccountingDepartment extends ITDepartment {}`
+
+#### 4.2 Từ khóa `super()` và quy tắc bắt buộc
+Hàm `super()` được sử dụng để gọi trực tiếp constructor của lớp cha và truy cập các thuộc tính/phương thức của lớp cha.
+
+*   > [!IMPORTANT]
+    > **Quy tắc bắt buộc:** Mọi lớp con tự định nghĩa `constructor` thì **bắt buộc phải gọi hàm `super()` ở dòng đầu tiên** của constructor đó, trước khi viết các câu lệnh truy cập từ khóa `this` hoặc thực hiện bất kỳ logic nào khác trong constructor.
+
+*   **Ví dụ thực tế:**
+    ```typescript
+    class ITDepartment extends Department {
+      admins: string[];
+      
+      constructor(id: string, admins: string[]) {
+        super(id); // Bắt buộc gọi super() trước tiên để khởi tạo dữ liệu lớp cha Department
+        this.admins = admins; // Hợp lệ
+      }
+    }
+    ```
+
+#### 4.3 Ghi đè phương thức (Method Overriding)
+Lớp con có thể định nghĩa lại (redefine) một phương thức có cùng tên và danh sách tham số trùng khớp với phương thức của lớp cha nhằm thay đổi hoặc bổ sung hành vi hoạt động.
+
+*   Lớp con có thể gọi phương thức của lớp cha từ bên trong phương thức ghi đè bằng cú pháp: `super.methodName(...)`.
+    ```typescript
+    class ITDepartment extends Department {
+      addEmployee(name: string) {
+        console.log("Adding employee to IT Department...");
+        super.addEmployee(name); // Gọi lại phương thức addEmployee gốc của lớp cha
+      }
+    }
+    ```
+
+#### 4.4 Phạm vi truy cập bảo vệ `protected`
+Khi thuộc tính hoặc phương thức của lớp cha được đánh dấu là `private`, lớp con kế thừa từ nó cũng sẽ **không thể truy cập** được thuộc tính đó. Để cho phép lớp con có quyền truy cập nhưng vẫn chặn truy cập từ thực thể bên ngoài, TypeScript hỗ trợ từ khóa **`protected`**.
+
+*   **So sánh Private vs Protected:**
+    *   `private`: Chỉ nội bộ lớp cha truy cập được. Lớp con **không** truy cập được.
+    *   `protected`: Nội bộ lớp cha và các lớp con thừa kế từ nó **đều truy cập được**. Bên ngoài thực thể vẫn bị cấm hoàn toàn.
+
+*   **Ví dụ ghi đè phương thức sử dụng thuộc tính protected:**
+    ```typescript
+    class Department {
+      protected employees: string[] = []; // Đổi từ private sang protected
+      // ...
+    }
+    
+    class AccountingDepartment extends Department {
+      addEmployee(name: string) {
+        if (name === 'Max') {
+          return; // Lọc bỏ không thêm nhân viên tên là Max
+        }
+        this.employees.push(name); // HỢP LỆ (do employees là protected)
+      }
+    }
+    }
+    ```
+
+---
+
+### 5. Thành viên tĩnh trong Lớp (Static Methods and Properties)
+Các thuộc tính hoặc phương thức được đánh dấu là **`static`** sẽ thuộc về chính lớp đó, thay vì thuộc về các thực thể (instances) được tạo ra từ lớp.
+
+*   **Đặc điểm:**
+    *   Có thể truy cập trực tiếp thông qua tên lớp mà không cần sử dụng từ khóa `new` để tạo thực thể.
+    *   Bên trong phương thức tĩnh, từ khóa `this` tham chiếu đến chính constructor của lớp chứ không trỏ đến instance, do đó không thể truy cập các thuộc tính non-static qua `this`.
+*   **Ví dụ thực tế:**
+    ```typescript
+    class Department {
+      static id: string;
+      private name: string;
+    
+      constructor(id: string, name: string) {
+        Department.id = id; // Truy cập thuộc tính static qua tên lớp
+        this.name = name;
+      }
+    
+      static describe(name: string) {
+        // Department.id truy cập thuộc tính static. 
+        // this.name trong static method trỏ đến tên của lớp (Output là "Department") chứ không phải thuộc tính name của thực thể.
+        console.log(`Department (${Department.id}): ${this.name}`); 
+      }
+    }
+    
+    Department.id = 'd1'; // Gán giá trị trực tiếp cho thuộc tính static
+    Department.describe('Max'); // Gọi phương thức static không cần new. Output: "Department (d1): Department"
+    ```
+
+---
+
+### 6. Lớp trừu tượng (Abstract Class)
+Lớp trừu tượng (**`abstract class`**) đóng vai trò là lớp nền tảng định nghĩa khuôn mẫu chung cho các lớp con có cùng bản chất.
+
+*   **Đặc điểm:**
+    *   Không thể khởi tạo thực thể trực tiếp từ một abstract class bằng từ khóa `new`.
+    *   Có thể chứa các **phương thức trừu tượng (`abstract method`)** - là các phương thức chỉ có phần khai báo chữ ký (signature) mà không có phần thân thực thi `{}`.
+    *   Bất kỳ lớp con nào kế thừa từ abstract class **bắt buộc phải ghi đè và cài đặt cụ thể** cho toàn bộ các phương thức trừu tượng của lớp cha.
+
+*   **Ví dụ thực tế:**
+    ```typescript
+    abstract class Department {
+      static fiscalYear = 2020;
+      protected employees: string[] = [];
+    
+      constructor(protected readonly id: string, public name: string) {}
+    
+      static createEmployee(name: string) {
+        return { name: name };
+      }
+    
+      // Định nghĩa phương thức trừu tượng (không có phần thân {})
+      abstract describe(this: Department): void; 
+    }
+    
+    class ITDepartment extends Department {
+      admins: string[];
+      constructor(id: string, admins: string[]) {
+        super(id, 'IT');
+        this.admins = admins;
+      }
+    
+      // Bắt buộc phải cài đặt phương thức describe
+      describe() {
+        console.log('IT Department - ID: ' + this.id);
+      }
+    }
+    ```
+
+---
+
+### 7. Giao diện (Interfaces)
+**Interface (Giao diện)** được sử dụng trong TypeScript để định nghĩa cấu trúc khung (shape) của một đối tượng.
+
+*   **Đặc điểm:**
+    *   Chỉ chứa phần khai báo các thuộc tính, phương thức hoặc sự kiện mà không chứa bất kỳ phần cài đặt logic nào.
+    *   > [!IMPORTANT]
+        > **Zero-overhead at runtime:** Trình biên dịch TypeScript sẽ loại bỏ hoàn toàn các Interface khi biên dịch mã nguồn sang JavaScript. Chúng chỉ tồn tại ở giai đoạn compile-time để phục vụ kiểm tra kiểu dữ liệu tĩnh.
+
+*   **Cú pháp khai báo:**
+    ```typescript
+    interface <ten_interface> {
+      // Khai báo thuộc tính và phương thức...
+    }
+    ```
+
+#### 7.1 Ví dụ khai báo và sử dụng Interface:
+```typescript
+interface Person {
+  name: string;
+  age: number;
+  
+  greet(phrase: string): void; // Chỉ định nghĩa chữ ký phương thức
+}
+
+let user1: Person;
+
+user1 = {
+  name: 'Max',
+  age: 30,
+  greet(phrase: string) {
+    console.log(phrase + ' ' + this.name);
+  }
+};
+
+user1.greet('Hi there - I am'); // Output: "Hi there - I am Max"
+```
+
+#### 7.2 Thuộc tính chỉ đọc trong Interface (`readonly`)
+Bạn có thể đánh dấu thuộc tính trong Interface là `readonly` để bảo vệ giá trị, chỉ cho phép gán duy nhất một lần khi đối tượng được khởi tạo.
+
+```typescript
+interface Named {
+  readonly name: string; // Chỉ đọc, không được phép sửa đổi sau khi tạo đối tượng
+  outputName?: string;
+}
+```
+
+#### 7.3 Giao diện mô tả Hàm (Interfaces as Functions)
+Bên cạnh việc mô tả cấu trúc Object, Interface còn có thể sử dụng như một Custom Type để định nghĩa chữ ký (signature) của một hàm.
+
+*   **Ví dụ:**
+    ```typescript
+    interface AddFn {
+      (a: number, b: number): number; // Định nghĩa danh sách tham số và kiểu trả về của hàm
+    }
+    
+    let add: AddFn;
+    add = (n1: number, n2: number) => {
+      return n1 + n2;
+    };
+    ```
+
+#### 7.4 Sử dụng Interface với Lớp (Using Interfaces with Classes)
+*   **Từ khóa `implements` (Triển khai):** Một lớp có thể triển khai một hoặc nhiều giao diện bằng từ khóa `implements`. Lớp đó bắt buộc phải định nghĩa và cài đặt đầy đủ tất cả các thuộc tính và phương thức có trong các giao diện đó.
+    *   *Cú pháp:* `class ClassName implements InterfaceName { ... }`
+*   **Từ khóa `extends` (Kế thừa Interface):** Khác với Class (chỉ kế thừa đơn), một Interface có thể kế thừa từ **nhiều** Interface khác cùng lúc thông qua từ khóa `extends`.
+    *   *Cú pháp:* `interface InterfaceA extends InterfaceB, InterfaceC { ... }`
+
+#### 7.5 Ví dụ kết hợp tổng hợp (`extends` và `implements`):
+```typescript
+interface Named {
+  readonly name: string;
+}
+
+// Greetable kế thừa cấu trúc từ Named
+interface Greetable extends Named {
+  greet(phrase: string): void;
+}
+
+// Lớp Person bắt buộc phải cài đặt thuộc tính name (từ Named) và phương thức greet (từ Greetable)
+class Person implements Greetable {
+  name: string;
+  age = 30;
+
+  constructor(n: string) {
+    this.name = n;
+  }
+
+  greet(phrase: string) {
+    console.log(phrase + ' ' + this.name);
+  }
+}
+
+let user2: Greetable;
+user2 = new Person('Max');
+user2.greet('Hi there - I am'); // Output: "Hi there - I am Max"
+```
+
+#### 7.6 Thuộc tính tùy chọn trong Interface (Optional Properties)
+Giống như tham số tùy chọn trong hàm, không phải tất cả các thuộc tính khai báo trong Interface đều bắt buộc phải triển khai. Bạn có thể định nghĩa một thuộc tính là tùy chọn bằng cách đặt dấu hỏi chấm `?` ngay sau tên thuộc tính.
+
+*   **Ví dụ:**
+    ```typescript
+    interface Named {
+      readonly name?: string; // Thuộc tính vừa là chỉ đọc, vừa là tùy chọn
+      outputName?: string;    // Thuộc tính tùy chọn (có thể có hoặc không khi triển khai)
+    }
+    
+    // Đối tượng triển khai không bắt buộc phải khai báo name hay outputName
+    let user3: Named = {
+      // Hoàn toàn trống vẫn hợp lệ
+    };
+    ```
+
+---
+
+## Phần 8. Advanced Types and Generics (Kiểu dữ liệu nâng cao và Generics)
+
+### 1. Kiểu Giao lộ (Intersection Type `&`)
+Kiểu giao lộ (Intersection Type), ký hiệu là dấu và `&`, cho phép bạn kết hợp nhiều kiểu dữ liệu lại với nhau thành một kiểu mới. Đối tượng thuộc kiểu giao lộ này sẽ phải chứa đầy đủ tất cả các thuộc tính của các kiểu thành phần cấu thành.
+
+*   **Ví dụ gộp Union Types:**
+    ```typescript
+    type Combinable = string | number;
+    type Numeric = number | boolean;
+    
+    // Universal là giao điểm chung của Combinable và Numeric
+    type Universal = Combinable & Numeric; // Kiểu Universal sẽ được thu hẹp về kiểu dữ liệu 'number'
+    ```
+
+---
+
+### 2. Bộ lọc kiểu (Type Guard)
+**Type Guard (Bộ lọc kiểu)** là các biểu thức logic cho phép bạn kiểm tra và thu hẹp (narrow down) kiểu dữ liệu của một biến trong một khối lệnh điều kiện (`if`, `switch`...) trước khi thực hiện các hành động cụ thể trên biến đó.
+
+Các kỹ thuật lọc kiểu phổ biến:
+
+#### 2.1 Sử dụng toán tử `typeof` (Dành cho các kiểu dữ liệu nguyên bản - Primitive Types)
+Thường dùng để kiểm tra các kiểu cơ bản như `string`, `number`, `boolean`...
+
+*   **Ví dụ:**
+    ```typescript
+    function add(a: Combinable, b: Combinable) {
+      // Thu hẹp kiểu bằng typeof để tránh lỗi cộng chuỗi với số
+      if (typeof a === 'string' || typeof b === 'string') {
+        return a.toString() + b.toString();
+      }
+      return a + b; // Ở đây chắc chắn a và b là number
+    }
+    ```
+
+#### 2.2 Sử dụng toán tử `in` (Dành cho Object để kiểm tra thuộc tính)
+Thường dùng khi làm việc với kiểu Union của các Object để kiểm tra xem một thuộc tính có tồn tại trong đối tượng hay không.
+
+*   **Ví dụ:**
+    ```typescript
+    type Admin = {
+      name: string;
+      privileges: string[];
+    };
+    
+    type Employee = {
+      name: string;
+      startDate: Date;
+    };
+    
+    type UnknownEmployee = Employee | Admin;
+    
+    function printEmployeeInformation(emp: UnknownEmployee) {
+      console.log('Name: ' + emp.name);
+      
+      // Sử dụng toán tử 'in' để lọc kiểu an toàn
+      if ('privileges' in emp) {
+        console.log('Privileges: ' + emp.privileges); // Trong khối này, emp chắc chắn là Admin
+      }
+      
+      if ('startDate' in emp) {
+        console.log('Start Date: ' + emp.startDate); // Trong khối này, emp chắc chắn là Employee
+      }
+    }
+    ```
+
+#### 2.3 Sử dụng toán tử `instanceof` (Dành cho các thực thể khởi tạo từ Lớp)
+Toán tử `instanceof` cho phép kiểm tra xem một thực thể đối tượng được tạo ra trực tiếp từ một lớp (Class) nào đó hay không ở thời điểm runtime.
+
+*   > [!IMPORTANT]
+    > Khác với Interface (bị biến mất hoàn toàn sau biên dịch), Class trong TypeScript tồn tại dưới dạng Constructor Function ở Javascript runtime nên hoàn toàn sử dụng được toán tử `instanceof`.
+
+*   **Ví dụ:**
+    ```typescript
+    class Car {
+      drive() {
+        console.log('Driving...');
+      }
+    }
+    
+    class Truck {
+      drive() {
+        console.log('Driving a truck...');
+      }
+      loadCargo(amount: number) {
+        console.log('Loading cargo: ' + amount);
+      }
+    }
+    
+    type Vehicle = Car | Truck;
+    
+    function useVehicle(vehicle: Vehicle) {
+      vehicle.drive();
+      
+      // Sử dụng instanceof để lọc kiểu lớp con
+      if (vehicle instanceof Truck) {
+        vehicle.loadCargo(1000); // Trong khối này, vehicle chắc chắn là Truck
+      }
+    }
+    ```
+
+---
+
+### 3. Kiểu Union phân biệt (Discriminated Unions)
+**Discriminated Union** là một kỹ thuật nâng cao cực kỳ phổ biến trong TypeScript, được sử dụng khi định nghĩa các cấu trúc dữ liệu kiểu Union. 
+
+*   **Cách hoạt động:** Tất cả các kiểu (Interface hoặc Object) trong Union sẽ chia sẻ chung **một thuộc tính đóng vai trò là "Nhãn nhận diện" (Discriminant)**. Giá trị của thuộc tính này bắt buộc phải thuộc kiểu dữ liệu cụ thể (Literal Type).
+*   **Ví dụ:**
+    ```typescript
+    interface Bird {
+      type: 'bird'; // Nhãn nhận diện
+      flyingSpeed: number;
+    }
+    
+    interface Horse {
+      type: 'horse'; // Nhãn nhận diện
+      runningSpeed: number;
+    }
+    
+    type Animal = Bird | Horse;
+    
+    function moveAnimal(animal: Animal) {
+      let speed: number;
+      switch (animal.type) { // Kiểm tra nhãn để phân biệt kiểu
+        case 'bird':
+          speed = animal.flyingSpeed; // Tự động nhận diện là Bird
+          break;
+        case 'horse':
+          speed = animal.runningSpeed; // Tự động nhận diện là Horse
+          break;
+      }
+      console.log('Moving at speed: ' + speed);
+    }
+    ```
+
+---
+
+### 4. Ép kiểu dữ liệu (Type Casting / Type Assertions)
+Trong nhiều trường hợp, bạn biết chắc chắn một giá trị có kiểu dữ liệu cụ thể hơn kiểu dữ liệu mà TypeScript tự động suy luận ra (ví dụ: khi truy vấn các thẻ HTML từ DOM). Lúc này ta sử dụng kỹ thuật ép kiểu.
+
+*   **Hai cú pháp ép kiểu tương đương:**
+    *   **Cú pháp 1:** Sử dụng từ khóa `as` (Khuyên dùng).
+    *   **Cú pháp 2:** Sử dụng dấu `<Kiểu_Dữ_Liệu>` đặt trước biến.
+*   **Ví dụ:**
+    ```typescript
+    // Cú pháp dùng từ khóa as:
+    let input1 = document.querySelector('input[type="text"]') as HTMLInputElement;
+    
+    // Cú pháp dùng dấu ngoặc nhọn:
+    let input2 = <HTMLInputElement>document.querySelector('input[type="text"]');
+    ```
+
+---
+
+### 5. Khái quát về Kiểu chung (Generics)
+
+#### 5.1 Vấn đề đặt ra (The Problem)
+Giả sử chúng ta cần viết một hàm nhận vào một giá trị và trả về chính giá trị đó (hàm Identity):
+
+```typescript
+// Chỉ nhận vào number và trả ra number
+function identity(arg: number): number {
+  return arg;
+}
+```
+*   **Hạn chế:** Hàm này không thể tái sử dụng cho các kiểu dữ liệu khác như `string`, `boolean`...
+*   **Giải pháp dùng `any`?**
+    ```typescript
+    function identity(arg: any): any {
+      return arg;
+    }
+    ```
+    => Nếu sử dụng `any`, chúng ta sẽ hoàn toàn **làm mất thông tin kiểu của kết quả trả ra**. Trình biên dịch không thể biết được giá trị trả về có kiểu dữ liệu gì để tiếp tục kiểm tra kiểu một cách an toàn cho các bước xử lý phía sau.
+
+#### 5.2 Giải pháp sử dụng Generics (Problem Solving)
+Generics giải quyết bài toán trên bằng cách giới thiệu một **Biến kiểu (Type Variable)** đóng vai trò như một nhãn giữ chỗ cho kiểu dữ liệu truyền vào hàm, thường ký hiệu là chữ **`T`** (viết tắt của Type) đặt trong cặp dấu ngoặc nhọn `<T>`.
+
+```typescript
+// T là biến kiểu giữ chỗ, nhận vào kiểu gì sẽ trả về kiểu đó
+function identity<T>(arg: T): T {
+  return arg;
+}
+
+let output1 = identity<string>("myString"); // Khai báo kiểu cụ thể: output1 có kiểu string
+let output2 = identity(123); // TypeScript tự động suy luận kiểu: output2 có kiểu number
+```
+
+---
+
+### 6. Chi tiết về Generics trong TypeScript
+
+#### 6.1 Khái niệm chung
+*   **Generics:** Là công cụ giúp xây dựng các thành phần phần mềm (hàm, lớp, giao diện) có khả năng tái sử dụng cao. Chúng có thể hoạt động linh hoạt trên nhiều kiểu dữ liệu khác nhau mà vẫn giữ nguyên tính an toàn kiểu (Type Safety).
+*   **Tham số hóa kiểu dữ liệu:** Generics cho phép chúng ta truyền kiểu dữ liệu vào các thành phần giống như cách truyền đối số vào hàm.
+
+#### 6.2 Truyền nhiều biến kiểu (Multiple Type Variables)
+Bạn có thể khai báo nhiều biến kiểu ngăn cách nhau bởi dấu phẩy trong cặp ngoặc `<>`.
+
+```typescript
+// Gộp hai đối tượng có kiểu T và U khác nhau
+function merge<T, U>(objA: T, objB: U) {
+  return Object.assign({}, objA, objB); // Trả về kiểu kết hợp (T & U)
+}
+
+const mergedObj = merge({ name: 'Max' }, { age: 30 });
+console.log(mergedObj.name); // Hợp lệ, trình biên dịch tự động nhận diện thuộc tính name
+```
+
+#### 6.3 Ràng buộc kiểu Generic (Generic Constraints)
+Đôi khi ta cần giới hạn phạm vi các kiểu dữ liệu có thể truyền vào cho biến Generic chứ không cho phép truyền bất kỳ kiểu nào. Ta dùng từ khóa **`extends`** để đặt ràng buộc.
+
+*   **Ràng buộc kiểu Object:**
+    ```typescript
+    // Ép buộc T phải là một đối tượng (object)
+    function identity<T extends object>(arg: T): T {
+      return arg;
+    }
+    ```
+*   **Ràng buộc bằng từ khóa `keyof` (keyof Constraints):**
+    Đảm bảo một tham số khóa truyền vào bắt buộc phải là một thuộc tính hợp lệ (key) nằm trong đối tượng truyền vào.
+    ```typescript
+    // K bắt buộc phải là key của đối tượng T
+    function getProperty<T, K extends keyof T>(obj: T, key: K) {
+      return obj[key];
+    }
+    
+    const person = { name: 'Alice', age: 25 };
+    getProperty(person, 'name'); // HỢP LỆ
+    // getProperty(person, 'job');  // LỖI BIÊN DỊCH: Argument of type '"job"' is not assignable...
+    ```
+
+#### 6.4 Kiểu mặc định cho Generic (Generic Default Values)
+Bạn có thể đặt một kiểu dữ liệu mặc định cho biến Generic phòng trường hợp người gọi không cung cấp kiểu cụ thể.
+
+```typescript
+// Mặc định T sẽ là kiểu string nếu không truyền kiểu
+function identity<T = string>(arg: T): T {
+  return arg;
+}
+```
+
+#### 6.5 Generics làm việc với Mảng (Arrays)
+```typescript
+function displayNames<T>(names: T[]): void {
+  console.log(names.join(", ")); // names là một mảng kiểu T
+}
+
+displayNames(["Alice", "Bob", "Charlie"]); // Tự động nhận diện T là string
+```
+
+#### 6.6 Giao diện chung (Generic Interface)
+Interface cũng có thể tham số hóa kiểu dữ liệu bằng cách đặt các biến kiểu Generic ở phần định nghĩa.
+
+*   **Dạng 1: Interface cấu trúc Object chứa thuộc tính và phương thức Generic:**
+    ```typescript
+    interface IProcessor<T> {
+      result: T;
+      process(a: T, b: T): T;
+    }
+    ```
+*   **Dạng 2: Interface Generic mô tả một hàm cụ thể (Generic Function Interface):**
+    ```typescript
+    interface KeyValueProcessor<T, U> {
+      (key: T, val: U): void; // Chữ ký hàm nhận key kiểu T và val kiểu U
+    }
+    ```
+
+#### 6.7 Lớp chung (Generic Class)
+Khai báo biến Generic đặt trong ngoặc `<>` ngay sau tên của lớp để sử dụng kiểu dữ liệu động cho các thuộc tính, phương thức nội bộ.
+
+```typescript
+class KeyValuePair<T, U> {
+  private key: T;
+  private val: U;
+
+  setKeyValue(key: T, val: U): void {
+    this.key = key;
+    this.val = val;
+  }
+
+  display(): void {
+    console.log(`Key = ${this.key}, val = ${this.val}`);
+  }
+}
+
+const entry = new KeyValuePair<number, string>();
+entry.setKeyValue(101, "Admin");
+entry.display(); // Output: "Key = 101, val = Admin"
+```
+
+#### 6.8 Lớp Generic triển khai Interface Generic (Generic Class implements Generic Interface)
+Đây là cách thiết lập mô hình thiết kế hướng đối tượng vô cùng chặt chẽ và an toàn kiểu.
+
+```typescript
+interface IKeyValueProcessor<T, U> {
+  process(key: T, val: U): void;
+}
+
+// Lớp kvProcessor triển khai interface IKeyValueProcessor đồng bộ biến kiểu T và U
+class kvProcessor<T, U> implements IKeyValueProcessor<T, U> {
+  process(key: T, val: U): void {
+    console.log(`Key = ${key}, val = ${val}`);
+  }
+}
+
+const processor = new kvProcessor<string, number>();
+processor.process("Age", 30); // Output: "Key = Age, val = 30"
+```
+
+---
+
+## Phần 9. Decorators (Bộ trang trí trong TypeScript)
+
+### 1. Decorator là gì?
+**Decorator (Bộ trang trí)** là một cú pháp khai báo đặc biệt, sử dụng ký hiệu `@` đặt trước các lớp, phương thức, bộ truy cập (accessor), thuộc tính hoặc tham số để sửa đổi, bổ sung thêm tính năng hoặc thay đổi hành vi hoạt động của chúng (Meta-programming).
+
+*   Về bản chất, biểu thức Decorator `@expression` trỏ đến một **hàm (function)** sẽ được gọi tự động ở thời điểm runtime.
+
+---
+
+### 2. Kích hoạt tính năng Decorators
+Vì Decorators là một tính năng thử nghiệm (experimental) của TypeScript, bạn bắt buộc phải bật cấu hình cho phép sử dụng trong file cấu hình dự án `tsconfig.json`:
+
+```json
+{
+  "compilerOptions": {
+    "target": "ES5",
+    "experimentalDecorators": true
+  }
+}
+```
+
+---
+
+### 3. Phân loại Decorators
+TypeScript hỗ trợ 5 loại bộ trang trí dựa trên đối tượng mà chúng tác động:
+
+1.  **Class Decorator (Trang trí Lớp):** Đặt ngay trước từ khóa khai báo lớp (ví dụ: `@Theme class Employee {}`).
+2.  **Property Decorator (Trang trí Thuộc tính):** Đặt trước các thuộc tính trong lớp (ví dụ: `@Required employeeID: number;`).
+3.  **Method Decorator (Trang trí Phương thức):** Đặt trước khai báo phương thức (ví dụ: `@Track showDetails() {}`).
+4.  **Accessor Decorator (Trang trí Bộ truy cập):** Đặt trước phương thức getter hoặc setter của thuộc tính.
+5.  **Parameter Decorator (Trang trí Tham số):** Đặt trước các tham số nằm trong chữ ký của phương thức.
+
+---
+
+### 4. Khai báo nhiều Decorators (Multiple Decorators)
+Bạn có thể áp dụng chồng nhiều Decorators đồng thời lên cùng một đối tượng khai báo:
+
+*   **Khai báo trên cùng một dòng:**
+    ```typescript
+    @f() @g() method() {}
+    ```
+*   **Khai báo trên nhiều dòng:**
+    ```typescript
+    @f()
+    @g()
+    method() {}
+    ```
+
+---
+
+### 5. Thứ tự chạy và Ưu tiên của Decorators (Priorities of Decorators)
+Khi các Decorators được áp dụng trên các thành phần khác nhau của lớp hoặc khi nhiều Decorators được áp dụng chồng lên cùng một thành phần, thứ tự thực thi của chúng tuân theo các quy tắc sau:
+
+#### 5.1 Quy tắc ưu tiên theo đối tượng (Precedence):
+1.  **Parameter Decorator** (Độ ưu tiên 1 - chạy trước nhất)
+2.  **Method Decorator** (Độ ưu tiên 2)
+3.  **Accessor / Property Decorator** (Độ ưu tiên 3)
+4.  **Class Decorator** (Độ ưu tiên 4 - chạy sau cùng)
+
+#### 5.2 Quy tắc đánh giá và gọi thực thi khi chồng nhiều Decorator (Composition Order):
+Khi có nhiều bộ trang trí cùng áp dụng lên một vị trí (ví dụ: `@f() @g() method() {}`):
+*   **Thứ tự đánh giá (Evaluation):** Biểu thức Decorator được đánh giá từ **trên xuống dưới** (từ trái qua phải).
+*   **Thứ tự gọi hàm (Execution):** Kết quả hàm Decorator được gọi thực thi ngược lại từ **dưới lên trên** (từ phải qua trái).
+
+*   **Ví dụ tham chiếu và gọi sử dụng:**
+    ```typescript
+    /// <reference path="./StoreCalc.ts" />
+    
+    let invoice = new invoiceCalc.invoiceAccount.Invoice();
+    console.log("Output: " + invoice.calculatedDiscount(400)); // Output: 240
+    ```
+
+---
+
+### 7. Webpack và Đóng gói mã nguồn (Module Bundler)
+
+#### 7.1 Webpack là gì?
+**Webpack** là một công cụ đóng gói mã nguồn (Module Bundler) cực kỳ mạnh mẽ. Nhiệm vụ chính của Webpack là quét qua sơ đồ phụ thuộc (Dependency Graph) của dự án, biên dịch toàn bộ các file mã nguồn riêng lẻ (như `.ts`, `.css`, hình ảnh...) thành một tệp tin JavaScript duy nhất (ví dụ: `bundle.js`) để giảm số lượng request HTTP và tối ưu hóa hiệu năng ứng dụng trên trình duyệt.
+
+```mermaid
+graph LR
+    A[src/index.ts] --> B[src/components/List.ts]
+    A --> C[src/utils/Helper.ts]
+    B --> D[Webpack + ts-loader]
+    C --> D
+    D --> E[dist/bundle.js]
+```
+
+```typescript
+class C {
+  @f()
+  @g()
+  method() {}
+}
+
+// Luồng chạy sẽ là:
+// 1. f() được đánh giá (evaluated)
+// 2. g() được đánh giá (evaluated)
+// 3. g() thực thi gọi hàm (called)
+// 4. f() thực thi gọi hàm (called)
+```
+
+---
+
+### 6. Bộ trang trí Lớp (Class Decorator)
+Class Decorator được khai báo ngay trước định nghĩa lớp. Tham số duy nhất truyền vào hàm Class Decorator là **hàm khởi tạo (`constructor`)** của lớp đó.
+
+*   > [!IMPORTANT]
+    > Class Decorator chạy ngay tại thời điểm **lớp được định nghĩa** (khi trình duyệt hoặc Node.js load file script chứa định nghĩa lớp), **KHÔNG** phải khi lớp được khởi tạo thực thể bằng từ khóa `new`.
+
+*   **Ví dụ:**
+    ```typescript
+    function Logger(constructor: Function) {
+      console.log('Logging Class definition...');
+      console.log(constructor);
+    }
+    
+    @Logger
+    class Person {
+      name = 'Max';
+      constructor() {
+        console.log('Creating person object...');
+      }
+    }
+    
+    // Lệnh console.log("Logging...") sẽ chạy ngay lập tức khi load code
+    const pers = new Person(); // Lúc này mới in ra "Creating person object..."
+    ```
+
+---
+
+### 7. Nhà máy trang trí (Decorator Factory)
+Để có thể truyền tham số tùy biến vào bộ trang trí (ví dụ: `@Logger('LOGGING - VEHICLE')`), chúng ta sử dụng mô hình **Decorator Factory**.
+
+*   **Định nghĩa:** Decorator Factory là một hàm bọc bên ngoài nhận các đối số tùy biến và trả về chính hàm decorator thực tế bên trong.
+
+*   **Ví dụ:**
+    ```typescript
+    function Logger(logString: string) {
+      // Trả về hàm decorator thực tế nhận constructor của class làm tham số
+      return function(constructor: Function) {
+        console.log(logString); // Sử dụng đối số từ hàm bọc ngoài
+        console.log(constructor);
+      };
+    }
+    
+    @Logger('LOGGING - PERSON CLASS')
+    class Person {
+      name = 'Max';
+      constructor() {
+        console.log('Creating person object...');
+      }
+    }
+    ```
+
+---
+
+### 8. Bộ trang trí Thuộc tính (Property Decorator)
+Property Decorator được áp dụng ngay trước phần khai báo thuộc tính trong lớp. Hàm trang trí thuộc tính sẽ được gọi tự động với **2 tham số**:
+
+1.  **`target: any`:** Sẽ là `Prototype` của lớp nếu đó là thuộc tính thực thể (instance member), hoặc là `Constructor Function` của lớp nếu đó là thuộc tính tĩnh (static member).
+2.  **`propertyName: string | Symbol`:** Tên của thuộc tính được trang trí.
+
+*   **Ví dụ:**
+    ```typescript
+    function Log(target: any, propertyName: string | Symbol) {
+      console.log('Property decorator!');
+      console.log(target, propertyName); // In ra Prototype của Product và tên thuộc tính "title"
+    }
+    
+    class Product {
+      @Log
+      title: string;
+      private _price: number;
+    
+      constructor(t: string, p: number) {
+        this.title = t;
+        this._price = p;
+      }
+    }
+    ```
+
+---
+
+### 9. Bộ trang trí Phương thức (Method Decorator)
+Method Decorator được áp dụng ngay trước khai báo phương thức trong lớp. Hàm trang trí phương thức sẽ nhận vào **3 tham số**:
+
+1.  **`target: any`:** Prototype của lớp (đối với instance method) hoặc Constructor Function (đối với static method).
+2.  **`name: string | Symbol`:** Tên của phương thức được trang trí.
+3.  **`descriptor: PropertyDescriptor`:** Chứa Property Descriptor của phương thức (cấu hình các thuộc tính như `writable`, `enumerable`, `configurable`...).
+
+*   **Ví dụ:**
+    ```typescript
+    function Log3(target: any, name: string | Symbol, descriptor: PropertyDescriptor) {
+      console.log('Method decorator!');
+      console.log(target);     // In ra Prototype
+      console.log(name);       // In ra "getPriceWithTax"
+      console.log(descriptor); // In ra PropertyDescriptor cấu hình hàm
+    }
+    
+    class Product {
+      title: string;
+      private _price: number;
+    
+      constructor(t: string, p: number) {
+        this.title = t;
+        this._price = p;
+      }
+    
+      @Log3
+      getPriceWithTax() {
+        return this._price * 1.1;
+      }
+    }
+    ```
+
+---
+
+### 10. Bộ trang trí Bộ truy cập (Accessor Decorator)
+Accessor Decorator được áp dụng trước các hàm Getter hoặc Setter của thuộc tính. Cú pháp và danh sách tham số nhận vào hoàn toàn tương tự như Method Decorator.
+
+*   **Lưu ý quan trọng:** TypeScript **không cho phép** đặt bộ trang trí lên đồng thời cả hàm Getter và hàm Setter của cùng một thuộc tính. Bạn chỉ được phép đặt bộ trang trí lên hàm nào được định nghĩa đầu tiên trong cấu trúc mã nguồn.
+
+*   **Ví dụ:**
+    ```typescript
+    function Log2(target: any, name: string, descriptor: PropertyDescriptor) {
+      console.log('Accessor decorator!');
+      console.log(target, name, descriptor);
+    }
+    
+    class Product {
+      title: string;
+      private _price: number;
+    
+      constructor(t: string, p: number) {
+        this.title = t;
+        this._price = p;
+      }
+    
+      @Log2
+      set price(val: number) {
+        if (val > 0) {
+          this._price = val;
+        } else {
+          throw new Error('Invalid price - should be positive!');
+        }
+      }
+    }
+    ```
+
+---
+
+### 11. Bộ trang trí Tham số (Parameter Decorator)
+Parameter Decorator được áp dụng cho khai báo tham số của một phương thức hoặc constructor. Hàm trang trí tham số sẽ nhận vào **3 tham số**:
+
+1.  **`target: any`:** Prototype của lớp (đối với instance member) hoặc Constructor Function (đối với static member).
+2.  **`name: string | Symbol`:** Tên của phương thức chứa tham số này (hoặc `undefined` nếu là tham số của constructor).
+3.  **`position: number`:** Chỉ mục (index bắt đầu từ 0) biểu diễn vị trí của tham số đó trong danh sách tham số của hàm.
+
+*   > [!NOTE]
+    > Parameter Decorator thường chỉ được dùng để ghi nhận, đánh dấu thông tin về tham số đó (ví dụ kiểm tra sự tồn tại), và thường được sử dụng kết hợp với Method Decorator hoặc Accessor Decorator để thực thi logic kiểm tra dữ liệu ở runtime.
+
+---
+
+### 12. Giá trị trả về trong Decorator (Return Value in Decorator)
+Một số loại Decorator (như Class Decorator, Method/Accessor Decorator) cho phép trả về một giá trị mới để **ghi đè, chỉnh sửa hoặc thay thế** định nghĩa/hành vi ban đầu của đối tượng được trang trí.
+
+*   **Ví dụ Class Decorator trả về một Constructor mới:**
+    ```typescript
+    // T là kiểu đại diện cho hàm constructor có thể khởi tạo mới
+    function Logger<T extends { new(...args: any[]): {} }>(constructor: T) {
+      // Trả về một lớp mới kế thừa từ lớp cũ để bổ sung/ghi đè thuộc tính
+      return class extends constructor {
+        name_class = 'decorator_ex';
+      }
+    }
+    ```
+
+---
+
+### 13. Ví dụ thực tế: Tạo bộ trang trí tự động liên kết ngữ cảnh (`@Autobind`)
+Khi gắn các phương thức của lớp vào các sự kiện lắng nghe của DOM (DOM Event Listeners), từ khóa `this` thường bị mất ngữ cảnh (trở thành chính thẻ HTML kích hoạt sự kiện). Chúng ta có thể tạo ra một Method Decorator `@Autobind` để tự động liên kết `this` vào đúng thực thể.
+
+```typescript
+function Autobind(_: any, _2: string, descriptor: PropertyDescriptor) {
+  const originalMethod = descriptor.value; // Lưu lại phương thức gốc
+  
+  // Tạo Property Descriptor mới được cấu hình lại getter
+  const adjDescriptor: PropertyDescriptor = {
+    configurable: true,
+    enumerable: false,
+    get() {
+      // get() tự động kích hoạt khi phương thức được truy cập. 
+      // originalMethod.bind(this) liên kết vĩnh viễn ngữ cảnh "this" của thực thể vào phương thức.
+      const boundFn = originalMethod.bind(this);
+      return boundFn;
+    }
+  };
+  return adjDescriptor; // Trả về Descriptor mới để ghi đè phương thức gốc
+}
+
+class Printer {
+  message = 'This works!';
+
+  @Autobind
+  showMessage() {
+    console.log(this.message);
+  }
+}
+
+const p = new Printer();
+p.showMessage(); // In ra: "This works!"
+
+const button = document.querySelector('button')!;
+button.addEventListener('click', p.showMessage); 
+// HỢP LỆ => showMessage đã được tự động liên kết (bind) với đối tượng p nhờ decorator @Autobind.
+// Khi bấm nút vẫn in ra: "This works!" (thay vì in ra undefined)
+```
+
+---
+
+## Phần 10. Modules and Namespaces (Mô-đun và Không gian tên)
+
+### 1. Mô-đun (Modules)
+**Module (Mô-đun)** là cơ chế tổ chức lại mã nguồn trong TypeScript, cho phép chia nhỏ mã nguồn thành nhiều file độc lập để dễ quản lý, bảo trì và tái sử dụng.
+
+*   Mỗi file TypeScript mặc định được xem là một module riêng biệt. Tất cả các biến, lớp, giao diện khai báo bên trong module chỉ có phạm vi truy cập nội bộ (file-scoped), không thể truy cập từ bên ngoài trừ khi được xuất khẩu rõ ràng.
+
+---
+
+### 2. Cú pháp Xuất/Nhập Mô-đun (Export & Import Syntax)
+
+#### 2.1 Cú pháp Xuất (Export)
+Sử dụng từ khóa **`export`** đặt trước khai báo lớp, giao diện, hàm, biến để cho phép các file khác có thể nhập vào và sử dụng.
+
+```typescript
+// FileName: EmployeeInterface.ts
+export interface Employee {
+  id: number;
+  name: string;
+}
+```
+
+#### 2.2 Cú pháp Nhập (Import)
+Sử dụng từ khóa **`import`** ở đầu file khác để khai báo việc sử dụng các thành phần được xuất từ module khác.
+
+*   **Nhập một hoặc nhiều thành phần cụ thể:**
+    ```typescript
+    import { Employee } from './EmployeeInterface.js';
+    import { Project, ProjectStatus } from './models/project.js';
+    ```
+*   > [!IMPORTANT]
+    > **Lưu ý đặc biệt (Đuôi file `.js` khi import):**
+    > Khi sử dụng tính năng ES Modules, tại câu lệnh `import`, bạn bắt buộc phải chỉ định phần mở rộng của đường dẫn file là **`.js`** (ví dụ: `./components/project-input.js`) chứ **không phải `.ts`**. 
+    > Lý do: Trình biên dịch TypeScript sẽ biên dịch mã nguồn của bạn ra JavaScript và giữ nguyên các đường dẫn import này. Khi chạy trên trình duyệt hoặc các môi trường hỗ trợ module, hệ thống sẽ tải trực tiếp các tệp tin `.js` đã biên dịch tương ứng.
+
+---
+
+### 3. Biên dịch mô-đun (Compiling and Executing Modules)
+Bạn có thể chỉ định định dạng mô-đun đầu ra mong muốn (ví dụ: `commonjs`, `amd`, `system`, `esnext`...) khi chạy lệnh biên dịch bằng cờ hiệu `--module`.
+
+*   **Cú pháp:**
+    ```bash
+    tsc --module <target> <file_path>
+    ```
+    ```
+
+---
+
+### 4. Tái xuất khẩu (Re-export / Barrel Export)
+Kỹ thuật tái xuất khẩu cho phép bạn tạo ra một file trung tâm (thường đặt tên là `index.ts` hoặc `Middle.ts`) làm nhiệm vụ thu gom và xuất khẩu đồng loạt các thành phần từ nhiều file con khác nhau.
+
+*   **Lợi ích:** Giúp các file sử dụng bên ngoài chỉ cần viết duy nhất 1 câu lệnh import từ file trung tâm, thay vì phải import lặt vặt từ nhiều đường dẫn khác nhau.
+
+**Ví dụ thực tế cấu trúc Re-export:**
+1.  **File `Operator.ts` (Xuất mặc định - Default Export):**
+    ```typescript
+    interface Operator {
+      eval(a: number, b: number): number;
+    }
+    export default Operator;
+    ```
+2.  **Các file triển khai `Add.ts` và `Mul.ts`:**
+    ```typescript
+    // Add.ts
+    import Operator from "./Operator.js";
+    export class Add implements Operator {
+      eval(a: number, b: number): number {
+        return a + b;
+      }
+    }
+    
+    // Mul.ts
+    import Operator from "./Operator.js";
+    export class Mul implements Operator {
+      eval(a: number, b: number): number {
+        return a * b;
+      }
+    }
+    ```
+3.  **File trung tâm `Middle.ts` thu gom và Tái xuất khẩu (Re-export):**
+    ```typescript
+    export { Add } from "./Add.js";
+    export { Mul } from "./Mul.js";
+    ```
+4.  **Sử dụng bên ngoài:**
+    ```typescript
+    import { Add, Mul } from "./Middle.js"; // Chỉ cần import từ Middle.js
+    ```
+
+---
+
+### 5. Không gian tên (Namespaces)
+**Namespace (Không gian tên)** là giải pháp gom nhóm các đoạn mã nguồn có mối liên hệ logic (như hàm, lớp, giao diện, biến) lại với nhau dưới một cái tên chung nhằm tránh xung đột tên gọi (Name Collisions) trong không gian toàn cục toàn dự án.
+
+*   > [!NOTE]
+    > Namespace là tính năng đặc trưng của TypeScript từ các phiên bản đầu tiên (trước khi ES Modules ra đời). Trong các dự án hiện đại, ES Modules thường được khuyên dùng thay thế cho Namespaces.
+
+*   **Cú pháp khai báo:**
+    ```typescript
+    namespace NameSpaceName {
+      // Bắt buộc phải có từ khóa export trước các thành phần để cho phép truy cập từ bên ngoài Namespace
+      export function functionName() {}
+    }
+    ```
+
+*   **Ví dụ thực tế:**
+    ```typescript
+    namespace studentCalc {
+      export function AnualFeeCalc(feeAmount: number, term: number): number {
+        return feeAmount * term;
+      }
+    }
+    
+    // Gọi sử dụng từ bên ngoài Namespace thông qua dấu chấm
+    const totalFee = studentCalc.AnualFeeCalc(2000, 4);
+    console.log(totalFee); // Output: 8000
+    ```
+
+#### 5.2 Truy cập thành phần trong Namespace
+Để gọi và truy cập các thành phần (lớp, giao diện, hàm, biến) được xuất ra từ một Namespace khác, ta sử dụng cú pháp:
+```typescript
+NameSpaceName.className;
+NameSpaceName.functionName;
+```
+
+#### 5.3 Tham chiếu Namespace giữa các tệp tin (Referencing Namespaces)
+Khi tách Namespace sang một tệp tin TypeScript riêng biệt, ở tệp tin sử dụng bạn bắt buộc phải khai báo liên kết bằng cú pháp thẻ đóng vai trò tham chiếu đặc biệt **Triple-Slash (`///`)** đặt ở dòng đầu tiên:
+
+*   **Cú pháp:**
+    ```typescript
+    /// <reference path="Namespace_FileName.ts" />
+    ```
+*   **Ví dụ thực tế:**
+    ```typescript
+    /// <reference path="./studentCalc.ts" />
+    
+    let TotalFee = studentCalc.AnualFeeCalc(1500, 4);
+    console.log("Output: " + TotalFee); // Output: 6000
+    ```
+
+#### 5.4 Biên dịch và gộp file với Namespace
+Vì Namespace thường phân mảnh trên nhiều file nhưng không sử dụng cơ chế module tải động của trình duyệt, ta cần gộp chúng lại thành một file JavaScript duy nhất khi biên dịch bằng cờ hiệu **`--outFile`**:
+
+*   **Cú pháp biên dịch gộp file:**
+    ```bash
+    tsc --outFile <output_file.js> <input_file.ts>
+    ```
+*   **Ví dụ gộp nhiều file đầu vào thành một file chạy duy nhất:**
+    ```bash
+    tsc --outFile combine.js filename1.ts filename2.ts
+    ```
+
+---
+
+### 6. So sánh Mô-đun (Module) và Không gian tên (Namespace)
+
+| Đặc điểm so sánh | Mô-đun (Module) | Không gian tên (Namespace) |
+| :--- | :--- | :--- |
+| **Cách tiếp cận** | Chuẩn hiện đại ES Modules (Khuyên dùng). | Tính năng đặc trưng riêng của TypeScript (Lịch sử). |
+| **Cách khai báo & sử dụng** | Bắt buộc phải thực hiện `import` rõ ràng ở đầu file trước khi sử dụng. | Sử dụng cú pháp Triple-Slash `/// <reference path="..." />` để liên kết tệp. |
+| **Cơ chế biên dịch** | Biên dịch riêng lẻ từng file, cấu hình qua cờ hiệu `--module`. | Thường gộp toàn bộ các tệp nguồn lại thành một file JS duy nhất qua cờ hiệu `--outFile`. |
+| **Phạm vi truy cập** | Xuất khẩu toàn bộ trong 1 tệp độc lập, truy cập dễ dàng thông qua import. | Bắt buộc phải ghi rõ từ khóa `export` trước từng hàm/lớp bên trong Namespace để có thể gọi từ bên ngoài. |
+| **Nội dung bên trong** | Chứa cả mã nguồn thực thi và các khai báo kiểu dữ liệu. | Dùng để tổ chức, phân nhóm cấu trúc mã nguồn TypeScript logic nội bộ. |
+
+#### 6.1 Không gian tên lồng nhau (Nested Namespaces)
+TypeScript cho phép bạn lồng các Namespace bên trong nhau để phân cấp cấu trúc chặt chẽ hơn. Khi lồng nhau, bắt buộc phải dùng từ khóa `export` trước từ khóa `namespace` của con.
+
+*   **Ví dụ định nghĩa (`StoreCalc.ts`):**
+    ```typescript
+    namespace invoiceCalc {
+      export namespace invoiceAccount {
+        export class Invoice {
+          public calculatedDiscount(price: number) {
+            return price * 0.60;
+          }
+        }
+      }
+    }
+    ```
+*   **Ví dụ tham chiếu và gọi sử dụng:**
+    ```typescript
+    /// <reference path="./StoreCalc.ts" />
+    
+    let invoice = new invoiceCalc.invoiceAccount.Invoice();
+    console.log("Output: " + invoice.calculatedDiscount(400)); // Output: 240
+    ```
+
+---
+
+### 7. Webpack và Đóng gói mã nguồn (Module Bundler)
+
+#### 7.1 Webpack là gì?
+**Webpack** là một công cụ đóng gói mã nguồn (Module Bundler) cực kỳ mạnh mẽ. Nhiệm vụ chính của Webpack là quét qua sơ đồ phụ thuộc (Dependency Graph) của dự án, biên dịch toàn bộ các file mã nguồn riêng lẻ (như `.ts`, `.css`, hình ảnh...) thành một tệp tin JavaScript duy nhất (ví dụ: `bundle.js`) để giảm số lượng request HTTP và tối ưu hóa hiệu năng ứng dụng trên trình duyệt.
+
+```mermaid
+graph LR
+    A[src/index.ts] --> B[src/components/List.ts]
+    A --> C[src/utils/Helper.ts]
+    B --> D[Webpack + ts-loader]
+    C --> D
+    D --> E[dist/bundle.js]
+```
+
+---
+
+#### 7.2 Các bước cài đặt Webpack cho TypeScript
+
+*   **Bước 1: Cài đặt Webpack và Webpack CLI (Công cụ dòng lệnh của Webpack):**
+    ```bash
+    npm install --save-dev webpack webpack-cli
+    ```
+*   **Bước 2: Cài đặt TypeScript loader cho Webpack (`ts-loader`):**
+    ```bash
+    npm install --save-dev typescript ts-loader
+    ```
+
+---
+
+#### 7.3 Cấu hình file `tsconfig.json` cho Webpack
+Để Webpack làm việc trơn tru với TypeScript (chạy tính năng Tree Shaking và phân tích tĩnh dependency), cấu hình `"module"` trong `tsconfig.json` bắt buộc phải chuyển sang định dạng **`"es6"`** thay vì `commonjs`.
+
+```json
+{
+  "compilerOptions": {
+    "outDir": "./dist/",
+    "noImplicitAny": true,
+    "module": "es6",
+    "target": "es5",
+    "jsx": "react",
+    "allowJs": true
+  }
+}
+```
+
+---
+
+#### 7.4 Cấu hình tệp `webpack.config.js`
+Tạo tệp tin cấu hình **`webpack.config.js`** tại thư mục gốc của dự án để hướng dẫn Webpack cách tìm file nguồn đầu vào và xuất file bundle đầu ra:
+
+```javascript
+const path = require('path');
+
+module.exports = {
+  // Điểm đầu vào chính của ứng dụng
+  entry: './src/index.ts',
+  
+  // Cấu hình quy tắc dịch file
+  module: {
+    rules: [
+      {
+        test: /\.tsx?$/,         // Tìm các file đuôi .ts hoặc .tsx
+        use: 'ts-loader',        // Dùng ts-loader để biên dịch sang JS
+        exclude: /node_modules/, // Loại trừ thư mục node_modules
+      },
+    ],
+  },
+  
+  // Tự động nhận diện phần mở rộng khi import
+  resolve: {
+    extensions: ['.tsx', '.ts', '.js'],
+  },
+  
+  // Cấu hình đầu ra sau khi gộp file
+  output: {
+    filename: 'bundle.js',                          // Tên file đã gộp
+    path: path.resolve(__dirname, 'dist'),          // Lưu file gộp vào thư mục dist
+  },
+};
+```
+
+---
+
+#### 7.5 Các thông số cấu hình cốt lõi của Webpack
+
+Trong tệp cấu hình `webpack.config.js`, có 4 thông số quan trọng nhất cần ghi nhớ:
+
+##### 7.5.1 Mode (Chế độ đóng gói)
+Webpack hỗ trợ 3 chế độ hoạt động chính:
+*   `development`: Giữ nguyên cấu trúc mã nguồn ban đầu, tự động tạo Source Map để hỗ trợ debug dễ dàng khi phát triển.
+*   `production`: Tối ưu hóa tối đa kích thước tệp tin, tự động minify (nén code, xóa khoảng trắng, tối giản tên biến) để triển khai thực tế.
+*   `none`: Chạy đóng gói cơ bản, không áp dụng bất kỳ cấu hình mặc định nào.
+
+##### 7.5.2 Entry (Điểm đầu vào)
+Khai báo điểm bắt đầu mà Webpack sẽ quét dự án. Thông số `entry` chấp nhận **3 kiểu dữ liệu**:
+
+*   **Dạng String (Chuỗi):** Định nghĩa duy nhất một file đầu vào (`entry: './src/app.ts'`).
+*   **Dạng Array (Mảng):** Kết hợp nhiều file nguồn khác nhau lại thành một luồng xử lý duy nhất.
+*   **Dạng Object (Đối tượng):** Dành cho dự án có nhiều trang độc lập cần đóng gói thành **nhiều file bundle đầu ra** riêng biệt (Multiple Entry Points):
+    ```javascript
+    module.exports = {
+      entry: {
+        index: './src/index.ts',
+        app: './src/app.ts'
+      },
+      output: {
+        filename: '[name].bundle.js', // [name] sẽ tự động thay bằng "index" và "app"
+        path: path.resolve(__dirname, 'dist')
+      }
+    };
+    // Kết quả đầu ra sẽ tạo ra 2 file: index.bundle.js và app.bundle.js
+    ```
+
+##### 7.5.3 Output (Cấu hình đầu ra)
+Nơi Webpack ghi các tệp tin đã gộp xuống ổ đĩa. Lưu ý sự khác biệt giữa hai thuộc tính chính:
+*   **`path`:** Đường dẫn tuyệt đối vật lý trên hệ thống để lưu file đã đóng gói (thường dùng `path.resolve(__dirname, 'dist')`).
+*   **`publicPath`:** Đường dẫn tương đối dùng để tải các tệp tin tài nguyên (như hình ảnh, chunk tải động) từ phía trình duyệt web ở thời điểm runtime.
+
+##### 7.5.4 Resolve (Giải quyết import)
+Cấu hình cách thức Webpack tìm kiếm và giải quyết đường dẫn tệp tin. 
+*   Nếu import không khai báo phần mở rộng (đuôi file), Webpack sẽ dựa vào thuộc tính `extensions: ['.ts', '.js']` để tự động dò tìm tệp tin phù hợp theo thứ tự khai báo.
+
+---
+
+## Phần 11. Validator (Thư viện bên thứ ba và Xác thực dữ liệu)
+
+### 1. Sử dụng thư viện JavaScript thuần (Ví dụ: Lodash)
+**Lodash** là thư viện JavaScript hỗ trợ rất nhiều hàm tiện ích mạnh mẽ để xử lý mảng, đối tượng, hàm, chuỗi... giúp viết code ngắn gọn và tối ưu hiệu suất.
+
+*   **Cài đặt Lodash:**
+    ```bash
+    npm install --save lodash
+    ```
+*   > [!IMPORTANT]
+    > **Cài đặt định nghĩa kiểu dữ liệu (Type Definitions):**
+    > Do Lodash được viết bằng JavaScript thuần nên trình biên dịch TypeScript sẽ báo lỗi không nhận dạng được kiểu dữ liệu. Ta bắt buộc phải cài đặt thêm gói định nghĩa kiểu dữ liệu (`.d.ts`) của Lodash:
+    > ```bash
+    > npm install --save-dev @types/lodash
+    > ```
+*   **Sử dụng thực tế:**
+    ```typescript
+    import _ from 'lodash';
+    console.log(_.shuffle([1, 2, 3])); // Trộn ngẫu nhiên mảng
+    ```
+
+---
+
+### 2. Khai báo biến toàn cục (Ambient Declarations - từ khóa `declare`)
+Khi bạn nhúng một biến toàn cục trong file `index.html` thông qua thẻ `<script>` (ví dụ: biến cấu hình cấu trúc `GLOBAL`), TypeScript sẽ báo lỗi không tìm thấy tên biến khi viết mã nguồn ở các file `.ts`.
+
+Để giải quyết, ta sử dụng từ khóa **`declare`** để thông báo cho TypeScript biết biến đó đã được khai báo ở đâu đó ngoài hệ thống runtime và bỏ qua bước kiểm tra lỗi biên dịch:
+
+*   **HTML:**
+    ```html
+    <script>
+      var GLOBAL = 'LODASH';
+    </script>
+    ```
+*   **TypeScript:**
+    ```typescript
+    // Khai báo môi trường để báo cho TypeScript compiler biết GLOBAL đã tồn tại
+    declare var GLOBAL: any;
+    
+    console.log(GLOBAL); // Không còn lỗi biên dịch nữa, in ra: "LODASH"
+    GLOBAL = 'NEW_VALUE';
+    ```
+
+---
+
+### 3. Chuyển đổi dữ liệu đối tượng (Class-transformer)
+Khi nhận dữ liệu thô (Plain JSON Object) từ các cuộc gọi API, dữ liệu đó chỉ là các Object thông thường chứ không phải là thực thể của Class, dẫn đến việc không thể gọi các phương thức (methods) được khai báo trong Class. Thư viện **Class-transformer** giúp ánh xạ các đối tượng JavaScript thuần thành thực thể lớp thực sự.
+
+*   **Cài đặt các thư viện cần thiết:**
+    ```bash
+    npm install class-transformer reflect-metadata --save
+    ```
+
+*   **Ví dụ định nghĩa lớp (`product.model.ts`):**
+    ```typescript
+    export class Product {
+      title: string;
+      price: number;
+    
+      constructor(t: string, p: number) {
+        this.title = t;
+        this.price = p;
+      }
+    
+      getInformation() {
+        return [this.title, `$${this.price}`];
+      }
+    }
+    ```
+
+*   **Ví dụ chuyển đổi dữ liệu bằng `plainToClass` trong `app.ts`:**
+    ```typescript
+    import 'reflect-metadata'; // Bắt buộc phải import thư viện này ở đầu file chạy
+    import { plainToClass } from 'class-transformer';
+    import { Product } from './product.model.js';
+    
+    // Dữ liệu thô giả lập nhận từ API (Plain Object)
+    const products = [
+      { title: 'A Carpet', price: 29.99 },
+      { title: 'A Book', price: 10.99 }
+    ];
+    
+    // Chuyển đổi mảng đối tượng thô thành mảng thực thể lớp Product
+    const loadedProducts = plainToClass(Product, products);
+    
+    for (const prod of loadedProducts) {
+      // HỢP LỆ => Giờ đây bạn đã có thể gọi phương thức trong class thoải mái
+      console.log(prod.getInformation());
+    }
+    ```
+
+---
+
+### 4. Xác thực dữ liệu với Class-validator (Validator)
+Thư viện **Class-validator** cho phép bạn sử dụng các bộ trang trí (Decorators) khai báo trực tiếp trên các thuộc tính của Lớp để kiểm tra tính hợp lệ của dữ liệu (Validation) ở thời điểm runtime.
+
+*   **Cài đặt thư viện:**
+    ```bash
+    npm install class-validator --save
+    ```
+
+*   **Ví dụ áp dụng các Decorators kiểm tra dữ liệu (`product.model.ts`):**
+    ```typescript
+    import { IsNotEmpty, IsNumber, IsPositive } from 'class-validator';
+    
+    export class Product {
+      @IsNotEmpty() // Kiểm tra thuộc tính không được để trống
+      title: string;
+    
+      @IsNumber()   // Phải là kiểu số
+      @IsPositive() // Phải là số dương (> 0)
+      price: number;
+    
+      constructor(t: string, p: number) {
+        this.title = t;
+        this.price = p;
+      }
+    
+      getInformation() {
+        return [this.title, `$${this.price}`];
+      }
+    }
+    ```
+
+*   **Ví dụ thực hiện xác thực bằng hàm `validate` trong `app.ts`:**
+    ```typescript
+    import { validate } from 'class-validator';
+    import { Product } from './product.model.js';
+    
+    // Tạo thực thể chứa dữ liệu lỗi (chuỗi rỗng và số âm)
+    const newProd = new Product('', -5.99);
+    
+    // Gọi hàm validate để kiểm tra thực thể
+    validate(newProd).then(errors => {
+      if (errors.length > 0) {
+        console.log('VALIDATION ERRORS!');
+        console.log(errors); // In ra danh sách các lỗi chi tiết (ví dụ: price must be a positive number)
+      } else {
+        console.log(newProd.getInformation());
+      }
+    });
+    ```
+
+
+
 
