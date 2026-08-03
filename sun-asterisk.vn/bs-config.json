@@ -1,11 +1,8 @@
 {
   "server": {
-    "baseDir": ["src", "."],
-    "routes": {
-      "/dist": "dist"
-    }
+    "baseDir": ["src"]
   },
-  "files": ["src/**/*.{html,htm,css,js}", "dist/css/*.css"],
+  "files": ["src/**/*.{html,htm,css,js}"],
   "watchOptions": {
     "ignored": "node_modules"
   }
