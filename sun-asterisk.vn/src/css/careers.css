@@ -91,6 +91,11 @@
   margin: -10px 0 0;
   line-height: 1.25;
 }
+@media (max-width: 767px) {
+  .career-hero .career-hero__title {
+    font-size: 32px;
+  }
+}
 .career-hero .career-hero__desc-col {
   box-sizing: border-box;
   padding-left: 10px;
@@ -211,6 +216,11 @@
   font-size: 40px;
   font-weight: 700;
   color: var(--color-brand-heading);
+}
+@media (max-width: 767px) {
+  .career-teams-section .section-heading {
+    font-size: 28px;
+  }
 }
 .career-teams-section .teams-grid {
   display: grid;

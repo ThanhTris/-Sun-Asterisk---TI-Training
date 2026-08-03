@@ -289,17 +289,6 @@ body.projects-page .container {
   transition-timing-function: cubic-bezier(.2, 1, .3, 1);
 }
 
-.btn-load-more {
-  width: 32px;
-  height: 32px;
-  border-radius: 50%;
-  background-color: rgba(255, 255, 255, 0.1);
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  transition: background-color 0.4s, color 0.4s;
-}
-
 .btn-load-more:hover {
   color: #fff;
 }
@@ -307,11 +296,6 @@ body.projects-page .container {
 .btn-load-more:hover::before {
   opacity: 1;
   transform: scale3d(1, 1, 1);
-}
-
-.btn-load-more:hover  {
-  background-color: rgba(255, 255, 255, 0.2);
-  color: #fff;
 }
 
 /* Red Bubble Badge on top of the first project card (Item 1) */
@@ -331,6 +315,19 @@ body.projects-page .container {
   z-index: 10;
 }
 
+/* Touch devices (phones, tablets) have no real hover, so the overlay is
+   toggled by tapping instead (see the click handler in projects/index.html
+   that adds/removes this class). Keeps the same overlay-on-image look as
+   the desktop hover state, just triggered by tap. */
+.project-card.is-active .project-card-body {
+  opacity: 1;
+  visibility: visible;
+}
+
+.project-card.is-active .project-card-img {
+  transform: scale(1.08);
+}
+
 @media (max-width: 767px) {
   .col-featured-text,
   .col-featured-img {
@@ -339,14 +336,42 @@ body.projects-page .container {
     max-width: 100%;
   }
 
-  /* Card text is normally a hover-reveal overlay (desktop only interaction);
-     on mobile there's no hover, so show it as static content below the image */
-  .project-card-body {
-    position: static;
-    opacity: 1;
-    visibility: visible;
-    padding: 1.25rem 0 0;
-    background: transparent;
+  /* Shorter, uniform thumbnails on mobile — the staggered masonry heights
+     (300-520px) are tuned for the 3-column desktop layout and are far too
+     tall once cards stack full-width in a single column. */
+  .project-height-1 .project-card-img-wrap,
+  .project-height-2 .project-card-img-wrap,
+  .project-height-3 .project-card-img-wrap,
+  .project-height-4 .project-card-img-wrap,
+  .project-height-5 .project-card-img-wrap,
+  .project-height-6 .project-card-img-wrap,
+  .project-height-7 .project-card-img-wrap,
+  .project-height-8 .project-card-img-wrap,
+  .project-height-9 .project-card-img-wrap {
+    height: 240px;
   }
+
+  /* The 3 desktop masonry columns (col-md-4) each interleave every 3rd
+     project (1,4,7 / 2,5,8 / 3,6,9). Stacked on mobile that reads out of
+     order as 1,4,7,2,5,8,3,6,9 — flatten the columns and re-order the
+     cards back into natural 1-9 reading order. */
+  .row.g-4 {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .row.g-4 > .col-12.col-md-4 {
+    display: contents;
+  }
+
+  .project-badge-wrapper { order: 1; }
+  .project-height-2 { order: 2; }
+  .project-height-3 { order: 3; }
+  .project-height-4 { order: 4; }
+  .project-height-5 { order: 5; }
+  .project-height-6 { order: 6; }
+  .project-height-7 { order: 7; }
+  .project-height-8 { order: 8; }
+  .project-height-9 { order: 9; }
 }
 

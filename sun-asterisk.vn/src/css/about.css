@@ -1299,4 +1299,20 @@
   .about-offices__content {
     padding: 20px;
   }
+
+  .about-vision__title {
+    font-size: 26px;
+  }
+
+  .about-core__slide-title {
+    font-size: 24px;
+  }
+
+  .sectors__title {
+    font-size: 24px;
+  }
+
+  .offices__heading {
+    font-size: 24px;
+  }
 }

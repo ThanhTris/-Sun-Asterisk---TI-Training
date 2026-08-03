@@ -287,6 +287,23 @@
           });
         });
       }
+
+      // Touch devices have no hover: tapping a project card's image reveals
+      // its info overlay (same look as desktop hover); tapping "Xem chi tiết"
+      // still navigates normally.
+      if (window.matchMedia('(hover: none), (pointer: coarse)').matches) {
+        const projectCards = document.querySelectorAll('.project-card');
+        projectCards.forEach(card => {
+          const imgWrap = card.querySelector('.project-card-img-wrap');
+          imgWrap.addEventListener('click', () => {
+            const wasActive = card.classList.contains('is-active');
+            projectCards.forEach(c => c.classList.remove('is-active'));
+            if (!wasActive) {
+              card.classList.add('is-active');
+            }
+          });
+        });
+      }
     });
   </script>
 </body>
