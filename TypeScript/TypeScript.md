@@ -1,6 +1,3 @@
-# Học phần TypeScript: Tài liệu tóm tắt kiến thức
-
----
 
 ## Phần 1. JavaScript Fundamentals (ES6+)
 
@@ -738,7 +735,427 @@ Sau khi thiết lập file `index.html` và biên dịch mã nguồn thành côn
 1.  Mở file `index.html` bằng bất kỳ trình duyệt nào (Chrome, Safari, Firefox, Edge...).
 2.  Trang web hiển thị tiêu đề *"This is a heading"* và đoạn văn *"This is a paragraph."*.
 3.  Nhấp chuột phải vào trang web, chọn **Inspect (Kiểm tra)** và chuyển sang tab **Console (Bảng điều khiển)**.
-4.  Bạn sẽ thấy dòng thông điệp `Welcome to this course` được ghi nhận từ file `app.js:3` in ra trên màn hình console, chứng tỏ mã JavaScript được biên dịch từ TypeScript đã hoạt động chính xác.
+4.      Bạn sẽ thấy dòng thông điệp `Welcome to this course` được ghi nhận từ file `app.js:3` in ra trên màn hình console, chứng tỏ mã JavaScript được biên dịch từ TypeScript đã hoạt động chính xác.
+
+---
+
+## Phần 5. Basic TypeScript and Basic Data Types (TypeScript Cơ bản và các Kiểu dữ liệu Cơ bản)
+
+### 1. Các kiểu dữ liệu cốt lõi (Core Types)
+TypeScript kế thừa và kiểm soát chặt chẽ 3 kiểu dữ liệu cơ bản phổ biến nhất từ JavaScript:
+
+| Kiểu dữ liệu | Giá trị mẫu | Ý nghĩa / Giải thích |
+| :--- | :--- | :--- |
+| **`number`** | `1`, `5.3`, `-10` | Tất cả các loại số. TypeScript **không phân biệt** giữa số nguyên (Integer) và số thực (Float). |
+| **`string`** | `'Hi'`, `"Hi"`, `` `Hi` `` | Tất cả các giá trị văn bản (sử dụng dấu nháy đơn, nháy kép hoặc backtick). |
+| **`boolean`** | `true`, `false` | Chỉ nhận 2 giá trị logic đúng (`true`) hoặc sai (`false`). |
+
+---
+
+### 2. Khai báo kiểu dữ liệu (Type Annotation)
+**Type Annotation (Khai báo kiểu dữ liệu)** là cú pháp cho phép lập trình viên chỉ định cụ thể kiểu dữ liệu cho một biến khi khai báo.
+
+```
+ Cú pháp khai báo biến kiểu dữ liệu trong TypeScript:
+ 
+  var  message  :  string  =  "Hello World"
+  ---  -------  -  ------  -  -------------
+   |      |     |    |     |        |
+Declare Name    |  Type    |   Initial Value
+            Annotation     |
+                       Assignment
+```
+
+**Ví dụ thực tế:**
+```typescript
+let number1: number = 5;
+let number2: number = 2.8;
+let phrase: string = 'Result is ';
+let permit: boolean = true;
+
+const result = number1 + number2;
+
+if (permit) {
+  console.log(phrase + result); // Output: "Result is 7.8"
+} else {
+  console.log('Not show result');
+}
+```
+
+---
+
+### 3. Tự động suy luận kiểu (Type Inference)
+Trong TypeScript, nếu bạn không khai báo kiểu dữ liệu một cách tường minh, **trình biên dịch TypeScript sẽ tự động suy luận kiểu dữ liệu** của các biến/hàm dựa trên ngữ cảnh xung quanh.
+
+#### 3.1 Các trường hợp tự động suy luận kiểu:
+*   Khi các biến được khởi tạo giá trị ban đầu ngay lúc khai báo.
+*   Khi thiết lập các giá trị mặc định cho tham số đầu vào của hàm.
+*   Khi xác định kiểu giá trị trả về (`return value`) của một hàm.
+
+#### 3.2 Ví dụ về cơ chế suy luận kiểu và các lỗi phát sinh (Compile Errors):
+```typescript
+function add(x = 5) { // x có giá trị mặc định là 5 => x được suy luận kiểu là number
+  let phrase = 'Result is '; // phrase được khởi tạo là string => phrase được suy luận kiểu là string
+  
+  phrase = 10; 
+  // LỖI: Type 'number' is not assignable to type 'string' (phrase phải là string)
+  
+  x = '2.8'; 
+  // LỖI: Type 'string' is not assignable to type 'number' (x phải là number)
+  
+  return phrase + x; // Trả về phép cộng chuỗi => Kiểu trả về của hàm được suy luận là string
+}
+
+let result: number = add(); 
+// (Vì hàm add() trả về string nhưng biến result lại yêu cầu kiểu number)
+```
+
+---
+
+### 4. Kiểu đối tượng (Object Type)
+Trong TypeScript, kiểu **`object`** đại diện cho bất kỳ đối tượng JavaScript nào (cặp `key-value`). Chúng ta có thể định nghĩa cấu trúc chi tiết cho các thuộc tính của đối tượng bằng Type Annotation.
+
+#### 4.1 Cú pháp khai báo kiểu đối tượng (Type Annotation):
+```
+ Cú pháp khai báo một đối tượng có cấu trúc cụ thể:
+ 
+  var  person  :  {  /*Structure (Thuộc tính và kiểu của thuộc tính)*/  }
+  ---  ------  -  -----------------------------------------------------
+   |     |     |                            |
+Declare Name   |                         Braces
+           Annotation
+```
+
+#### 4.2 Ví dụ thực tế:
+```typescript
+// Khai báo cấu trúc kiểu của đối tượng person
+var person : {
+  name: string;
+  age: number;
+};
+
+// Gán giá trị cụ thể khớp hoàn toàn với cấu trúc đã khai báo
+person = {
+  name: 'TypeScript',
+  age: 11
+};
+
+console.log(person.name); // Output: "TypeScript"
+```
+
+---
+
+### 5. Kiểu mảng (Array Type)
+Mảng trong TypeScript được định nghĩa chặt chẽ để chỉ cho phép chứa các phần tử thuộc cùng một kiểu dữ liệu xác định (hoặc kết hợp nhiều kiểu tùy cấu hình).
+
+#### 5.1 Khai báo Mảng bằng dấu ngoặc vuông (Method 1: Using square brackets)
+Cú pháp này sử dụng tên kiểu dữ liệu cơ bản kết hợp cặp dấu ngoặc vuông `[]` ở phía sau để chỉ thị mảng của kiểu đó.
+
+```
+ Cú pháp khai báo mảng bằng dấu ngoặc vuông:
+ 
+  let  hobbies  :  string[]  =  ['Sports', 'Cooking']
+  ---  -------  -  --------  -  ---------------------
+   |      |     |     |      |          |
+Declare Name    |  Data type |    Initial Value
+            Annotation       |
+                         Assignment
+```
+
+**Ví dụ:**
+```typescript
+let scores: number[] = [90, 85, 95];           // Mảng chỉ chứa các số nguyên/số thực
+```
+
+#### 5.2 Khai báo Mảng bằng lớp Generic (Method 2: Using generic array type)
+Cú pháp này sử dụng lớp đối tượng `Array` kết hợp cặp dấu ngoặc nhọn `<>` chứa kiểu dữ liệu của các phần tử bên trong.
+
+```
+ Cú pháp khai báo mảng bằng generic:
+ 
+  let  hobbies  :  Array<string>  =  ['Sports', 'Cooking']
+  ---  -------  -  -------------  -  ---------------------
+   |      |     |    |      |     |          |
+Declare Name    | Keyword Element |    Initial Value
+            Annotation    Type    |
+                              Assignment
+```
+
+**Ví dụ:**
+```typescript
+let hobbies: Array<string> = ['Sports', 'Cooking'];
+let scores: Array<number> = [90, 85, 95];
+```
+
+---
+
+### 6. Kiểu dữ liệu đặc biệt Tuple (Mảng cố định chiều dài)
+**Tuple (Mảng cố định)** là một kiểu dữ liệu do TypeScript bổ sung, đại diện cho một mảng có **chiều dài cố định (fixed length)** và các phần tử tại các vị trí khác nhau có thể có **kiểu dữ liệu khác nhau**.
+
+#### 6.1 Khai báo và sử dụng Tuple:
+```typescript
+// Khai báo một tuple gồm 2 phần tử: phần tử thứ nhất kiểu number, phần tử thứ hai kiểu string
+let hobbies: [number, string];
+
+// Gán giá trị hợp lệ
+hobbies = [2, 'Sports']; 
+
+// LỖI nếu gán sai kiểu vị trí hoặc sai chiều dài ban đầu:
+// hobbies = ['Sports', 2]; // Lỗi: Type 'string' is not assignable to type 'number'
+// hobbies = [2, 'Sports', 'Cooking']; // Lỗi: Source has 3 element(s) but target allows only 2
+```
+
+#### 6.2 Các phương thức hỗ trợ trên Tuple:
+Vì bản chất Tuple vẫn là mảng khi chuyển đổi về JavaScript, nó hỗ trợ các hàm thay đổi phần tử mảng như `.push()` và `.pop()`:
+*   `push()`: Thêm phần tử mới vào cuối tuple.
+*   `pop()`: Xóa phần tử cuối cùng ra khỏi tuple.
+
+```typescript
+hobbies.push('Cooking'); // Hoạt động bình thường (không bị báo lỗi biên dịch khi dùng hàm push)
+```
+
+---
+
+### 7. Kiểu dữ liệu linh hoạt `any` (Kiểu bất kỳ)
+Kiểu **`any`** cho phép một biến hoặc mảng nhận **bất kỳ kiểu dữ liệu nào** (dùng khi bạn chưa biết rõ kiểu dữ liệu sẽ nhận được, ví dụ khi nhận dữ liệu từ API bên thứ ba). Việc sử dụng `any` sẽ vô hiệu hóa hoàn toàn cơ chế kiểm tra kiểu dữ liệu tĩnh của TypeScript cho biến đó.
+
+**Ví dụ thực tế:**
+```typescript
+// Khai báo biến có kiểu any
+let hobby: any;
+hobby = 2;         // Gán số: Hợp lệ
+hobby = 'Cooking'; // Gán chuỗi: Hợp lệ
+
+// Khai báo mảng chứa các phần tử kiểu any
+hobbies = [2, 'Sports', true]; // Mảng hỗn hợp chứa cả number, string và boolean
+```
+
+---
+
+### 8. Kiểu dữ liệu Union (Kiểu kết hợp)
+Kiểu **Union** cho phép một biến, mảng hoặc tham số hàm có thể nhận **một trong nhiều kiểu dữ liệu** định sẵn thông qua ký tự thanh đứng `|`.
+
+**Ví dụ thực tế:**
+```typescript
+// Biến hobby có thể nhận kiểu dữ liệu string HOẶC number
+let hobby: string | number;
+hobby = 2;         // Hợp lệ
+hobby = 'Cooking'; // Hợp lệ
+
+// Mảng hobbies có thể là mảng chứa toàn bộ chuỗi HOẶC mảng chứa toàn bộ số
+let hobbies: string[] | number[];
+hobbies = ['Cooking', 'Sports']; // Hợp lệ (Mảng chuỗi)
+hobbies = [5, 8, 18, 30];        // Hợp lệ (Mảng số)
+```
+
+---
+
+### 9. Kiểu liệt kê Enum (Enumerated Type)
+**Enum (Kiểu liệt kê)** là một tính năng mạnh mẽ được TypeScript bổ sung thêm, cho phép chúng ta định nghĩa một nhóm các hằng số có tên thân thiện.
+
+#### 9.1 Ví dụ khai báo Enum:
+```typescript
+enum Role { ADMIN, READ_ONLY, AUTHOR };
+```
+
+#### 9.2 Cơ chế ánh xạ ngược (Reverse Mapping):
+Mặc định, các giá trị trong enum sẽ được tự động gán các chỉ số số nguyên tăng dần bắt đầu từ `0` (ví dụ: `ADMIN = 0`, `READ_ONLY = 1`, `AUTHOR = 2`).
+
+Khi biên dịch sang JavaScript, TypeScript sinh ra một cơ chế ánh xạ ngược rất tiện lợi:
+```javascript
+// Biểu diễn đối tượng Role sau khi biên dịch sang JS:
+{
+  '0': 'ADMIN',
+  '1': 'READ_ONLY',
+  '2': 'AUTHOR',
+  ADMIN: 0,
+  READ_ONLY: 1,
+  AUTHOR: 2
+}
+```
+
+---
+
+### 10. Nghiên cứu thực tế về Lỗi kiểu dữ liệu (Case Study: Type Errors)
+Hãy cùng phân tích một ví dụ chứa các lỗi kiểm tra kiểu tĩnh phổ biến trong TypeScript:
+
+```typescript
+enum Role { ADMIN, READ_ONLY, AUTHOR };
+
+const person: {
+  name: string;
+  age: number;
+  hobbies: string[];
+  role: string;
+  roletuple: [number, string];
+} = {
+  name: 'Typescript',
+  age: 11,
+  hobbies: ['Sports', 'Cooking'],
+  role: Role.ADMIN, 
+  // LỖI BIÊN DỊCH: Type 'Role' is not assignable to type 'string'
+  // (Vì Role.ADMIN có giá trị là 0 (kiểu number) nhưng thuộc tính role khai báo kiểu string)
+  
+  roletuple: [2, 'author']
+};
+
+let favouriteActivites: any[];
+favouriteActivites = [5, 'Sports', true];
+
+if (person.role === Role.AUTHOR) {
+  // LỖI BIÊN DỊCH: This condition will always return 'false' since the types 'string' and 'Role.AUTHOR' have no overlap.
+  // (Vì person.role có kiểu string còn Role.AUTHOR có kiểu là number)
+  console.log('is author');
+}
+
+person.roletuple.push('admin'); // Hợp lệ (push không bị chặn trên Tuple ở runtime)
+
+person.roletuple[1] = 10;
+// LỖI BIÊN DỊCH: Type 'number' is not assignable to type 'string'
+// (Vì index 1 của roletuple đã được khai báo cố định là kiểu string)
+
+person.roletuple = [0, 'admin', 'user'];
+// LỖI BIÊN DỊCH: Type '[number, string, string]' is not assignable to type '[number, string]'.
+// (Vì roletuple chỉ cho phép tối đa 2 phần tử cố định)
+```
+
+---
+
+### 11. Kiểu dữ liệu Literal (Literal Types)
+Kiểu **Literal** giới hạn giá trị của một biến chỉ được phép nhận một số lượng hằng số giá trị cụ thể cố định (thay vì nhận toàn bộ giá trị của một kiểu nguyên thủy như string hay number).
+*   **Numeric literal types (Kiểu số cụ thể):** Ví dụ: `let speed: 30 | 50 | 80;`
+*   **String literal types (Kiểu chuỗi cụ thể):** Ví dụ: `let direction: 'left' | 'right' | 'up';`
+*   **Boolean literal types (Kiểu logic cụ thể):** Ví dụ: `let isTrue: true;`
+*   **Enum literal types (Kiểu Enum cụ thể).**
+
+---
+
+### 12. Bí danh kiểu (Type Alias)
+**Type Alias** giúp bạn định nghĩa một kiểu dữ liệu tùy chỉnh mới (custom name) đại diện cho một kiểu dữ liệu phức tạp hoặc một Union Type, giúp code ngắn gọn và dễ tái sử dụng bằng từ khóa **`type`**.
+
+```
+ Cú pháp khai báo một Type Alias tùy chỉnh:
+ 
+  type  aliascustom  =  'as-number' | 'as-text'
+  ----  -----------  =  -----------------------
+   |         |                     |
+Keyword Custom Name               Type
+```
+
+#### 12.1 Ví dụ kết hợp Type Alias và Literal Types:
+```typescript
+// Định nghĩa Type Alias Combinable đại diện cho kiểu number hoặc string
+type Combinable = number | string;
+
+// Định nghĩa hàm sử dụng Type Alias và String Literal làm kết quả mong muốn
+function combine(
+  input1: Combinable,
+  input2: number | string,
+  resultConversion: 'as-number' | 'as-text' // Literal type giới hạn giá trị đầu vào
+) {
+  let result;
+  
+  if (typeof input1 === 'number' && typeof input2 === 'number' || resultConversion === 'as-number') {
+    // Chuyển đổi dữ liệu và thực hiện cộng số
+    result = parseFloat(input1.toString()) + parseFloat(input2.toString());
+  } else {
+    // Ghép chuỗi văn bản thông thường
+    result = input1.toString() + input2.toString();
+  }
+  
+  return result;
+}
+
+const combineNumber = combine(30, 26, 'as-number');
+console.log(combineNumber); // Output: 56
+
+const combineStringNumber = combine('30', '26', 'as-number');
+console.log(combineStringNumber); // Output: 56
+
+const combineText = combine('TypeScript Vs ', 'JavaScript', 'as-text');
+console.log(combineText); // Output: "TypeScript Vs JavaScript"
+```
+
+---
+
+### 13. So sánh Kiểu `null` và `undefined`
+
+| Tiêu chí | Kiểu `null` | Kiểu `undefined` |
+| :--- | :--- | :--- |
+| **Bản chất** | Biến đã được khai báo và **được gán trực tiếp giá trị rỗng** (`null`). | Biến đã được khai báo nhưng **chưa được gán bất kỳ giá trị nào**. |
+| **Giá trị trả về của `typeof`** | Trả về kiểu **`object`** (một lỗi lịch sử được giữ lại của JS). | Trả về kiểu **`undefined`**. |
+| **Chuyển đổi số học** | Có thể chuyển đổi tự động về giá trị số **`0`**. | Chuyển đổi số học sẽ trả về giá trị **`NaN`** (Not a Number). |
+| **Ứng dụng** | Dùng khi muốn chủ động biểu thị một biến không trỏ đến đối tượng nào. | Là trạng thái mặc định của các biến vừa khởi tạo chưa gán trị. |
+
+#### 13.1 Ví dụ thực tế kiểm tra `null` và `undefined`:
+```typescript
+// 1. Biến được khai báo và gán trị null
+var a = null;
+console.log(a);         // Output: null
+console.log(typeof a);  // Output: "object"
+
+// 2. Biến được khai báo nhưng không gán trị
+var b;
+console.log(b);         // Output: undefined
+console.log(typeof b);  // Output: "undefined"
+
+// 3. Sử dụng biến chưa từng được khai báo
+console.log(undeclaredVar); 
+// LỖI BIÊN DỊCH: Cannot find name 'undeclaredVar' (Biến chưa được định nghĩa)
+```
+
+---
+
+### 14. So sánh Kiểu `unknown` và `any`
+*   **Điểm chung:** Cả `any` và `unknown` đều cho phép gán bất kỳ giá trị nào (chuỗi, số, đối tượng...) vào biến.
+*   **Điểm khác biệt (An toàn hơn):** 
+    *   **`any`:** Vô hiệu hóa hoàn toàn cơ chế kiểm tra kiểu. Cho phép thực hiện mọi thao tác (như gọi hàm, gọi thuộc tính) trên biến mà không gặp bất kỳ lỗi biên dịch nào.
+    *   **`unknown`:** An toàn hơn `any`. Mặc dù cho phép gán mọi giá trị, nhưng bạn **không được phép thực hiện bất kỳ thao tác nào** (như gọi thuộc tính, gán cho biến khác có kiểu cụ thể) trừ khi bạn thực hiện kiểm tra kiểu dữ liệu (Type checking) hoặc ép kiểu (Type assertion) trước.
+
+---
+
+### 15. Khái niệm Khẳng định kiểu / Ép kiểu (Type Assertions)
+**Type Assertion** là cách bạn báo cho trình biên dịch TypeScript biết rằng bạn đã nắm rõ kiểu dữ liệu cụ thể của đối tượng hơn nó, và yêu cầu nó tin tưởng kiểu dữ liệu bạn chỉ định.
+
+TypeScript hỗ trợ 2 cách viết ép kiểu:
+*   **Option 1: Sử dụng cặp ngoặc nhọn `<Type>` (Angle-bracket syntax):**
+    ```typescript
+    let userInput: any = "this is a string";
+    let strLength: number = (<string>userInput).length;
+    ```
+*   **Option 2: Sử dụng từ khóa `as` (Từ khóa `as` syntax - Khuyên dùng khi viết code React/JSX):**
+    ```typescript
+    let userInput: any = "this is a string";
+    let strLength: number = (userInput as string).length;
+    ```
+
+---
+
+### 16. Ví dụ kết hợp `unknown` và Type Assertion:
+```typescript
+let userInput: unknown;
+let userName: string;
+
+userInput = 5;
+userInput = 'TypeScript';
+
+// 1. Gán trực tiếp unknown cho string => BÁO LỖI BIÊN DỊCH
+userName = userInput; 
+// LỖI: Type 'unknown' is not assignable to type 'string'
+
+// 2. Sử dụng Type Assertion để ép kiểu => HỢP LỆ
+userName = <string>userInput; 
+
+// 3. Sử dụng Type Narrowing (Kiểm tra kiểu runtime bằng typeof) => HỢP LỆ
+if (typeof userInput === 'string') {
+  userName = userInput; // Trình biên dịch hiểu userInput chắc chắn là string trong block này
+}
+```
+
+
+
+
+
 
 ```
 
