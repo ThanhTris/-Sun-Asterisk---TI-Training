@@ -8,7 +8,7 @@ interface HeaderProps {
 
 export function Header({ searchTerm, onSearchChange }: HeaderProps) {
   return (
-    <header className="relative isolate flex min-h-[368px] items-center justify-center overflow-hidden bg-[#f5a300] px-4 py-10 sm:px-6">
+    <header className="relative isolate flex min-h-[368px] items-center justify-center overflow-hidden bg-accent px-4 py-10 sm:px-6">
       <div
         className="absolute inset-0 -z-10 hidden bg-cover bg-center md:block"
         style={{ backgroundImage: `url(${heroDesktop})` }}
@@ -41,7 +41,7 @@ export function Header({ searchTerm, onSearchChange }: HeaderProps) {
 
         <div className="flex h-16 w-full items-center gap-2 rounded-lg bg-white px-6 shadow-[0_4px_48px_rgba(0,0,0,0.2)]">
           <svg
-            className="shrink-0 text-[#f5a300]"
+            className="shrink-0 text-accent"
             viewBox="0 0 24 24"
             width="20"
             height="20"
