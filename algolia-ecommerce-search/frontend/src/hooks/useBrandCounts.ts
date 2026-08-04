@@ -1,12 +1,18 @@
-import type { Product } from '../types/Product';
-import { useFacetCounts, type FacetCount } from './useFacetCounts';
+import { useEffect, useState } from 'react';
+import type { FacetCount } from './useFacetCounts';
 
 export type BrandCount = FacetCount;
 
-function selectBrand(product: Product) {
-  return product.brand;
-}
+/** Fetches the precomputed top-brand facet list (name + count), in display order. */
+export function useBrandCounts(): BrandCount[] {
+  const [brands, setBrands] = useState<BrandCount[]>([]);
 
-export function useBrandCounts(products: Product[]): BrandCount[] {
-  return useFacetCounts(products, selectBrand);
+  useEffect(() => {
+    fetch('/data/brands.json')
+      .then((res) => res.json() as Promise<BrandCount[]>)
+      .then(setBrands)
+      .catch(() => setBrands([]));
+  }, []);
+
+  return brands;
 }

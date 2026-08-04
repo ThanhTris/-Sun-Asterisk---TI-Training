@@ -1,22 +1,12 @@
 import { useState } from 'react';
+import { CountBadge } from './CountBadge';
 
 export interface Option {
   name: string;
   count: number;
 }
 
-interface OptionListSingleProps {
-  mode: 'single';
-  options: Option[];
-  selected: string | null;
-  onSelect: (value: string | null) => void;
-  allLabel?: string;
-  searchable?: boolean;
-  searchPlaceholder?: string;
-}
-
-interface OptionListMultiProps {
-  mode: 'multi';
+interface OptionListProps {
   options: Option[];
   selected: string[];
   onSelect: (value: string) => void;
@@ -24,21 +14,28 @@ interface OptionListMultiProps {
   searchPlaceholder?: string;
 }
 
-type OptionListProps = OptionListSingleProps | OptionListMultiProps;
-
-const itemClasses =
-  'flex w-full cursor-pointer items-center gap-2 rounded px-2 py-[0.4rem] text-left text-[0.85rem] text-[#333] hover:bg-[#eceef1]';
-
-const buttonBaseClasses =
-  'flex w-full cursor-pointer items-center justify-between gap-2 rounded border-none px-2 py-[0.4rem] text-left text-[0.85rem]';
-
-function buttonStateClasses(isActive: boolean) {
-  return isActive ? 'bg-[#1a1a2e] text-white' : 'text-[#333] hover:bg-[#eceef1]';
+function itemClasses(isChecked: boolean) {
+  const textClasses = isChecked
+    ? 'font-bold text-primary'
+    : 'font-normal text-[#3b4468] hover:text-primary';
+  return `flex w-full cursor-pointer items-center gap-2 rounded px-0 py-[0.4rem] text-left text-[0.95rem] ${textClasses}`;
 }
 
-/** Renders a facet's values as either a single-select button list or a multi-select checkbox list. */
-export function OptionList(props: OptionListProps) {
-  const { options, searchable, searchPlaceholder } = props;
+function checkboxClasses(isChecked: boolean) {
+  const fillClasses = isChecked
+    ? 'bg-accent bg-[radial-gradient(circle,white_28%,transparent_30%)]'
+    : 'bg-[#e5e5e5]';
+  return `h-5 w-5 shrink-0 cursor-pointer appearance-none rounded ${fillClasses}`;
+}
+
+/** Renders a facet's values as a multi-select checkbox list. */
+export function OptionList({
+  options,
+  selected,
+  onSelect,
+  searchable,
+  searchPlaceholder,
+}: OptionListProps) {
   const [query, setQuery] = useState('');
 
   const visibleOptions = query.trim()
@@ -57,49 +54,27 @@ export function OptionList(props: OptionListProps) {
         />
       )}
 
-      <ul className="m-0 max-h-80 list-none overflow-y-auto p-0">
-        {props.mode === 'single' && (
-          <li>
-            <button
-              type="button"
-              className={`${buttonBaseClasses} ${buttonStateClasses(props.selected === null)}`}
-              onClick={() => props.onSelect(null)}
-            >
-              <span>{props.allLabel ?? 'All'}</span>
-            </button>
-          </li>
-        )}
-
-        {visibleOptions.map((option) =>
-          props.mode === 'single' ? (
+      <ul className="m-0 list-none p-0">
+        {visibleOptions.map((option) => {
+          const isChecked = selected.includes(option.name);
+          return (
             <li key={option.name}>
-              <button
-                type="button"
-                className={`${buttonBaseClasses} ${buttonStateClasses(props.selected === option.name)}`}
-                onClick={() => props.onSelect(option.name)}
-              >
-                <span>{option.name}</span>
-                <span className="opacity-60">{option.count}</span>
-              </button>
-            </li>
-          ) : (
-            <li key={option.name}>
-              <label className={itemClasses}>
+              <label className={itemClasses(isChecked)}>
                 <input
                   type="checkbox"
-                  className="m-0"
-                  checked={props.selected.includes(option.name)}
-                  onChange={() => props.onSelect(option.name)}
+                  className={checkboxClasses(isChecked)}
+                  checked={isChecked}
+                  onChange={() => onSelect(option.name)}
                 />
-                <span className="flex-1">{option.name}</span>
-                <span className="opacity-60">{option.count}</span>
+                <span className="whitespace-nowrap">{option.name}</span>
+                <CountBadge count={option.count} />
               </label>
             </li>
-          )
-        )}
+          );
+        })}
 
         {visibleOptions.length === 0 && (
-          <li className="px-2 py-[0.4rem] text-[0.8rem] text-[#999]">No matches</li>
+          <li className="px-0 py-[0.4rem] text-[0.8rem] text-[#999]">No matches</li>
         )}
       </ul>
     </div>

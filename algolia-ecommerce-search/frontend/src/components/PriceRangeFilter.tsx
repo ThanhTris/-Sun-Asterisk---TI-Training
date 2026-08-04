@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import type { PriceBounds } from '../hooks/usePriceBounds';
 
 interface PriceRangeFilterProps {
@@ -7,63 +7,76 @@ interface PriceRangeFilterProps {
   onApply: (min: number | null, max: number | null) => void;
 }
 
+const thumbClasses =
+  'pointer-events-none absolute inset-0 h-5 w-full cursor-pointer appearance-none bg-transparent ' +
+  '[&::-webkit-slider-thumb]:pointer-events-auto [&::-webkit-slider-thumb]:h-5 [&::-webkit-slider-thumb]:w-5 ' +
+  '[&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:border ' +
+  '[&::-webkit-slider-thumb]:border-[#ddd] [&::-webkit-slider-thumb]:bg-white [&::-webkit-slider-thumb]:shadow-md ' +
+  '[&::-moz-range-thumb]:pointer-events-auto [&::-moz-range-thumb]:h-5 [&::-moz-range-thumb]:w-5 ' +
+  '[&::-moz-range-thumb]:appearance-none [&::-moz-range-thumb]:rounded-full [&::-moz-range-thumb]:border ' +
+  '[&::-moz-range-thumb]:border-[#ddd] [&::-moz-range-thumb]:bg-white [&::-moz-range-thumb]:shadow-md';
+
 export function PriceRangeFilter({ bounds, value, onApply }: PriceRangeFilterProps) {
-  const [minInput, setMinInput] = useState(value.min?.toString() ?? '');
-  const [maxInput, setMaxInput] = useState(value.max?.toString() ?? '');
-  const [error, setError] = useState<string | null>(null);
+  const [minVal, setMinVal] = useState(value.min ?? bounds.min);
+  const [maxVal, setMaxVal] = useState(value.max ?? bounds.max);
 
-  function handleApply() {
-    const min = minInput.trim() === '' ? null : Number(minInput);
-    const max = maxInput.trim() === '' ? null : Number(maxInput);
+  useEffect(() => {
+    setMinVal(value.min ?? bounds.min);
+    setMaxVal(value.max ?? bounds.max);
+  }, [value.min, value.max, bounds.min, bounds.max]);
 
-    if (min != null && Number.isNaN(min)) {
-      setError('Invalid minimum price');
-      return;
-    }
-    if (max != null && Number.isNaN(max)) {
-      setError('Invalid maximum price');
-      return;
-    }
-    if (min != null && max != null && min > max) {
-      setError('Min must be less than max');
-      return;
-    }
+  const span = bounds.max - bounds.min || 1;
+  const minPercent = ((minVal - bounds.min) / span) * 100;
+  const maxPercent = ((maxVal - bounds.min) / span) * 100;
 
-    setError(null);
-    onApply(min, max);
+  function handleMinChange(next: number) {
+    const clamped = Math.min(next, maxVal - 1);
+    setMinVal(clamped);
+    onApply(clamped, maxVal);
+  }
+
+  function handleMaxChange(next: number) {
+    const clamped = Math.max(next, minVal + 1);
+    setMaxVal(clamped);
+    onApply(minVal, clamped);
   }
 
   return (
     <div>
-      <div className="flex items-center gap-2">
-        <input
-          type="number"
-          inputMode="decimal"
-          placeholder={`$${bounds.min}`}
-          value={minInput}
-          onChange={(e) => setMinInput(e.target.value)}
-          aria-label="Minimum price"
-          className="w-0 flex-1 rounded border border-[#e5e5e5] px-2 py-[0.4rem] text-[0.85rem]"
+      <div className="mb-3 flex items-center justify-between text-[0.95rem] font-bold text-[#1a1a1a]">
+        <span>
+          <span className="text-accent">$</span> {minVal.toLocaleString()}
+        </span>
+        <span>
+          <span className="text-accent">$</span> {maxVal.toLocaleString()}
+        </span>
+      </div>
+
+      <div className="relative h-5">
+        <div className="absolute top-1/2 h-1 w-full -translate-y-1/2 rounded-full bg-[#e5e5e5]" />
+        <div
+          className="absolute top-1/2 h-1 -translate-y-1/2 rounded-full bg-accent"
+          style={{ left: `${minPercent}%`, right: `${100 - maxPercent}%` }}
         />
-        <span className="text-[#999]">–</span>
         <input
-          type="number"
-          inputMode="decimal"
-          placeholder={`$${bounds.max}`}
-          value={maxInput}
-          onChange={(e) => setMaxInput(e.target.value)}
+          type="range"
+          aria-label="Minimum price"
+          min={bounds.min}
+          max={bounds.max}
+          value={minVal}
+          onChange={(e) => handleMinChange(Number(e.target.value))}
+          className={thumbClasses}
+        />
+        <input
+          type="range"
           aria-label="Maximum price"
-          className="w-0 flex-1 rounded border border-[#e5e5e5] px-2 py-[0.4rem] text-[0.85rem]"
+          min={bounds.min}
+          max={bounds.max}
+          value={maxVal}
+          onChange={(e) => handleMaxChange(Number(e.target.value))}
+          className={thumbClasses}
         />
       </div>
-      {error && <p className="mt-[0.4rem] text-xs text-[#c0392b]">{error}</p>}
-      <button
-        type="button"
-        className="mt-[0.6rem] w-full cursor-pointer rounded border border-[#1a1a2e] bg-white p-[0.4rem] text-[0.85rem] text-[#1a1a2e] hover:bg-[#1a1a2e] hover:text-white"
-        onClick={handleApply}
-      >
-        Apply
-      </button>
     </div>
   );
 }
