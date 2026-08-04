@@ -1,5 +1,5 @@
 import { useCallback, useReducer } from 'react';
-import type { Filters, SortOption } from '../types/Filters';
+import type { Filters, PageSize, SortOption } from '../types/Filters';
 import { initialFilters } from '../types/Filters';
 
 type Action =
@@ -10,6 +10,7 @@ type Action =
   | { type: 'SET_MIN_RATING'; value: number | null }
   | { type: 'SET_FREE_SHIPPING'; value: boolean }
   | { type: 'SET_SORT'; value: SortOption }
+  | { type: 'SET_PAGE_SIZE'; value: PageSize }
   | { type: 'SET_PAGE'; value: number }
   | { type: 'RESET' };
 
@@ -33,6 +34,8 @@ function filtersReducer(state: Filters, action: Action): Filters {
       return { ...state, freeShippingOnly: action.value, page: 1 };
     case 'SET_SORT':
       return { ...state, sortBy: action.value, page: 1 };
+    case 'SET_PAGE_SIZE':
+      return { ...state, pageSize: action.value, page: 1 };
     case 'SET_PAGE':
       return { ...state, page: action.value };
     case 'RESET':
@@ -64,6 +67,10 @@ export function useFilters() {
     []
   );
   const setSortBy = useCallback((value: SortOption) => dispatch({ type: 'SET_SORT', value }), []);
+  const setPageSize = useCallback(
+    (value: PageSize) => dispatch({ type: 'SET_PAGE_SIZE', value }),
+    []
+  );
   const setPage = useCallback((value: number) => dispatch({ type: 'SET_PAGE', value }), []);
   const resetFilters = useCallback(() => dispatch({ type: 'RESET' }), []);
 
@@ -76,6 +83,7 @@ export function useFilters() {
     setMinRating,
     setFreeShippingOnly,
     setSortBy,
+    setPageSize,
     setPage,
     resetFilters,
   };

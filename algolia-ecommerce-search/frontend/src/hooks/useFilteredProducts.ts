@@ -1,7 +1,6 @@
 import { useMemo } from 'react';
 import type { Product } from '../types/Product';
 import type { Filters } from '../types/Filters';
-import { PAGE_SIZE } from '../types/Filters';
 
 interface FilteredProductsResult {
   pageItems: Product[];
@@ -40,9 +39,9 @@ export function useFilteredProducts(products: Product[], filters: Filters): Filt
     });
 
     const totalCount = sorted.length;
-    const totalPages = Math.max(1, Math.ceil(totalCount / PAGE_SIZE));
-    const start = (filters.page - 1) * PAGE_SIZE;
-    const pageItems = sorted.slice(start, start + PAGE_SIZE);
+    const totalPages = Math.max(1, Math.ceil(totalCount / filters.pageSize));
+    const start = (filters.page - 1) * filters.pageSize;
+    const pageItems = sorted.slice(start, start + filters.pageSize);
 
     return { pageItems, totalCount, totalPages };
   }, [products, filters]);

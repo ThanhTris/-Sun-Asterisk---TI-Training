@@ -1,28 +1,51 @@
-interface SelectOption<T extends string> {
+interface SelectOption<T extends string | number> {
   label: string;
   value: T;
 }
 
-interface SelectProps<T extends string> {
+interface SelectProps<T extends string | number> {
   ariaLabel: string;
   value: T;
   options: SelectOption<T>[];
   onChange: (value: T) => void;
 }
 
-export function Select<T extends string>({ ariaLabel, value, options, onChange }: SelectProps<T>) {
+export function Select<T extends string | number>({
+  ariaLabel,
+  value,
+  options,
+  onChange,
+}: SelectProps<T>) {
   return (
-    <select
-      aria-label={ariaLabel}
-      className="rounded border border-[#e5e5e5] bg-white px-[0.6rem] py-[0.4rem] text-[0.85rem] text-[#333]"
-      value={value}
-      onChange={(e) => onChange(e.target.value as T)}
-    >
-      {options.map((option) => (
-        <option key={option.value} value={option.value}>
-          {option.label}
-        </option>
-      ))}
-    </select>
+    <div className="relative inline-flex items-center">
+      <select
+        aria-label={ariaLabel}
+        className="cursor-pointer appearance-none bg-transparent py-[0.4rem] pr-5 pl-0 text-[0.85rem] text-[#333] outline-none"
+        value={value}
+        onChange={(e) => {
+          const raw = e.target.value;
+          const matched = options.find((option) => String(option.value) === raw);
+          if (matched) onChange(matched.value);
+        }}
+      >
+        {options.map((option) => (
+          <option key={option.value} value={option.value}>
+            {option.label}
+          </option>
+        ))}
+      </select>
+      <svg
+        className="pointer-events-none absolute right-0 h-3.5 w-3.5 text-[#333]"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        aria-hidden="true"
+      >
+        <path d="m6 9 6 6 6-6" />
+      </svg>
+    </div>
   );
 }

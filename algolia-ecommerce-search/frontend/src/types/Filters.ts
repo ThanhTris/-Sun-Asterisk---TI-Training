@@ -1,5 +1,7 @@
 export type SortOption = 'featured' | 'price-asc' | 'price-desc';
 
+export type PageSize = 16 | 32 | 64;
+
 export interface Filters {
   search: string;
   category: string | null;
@@ -9,10 +11,9 @@ export interface Filters {
   minRating: number | null;
   freeShippingOnly: boolean;
   sortBy: SortOption;
+  pageSize: PageSize;
   page: number;
 }
-
-export const PAGE_SIZE = 16;
 
 export const initialFilters: Filters = {
   search: '',
@@ -23,5 +24,6 @@ export const initialFilters: Filters = {
   minRating: null,
   freeShippingOnly: true,
   sortBy: 'featured',
+  pageSize: 16,
   page: 1,
 };

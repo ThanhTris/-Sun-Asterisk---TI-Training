@@ -9,7 +9,7 @@ const buttonBaseClasses =
 
 function buttonStateClasses(isActive: boolean) {
   return isActive
-    ? 'border-[#1a1a2e] bg-[#1a1a2e] text-white'
+    ? 'border-primary bg-primary text-white'
     : 'border-[#e5e5e5] bg-white enabled:hover:bg-[#eceef1]';
 }
 

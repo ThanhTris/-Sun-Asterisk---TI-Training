@@ -1,5 +1,5 @@
 import { useProducts } from './hooks/useProducts';
-import { useCategoryCounts } from './hooks/useCategoryCounts';
+import { useCategoryTree } from './hooks/useCategoryTree';
 import { useBrandCounts } from './hooks/useBrandCounts';
 import { useRatingOptions } from './hooks/useRatingOptions';
 import { usePriceBounds } from './hooks/usePriceBounds';
@@ -7,12 +7,11 @@ import { useFilters } from './hooks/useFilters';
 import { useFilteredProducts } from './hooks/useFilteredProducts';
 import { Header } from './components/Header';
 import { Sidebar } from './components/Sidebar';
-import { Footer } from './components/Footer';
 import { ProductList } from './components/ProductList';
 import { Pagination } from './components/Pagination';
 import { Select } from './components/shared/Select';
 import { StatusMessage } from './components/shared/StatusMessage';
-import type { SortOption } from './types/Filters';
+import type { PageSize, SortOption } from './types/Filters';
 
 const SORT_OPTIONS: { label: string; value: SortOption }[] = [
   { label: 'Sort by featured', value: 'featured' },
@@ -20,12 +19,18 @@ const SORT_OPTIONS: { label: string; value: SortOption }[] = [
   { label: 'Price descending', value: 'price-desc' },
 ];
 
+const PAGE_SIZE_OPTIONS: { label: string; value: PageSize }[] = [
+  { label: '16 hits per page', value: 16 },
+  { label: '32 hits per page', value: 32 },
+  { label: '64 hits per page', value: 64 },
+];
+
 function App() {
   const { products, isLoading, error } = useProducts();
-  const categories = useCategoryCounts(products);
-  const brands = useBrandCounts(products);
-  const ratingOptions = useRatingOptions(products);
-  const priceBounds = usePriceBounds(products);
+  const categoryTree = useCategoryTree();
+  const brands = useBrandCounts();
+  const ratingOptions = useRatingOptions();
+  const priceBounds = usePriceBounds();
 
   const {
     filters,
@@ -36,19 +41,20 @@ function App() {
     setMinRating,
     setFreeShippingOnly,
     setSortBy,
+    setPageSize,
     setPage,
     resetFilters,
   } = useFilters();
 
-  const { pageItems, totalCount, totalPages } = useFilteredProducts(products, filters);
+  const { pageItems, totalPages } = useFilteredProducts(products, filters);
 
   return (
     <div className="flex min-h-screen flex-col">
       <Header searchTerm={filters.search} onSearchChange={setSearch} />
 
-      <div className="mx-auto grid w-full max-w-[1280px] flex-1 grid-cols-1 gap-6 p-6 md:grid-cols-[240px_1fr]">
+      <div className="mx-auto grid w-full max-w-[1280px] flex-1 grid-cols-1 gap-6 p-6 md:grid-cols-[300px_1fr]">
         <Sidebar
-          categories={categories}
+          categoryTree={categoryTree}
           brands={brands}
           ratingOptions={ratingOptions}
           priceBounds={priceBounds}
@@ -67,14 +73,21 @@ function App() {
 
           {!isLoading && !error && (
             <>
-              <div className="mb-4 flex items-center justify-between border-b border-[#e5e5e5] pb-4">
-                <p className="m-0 text-[0.85rem] text-[#666]">{totalCount} results</p>
-                <Select
-                  ariaLabel="Sort by"
-                  value={filters.sortBy}
-                  options={SORT_OPTIONS}
-                  onChange={setSortBy}
-                />
+              <div className="mb-4 flex items-center justify-end border-b border-[#e5e5e5] pb-4">
+                <div className="flex items-center gap-2">
+                  <Select
+                    ariaLabel="Sort by"
+                    value={filters.sortBy}
+                    options={SORT_OPTIONS}
+                    onChange={setSortBy}
+                  />
+                  <Select
+                    ariaLabel="Hits per page"
+                    value={filters.pageSize}
+                    options={PAGE_SIZE_OPTIONS}
+                    onChange={setPageSize}
+                  />
+                </div>
               </div>
 
               <ProductList products={pageItems} />
@@ -84,8 +97,6 @@ function App() {
           )}
         </main>
       </div>
-
-      <Footer />
     </div>
   );
 }
