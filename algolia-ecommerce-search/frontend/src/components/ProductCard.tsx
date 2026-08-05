@@ -1,6 +1,5 @@
 import type { Product } from '../types/Product';
-import { Badge } from './shared/Badge';
-import { StarRating } from './shared/StarRating';
+import { RatingBadge } from './shared/RatingBadge';
 
 interface ProductCardProps {
   product: Product;
@@ -8,8 +7,8 @@ interface ProductCardProps {
 
 export function ProductCard({ product }: ProductCardProps) {
   return (
-    <article className="flex flex-col overflow-hidden rounded-lg border border-[#e5e5e5] bg-white">
-      <div className="flex aspect-square items-center justify-center bg-[#f7f7f7]">
+    <article className="flex flex-col">
+      <div className="flex aspect-square items-center justify-center">
         <img
           src={product.image}
           alt={product.name}
@@ -18,11 +17,16 @@ export function ProductCard({ product }: ProductCardProps) {
         />
       </div>
       <div className="flex flex-1 flex-col gap-1 p-3">
-        <p className="m-0 text-xs text-[#999] uppercase">{product.categories[0]}</p>
-        <h3 className="m-0 line-clamp-2 text-[0.9rem] leading-[1.3]">{product.name}</h3>
-        {!!product.rating && <StarRating value={product.rating} />}
-        <p className="m-0 font-semibold">${product.price.toFixed(2)}</p>
-        {product.free_shipping && <Badge>Free shipping</Badge>}
+        <p className="m-0 text-xs font-semibold text-primary uppercase">{product.categories[0]}</p>
+        <h3 className="m-0 text-[0.9rem] leading-[1.3] font-bold text-primary">{product.name}</h3>
+        <p className="m-0 line-clamp-2 text-[0.9rem] leading-[1.3] text-primary">{product.description}</p>
+        <div className="mt-1 flex items-center gap-3">
+          <p className="m-0 text-[0.9rem] leading-[1.3] font-bold text-primary">
+            <span className="text-[11px] font-semibold text-[#e2a400]">$</span>
+            {product.price.toFixed(2)}
+          </p>
+          {!!product.rating && <RatingBadge value={product.rating} />}
+        </div>
       </div>
     </article>
   );
