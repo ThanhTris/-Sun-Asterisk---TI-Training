@@ -43,7 +43,7 @@ export function PriceRangeFilter({ bounds, value, onApply }: PriceRangeFilterPro
 
   return (
     <div>
-      <div className="mb-3 flex items-center justify-between text-[0.95rem] font-bold text-[#1a1a1a]">
+      <div className="mb-3 flex items-center justify-between text-[0.95rem] font-bold text-primary">
         <span>
           <span className="text-accent">$</span> {minVal.toLocaleString()}
         </span>
@@ -53,7 +53,7 @@ export function PriceRangeFilter({ bounds, value, onApply }: PriceRangeFilterPro
       </div>
 
       <div className="relative h-5">
-        <div className="absolute top-1/2 h-1 w-full -translate-y-1/2 rounded-full bg-[#e5e5e5]" />
+        <div className="absolute top-1/2 h-1 w-full -translate-y-1/2 rounded-full bg-[rgba(65,66,71,0.08)]" />
         <div
           className="absolute top-1/2 h-1 -translate-y-1/2 rounded-full bg-accent"
           style={{ left: `${minPercent}%`, right: `${100 - maxPercent}%` }}

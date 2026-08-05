@@ -20,7 +20,7 @@ export function Select<T extends string | number>({
     <div className="relative inline-flex items-center">
       <select
         aria-label={ariaLabel}
-        className="cursor-pointer appearance-none bg-transparent py-[0.4rem] pr-5 pl-0 text-[0.85rem] text-[#333] outline-none"
+        className="cursor-pointer appearance-none bg-transparent py-[0.4rem] pr-5 pl-0 text-xs text-primary outline-none"
         value={value}
         onChange={(e) => {
           const raw = e.target.value;
@@ -35,7 +35,7 @@ export function Select<T extends string | number>({
         ))}
       </select>
       <svg
-        className="pointer-events-none absolute right-0 h-3.5 w-3.5 text-[#333]"
+        className="pointer-events-none absolute right-0 h-3.5 w-3.5 text-primary"
         viewBox="0 0 24 24"
         fill="none"
         stroke="currentColor"

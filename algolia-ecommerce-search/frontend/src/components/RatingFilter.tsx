@@ -9,11 +9,7 @@ interface RatingFilterProps {
 }
 
 const rowClasses =
-  'flex w-full cursor-pointer items-center gap-2 border-none bg-transparent px-0 py-[0.35rem] text-left';
-
-function rowStateClasses(isActive: boolean) {
-  return isActive ? 'opacity-100' : 'opacity-60 hover:opacity-100';
-}
+  'flex w-full cursor-pointer items-center border-none bg-transparent px-0 py-[0.35rem] text-left';
 
 export function RatingFilter({ options, selected, onSelect }: RatingFilterProps) {
   return (
@@ -22,7 +18,7 @@ export function RatingFilter({ options, selected, onSelect }: RatingFilterProps)
         <li key={option.value}>
           <button
             type="button"
-            className={`${rowClasses} ${rowStateClasses(selected === option.value)}`}
+            className={rowClasses}
             onClick={() => onSelect(selected === option.value ? null : option.value)}
           >
             <StarRating value={option.value} size={22} gapClassName="gap-1" />

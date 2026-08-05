@@ -15,17 +15,13 @@ interface OptionListProps {
 }
 
 function itemClasses(isChecked: boolean) {
-  const textClasses = isChecked
-    ? 'font-bold text-primary'
-    : 'font-normal text-[#3b4468] hover:text-primary';
-  return `flex w-full cursor-pointer items-center gap-2 rounded px-0 py-[0.4rem] text-left text-[0.95rem] ${textClasses}`;
+  const textClasses = isChecked ? 'font-bold text-primary' : 'font-normal text-primary';
+  return `flex w-full cursor-pointer items-center rounded px-0 py-[0.4rem] text-left text-[0.95rem] ${textClasses}`;
 }
 
 function checkboxClasses(isChecked: boolean) {
-  const fillClasses = isChecked
-    ? 'bg-accent bg-[radial-gradient(circle,white_28%,transparent_30%)]'
-    : 'bg-[#e5e5e5]';
-  return `h-5 w-5 shrink-0 cursor-pointer appearance-none rounded ${fillClasses}`;
+  const fillClasses = isChecked ? 'bg-accent' : 'bg-[rgba(65,66,71,0.08)]';
+  return `absolute inset-0 h-4 w-4 shrink-0 cursor-pointer appearance-none rounded-sm ${fillClasses}`;
 }
 
 /** Renders a facet's values as a multi-select checkbox list. */
@@ -60,12 +56,26 @@ export function OptionList({
           return (
             <li key={option.name}>
               <label className={itemClasses(isChecked)}>
-                <input
-                  type="checkbox"
-                  className={checkboxClasses(isChecked)}
-                  checked={isChecked}
-                  onChange={() => onSelect(option.name)}
-                />
+                <span className="relative mr-4 inline-flex h-4 w-4 shrink-0">
+                  <input
+                    type="checkbox"
+                    className={checkboxClasses(isChecked)}
+                    checked={isChecked}
+                    onChange={() => onSelect(option.name)}
+                  />
+                  {isChecked && (
+                    <svg
+                      className="pointer-events-none absolute inset-0 h-4 w-4 fill-none stroke-white"
+                      viewBox="0 0 16 16"
+                      strokeWidth="2"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      aria-hidden="true"
+                    >
+                      <path d="M4 8.5 6.5 11 12 5" />
+                    </svg>
+                  )}
+                </span>
                 <span className="whitespace-nowrap">{option.name}</span>
                 <CountBadge count={option.count} />
               </label>
