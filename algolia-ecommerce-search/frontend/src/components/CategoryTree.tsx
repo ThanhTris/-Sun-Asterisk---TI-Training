@@ -9,20 +9,20 @@ interface CategoryTreeProps {
 }
 
 const rowClasses =
-  'flex w-full cursor-pointer items-center gap-2 border-none bg-transparent px-0 py-[0.45rem] text-left text-[0.95rem]';
+  'flex w-full cursor-pointer items-center border-none bg-transparent px-0 py-[0.45rem] text-left text-[0.95rem]';
 
 function rowStateClasses(isActive: boolean) {
-  return isActive ? 'text-primary font-bold' : 'text-[#3b4468] font-normal hover:text-primary';
+  return isActive ? 'text-primary font-bold' : 'text-primary font-normal';
 }
 
 function ToggleIcon({ expanded }: { expanded: boolean }) {
   return (
     <svg
-      className={`h-2.5 w-2.5 shrink-0 fill-current ${expanded ? 'rotate-180 text-primary' : 'text-[#8a8fa3]'}`}
-      viewBox="0 0 24 24"
+      className={`mr-4 h-2 w-2 shrink-0 fill-[#90919e] ${expanded ? 'rotate-180' : ''}`}
+      viewBox="0 0 8 8"
       aria-hidden="true"
     >
-      <path d="M12 3 21 21 3 21Z" />
+      <path d="M0 4l4-4 4 4z" />
     </svg>
   );
 }
@@ -45,8 +45,9 @@ export function CategoryTree({ tree, selected, onSelect }: CategoryTreeProps) {
               type="button"
               className={`${rowClasses} ${rowStateClasses(isExpanded)}`}
               onClick={() => {
-                onSelect(category.name);
-                setExpanded(isExpanded ? null : category.name);
+                const isCurrentlySelected = selected === category.name;
+                onSelect(isCurrentlySelected ? null : category.name);
+                setExpanded(isCurrentlySelected ? null : category.name);
               }}
             >
               <ToggleIcon expanded={isExpanded} />
@@ -61,7 +62,7 @@ export function CategoryTree({ tree, selected, onSelect }: CategoryTreeProps) {
                     <button
                       type="button"
                       className={`${rowClasses} pl-5 ${rowStateClasses(selected === child.name)}`}
-                      onClick={() => onSelect(child.name)}
+                      onClick={() => onSelect(selected === child.name ? null : child.name)}
                     >
                       <ToggleIcon expanded={false} />
                       <span className="whitespace-nowrap">{child.name}</span>
