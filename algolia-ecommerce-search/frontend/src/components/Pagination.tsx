@@ -5,12 +5,12 @@ interface PaginationProps {
 }
 
 const buttonBaseClasses =
-  'min-w-8 cursor-pointer rounded border px-[0.6rem] py-[0.35rem] text-[0.85rem] disabled:cursor-not-allowed disabled:opacity-40';
+  'flex h-[38px] w-[38px] cursor-pointer items-center justify-center rounded text-[0.9rem] disabled:cursor-not-allowed disabled:opacity-[0.33]';
 
 function buttonStateClasses(isActive: boolean) {
   return isActive
-    ? 'border-primary bg-primary text-white'
-    : 'border-[#e5e5e5] bg-white enabled:hover:bg-[#eceef1]';
+    ? 'bg-accent font-bold text-white'
+    : 'bg-[rgba(65,66,71,0.08)] font-normal text-[#414247]';
 }
 
 export function Pagination({ page, totalPages, onPageChange }: PaginationProps) {
@@ -18,56 +18,59 @@ export function Pagination({ page, totalPages, onPageChange }: PaginationProps) 
 
   const pages = getPageNumbers(page, totalPages);
 
+  function goToPage(p: number) {
+    onPageChange(p);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
   return (
     <nav className="mt-8 mb-4 flex items-center justify-center gap-[0.35rem]" aria-label="Pagination">
       <button
         type="button"
+        aria-label="Previous Page"
         className={`${buttonBaseClasses} ${buttonStateClasses(false)}`}
         disabled={page <= 1}
-        onClick={() => onPageChange(page - 1)}
+        onClick={() => goToPage(page - 1)}
       >
-        Prev
+        ‹
       </button>
 
-      {pages.map((p, i) =>
-        p === 'ellipsis' ? (
-          <span key={`ellipsis-${i}`} className="px-[0.2rem] py-[0.35rem] text-[#999]">
-            …
-          </span>
-        ) : (
-          <button
-            key={p}
-            type="button"
-            className={`${buttonBaseClasses} ${buttonStateClasses(p === page)}`}
-            onClick={() => onPageChange(p)}
-          >
-            {p}
-          </button>
-        )
-      )}
+      {pages.map((p) => (
+        <button
+          key={p}
+          type="button"
+          aria-label={`Page ${p}`}
+          className={`${buttonBaseClasses} ${buttonStateClasses(p === page)}`}
+          onClick={() => goToPage(p)}
+        >
+          {p}
+        </button>
+      ))}
 
       <button
         type="button"
+        aria-label="Next Page"
         className={`${buttonBaseClasses} ${buttonStateClasses(false)}`}
         disabled={page >= totalPages}
-        onClick={() => onPageChange(page + 1)}
+        onClick={() => goToPage(page + 1)}
       >
-        Next
+        ›
       </button>
     </nav>
   );
 }
 
-function getPageNumbers(page: number, totalPages: number): (number | 'ellipsis')[] {
-  const delta = 2;
-  const pages: (number | 'ellipsis')[] = [];
+function getPageNumbers(page: number, totalPages: number): number[] {
+  const windowSize = 5;
 
-  for (let i = 1; i <= totalPages; i++) {
-    if (i === 1 || i === totalPages || (i >= page - delta && i <= page + delta)) {
-      pages.push(i);
-    } else if (pages[pages.length - 1] !== 'ellipsis') {
-      pages.push('ellipsis');
-    }
+  let start = totalPages <= windowSize ? 1 : Math.max(1, page - 2);
+  start = Math.min(start, totalPages - windowSize + 1);
+  start = Math.max(1, start);
+  const end = Math.min(totalPages, start + windowSize - 1);
+
+  const pages: number[] = [];
+  for (let i = start; i <= end; i++) {
+    pages.push(i);
   }
 
   return pages;
