@@ -58,8 +58,24 @@ export function Header({ searchTerm, onSearchChange }: HeaderProps) {
             value={searchTerm}
             onChange={(e) => onSearchChange(e.target.value)}
             aria-label="Search products"
-            className="flex-1 border-none text-base text-[#1a1a1a] outline-none placeholder:text-[#999]"
+            className="flex-1 border-none text-base text-[#1a1a1a] outline-none placeholder:text-[#999] [&::-webkit-search-cancel-button]:appearance-none"
           />
+          {searchTerm.length > 0 && (
+            <button
+              type="button"
+              aria-label="Clear the search query"
+              title="Clear the search query"
+              onClick={() => onSearchChange('')}
+              className="flex shrink-0 cursor-pointer items-center justify-center border-none bg-transparent p-0 text-[#1a1a1a]"
+            >
+              <svg viewBox="0 0 20 20" width="12" height="12" aria-hidden="true">
+                <path
+                  fill="currentColor"
+                  d="M8.114 10L.944 2.83.944 2.83 0 1.885 1.886 0l.943.943L10 8.113l7.17-7.17.944-.943L20 1.886l-.943.943-7.17 7.17 7.17 7.17.943.944L18.114 20l-.943-.943-7.17-7.17-7.17 7.17-.944.943L0 18.114l.943-.943L8.113 10z"
+                />
+              </svg>
+            </button>
+          )}
         </div>
       </div>
     </header>
