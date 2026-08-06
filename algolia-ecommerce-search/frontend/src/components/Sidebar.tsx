@@ -3,12 +3,7 @@ import type { FacetCount } from '../hooks/useFacetCounts';
 import type { CategoryNode } from '../hooks/useCategoryTree';
 import type { PriceBounds } from '../hooks/usePriceBounds';
 import type { RatingOption } from '../hooks/useRatingOptions';
-import { FilterPanel } from './shared/FilterPanel';
-import { OptionList } from './shared/OptionList';
-import { CategoryTree } from './CategoryTree';
-import { PriceRangeFilter } from './PriceRangeFilter';
-import { RatingFilter } from './RatingFilter';
-import { Switch } from './shared/Switch';
+import { SidebarFilters } from './SidebarFilters';
 
 interface SidebarProps {
   categoryTree: CategoryNode[];
@@ -24,26 +19,17 @@ interface SidebarProps {
   onClearFilters: () => void;
 }
 
-export function Sidebar({
-  categoryTree,
-  brands,
-  ratingOptions,
-  priceBounds,
-  filters,
-  onSelectCategory,
-  onToggleBrand,
-  onSetPriceRange,
-  onSelectMinRating,
-  onToggleFreeShipping,
-  onClearFilters,
-}: SidebarProps) {
+/** Desktop sidebar. Hidden below `md`; the mobile filters drawer takes over there. */
+export function Sidebar(props: SidebarProps) {
+  const { onClearFilters, ...filterProps } = props;
+
   return (
-    <aside className="flex flex-col gap-6">
+    <aside className="hidden flex-col gap-6 md:flex">
       <div className="flex items-center justify-between">
         <h2 className="m-0 text-[1.5rem] font-bold text-primary">Filters</h2>
         <button
           type="button"
-          className="flex cursor-pointer items-center gap-1 border-none bg-transparent p-0 text-[0.8rem] text-[#666] hover:underline"
+          className="flex cursor-pointer items-center gap-1 border-none bg-transparent p-0 text-[0.8rem] text-[rgba(33,36,61,0.5)] hover:text-[rgba(33,36,61,0.7)]"
           onClick={onClearFilters}
         >
           <svg
@@ -63,49 +49,7 @@ export function Sidebar({
         </button>
       </div>
 
-      <FilterPanel title="Category">
-        <CategoryTree tree={categoryTree} selected={filters.category} onSelect={onSelectCategory} />
-      </FilterPanel>
-
-      <FilterPanel title="Brand">
-        <OptionList
-          options={brands}
-          selected={filters.brands}
-          onSelect={onToggleBrand}
-          searchable
-          searchPlaceholder="Search for brands…"
-        />
-      </FilterPanel>
-
-      <FilterPanel title="Price">
-        <PriceRangeFilter
-          bounds={priceBounds}
-          value={{ min: filters.minPrice, max: filters.maxPrice }}
-          onApply={onSetPriceRange}
-        />
-      </FilterPanel>
-
-      <FilterPanel title="Free shipping">
-        <div className="flex items-center justify-between gap-3">
-          <span className="text-[0.9rem] text-[#3b4468]">Display only items with free shipping</span>
-          <div className="flex items-center gap-2">
-            <span
-              className={`text-xs ${filters.freeShippingOnly ? 'font-semibold text-accent' : 'text-[#999]'}`}
-            >
-              {filters.freeShippingOnly ? 'Yes' : 'No'}
-            </span>
-            <Switch checked={filters.freeShippingOnly} onChange={onToggleFreeShipping} />
-          </div>
-        </div>
-      </FilterPanel>
-
-      <FilterPanel title="Ratings">
-        <RatingFilter
-          options={ratingOptions}
-          selected={filters.minRating}
-          onSelect={onSelectMinRating}
-        />
-      </FilterPanel>
+      <SidebarFilters {...filterProps} />
     </aside>
   );
 }

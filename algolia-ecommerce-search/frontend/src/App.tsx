@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { useProducts } from './hooks/useProducts';
 import { useCategoryTree } from './hooks/useCategoryTree';
 import { useBrandCounts } from './hooks/useBrandCounts';
@@ -7,6 +8,8 @@ import { useFilters } from './hooks/useFilters';
 import { useFilteredProducts } from './hooks/useFilteredProducts';
 import { Header } from './components/Header';
 import { Sidebar } from './components/Sidebar';
+import { MobileFiltersButton } from './components/MobileFiltersButton';
+import { FiltersDrawer } from './components/FiltersDrawer';
 import { ProductList } from './components/ProductList';
 import { Pagination } from './components/Pagination';
 import { Select } from './components/shared/Select';
@@ -27,10 +30,7 @@ const PAGE_SIZE_OPTIONS: { label: string; value: PageSize }[] = [
 
 function App() {
   const { products, isLoading, error } = useProducts();
-  const categoryTree = useCategoryTree();
-  const brands = useBrandCounts();
-  const ratingOptions = useRatingOptions();
-  const priceBounds = usePriceBounds();
+  const [isMobileFiltersOpen, setMobileFiltersOpen] = useState(false);
 
   const {
     filters,
@@ -46,13 +46,18 @@ function App() {
     resetFilters,
   } = useFilters();
 
-  const { pageItems, totalPages } = useFilteredProducts(products, filters);
+  const categoryTree = useCategoryTree(products, filters);
+  const brands = useBrandCounts(products, filters);
+  const ratingOptions = useRatingOptions(products, filters);
+  const priceBounds = usePriceBounds(products, filters);
+
+  const { pageItems, totalPages, totalCount } = useFilteredProducts(products, filters);
 
   return (
     <div className="flex min-h-screen flex-col">
       <Header searchTerm={filters.search} onSearchChange={setSearch} />
 
-      <div className="mx-auto grid w-full max-w-[1280px] flex-1 grid-cols-1 gap-6 p-6 md:grid-cols-[300px_1fr]">
+      <div className="mx-auto grid w-full max-w-[1280px] flex-1 grid-cols-1 gap-6 p-6 md:grid-cols-[260px_1fr]">
         <Sidebar
           categoryTree={categoryTree}
           brands={brands}
@@ -65,6 +70,24 @@ function App() {
           onSelectMinRating={setMinRating}
           onToggleFreeShipping={setFreeShippingOnly}
           onClearFilters={resetFilters}
+        />
+
+        <MobileFiltersButton onClick={() => setMobileFiltersOpen(true)} />
+        <FiltersDrawer
+          isOpen={isMobileFiltersOpen}
+          onClose={() => setMobileFiltersOpen(false)}
+          onClearFilters={resetFilters}
+          resultCount={totalCount}
+          categoryTree={categoryTree}
+          brands={brands}
+          ratingOptions={ratingOptions}
+          priceBounds={priceBounds}
+          filters={filters}
+          onSelectCategory={setCategory}
+          onToggleBrand={toggleBrand}
+          onSetPriceRange={setPriceRange}
+          onSelectMinRating={setMinRating}
+          onToggleFreeShipping={setFreeShippingOnly}
         />
 
         <main className="min-w-0">

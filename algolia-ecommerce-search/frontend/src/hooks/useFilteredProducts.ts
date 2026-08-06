@@ -8,24 +8,36 @@ interface FilteredProductsResult {
   totalPages: number;
 }
 
+export interface MatchSkip {
+  category?: boolean;
+  brand?: boolean;
+  price?: boolean;
+  rating?: boolean;
+}
+
+/** Matches a product against active filters, optionally skipping one facet (to compute that facet's own counts/bounds). */
+export function matchesFilters(product: Product, filters: Filters, skip: MatchSkip = {}): boolean {
+  const term = filters.search.trim().toLowerCase();
+  if (term && !product.name.toLowerCase().includes(term)) return false;
+  if (!skip.category && filters.category && !product.categories.includes(filters.category)) return false;
+  if (
+    !skip.brand &&
+    filters.brands.length > 0 &&
+    (!product.brand || !filters.brands.includes(product.brand))
+  )
+    return false;
+  if (!skip.price) {
+    if (filters.minPrice != null && product.price < filters.minPrice) return false;
+    if (filters.maxPrice != null && product.price > filters.maxPrice) return false;
+  }
+  if (!skip.rating && filters.minRating != null && (product.rating ?? 0) < filters.minRating) return false;
+  if (filters.freeShippingOnly && !product.free_shipping) return false;
+  return true;
+}
+
 export function useFilteredProducts(products: Product[], filters: Filters): FilteredProductsResult {
   return useMemo(() => {
-    const term = filters.search.trim().toLowerCase();
-
-    const filtered = products.filter((product) => {
-      if (term && !product.name.toLowerCase().includes(term)) return false;
-      if (filters.category && !product.categories.includes(filters.category)) return false;
-      if (
-        filters.brands.length > 0 &&
-        (!product.brand || !filters.brands.includes(product.brand))
-      )
-        return false;
-      if (filters.minPrice != null && product.price < filters.minPrice) return false;
-      if (filters.maxPrice != null && product.price > filters.maxPrice) return false;
-      if (filters.minRating != null && (product.rating ?? 0) < filters.minRating) return false;
-      if (filters.freeShippingOnly && !product.free_shipping) return false;
-      return true;
-    });
+    const filtered = products.filter((product) => matchesFilters(product, filters));
 
     const sorted = [...filtered].sort((a, b) => {
       switch (filters.sortBy) {

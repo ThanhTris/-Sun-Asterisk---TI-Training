@@ -17,21 +17,21 @@ type Action =
 function filtersReducer(state: Filters, action: Action): Filters {
   switch (action.type) {
     case 'SET_SEARCH':
-      return { ...state, search: action.value, page: 1 };
+      return { ...state, search: action.value, minPrice: null, maxPrice: null, page: 1 };
     case 'SET_CATEGORY':
-      return { ...state, category: action.value, page: 1 };
+      return { ...state, category: action.value, minPrice: null, maxPrice: null, page: 1 };
     case 'TOGGLE_BRAND': {
       const brands = state.brands.includes(action.value)
         ? state.brands.filter((brand) => brand !== action.value)
         : [...state.brands, action.value];
-      return { ...state, brands, page: 1 };
+      return { ...state, brands, minPrice: null, maxPrice: null, page: 1 };
     }
     case 'SET_PRICE_RANGE':
       return { ...state, minPrice: action.min, maxPrice: action.max, page: 1 };
     case 'SET_MIN_RATING':
-      return { ...state, minRating: action.value, page: 1 };
+      return { ...state, minRating: action.value, minPrice: null, maxPrice: null, page: 1 };
     case 'SET_FREE_SHIPPING':
-      return { ...state, freeShippingOnly: action.value, page: 1 };
+      return { ...state, freeShippingOnly: action.value, minPrice: null, maxPrice: null, page: 1 };
     case 'SET_SORT':
       return { ...state, sortBy: action.value, page: 1 };
     case 'SET_PAGE_SIZE':

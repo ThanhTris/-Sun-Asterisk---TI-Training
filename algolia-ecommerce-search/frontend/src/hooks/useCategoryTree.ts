@@ -1,4 +1,7 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
+import type { Product } from '../types/Product';
+import type { Filters } from '../types/Filters';
+import { matchesFilters } from './useFilteredProducts';
 
 export interface CategoryChild {
   name: string;
@@ -9,9 +12,9 @@ export interface CategoryNode extends CategoryChild {
   children: CategoryChild[];
 }
 
-/** Fetches the precomputed 2-level category facet tree (top categories + subcategories by count). */
-export function useCategoryTree(): CategoryNode[] {
-  const [tree, setTree] = useState<CategoryNode[]>([]);
+/** Fetches the precomputed 2-level category structure (names + order), then recounts against the local sample given active filters. */
+export function useCategoryTree(products: Product[], filters: Filters): CategoryNode[] {
+  const [structure, setStructure] = useState<CategoryNode[]>([]);
 
   useEffect(() => {
     fetch('/data/categories.json')
@@ -23,10 +26,21 @@ export function useCategoryTree(): CategoryNode[] {
             ...node,
             children: [...node.children].sort((a, b) => a.name.localeCompare(b.name)),
           }));
-        setTree(sorted);
+        setStructure(sorted);
       })
-      .catch(() => setTree([]));
+      .catch(() => setStructure([]));
   }, []);
 
-  return tree;
+  return useMemo(() => {
+    const relevant = products.filter((product) => matchesFilters(product, filters, { category: true }));
+
+    return structure.map((node) => ({
+      ...node,
+      count: relevant.filter((product) => product.categories.includes(node.name)).length,
+      children: node.children.map((child) => ({
+        ...child,
+        count: relevant.filter((product) => product.categories.includes(child.name)).length,
+      })),
+    }));
+  }, [structure, products, filters]);
 }

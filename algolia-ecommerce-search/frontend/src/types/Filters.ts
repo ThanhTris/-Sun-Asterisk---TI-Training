@@ -22,7 +22,7 @@ export const initialFilters: Filters = {
   minPrice: null,
   maxPrice: null,
   minRating: null,
-  freeShippingOnly: true,
+  freeShippingOnly: false,
   sortBy: 'featured',
   pageSize: 16,
   page: 1,
