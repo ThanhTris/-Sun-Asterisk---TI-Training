@@ -8,7 +8,7 @@ interface HeaderProps {
 
 export function Header({ searchTerm, onSearchChange }: HeaderProps) {
   return (
-    <header className="relative isolate flex min-h-[368px] items-center justify-center overflow-hidden bg-accent px-4 py-10 sm:px-6">
+    <header className="relative isolate overflow-visible bg-accent px-4 pt-10 pb-2 sm:px-6 md:flex md:min-h-92 md:items-center md:justify-center md:overflow-hidden md:py-10">
       <div
         className="absolute inset-0 -z-10 hidden bg-cover bg-center md:block"
         style={{ backgroundImage: `url(${heroDesktop})` }}
@@ -20,7 +20,7 @@ export function Header({ searchTerm, onSearchChange }: HeaderProps) {
         aria-hidden="true"
       />
 
-      <div className="flex w-full max-w-[740px] flex-col items-center text-center">
+      <div className="mx-auto flex w-full max-w-[740px] flex-col items-center text-center">
         <span className="m-0 leading-none">
           <svg
             className="h-6 w-[92px]"
@@ -39,7 +39,7 @@ export function Header({ searchTerm, onSearchChange }: HeaderProps) {
           Stop looking for an item — find it.
         </h1>
 
-        <div className="flex h-16 w-full items-center gap-2 rounded-lg bg-white px-6 shadow-[0_4px_48px_rgba(0,0,0,0.2)]">
+        <div className="relative z-10 -mb-8 flex h-16 w-full items-center gap-2 rounded-lg bg-white px-6 shadow-[0_4px_48px_rgba(0,0,0,0.2)] md:mb-0">
           <svg
             className="shrink-0 text-accent"
             viewBox="0 0 24 24"

@@ -57,7 +57,7 @@ function App() {
     <div className="flex min-h-screen flex-col">
       <Header searchTerm={filters.search} onSearchChange={setSearch} />
 
-      <div className="mx-auto grid w-full max-w-[1280px] flex-1 grid-cols-1 gap-6 p-6 md:grid-cols-[260px_1fr]">
+      <div className="mx-auto grid w-full max-w-[1280px] flex-1 grid-cols-1 gap-6 px-4 pt-14 pb-24 md:grid-cols-[260px_1fr] md:px-6 md:pt-6 md:pb-6">
         <Sidebar
           categoryTree={categoryTree}
           brands={brands}
@@ -96,7 +96,7 @@ function App() {
 
           {!isLoading && !error && (
             <>
-              <div className="mb-4 flex items-center justify-end border-b border-[#e5e5e5] pb-4">
+              <div className="mb-4 hidden items-center justify-end border-b border-[#e5e5e5] pb-4 md:flex">
                 <div className="flex items-center gap-2">
                   <Select
                     ariaLabel="Sort by"
