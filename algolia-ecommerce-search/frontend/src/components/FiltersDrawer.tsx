@@ -46,7 +46,10 @@ export function FiltersDrawer({
       <div className="flex gap-3 border-t border-[#e5e5e5] p-4">
         <button
           type="button"
-          onClick={onClearFilters}
+          onClick={() => {
+            onClearFilters();
+            onClose();
+          }}
           className="flex-1 cursor-pointer rounded border-none bg-[rgba(65,66,71,0.08)] px-4 py-3 text-sm font-semibold text-[#414247]"
         >
           Reset filters
