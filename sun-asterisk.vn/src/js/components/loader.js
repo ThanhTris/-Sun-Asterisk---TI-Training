@@ -1,11 +1,6 @@
 import { $ } from '../utils/dom.js';
 
-/**
- * Tải file HTML component và chèn vào selector tương ứng
- * @param {string} selector - Selector của thẻ giữ chỗ (placeholder)
- * @param {string} componentPath - Đường dẫn tương đối đến file HTML component
- * @returns {Promise<void>}
- */
+// Tải file HTML component và chèn vào selector tương ứng
 export const loadComponent = async (selector, componentPath) => {
   const placeholder = $(selector);
   if (!placeholder) return;
@@ -26,9 +21,7 @@ export const loadComponent = async (selector, componentPath) => {
   }
 };
 
-/**
- * Điều chỉnh đường dẫn tương đối (img, a) theo vị trí trang hiện tại
- */
+// Điều chỉnh đường dẫn tương đối (img, a) theo vị trí trang hiện tại
 function adjustComponentUrls(container) {
   const path = window.location.pathname.toLowerCase();
   

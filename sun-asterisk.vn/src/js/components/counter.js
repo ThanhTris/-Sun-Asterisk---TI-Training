@@ -1,6 +1,4 @@
-/**
- * Animated Counter Component using IntersectionObserver
- */
+// Animated Counter Component using IntersectionObserver
 import { $, $$ } from '../utils/dom.js';
 
 export function initCounter() {

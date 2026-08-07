@@ -1,6 +1,4 @@
-/* ==========================================================================
-   CSS Custom Properties (Design Tokens)
-   ========================================================================== */
+/* CSS Custom Properties (Design Tokens) */
 :root {
   /* Core brand colors */
   --color-brand-primary:  #C01111;
@@ -30,9 +28,7 @@
 @tailwind components;
 @tailwind utilities;
 
-/* ==========================================================================
-   Base Layer
-   ========================================================================== */
+/* Base Layer */
 @layer base {
   body {
     @apply text-brand-body font-sans bg-white;
@@ -43,14 +39,10 @@
   }
 }
 
-/* ==========================================================================
-   Component Layer — Reusable UI building blocks
-   ========================================================================== */
+/* Component Layer — Reusable UI building blocks */
 @layer components {
 
-  /* ------------------------------------------------------------------
-   * Buttons (pill-shaped base)
-   * ------------------------------------------------------------------ */
+  /* Buttons (pill-shaped base) */
   .btn {
     @apply inline-flex items-center justify-center px-6 py-3 font-semibold rounded-full transition-all duration-300 transform active:scale-95 cursor-pointer;
   }
@@ -71,16 +63,12 @@
     @apply inline-flex items-center justify-center px-6 py-3 font-semibold rounded-full transition-all duration-300 transform active:scale-95 cursor-pointer border-2 border-brand-primary text-brand-primary hover:bg-brand-primary hover:text-white;
   }
 
-  /* ------------------------------------------------------------------
-   * Section Title — shared across all homepage sections
-   * ------------------------------------------------------------------ */
+  /* Section Title — shared across all homepage sections */
   .section-title {
     @apply text-[40px] font-heading font-bold text-brand-heading mt-[20px] mb-[10px] pb-[25px];
   }
 
-  /* ------------------------------------------------------------------
-   * News Card — used in the Culture & Events section
-   * ------------------------------------------------------------------ */
+  /* News Card — used in the Culture & Events section */
   .news-card {
     @apply relative flex flex-col border border-transparent p-6 rounded-[8px] bg-white transition-all duration-300;
   }
@@ -122,16 +110,12 @@
     @apply underline;
   }
 
-  /* ------------------------------------------------------------------
-   * News Badge — "Tin nóng" pill badge overlaid on card image
-   * ------------------------------------------------------------------ */
+  /* News Badge — "Tin nóng" pill badge overlaid on card image */
   .news-badge {
     @apply absolute block text-white bg-brand-primary font-bold rounded-[34px] leading-[32px] px-[20px] z-10 text-xs;
   }
 
-  /* ------------------------------------------------------------------
-   * Haru List Item — Work Environment #Active... list
-   * ------------------------------------------------------------------ */
+  /* Haru List Item — Work Environment #Active... list */
   .haru-list-item {
     @apply flex items-start gap-4;
   }
@@ -148,16 +132,12 @@
     @apply text-[18px] text-brand-body mb-[10px] font-sans leading-relaxed;
   }
 
-  /* ------------------------------------------------------------------
-   * Navigation Chevron — carousel prev/next button
-   * ------------------------------------------------------------------ */
+  /* Navigation Chevron — carousel prev/next button */
   .nav-chevron {
     @apply w-10 h-10 rounded-full border border-gray-200 flex items-center justify-center hover:bg-gray-50 transition-colors;
   }
 
-  /* ------------------------------------------------------------------
-   * Footer Heading with accent circle decoration
-   * ------------------------------------------------------------------ */
+  /* Footer Heading with accent circle decoration */
   .footer-heading {
     @apply relative font-bold text-brand-footerTitle text-[18px] mb-6 pl-2;
   }
@@ -166,18 +146,14 @@
     @apply absolute left-[-10px] top-1/2 -translate-y-1/2 w-[38px] h-[38px] rounded-full bg-brand-circleAccent -z-10;
   }
 
-  /* ------------------------------------------------------------------
-   * Container utility
-   * ------------------------------------------------------------------ */
+  /* Container utility */
   .container-custom {
     @apply mx-auto px-4 md:px-8;
     max-width: 1200px;
   }
 }
 
-/* ==========================================================================
-   Utilities
-   ========================================================================== */
+/* Utilities */
 .max-width-custom {
   max-width: 1200px;
 }

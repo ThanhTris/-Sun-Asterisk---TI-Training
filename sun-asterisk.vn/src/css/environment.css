@@ -1,6 +1,4 @@
-/* ==========================================================================
-   Môi trường làm việc (Work Environment) Page Styles - Pure Vanilla CSS
-   ========================================================================== */
+/* Môi trường làm việc (Work Environment) Page Styles - Pure Vanilla CSS */
 
 body.environment-page {
   font-family: 'Roboto', sans-serif;
@@ -11,7 +9,7 @@ body.environment-page {
 }
 
 
-/* ==================== 1. INTRO / CEO QUOTE ==================== */
+/* 1. INTRO / CEO QUOTE */
 .env-intro__grid {
   display: grid;
   grid-template-columns: 30% 70%;
@@ -54,7 +52,7 @@ body.environment-page {
   display: block;
 }
 
-/* ==================== #ACTIVE SECTIONS (Challenge / Learn / Joy) ==================== */
+/* #ACTIVE SECTIONS (Challenge / Learn / Joy) */
 .env-active__title {
   font-family: 'Roboto Slab', serif;
   font-size: 40px;
@@ -142,7 +140,7 @@ body.environment-page {
   color: var(--color-brand-heading);
 }
 
-/* ==================== CTA BUTTON (reused from home.css btn-card-left) ==================== */
+/* CTA BUTTON (reused from home.css btn-card-left) */
 .btn-card-left {
   position: relative;
   height: 80px;

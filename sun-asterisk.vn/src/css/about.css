@@ -1,6 +1,4 @@
-/* ==========================================================================
-   Design Tokens / CSS Custom Properties
-   ========================================================================== */
+/* Design Tokens / CSS Custom Properties */
 :root {
   /* Core brand palette */
   --color-primary:        var(--color-brand-primary, #C01111);
@@ -20,9 +18,7 @@
   --grad-wasshoi:         linear-gradient(135deg, #EA580C 0%, #F97316 100%);
 }
 
-/* ==========================================================================
-   Base & Global Utilities
-   ========================================================================== */
+/* Base & Global Utilities */
 .about-page {
   font-family: 'Roboto', sans-serif;
   color: var(--color-body);
@@ -68,9 +64,7 @@
   color: var(--color-primary);
 }
 
-/* ==========================================================================
-   1. BLOCK: about-hero
-   ========================================================================== */
+/* 1. BLOCK: about-hero */
 .about-hero {
   position: relative;
   overflow: visible;
@@ -210,9 +204,7 @@
   box-shadow: 0 10px 35px rgba(0, 0, 0, 0.08);
 }
 
-/* ==========================================================================
-   2. BLOCK: about-meaning & about-modal
-   ========================================================================== */
+/* 2. BLOCK: about-meaning & about-modal */
 .about-meaning {
   position: relative;
 }
@@ -384,9 +376,7 @@
   margin-bottom: 16px;
 }
 
-/* ==========================================================================
-   3. BLOCK: about-vision
-   ========================================================================== */
+/* 3. BLOCK: about-vision */
 
 .about-vision__grid {
   display: grid;
@@ -444,9 +434,7 @@
   margin: 0;
 }
 
-/* ==========================================================================
-   4. BLOCK: about-core
-   ========================================================================== */
+/* 4. BLOCK: about-core */
 .about-core {
   position: relative;
   background-color: var(--color-white);
@@ -666,9 +654,7 @@
   box-shadow: 0 4px 10px rgba(192, 17, 17, 0.2);
 }
 
-/* ==========================================================================
-   5. BLOCK: sectors (Lĩnh vực kinh doanh)
-   ========================================================================== */
+/* 5. BLOCK: sectors (Lĩnh vực kinh doanh) */
 
 .sectors__grid {
   display: grid;
@@ -879,9 +865,7 @@
 
 
 
-/* ==========================================================================
-   6. BLOCK: about-ceo
-   ========================================================================== */
+/* 6. BLOCK: about-ceo */
 .about-ceo {
   background-color: var(--color-heading);
   border-radius: 20px;
@@ -974,9 +958,7 @@
   border-color: var(--color-white);
 }
 
-/* ==========================================================================
-   7. BLOCK: about-offices
-   ========================================================================== */
+/* 7. BLOCK: about-offices */
 
 
 .offices__heading {
@@ -1168,9 +1150,7 @@
 
 
 
-/* ==========================================================================
-   RESPONSIVE DESIGN (Mobile only)
-   ========================================================================== */
+/* RESPONSIVE DESIGN (Mobile only) */
 @media (max-width: 767px) {
   .about-wrapper {
     padding-left: 16px;
