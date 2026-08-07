@@ -19,7 +19,7 @@ interface SidebarProps {
   onClearFilters: () => void;
 }
 
-/** Desktop sidebar. Hidden below `md`; the mobile filters drawer takes over there. */
+// Desktop sidebar. Hidden below `md`; the mobile filters drawer takes over there.
 export function Sidebar(props: SidebarProps) {
   const { onClearFilters, ...filterProps } = props;
 

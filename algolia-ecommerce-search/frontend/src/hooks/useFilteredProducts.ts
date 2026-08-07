@@ -15,7 +15,7 @@ export interface MatchSkip {
   rating?: boolean;
 }
 
-/** Matches a product against active filters, optionally skipping one facet (to compute that facet's own counts/bounds). */
+// Matches a product against active filters, optionally skipping one facet (to compute that facet's own counts/bounds).
 export function matchesFilters(product: Product, filters: Filters, skip: MatchSkip = {}): boolean {
   const term = filters.search.trim().toLowerCase();
   if (term && !product.name.toLowerCase().includes(term)) return false;

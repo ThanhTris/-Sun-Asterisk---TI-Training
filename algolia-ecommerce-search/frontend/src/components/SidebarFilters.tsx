@@ -23,7 +23,7 @@ interface SidebarFiltersProps {
   onToggleFreeShipping: (checked: boolean) => void;
 }
 
-/** The filter panels shared between the desktop sidebar and the mobile filters drawer. */
+// The filter panels shared between the desktop sidebar and the mobile filters drawer.
 export function SidebarFilters({
   categoryTree,
   brands,

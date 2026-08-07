@@ -22,7 +22,7 @@ interface FiltersDrawerProps {
   onToggleFreeShipping: (checked: boolean) => void;
 }
 
-/** Full-screen filters overlay shown below the `md` breakpoint. */
+// Full-screen filters overlay shown below the `md` breakpoint.
 export function FiltersDrawer({
   isOpen,
   onClose,

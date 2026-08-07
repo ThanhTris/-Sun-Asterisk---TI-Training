@@ -10,7 +10,7 @@ export interface RatingOption {
 
 const RATING_THRESHOLDS = [4, 3, 2, 1];
 
-/** "N stars & up" counts, recomputed against the local sample given active filters (excluding rating itself). */
+// "N stars & up" counts, recomputed against the local sample given active filters (excluding rating itself).
 export function useRatingOptions(products: Product[], filters: Filters): RatingOption[] {
   return useMemo(() => {
     const relevant = products.filter((product) => matchesFilters(product, filters, { rating: true }));

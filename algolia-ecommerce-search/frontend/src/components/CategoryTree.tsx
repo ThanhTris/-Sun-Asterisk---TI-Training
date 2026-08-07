@@ -27,7 +27,7 @@ function ToggleIcon({ expanded }: { expanded: boolean }) {
   );
 }
 
-/** Two-level category facet: clicking a top-level row selects it and expands its subcategories. */
+// Two-level category facet: clicking a top-level row selects it and expands its subcategories.
 export function CategoryTree({ tree, selected, onSelect }: CategoryTreeProps) {
   const [expanded, setExpanded] = useState<string | null>(null);
 

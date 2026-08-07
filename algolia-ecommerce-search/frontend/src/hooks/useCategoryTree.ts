@@ -12,7 +12,7 @@ export interface CategoryNode extends CategoryChild {
   children: CategoryChild[];
 }
 
-/** Fetches the precomputed 2-level category structure (names + order), then recounts against the local sample given active filters. */
+// Fetches the precomputed 2-level category structure (names + order), then recounts against the local sample given active filters.
 export function useCategoryTree(products: Product[], filters: Filters): CategoryNode[] {
   const [structure, setStructure] = useState<CategoryNode[]>([]);
 

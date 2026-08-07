@@ -5,7 +5,7 @@ export interface FacetCount {
   count: number;
 }
 
-/** Counts how many items match each value returned by `selector`, sorted by count desc. */
+// Counts how many items match each value returned by `selector`, sorted by count desc.
 export function useFacetCounts<T>(
   items: T[],
   selector: (item: T) => string | undefined

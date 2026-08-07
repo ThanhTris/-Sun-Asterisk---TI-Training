@@ -10,7 +10,7 @@ export interface PriceBounds {
 
 const FALLBACK_BOUNDS: PriceBounds = { min: 1, max: 5000 };
 
-/** Price range of products matching every active filter except price itself. */
+// Price range of products matching every active filter except price itself.
 export function usePriceBounds(products: Product[], filters: Filters): PriceBounds {
   return useMemo(() => {
     const matching = products.filter((product) => matchesFilters(product, filters, { price: true }));
