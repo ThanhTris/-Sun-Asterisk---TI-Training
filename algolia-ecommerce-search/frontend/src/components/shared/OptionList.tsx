@@ -24,7 +24,7 @@ function checkboxClasses(isChecked: boolean) {
   return `absolute inset-0 h-4 w-4 shrink-0 cursor-pointer appearance-none rounded-sm ${fillClasses}`;
 }
 
-/** Renders a facet's values as a multi-select checkbox list. */
+// Renders a facet's values as a multi-select checkbox list.
 export function OptionList({
   options,
   selected,
@@ -50,7 +50,7 @@ export function OptionList({
         />
       )}
 
-      <ul className="m-0 grid list-none grid-cols-2 gap-x-2 p-0">
+      <ul className="m-0 grid list-none grid-cols-2 gap-x-2 p-0 md:grid-cols-1">
         {visibleOptions.map((option) => {
           const isChecked = selected.includes(option.name);
           return (
