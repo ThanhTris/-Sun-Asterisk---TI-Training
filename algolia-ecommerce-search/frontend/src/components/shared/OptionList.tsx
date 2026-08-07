@@ -50,7 +50,7 @@ export function OptionList({
         />
       )}
 
-      <ul className="m-0 list-none p-0">
+      <ul className="m-0 grid list-none grid-cols-2 gap-x-2 p-0">
         {visibleOptions.map((option) => {
           const isChecked = selected.includes(option.name);
           return (
@@ -84,7 +84,7 @@ export function OptionList({
         })}
 
         {visibleOptions.length === 0 && (
-          <li className="px-0 py-[0.4rem] text-[0.8rem] text-[#999]">No matches</li>
+          <li className="col-span-2 px-0 py-[0.4rem] text-[0.8rem] text-[#999]">No matches</li>
         )}
       </ul>
     </div>
