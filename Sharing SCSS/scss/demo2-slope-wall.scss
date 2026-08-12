@@ -1,0 +1,70 @@
+@use "sass:math";
+
+$num-cols: 5; // số cột
+$h-min: 160px; // chiều cao khung trên ở cột đầu
+$h-max: 340px; // chiều cao khung trên ở cột cuối
+$frame-width: 200px;
+$gap: 16px; // khoảng cách dọc giữa khung trên và dưới
+$col-gap: 20px; // khoảng cách ngang giữa 2 cột
+
+$total-height: $h-max + $h-min + $gap; // tổng chiều cao 1 cột, cố định
+
+@mixin gallery-slope {
+  $left: 0;
+
+  @for $c from 1 through $num-cols {
+    $ratio: 0;
+    @if $num-cols > 1 {
+      $ratio: math.div($c - 1, $num-cols - 1);
+    }
+
+    $h-top: $h-min + ($h-max - $h-min) * $ratio;
+    // khung dưới suy từ khung trên, giữ tổng cột không đổi → hình chữ X
+    $h-bottom: $total-height - $h-top - $gap;
+
+    .frame-#{$c}-1 {
+      position: absolute;
+      top: 0;
+      left: $left;
+      width: $frame-width;
+      height: $h-top;
+    }
+    .frame-#{$c}-2 {
+      position: absolute;
+      top: $h-top + $gap;
+      left: $left;
+      width: $frame-width;
+      height: $h-bottom;
+    }
+
+    $left: $left + $frame-width + $col-gap;
+  }
+
+  min-height: $total-height;
+}
+
+.gallery-slope {
+  position: relative;
+  @include gallery-slope;
+}
+
+// Giao diện trang
+body {
+  margin: 0;
+  padding: 1.5rem;
+  background: #f7f7f9;
+  font-family: system-ui, sans-serif;
+}
+.gallery-stage {
+  overflow-x: auto;
+  padding: 0.5rem 0.25rem 1.5rem;
+}
+.gallery-wall {
+  margin: 0 0.25rem;
+
+  > div {
+    background: #ffffff;
+    border: 3px solid #7dbcf0;
+    border-radius: 6px;
+  }
+}

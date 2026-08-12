@@ -1,0 +1,72 @@
+@use "sass:math";
+
+$bar-count: 10; // số thanh
+$step: 0.08s; // mỗi thanh trễ hơn thanh trước đúng bằng khoảng này
+
+$rise: 0.2s;
+$fall: 0.8s;
+$active: $rise + $fall;
+$pause: 0.2s; // khoảng nghỉ thật sự trước khi cả dãy lặp lại vòng sóng mới
+
+$cycle: $bar-count * $step + $active + $pause;
+
+.equalizer {
+  display: flex;
+  align-items: flex-end;
+  gap: 6px;
+  height: 120px;
+
+  .bar {
+    width: 18px;
+    height: 100%;
+    border-radius: 4px;
+    background: #6366f1;
+    transform-origin: bottom; // co giãn theo chiều cao thì phải "mọc" từ đáy lên
+    // mọi thanh dùng CHUNG 1 animation, CHUNG 1 thời lượng $cycle —
+    // khác nhau duy nhất ở animation-delay (gán bên dưới), đó mới là
+    // thứ tạo ra hiệu ứng sóng chạy từ trái qua phải.
+    animation: bounce $cycle ease-in-out infinite;
+  }
+}
+
+// hàm toán học: thanh 1 → 0.08s, thanh 2 → 0.16s, thanh 3 → 0.24s...
+@function delay-for($i) {
+  @return $i * $step;
+}
+
+// Vòng lặp chạy từ 1 đến $bar-count, mỗi lượt sinh ra đúng 1 rule
+// nhắm vào ĐÚNG 1 thanh (qua :nth-child), gán delay riêng cho thanh
+// đó bằng cách gọi hàm delay-for().
+@for $i from 1 through $bar-count {
+  .equalizer .bar:nth-child(#{$i}) {
+    animation-delay: delay-for($i);
+  }
+}
+
+// @keyframes chỉ nhận %, không nhận giây — nên quy đổi $rise/$fall sang %
+$rise-pct: math.div($rise, $cycle) * 100%; // thời điểm đạt đỉnh
+$fall-end-pct: math.div($rise + $fall, $cycle) * 100%; // thời điểm rơi xong
+
+@keyframes bounce {
+  // trạng thái NGHỈ 
+  0%, #{$fall-end-pct}, 100% {
+    transform: scaleY(0.15);
+    background: #c7d2fe;
+  }
+  // đỉnh sóng 
+  #{$rise-pct} {
+    transform: scaleY(1);
+    background: #4f46e5;
+  }
+}
+
+// Giao diện trang 
+body {
+  margin: 0;
+  padding: 1.5rem;
+  background: #f7f7f9;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+}

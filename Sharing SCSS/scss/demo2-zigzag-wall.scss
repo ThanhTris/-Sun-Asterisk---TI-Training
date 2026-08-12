@@ -1,0 +1,68 @@
+@use "sass:math";
+@use "sass:list";
+
+$num-cols: 5; // số cột
+$heights: (200px, 320px); // chiều cao lặp lại theo cột
+$frame-width: 200px;
+$gap: 16px; // khoảng cách dọc giữa 2 khung cùng cột
+$col-gap: 20px; // khoảng cách ngang giữa 2 cột
+
+@mixin gallery-wave {
+  $left: 0;
+  $max-bottom: 0;
+  $count: list.length($heights);
+
+  @for $c from 1 through $num-cols {
+    $top: 0;
+
+    @for $r from 1 through $count {
+      // cột chẵn đọc list ngược lại để mép dưới thẳng hàng
+      $idx: $r;
+      @if $c % 2 == 0 {
+        $idx: $count - $r + 1;
+      }
+      $h: list.nth($heights, $idx);
+
+      .frame-#{$c}-#{$r} {
+        position: absolute;
+        top: $top;
+        left: $left;
+        width: $frame-width;
+        height: $h;
+      }
+
+      $top: $top + $h + $gap;
+    }
+
+    $max-bottom: math.max($max-bottom, $top - $gap);
+    $left: $left + $frame-width + $col-gap;
+  }
+
+  min-height: $max-bottom;
+}
+
+.gallery-wave {
+  position: relative;
+  @include gallery-wave;
+}
+
+// Giao diện trang
+body {
+  margin: 0;
+  padding: 1.5rem;
+  background: #f7f7f9;
+  font-family: system-ui, sans-serif;
+}
+.gallery-stage {
+  overflow-x: auto;
+  padding: 0.5rem 0.25rem 1.5rem;
+}
+.gallery-wall {
+  margin: 0 0.25rem;
+
+  > div {
+    background: #ffffff;
+    border: 3px solid #7dbcf0;
+    border-radius: 6px;
+  }
+}
