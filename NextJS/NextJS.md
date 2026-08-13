@@ -791,6 +791,229 @@ export async function GET(request: Request) {
 // export async function POST(request: Request) { ... }
 ```
 
+---
+
+## 17. Image Optimization with the `<Image>` Component (Tối ưu hóa hình ảnh với Component `<Image>`)
+
+Component `<Image>` trong Next.js (`next/image`) là một bản mở rộng của thẻ HTML `<img>`, được thiết kế đặc biệt nhằm tối ưu hóa hiệu năng hiển thị hình ảnh. Nó tự động thực hiện các tác vụ sau:
+
+- **Resizing (Thay đổi kích thước):** Tạo ra các phiên bản ảnh nhỏ hơn phù hợp với từng kích thước màn hình thiết bị khác nhau, tránh việc gửi file ảnh dung lượng quá lớn tới thiết bị người dùng.
+- **Format Optimization (Tối ưu định dạng):** Tự động chuyển đổi ảnh sang các định dạng hiện đại hơn như **WebP** hoặc **AVIF** (nếu trình duyệt hỗ trợ), giúp giảm dung lượng file nhưng vẫn giữ nguyên chất lượng hiển thị.
+- **Lazy Loading (Tải chậm):** Mặc định, hình ảnh chỉ được tải về khi người dùng cuộn tới vùng hiển thị (viewport), giúp tăng tốc độ tải trang ban đầu.
+- **Prevents Cumulative Layout Shift (CLS):** Tự động thiết lập kích thước (kích thước khung giữ chỗ) cho hình ảnh để trình duyệt dành sẵn khoảng trống trước khi ảnh tải xong, ngăn chặn hiện tượng giao diện bị "nhảy" đột ngột.
+
+### 17.1. Bảng so sánh (Comparison Table)
+
+| Thẻ `<img` chuẩn (Standard HTML) | Next.js `<Image>` Component |
+| :--- | :--- |
+| Tải file ảnh gốc với dung lượng lớn | Tải file ảnh đã tối ưu hóa, đúng kích thước màn hình |
+| Không tự động chuyển đổi định dạng ảnh | Tự động chuyển đổi sang định dạng WebP/AVIF |
+| Tải ngay lập tức (trừ khi tự cấu hình) | Mặc định áp dụng Lazy loading |
+| Dễ gây ra lỗi dịch chuyển giao diện (Layout Shift) | Tự động chống lại Layout Shift (Prevent CLS) |
+
+### 17.2. Ví dụ mã nguồn minh họa (Example)
+Sử dụng component `<Image>` cho cả ảnh nội bộ (local) và ảnh từ máy chủ từ xa (remote).
+
+```tsx
+import Image from 'next/image';
+import profilePic from '../public/me.png'; // Import ảnh nội bộ
+
+export default function MyPage() {
+  return (
+    <div>
+      {/* Sử dụng ảnh nội bộ */}
+      <Image
+        src={profilePic}
+        alt="Picture of the author"
+        width={500} // Bắt buộc
+        height={500} // Bắt buộc
+        placeholder="blur" // Hiệu ứng mờ blur-up tùy chọn trong khi tải
+      />
+
+      {/* Sử dụng ảnh từ server từ xa */}
+      <Image
+        src="https://images.unsplash.com/photo-12345"
+        alt="An image from Unsplash"
+        width={800} // Bắt buộc
+        height={600} // Bắt buộc
+      />
+    </div>
+  );
+}
+```
+
+---
+
+## 18. Code Splitting & Parallel Loading (Chia nhỏ mã nguồn & Tải song song)
+
+### 18.1. Automatic Code Splitting (Chia nhỏ mã tự động)
+Next.js tự động thực hiện chia nhỏ mã nguồn (code splitting) mà không cần cấu hình thêm. Mỗi tệp `page.tsx` trong App Router được biên dịch thành một "gói" JavaScript (bundle) riêng biệt. Điều này có nghĩa là khi người dùng truy cập một trang cụ thể, họ chỉ cần tải về phần mã mã nguồn cần thiết cho trang đó thay vì phải tải toàn bộ ứng dụng.
+
+### 18.2. Parallel Route Loading (Tải đường dẫn song song)
+Khi một URL được yêu cầu, Next.js sẽ tải **tất cả các tệp `layout.tsx` và `page.tsx` cần thiết** cho route đó theo dạng **song song (in parallel)**.
+
+*Ví dụ:* Khi truy cập đường dẫn `/dashboard/settings`, Root Layout (`app/layout.tsx`), Dashboard Layout (`app/dashboard/layout.tsx`) và Settings Page (`app/dashboard/settings/page.tsx`) sẽ đều được fetch và render đồng thời trên server, giúp giảm thiểu tối đa thời gian chờ đợi của người dùng.
+
+```text
+                           ┌──► app/layout.tsx (Root Layout)
+                           │
+(Parallel Load) ───────────┼──► app/dashboard/layout.tsx (Dashboard Layout)
+                           │
+                           └──► app/dashboard/settings/page.tsx (Settings Page)
+```
+
+Đây là một hành vi hoàn toàn tự động trong Next.js; bạn không cần phải thêm bất kỳ cấu hình bổ sung nào. Chỉ cần tổ chức ứng dụng theo đúng quy ước thư mục của App Router là tính năng này sẽ tự động được kích hoạt.
+
+---
+
+## 19. React Suspense and Lazy Loading with Loading UI (React Suspense và Tải chậm với Loading UI)
+
+**React Suspense** là một tính năng của React cho phép các component "chờ" (wait) một điều gì đó (như tải dữ liệu) trước khi chúng render. Next.js tích hợp sâu với Suspense để tạo ra trải nghiệm người dùng tốt hơn thông qua cơ chế **Streaming**.
+
+Bằng cách tạo tệp `loading.tsx`, bạn đang bảo Next.js: *"Trong khi tệp component trang chính (`page.tsx`) đang bận fetch dữ liệu, hãy hiển thị giao diện từ tệp `loading.tsx` này như một khung giữ chỗ (temporary placeholder)."* Điều này giúp người dùng nhìn thấy ngay một phần giao diện trang và biết rằng nội dung đang trên đường tải về, thay vì phải nhìn vào một màn hình rỗng.
+
+### 19.1. Luồng hoạt động (Execution Flow)
+
+```text
+Client Sends Request
+  │
+  ▼
+Server Immediately Sends Back:
+  - Static UI (Layout)
+  - UI from `loading.tsx` (Fallback)
+  │
+  ▼
+(Meanwhile on the server...)
+  - `page.tsx` is `await`ing data...
+  │
+  ▼
+Data is available, Server Renders Page Content
+  │
+  ▼
+Server "Streams" the Content's HTML to the Client to replace the Fallback
+```
+
+### 19.2. Ví dụ mã nguồn minh họa (Example)
+Tạo giao diện tải tức thì cho một trang mất thời gian fetch data.
+
+```tsx
+// app/analytics/loading.tsx
+
+// Component này sẽ tự động hiển thị trong khi tệp page.tsx cùng cấp đang tải dữ liệu
+export default function Loading() {
+  return <p>Loading analytics data, please wait...</p>;
+}
+```
+
+```tsx
+// app/analytics/page.tsx
+
+async function getAnalyticsData() {
+  // Giả lập một network request chậm kéo dài 3 giây
+  await new Promise((resolve) => setTimeout(resolve, 3000));
+  return { visitors: 9876 };
+}
+
+export default async function AnalyticsPage() {
+  const data = await getAnalyticsData();
+  return <h1>Visitors: {data.visitors}</h1>;
+}
+```
+
+---
+
+## 20. Caching Strategies and ISR (Chiến lược Caching và ISR)
+
+Next.js mở rộng hàm `fetch` mặc định của JavaScript với hệ thống cache phía server rất mạnh mẽ.
+
+- **Static Fetch (Mặc định):** `fetch('...')` tự động cache kết quả vô thời hạn (tương tự `getStaticProps` trong Pages Router). Dữ liệu được lấy tại thời điểm build và tái sử dụng cho mọi request.
+- **No-cache Fetch:** `fetch('...', { cache: 'no-store' })` luôn luôn lấy dữ liệu mới cho mỗi request (tương tự `getServerSideProps`).
+- **Incremental Static Regeneration (ISR):** `fetch('...', { next: { revalidate: 60 } })` là sự kết hợp hoàn hảo của cả hai phương pháp. Nó cache dữ liệu trong một khoảng thời gian chỉ định (ví dụ: 60 giây). Request đầu tiên trong khoảng thời gian đó nhận dữ liệu đã cache, đồng thời Next.js tự động kích hoạt một quá trình "revalidation" ngầm ở nền để lấy dữ liệu mới. Các request tiếp theo sau đó sẽ nhận được dữ liệu đã cập nhật.
+
+### 20.1. Luồng tái tạo lại dữ liệu ngầm của ISR (ISR Revalidation Flow)
+
+```text
+User A Requests (at 0s) ──► Receives Cached Data (Stale)
+  │
+  ▼
+(Server begins revalidating in the background...)
+  │
+  ▼
+User B Requests (at 10s) ──► Receives Cached Data (Still stale)
+  │
+  ▼
+(Revalidation completes, cache is updated)
+  │
+  ▼
+User C Requests (at 65s) ──► Receives Cached Data (Fresh)
+```
+
+### 20.2. Ví dụ mã nguồn minh họa (Example)
+Lấy giá cổ phiếu và làm mới lại dữ liệu sau mỗi phút (60 giây).
+
+```tsx
+// app/stock-price/page.tsx
+
+async function getStockPrice() {
+  const res = await fetch('https://api.example.com/stock/XYZ', {
+    next: { revalidate: 60 }, // Revalidate sau mỗi 60 giây
+  });
+  return res.json();
+}
+
+export default async function StockPricePage() {
+  const stock = await getStockPrice();
+  return <h1>XYZ Stock Price: ${stock.price}</h1>;
+}
+```
+
+---
+
+## 21. Monitoring and Improving Core Web Vitals (Theo dõi và cải thiện Core Web Vitals)
+
+**Core Web Vitals (CWV)** là bộ ba chỉ số đo lường của Google dùng để đánh giá trải nghiệm thực tế của người dùng trên trang web, tập trung vào tốc độ tải, độ tương tác và tính ổn định về mặt thị giác.
+
+1. **Largest Contentful Paint (LCP):** Đo thời gian cần thiết để phần tử nội dung lớn nhất (thường là ảnh bìa hoặc khối văn bản chính) hiển thị rõ ràng. Next.js giúp cải thiện LCP với component `<Image>`.
+2. **Interaction to Next Paint (INP):** Đo độ trễ từ khi người dùng tương tác (click, tap, nhấn phím) cho tới khi giao diện cung cấp phản hồi. Next.js giúp cải thiện INP bằng cơ chế chia nhỏ mã (code splitting), chỉ tải JavaScript cần thiết (INP đã thay thế cho chỉ số cũ First Input Delay - FID).
+3. **Cumulative Layout Shift (CLS):** Đo mức độ giao diện bị "nhảy" bất ngờ trong quá trình tải. Next.js giúp giảm CLS bằng cách tự động đặt kích thước khung giữ chỗ cho hình ảnh và phông chữ.
+
+Bạn có thể theo dõi các chỉ số này bằng các công cụ như **Google PageSpeed Insights** hoặc tích hợp **Vercel Analytics** vào dự án.
+
+### 21.1. Sơ đồ các chỉ số (Metrics Diagram)
+
+- **LCP (Loading):** *"Trang web có tải nhanh không?"* $\rightarrow$ Tối ưu hóa bằng `<Image>`, Font Optimization.
+- **INP (Interactivity):** *"Trang web có phản hồi nhanh không?"* $\rightarrow$ Tối ưu hóa bằng Code Splitting.
+- **CLS (Stability):** *"Giao diện có ổn định không?"* $\rightarrow$ Tối ưu hóa bằng `<Image>`, Font Optimization.
+
+### 21.2. Ví dụ mã nguồn minh họa (Example)
+Tích hợp Vercel Analytics để dễ dàng theo dõi các chỉ số Core Web Vitals (CWV).
+
+1. **Cài đặt thư viện (Install package):**
+   ```bash
+   npm i @vercel/analytics
+   ```
+
+2. **Thêm component `<Analytics />` vào Root Layout (`app/layout.tsx`):**
+   ```tsx
+   // app/layout.tsx
+
+   import { Analytics } from '@vercel/analytics/react';
+
+   export default function RootLayout({ children }: { children: React.ReactNode }) {
+     return (
+       <html lang="en">
+         <body>
+           {children}
+           <Analytics /> {/* Thêm component Analytics tại đây */}
+         </body>
+       </html>
+     );
+   }
+   ```
+
+
+
+
 
 
 
