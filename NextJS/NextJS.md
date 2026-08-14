@@ -1011,6 +1011,726 @@ Tích hợp Vercel Analytics để dễ dàng theo dõi các chỉ số Core Web
    }
    ```
 
+---
+
+## 22. Using CSS Modules (Sử dụng CSS Modules)
+
+**CSS Modules** là phương pháp viết CSS với phạm vi cục bộ (locally scoped) dành riêng cho một component cụ thể. Khi bạn import một file CSS Module, Next.js tự động sinh ra các tên class duy nhất (unique class names), giúp tránh hoàn toàn hiện tượng xung đột tên class giữa các component khác nhau. Đây là cách được tích hợp sẵn và khuyến nghị sử dụng khi xử lý CSS ở cấp độ component trong Next.js.
+
+Để sử dụng, bạn chỉ cần đặt tên file theo quy ước `[name].module.css`.
+
+### 22.1. Cấu trúc thư mục minh họa (Structure Diagram)
+
+```text
+app/
+└── components/
+    ├── Button.tsx           <-- Component
+    └── Button.module.css    <-- File CSS dành riêng cho Button
+```
+
+### 22.2. Ví dụ mã nguồn minh họa (Example)
+
+#### A. File CSS Module (`Button.module.css`)
+```css
+/* Tên class này sẽ được tự động biến đổi thành một chuỗi duy nhất */
+.error {
+  background-color: red;
+  color: white;
+}
+```
+
+#### B. Sử dụng trong Component (`Button.tsx`)
+```tsx
+import styles from './Button.module.css';
+
+export default function Button() {
+  return (
+    <button
+      type="button"
+      // `styles.error` sẽ là tên class được sinh tự động, ví dụ: "Button_error__12345"
+      className={styles.error}
+    >
+      Delete
+    </button>
+  );
+}
+```
+
+---
+
+## 23. Integrating Sass/SCSS (Tích hợp Sass/SCSS)
+
+**Sass/SCSS** là một CSS preprocessor (trình tiền xử lý CSS) mở rộng khả năng của CSS thuần với các tính năng mạnh mẽ:
+
+- **Variables (Biến):** Lưu trữ các giá trị có thể tái sử dụng (màu sắc, font size).
+- **Nesting (Lồng nhau):** Viết các quy tắc CSS lồng vào nhau theo đúng cấu trúc cây phân cấp HTML.
+- **Mixins:** Tạo ra các khối style có thể tái sử dụng kèm tham số truyền vào.
+- **Partials & Imports:** Chia nhỏ CSS thành các module quản lý dễ dàng.
+
+### 23.1. Cài đặt (Installation)
+Mở Terminal và cài đặt gói `sass`:
+
+```bash
+npm install sass
+# hoặc
+yarn add sass
+```
+
+### 23.2. Cấu trúc thư mục & Khai báo biến (Structure & Global Variables)
+
+```text
+app/
+├── styles/
+│   └── _variables.scss      // File chứa các biến toàn cục
+└── components/
+    ├── Card.jsx
+    └── Card.module.scss     // Sử dụng SCSS module cho Component
+```
+
+#### A. File biến toàn cục (`app/styles/_variables.scss`)
+```scss
+// Khai báo các biến toàn cục
+$primary-color: #8a2be2;
+$border-radius: 12px;
+$card-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+```
+
+#### B. File SCSS Module (`app/components/Card.module.scss`)
+```scss
+// Import các biến từ file partial
+@import '../styles/variables';
+
+.card {
+  padding: 1.5rem;
+  border-radius: $border-radius;
+  box-shadow: $card-shadow;
+  background-color: white;
+
+  h3 {
+    margin-top: 0;
+    color: $primary-color;
+  }
+
+#### C. Sử dụng trong Component (`app/components/Card.jsx`)
+```jsx
+// Cách sử dụng hoàn toàn giống như CSS Modules thông thường
+import styles from './Card.module.scss';
+
+export default function Card({ title, content }) {
+  return (
+    <div className={styles.card}>
+      <h3>{title}</h3>
+      <p>{content}</p>
+    </div>
+  );
+}
+```
+
+---
+
+## 24. Styled-components with Server Components (Styled-components với Server Components)
+
+**Styled-components** là một thư viện CSS-in-JS cho phép bạn viết mã CSS trực tiếp bên trong các file JavaScript/TypeScript thông qua cú pháp tagged template literals.
+
+- **Ưu điểm:** Tạo kiểu dáng động dựa trên props, tự động giới hạn phạm vi (automatic scoping), không cần lo lắng về việc đặt tên class.
+
+### 24.1. Thách thức đối với App Router (Challenge with App Router)
+Styled-components yêu cầu một môi trường runtime trên trình duyệt (browser runtime environment) để chèn (inject) các đoạn mã CSS vào DOM. Tuy nhiên, **Server Components** được render hoàn toàn trên server - nơi môi trường này không tồn tại.
+
+### 24.2. Giải pháp (Solution)
+1. Tất cả các component sử dụng styled-components **bắt buộc phải là Client Components** (được đánh dấu với `"use client";`).
+2. Cần khởi tạo một **Style Registry** để thu thập tất cả các styles được tạo ra trong quá trình render trên server, sau đó chèn chúng vào thẻ `<head>` của file HTML gửi về cho client.
+
+### 24.3. Cài đặt & Khởi tạo Style Registry (Installation & Setup)
+
+1. **Cài đặt thư viện (Install library):**
+   ```bash
+   npm install styled-components
+   ```
+
+2. **Tạo tệp Style Registry (`app/lib/StyledComponentsRegistry.jsx`):**
+   ```jsx
+   'use client'
+
+   import React, { useState } from 'react'
+   import { useServerInsertedHTML } from 'next/navigation'
+   import { ServerStyleSheet, StyleSheetManager } from 'styled-components'
+
+   export default function StyledComponentsRegistry({ children }) {
+     const [styledComponentsStyleSheet] = useState(() => new ServerStyleSheet())
+
+     useServerInsertedHTML(() => {
+       const styles = styledComponentsStyleSheet.getStyleElement()
+       styledComponentsStyleSheet.instance.clearTag()
+       return <>{styles}</>
+     })
+
+     if (typeof window !== 'undefined') return <>{children}</>
+
+     return (
+       <StyleSheetManager sheet={styledComponentsStyleSheet.instance}>
+         {children}
+       </StyleSheetManager>
+     )
+   }
+   ```
+
+3. **Sử dụng Registry trong Root Layout (`app/layout.jsx`):**
+   ```jsx
+   import StyledComponentsRegistry from './lib/StyledComponentsRegistry';
+
+   export default function RootLayout({ children }) {
+     return (
+       <html>
+         <body>
+           <StyledComponentsRegistry>{children}</StyledComponentsRegistry>
+         </body>
+       </html>
+     );
+   }
+   ```
+
+### 24.4. Ví dụ mã nguồn minh họa Component (`app/components/StyledButton.jsx`)
+
+```jsx
+'use client'; // BẮT BUỘC phải là a Client Component
+
+import styled from 'styled-components';
+
+// Định dạng kiểu dáng động dựa trên prop '$primary'
+const Button = styled.button`
+  background: ${props => props.$primary ? '#BF4F74' : 'white'};
+  color: ${props => props.$primary ? 'white' : '#BF4F74'};
+  font-size: 1em;
+  margin: 1em;
+  padding: 0.5em 1.5em;
+  border: 2px solid #BF4F74;
+  border-radius: 3px;
+  cursor: pointer;
+`;
+
+export default function StyledButton({ primary, children }) {
+  // Lưu ý: styled-components khuyến nghị sử dụng tiền tố $ cho props
+  // để tránh việc chúng bị tự động truyền xuống phần tử DOM không cần thiết.
+  return <Button $primary={primary}>{children}</Button>;
+}
+---
+
+## 25. Tailwind CSS in the App Router (Tailwind CSS trong App Router)
+
+**Tailwind CSS** là một utility-first framework. Thay vì viết mã CSS tùy chỉnh truyền thống, bạn xây dựng giao diện bằng cách áp dụng trực tiếp các class tiện ích có sẵn vào trong JSX.
+
+- **Ưu điểm:** Tốc độ phát triển UI cực kỳ nhanh, giao diện nhất quán, dễ dàng tùy biến, và tự động loại bỏ (purge) các class CSS không sử dụng để tối ưu dung lượng sản phẩm đầu ra (production).
+
+### 25.1. Cài đặt & Cấu hình (Installation & Configuration)
+
+1. **Cài đặt các gói phụ thuộc cần thiết:**
+   ```bash
+   npm install -D tailwindcss postcss autoprefixer
+   ```
+
+2. **Khởi tạo các file cấu hình:**
+   ```bash
+   npx tailwindcss init -p
+   ```
+
+3. **Cấu hình đường dẫn mã nguồn trong `tailwind.config.js`:**
+   ```js
+   /** @type {import('tailwindcss').Config} */
+   module.exports = {
+     content: [
+       './pages/**/*.{js,ts,jsx,tsx,mdx}',
+       './components/**/*.{js,ts,jsx,tsx,mdx}',
+       './app/**/*.{js,ts,jsx,tsx,mdx}', // Bắt buộc thêm dòng này cho App Router
+     ],
+     theme: {
+       extend: {},
+     },
+     plugins: [],
+   }
+   ```
+
+4. **Thêm các directives của Tailwind vào file CSS toàn cục (`app/globals.css`):**
+   ```css
+   @tailwind base;
+   @tailwind components;
+   @tailwind utilities;
+   ```
+
+5. **Import file CSS toàn cục vào Root Layout (`app/layout.jsx`):**
+   ```jsx
+   import './globals.css';
+
+   export default function RootLayout({ children }) {
+     // ...
+   }
+   ```
+
+### 25.2. Quy trình Build mã nguồn của Tailwind (Tailwind Build Process)
+
+```text
+[Component.jsx]
+  │
+  ▼
+// Viết các utility classes trực tiếp trong `className`
+<div className="p-6 max-w-sm mx-auto bg-white rounded-xl shadow-lg flex items-center space-x-4">
+  │
+  ▼
+[Tailwind Build Process]
+// Quét tất cả các file, tìm các class đang được sử dụng,
+// và tự động sinh ra một file CSS đã được tối ưu hóa tối đa.
+  │
+  ▼
+[Final Optimized CSS]
+// Chỉ chứa duy nhất các class thực sự được dùng trong dự án
+.p-6 { padding: 1.5rem; }
+.max-w-sm { max-width: 24rem; }
+...
+```
+
+---
+
+## 26. Adding Custom Tailwind CSS Classes (Thêm các class tùy chỉnh trong Tailwind)
+
+Để duy trì một hệ thống thiết kế (Design System) đồng bộ, bạn thường cần thêm các giá trị tùy chỉnh (như màu thương hiệu, phông chữ, hoặc hiệu ứng chuyển động) vào Tailwind. Điều này được thực hiện bên trong tệp `tailwind.config.ts` (hoặc `.js`).
+
+Cách làm chuẩn nhất (Best practice) là thêm các giá trị tùy biến của bạn bên trong đối tượng `theme.extend`. Điều này giúp **bổ sung thêm** vào theme mặc định của Tailwind thay vì **ghi đè hoàn toàn** nó.
+
+Sau khi định nghĩa, bạn có thể sử dụng các class tiện ích tùy chỉnh này ở bất kỳ đâu trong ứng dụng.
+
+### 26.1. Ví dụ cấu hình tùy chỉnh (`tailwind.config.ts`)
+
+```ts
+// tailwind.config.ts
+
+import type { Config } from 'tailwindcss';
+
+const config: Config = {
+  content: [
+    './app/**/*.{js,ts,jsx,tsx,mdx}',
+  ],
+  theme: {
+    // Luôn luôn đặt các tùy chỉnh bên trong `extend`
+    extend: {
+      // 1. Thêm màu thương hiệu tùy chỉnh (Custom brand colors)
+      colors: {
+        brand: {
+          primary: '#0070f3',   // -> Sử dụng: bg-brand-primary
+          secondary: '#ff4081', // -> Sử dụng: text-brand-secondary
+        },
+      },
+
+      // 2. Thêm khoảng cách tùy chỉnh (Custom spacing)
+      spacing: {
+        '128': '32rem', // -> Sử dụng: p-128, w-128
+      },
+
+      // 3. Thêm hiệu ứng chuyển động tùy chỉnh (Custom animations)
+      keyframes: {
+        'slide-in-down': {
+          '0%': { transform: 'translateY(-100%)', opacity: '0' },
+          '100%': { transform: 'translateY(0)', opacity: '1' },
+        },
+      },
+      animation: {
+        'slide-in-down': 'slide-in-down 0.5s ease-out', // -> Sử dụng: animate-slide-in-down
+      },
+    },
+  },
+  plugins: [],
+};
+
+export default config;
+```
+
+---
+
+## 27. State Management - Overview & Challenges in Next.js (Tổng quan & Thách thức quản lý State trong Next.js)
+
+Trong Next.js App Router, việc quản lý state trở nên phức tạp hơn do sự tách biệt hoàn toàn giữa Server và Client:
+
+- **Server Components:**
+  - Chạy trên server, hoàn toàn không có trạng thái (**stateless**), và **không thể sử dụng các React Hooks** như `useState` hay `useEffect`.
+  - Lý tưởng cho việc fetch dữ liệu và truy cập các tài nguyên backend.
+  - Không thể tương tác trực tiếp với state ở phía client.
+- **Client Components (`"use client"`):**
+  - Hoạt động tương tự như các React components truyền thống.
+  - Có thể sử dụng hooks, quản lý state và xử lý các sự kiện người dùng (events).
+  - Tất cả các thư viện quản lý state (Context API, Redux, Zustand...) **bắt buộc phải được sử dụng bên trong Client Components**.
+- **Hydration (Quá trình Hydration):**
+  - Là quá trình "thổi sức sống" vào mã HTML tĩnh được render từ server bằng cách gắn các lắng nghe sự kiện JavaScript và state phía client, làm cho trang web có khả năng tương tác.
+  - Đồng bộ hóa state ban đầu giữa Server và Client là điều cực kỳ quan trọng để tránh các lỗi hydration mismatch.
+
+---
+
+## 28. React Context & Server Components (React Context và Server Components)
+
+**React Context API** là phương pháp chia sẻ state giữa các components mà không cần truyền props thủ công qua nhiều cấp (tránh hiện tượng prop drilling).
+
+- **Pros (Ưu điểm):**
+  - Tích hợp sẵn trong React, không cần cài đặt thêm thư viện ngoài.
+  - Dễ học và dễ sử dụng cho các ứng dụng quy mô vừa và nhỏ.
+  - Rất phù hợp cho các dạng state hiếm khi thay đổi, chẳng hạn như Giao diện (light/dark mode), Ngôn ngữ (language), hoặc Thông tin người dùng (user info).
+- **Cons (Nhược điểm):**
+  - Có thể gây ra việc re-render không cần thiết cho tất cả các component con đọc context khi state thay đổi.
+  - Chưa được tối ưu cho các cập nhật state liên tục và phức tạp.
+- **Lưu ý quan trọng trong Next.js:**
+  - **Context Provider BẮT BUỘC phải đặt bên trong một Client Component** (`"use client"`).
+
+### 28.1. Sơ đồ phân cấp Component & Luồng dữ liệu (Hierarchy Diagram & Flow)
+
+```text
+(Server) RootLayout
+ └── (Client) "use client" <ThemeProvider>
+      └── (Server) {children} - (e.g., HomePage)
+           └── (Client) "use client" <ThemeToggleButton />
+```
+
+**Luồng hoạt động (Flow):**
+1. **RootLayout (Server Component):** Render ra `<ThemeProvider>`.
+2. **ThemeProvider (Client Component):** Khởi tạo state và cung cấp nó thông qua Context.
+3. **`children` (Server hoặc Client Components):** Được render bên trong Provider (Server Components nằm bên trong Provider vẫn được hỗ trợ nếu được truyền dưới dạng prop `children`).
+4. **Client Components:** Chỉ có các Client Components nằm trong cây component mới có thể đọc và truy cập state từ Context (ví dụ: `<ThemeToggleButton />`).
+
+### 28.2. Ví dụ mã nguồn minh họa (Example)
+
+#### A. Khởi tạo Context Provider (`app/contexts/ThemeContext.jsx`)
+```jsx
+'use client';
+
+import { createContext, useState, useContext } from 'react';
+
+// 1. Tạo Context
+const ThemeContext = createContext();
+
+// 2. Tạo Provider Component
+export function ThemeProvider({ children }) {
+  const [theme, setTheme] = useState('light');
+
+  const toggleTheme = () => {
+    setTheme((prevTheme) => (prevTheme === 'light' ? 'dark' : 'light'));
+  };
+
+  return (
+    <ThemeContext.Provider value={{ theme, toggleTheme }}>
+      {children}
+    </ThemeContext.Provider>
+  );
+}
+
+// 3. Tạo Custom Hook để dễ dàng tiêu thụ Context
+export function useTheme() {
+  return useContext(ThemeContext);
+}
+```
+
+#### C. Sử dụng Context trong Client Component (`app/components/ThemeSwitcher.jsx`)
+```jsx
+'use client';
+
+import { useTheme } from '@/contexts/ThemeContext';
+
+export default function ThemeSwitcher() {
+  const { theme, toggleTheme } = useTheme();
+
+  return (
+    <button
+      onClick={toggleTheme}
+      className={`p-2 rounded ${theme === 'light' ? 'bg-gray-800 text-white' : 'bg-white text-black'}`}
+    >
+      Switch to {theme === 'light' ? 'Dark' : 'Light'} Mode
+    </button>
+  );
+}
+```
+
+---
+
+## 29. Redux Toolkit & App Router (Redux Toolkit và App Router)
+
+**Redux Toolkit (RTK)** là bộ công cụ chính thức và được khuyến nghị sử dụng để viết logic Redux. RTK giúp đơn giản hóa việc khởi tạo Store và viết các Reducers.
+
+- **Pros (Ưu điểm):**
+  - Quản lý state tập trung, có thể dự đoán được (predictable state management).
+  - Hệ sinh thái mạnh mẽ (DevTools, middleware như Redux Thunk/Saga).
+  - Tối ưu hiệu năng tốt nhờ `reselect` và `Immer`.
+  - Phù hợp cho các ứng dụng quy mô lớn, phức tạp với nhiều trạng thái toàn cục (global state).
+- **Cons (Nhược điểm):**
+  - Vẫn còn một số mã boilerplate (dù đã được RTK giảm thiểu đáng kể).
+  - Độ dốc học tập (learning curve) cao hơn so với các giải pháp khác.
+- **Lưu ý quan trọng trong Next.js:**
+  - Tương tự như Context API, Redux Store **chỉ tồn tại phía Client**. Provider của Redux bắt buộc phải được đặt trong một Client Component (`"use client"`).
+
+### 29.1. Sơ đồ phân cấp & Luồng hoạt động (Hierarchy Diagram & Flow)
+
+```text
+(Server) RootLayout
+ └── (Client) "use client" <StoreProvider>
+      └── (Server) {children} - (e.g., DashboardPage)
+           └── (Client) "use client" <CounterComponent />
+```
+
+**Luồng hoạt động (Flow):**
+1. **Store được khởi tạo một lần duy nhất ở phía client.**
+2. **StoreProvider (Client Component):** Cung cấp Store này tới toàn bộ cây component con.
+3. **Child Client Components:** Có thể tương tác với Store bằng cách sử dụng các hooks `useDispatch` và `useSelector`.
+
+### 29.2. Cài đặt & Các bước triển khai (Installation & Setup Steps)
+
+1. **Cài đặt các gói thư viện (Installation):**
+   ```bash
+   npm install @reduxjs/toolkit react-redux
+   ```
+
+2. **Tạo một Slice (`/lib/features/counter/counterSlice.js`):**
+   ```js
+   import { createSlice } from '@reduxjs/toolkit';
+
+   const initialState = { value: 0 };
+
+   const counterSlice = createSlice({
+     name: 'counter',
+     initialState,
+     reducers: {
+       increment: (state) => {
+         state.value += 1;
+       },
+       decrement: (state) => {
+         state.value -= 1;
+       },
+     },
+   });
+
+   export const { increment, decrement } = counterSlice.actions;
+   export default counterSlice.reducer;
+   ```
+
+3. **Tạo Store (`/lib/store.js`):**
+   ```js
+   import { configureStore } from '@reduxjs/toolkit';
+   import counterReducer from './features/counter/counterSlice';
+
+   export const makeStore = () => {
+     return configureStore({
+       reducer: {
+         counter: counterReducer,
+       },
+     });
+   };
+   ```
+
+4. **Tạo StoreProvider (`/app/StoreProvider.jsx`):**
+
+   ```jsx
+   'use client';
+
+   import { useRef } from 'react';
+   import { Provider } from 'react-redux';
+   import { makeStore } from '../lib/store';
+
+   export default function StoreProvider({ children }) {
+     const storeRef = useRef(null);
+     if (!storeRef.current) {
+       // Tạo một instance store mới trong lần đầu tiên component render
+       storeRef.current = makeStore();
+     }
+
+     return <Provider store={storeRef.current}>{children}</Provider>;
+   }
+   ```
+
+5. **Sử dụng trong `app/layout.js` và Component (`components/Counter.js`):**
+
+   *Thêm vào Root Layout (`app/layout.js`):*
+   ```jsx
+   // app/layout.js
+   import StoreProvider from './StoreProvider';
+
+   export default function RootLayout({ children }) {
+     return (
+       <html lang="en">
+         <body>
+           <StoreProvider>{children}</StoreProvider>
+         </body>
+       </html>
+     );
+   }
+   ```
+
+   *Sử dụng trong Component (`components/Counter.js`):*
+   ```jsx
+   // components/Counter.js
+   'use client';
+
+   import { useSelector, useDispatch } from 'react';
+   import { increment, decrement } from '@/lib/features/counter/counterSlice';
+
+   export function Counter() {
+     const count = useSelector((state) => state.counter.value);
+     const dispatch = useDispatch();
+
+     return (
+       <div>
+         <button onClick={() => dispatch(decrement())}>-</button>
+         <span>{count}</span>
+         <button onClick={() => dispatch(increment())}>+</button>
+       </div>
+     );
+   }
+   ```
+
+---
+
+## 30. Recoil & Zustand (Thư viện quản lý state hiện đại Recoil & Zustand)
+
+Đây là các thư viện quản lý state hiện đại, tối giản (minimalist) và hoạt động dựa trên React Hooks.
+
+### 30.1. Zustand
+- **Khái niệm:** 'Zustand' có nghĩa là 'trạng thái' (state) trong tiếng Đức.
+- **Đặc điểm:** Cực kỳ đơn giản với mã boilerplate tối thiểu.
+- **Cơ chế:** State được lưu trữ trong một Store độc lập nằm ngoài cây React, được truy cập thông qua các Custom Hooks.
+- **Không cần Provider:** **Không cần bọc ứng dụng trong bất kỳ Provider nào**.
+- **Phù hợp nhất cho (Best for):** Các dự án ở mọi quy mô cần một giải pháp quản lý state nhẹ nhàng và dễ sử dụng.
+
+#### Ví dụ mã nguồn với Zustand:
+1. **Cài đặt:** `npm install zustand`
+2. **Tạo Store (`/stores/bearStore.js`):**
+   ```js
+   import { create } from 'zustand';
+
+   const useBearStore = create((set) => ({
+     bears: 0,
+     increasePopulation: () => set((state) => ({ bears: state.bears + 1 })),
+     removeAllBears: () => set({ bears: 0 }),
+   }));
+
+   export default useBearStore;
+   ```
+3. **Sử dụng trong Component (`/components/BearCounter.js`):**
+   ```jsx
+   'use client';
+
+   import useBearStore from '@/stores/bearStore';
+
+   function BearCounter() {
+     // Lấy state từ store
+     const bears = useBearStore((state) => state.bears);
+     return <h1>{bears} around here ...</h1>;
+   }
+
+   function Controls() {
+     // Lấy actions từ store
+     const increasePopulation = useBearStore((state) => state.increasePopulation);
+     return <button onClick={increasePopulation}>one up</button>;
+   }
+   ```
+
+### 30.2. Recoil
+- **Phát triển bởi:** Facebook.
+- **Cơ chế:** Sử dụng các khái niệm **'atoms'** (đơn vị state riêng lẻ) và **'selectors'** (state phái sinh/derived state).
+- **Tối ưu re-render:** Cho phép tối ưu hóa việc re-render tốt hơn vì các components chỉ đăng ký nhận dữ liệu từ đúng các atoms mà chúng thực sự cần.
+- **Phù hợp nhất cho (Best for):** Các ứng dụng phức tạp cần quản lý hiệu quả các state có tính chất phụ thuộc lẫn nhau. *Yêu cầu phải bọc trong Provider (`RecoilRoot`).*
+
+### 30.3. State Persistence (Lưu trữ trạng thái bền vững)
+Vấn đề cốt lõi mà **State Persistence** giải quyết là tính chất tạm thời (temporary nature) của state khi lưu trong bộ nhớ RAM. Mặc định, state tạo bởi Zustand (hay bất kỳ thư viện nào) lưu trong bộ nhớ JavaScript của trình duyệt. Điều này dẫn đến:
+- Khi người dùng **tải lại trang (F5)**, bộ nhớ JS bị xóa sạch và khởi tạo lại từ đầu.
+- Khi người dùng **đóng tab hoặc trình duyệt**, bộ nhớ bị hủy hoàn toàn.
+
+**Hậu quả:** Ứng dụng khôi phục về giá trị khởi tạo ban đầu, gây trải nghiệm người dùng rất tồi tệ (mất Giỏ hàng - Shopping Cart, mất Cấu hình giao diện - User Preferences, hoặc mất dữ liệu Form đang nhập).
+
+**Giải pháp State persistence:** Đưa state từ bộ nhớ tạm thời và lưu vào bộ nhớ bền vững hơn trên thiết bị người dùng (như `localStorage` hay `sessionStorage`).
+
+#### Cấu hình State Persistence với Zustand:
+
+##### 1. Tạo Persisted Store (`stores/settingsStore.ts`)
+Sử dụng middleware `persist` và cung cấp một `name` duy nhất để đóng vai trò làm key trong `localStorage`. Tính năng này tự động lưu và rehydrate (khôi phục) state của bạn.
+
+```typescript
+// stores/settingsStore.ts
+import { create } from 'zustand';
+import { persist } from 'zustand/middleware';
+
+interface SettingsState {
+  theme: 'light' | 'dark';
+  toggleTheme: () => void;
+}
+
+export const useSettingsStore = create<SettingsState>()(
+  // 1. Bọc định nghĩa store trong hàm `persist`
+  persist(
+    (set) => ({
+      theme: 'light',
+      toggleTheme: () =>
+        set((state) => ({
+          theme: state.theme === 'light' ? 'dark' : 'light',
+        })),
+    }),
+    {
+      // 2. Đặt một tên duy nhất làm key trong localStorage (BẮT BUỘC)
+      name: 'user-settings-storage',
+    }
+  )
+);
+```
+
+##### 2. Xử lý Hydration trong Next.js / SSR (`components/ThemeSwitcher.tsx`)
+Trì hoãn việc render giao diện UI có sử dụng store cho đến khi component đã được mount hoàn toàn phía client. Điều này giúp ngăn ngừa triệt để lỗi **"hydration mismatch"** giữa server và client.
+
+```tsx
+// components/ThemeSwitcher.tsx
+'use client';
+
+import { useState, useEffect } from 'react';
+import { useSettingsStore } from '../stores/settingsStore';
+
+export function ThemeSwitcher() {
+  const { theme, toggleTheme } = useSettingsStore();
+  // State theo dõi xem component đã mounted trên client chưa
+  const [isHydrated, setIsHydrated] = useState(false);
+
+  // Chỉ chuyển cờ flag sang true sau khi component đã mount phía client
+  useEffect(() => {
+    setIsHydrated(true);
+  }, []);
+
+  // Render một trạng thái chờ (fallback state) cho tới khi quá trình hydration hoàn tất
+  if (!isHydrated) {
+    return null; // Hoặc trả về một loading skeleton
+  }
+
+  // Khi đã hydrated, render component với đúng state khôi phục
+  return (
+    <div>
+      <p>Current theme: {theme}</p>
+      <button onClick={toggleTheme}>Toggle Theme</button>
+    </div>
+  );
+}
+```
+
+---
+
+## 31. Handling State Hydration (Xử lý State Hydration)
+
+**Hydration** là quá trình React phía client tiếp quản mã HTML được render bởi server.
+
+- **Vấn đề (The Problem):** Nếu state ban đầu ở phía client không trùng khớp hoàn toàn với những gì đã được render trên server, React sẽ ném ra lỗi **"Hydration Mismatch"**.
+  - *Ví dụ:* Server render trang web với theme `'light'`, nhưng client khởi tạo state theme là `'dark'` (do đọc từ `localStorage`).
+- **Giải pháp (The Solution):** Truyền state ban đầu từ **Server Component** xuống cho **Client Component** thông qua **props**. Client Component sẽ dùng các props này để khởi tạo state của nó, đảm bảo tính đồng nhất tuyệt đối.
+
+### 31.1. Luồng xử lý Hydration chuẩn (Correct Hydration Flow Diagram)
+
+```text
+1. Server: ServerComponent thực hiện fetch dữ liệu (ví dụ: initialTodos).
+2. Server -> Client: Truyền initialTodos thông qua props tới ClientComponent.
+3. Client: ClientComponent nhận initialTodos và sử dụng làm giá trị khởi tạo cho useState:
+   const [todos, setTodos] = useState(initialTodos).
+4. Kết quả (Result): HTML được render từ server và state khởi tạo phía client trùng khớp hoàn toàn.
+   Hydration thành công rực rỡ (Hydration succeeds)!
+```
+
+
+
 
 
 
