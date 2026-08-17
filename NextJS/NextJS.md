@@ -1727,7 +1727,883 @@ export function ThemeSwitcher() {
    const [todos, setTodos] = useState(initialTodos).
 4. Kết quả (Result): HTML được render từ server và state khởi tạo phía client trùng khớp hoàn toàn.
    Hydration thành công rực rỡ (Hydration succeeds)!
+---
+
+## 32. Authentication & Authorization - Core Concepts (Khái niệm cốt lõi)
+
+### 32.1. Authentication (Xác thực)
+- **Khái niệm:** Trả lời cho câu hỏi: **"Bạn là ai?" ("Who are you?")**
+- **Mục đích:** Xác minh danh tính của người dùng, thường thông qua `username/password`, tài khoản mạng xã hội (Google, GitHub, Facebook...), v.v.
+- **Ví dụ thực tế:** Hành động đăng nhập vào Gmail.
+
+### 32.2. Authorization (Phân quyền)
+- **Khái niệm:** Trả lời cho câu hỏi: **"Bạn được phép làm gì?" ("What are you allowed to do?")**
+- **Mục đích:** Xác định quyền truy cập tài nguyên của một người dùng đã được xác thực thành công.
+- **Ví dụ thực tế:** Chỉ có người dùng mang quyền `admin` mới có thể truy cập vào trang Admin Dashboard (`/admin`).
+
+---
+
+## 33. Setting Up NextAuth.js in the App Router (Thiết lập NextAuth.js trong App Router)
+
+**NextAuth.js** (Auth.js) là thư viện xác thực mã nguồn mở hoàn thiện nhất dành riêng cho Next.js, hỗ trợ cả OAuth (Google, GitHub, Facebook...), Email/Password và Session Management.
+
+### 33.1. Luồng hoạt động xác thực OAuth (OAuth Authentication Flow)
+
+```text
+participant User
+participant Client as Browser (Next.js App)
+participant Server as Next.js Server (Route Handler)
+participant Provider as Google/GitHub
+
+User-->>Client: 1. Clicks "Sign in with Google"
+Client->>Server: 2. Calls signIn('google')
+Server-->>Provider: 3. Redirects to Google sign-in page
+Provider-->>User: 4. Requests authentication
+User-->>Provider: 5. Signs in successfully
+Provider-->>Server: 6. Sends back authorization code
+Server-->>Provider: 7. Exchanges code for access token
+Server-->>Server: 8. Creates session & saves to cookie
+Server-->>Client: 9. Returns session to client
+Client-->>User: 10. Displays "Signed in" status
 ```
+
+---
+
+## 34. Example: Setting up NextAuth.js (Ví dụ thiết lập NextAuth.js)
+
+### 34.1. Bước 1: Cài đặt thư viện (Installation)
+Chạy lệnh cài đặt gói `next-auth`:
+
+```bash
+npm install next-auth
+```
+
+### 34.2. Bước 2: Tạo Route Handler (`app/api/auth/[...nextauth]/route.ts`)
+Tạo một Catch-all Route Handler tại đường dẫn `app/api/auth/[...nextauth]/route.ts` để xử lý tất cả các yêu cầu API liên quan đến xác thực (như `signIn`, `signOut`, `callback`):
+
+```typescript
+// app/api/auth/[...nextauth]/route.ts
+import NextAuth from "next-auth";
+import GoogleProvider from "next-auth/providers/google";
+import CredentialsProvider from "next-auth/providers/credentials";
+
+const handler = NextAuth({
+  providers: [
+    GoogleProvider({
+      clientId: process.env.GOOGLE_CLIENT_ID!,
+      clientSecret: process.env.GOOGLE_CLIENT_SECRET!,
+    }),
+    CredentialsProvider({
+      // ... cấu hình cho đăng nhập username/password
+    }),
+  ],
+  // pages: { signIn: '/login' }, // Trang đăng nhập tùy chỉnh (nếu có)
+});
+
+export { handler as GET, handler as POST };
+---
+
+## 35. Building a Custom Auth with Server Actions (Tự xây dựng Auth tùy chỉnh với Server Actions)
+
+Dành cho các trường hợp bạn muốn kiểm soát hoàn toàn logic xác thực của ứng dụng.
+
+### 35.1. Khi nào nên sử dụng? (When to use it?)
+- Các hệ thống xác thực riêng biệt (Proprietary authentication systems), không sử dụng OAuth.
+- Cần tích hợp sâu với cơ sở dữ liệu (Database) có sẵn.
+- Không muốn phụ thuộc vào thư viện bên thứ ba.
+
+### 35.2. Phương pháp tiếp cận (Approach)
+- Form đăng nhập gọi trực tiếp tới một **Server Action**.
+- Server Action xử lý các logic: kiểm tra cơ sở dữ liệu, hash mật khẩu.
+- Khi thành công, tạo một session (ví dụ sử dụng `iron-session` hoặc `jose`) và lưu vào cookie an toàn có cờ **`httpOnly`**.
+
+### 35.3. Ví dụ mã nguồn minh họa (`app/login/actions.ts`)
+Sử dụng thư viện như `jose` để tạo JWT hoặc `iron-session` để mã hóa cookie:
+
+```typescript
+// app/login/actions.ts
+'use server';
+
+import { sealData } from 'iron-session/edge';
+import { cookies } from 'next/headers';
+import { redirect } from 'next/navigation';
+
+export async function login(formData: FormData) {
+  const email = formData.get('email');
+
+  // 1. Lấy thông tin người dùng từ cơ sở dữ liệu
+  // const user = await getUserByEmail(email);
+
+  // 2. Xác minh mật khẩu (ví dụ dùng bcrypt.compare)
+  // const isValid = await compare(password, user.password);
+
+  // Giả định xác thực thành công
+  const user = { id: 1, email, isAdmin: true };
+
+  // 3. Tạo một session an toàn (mã hóa)
+  const session = await sealData(user, {
+    password: process.env.SECRET_COOKIE_PASSWORD!,
+  });
+
+  // 4. Lưu session vào Cookie an toàn (httpOnly)
+  cookies().set('session', session, {
+    httpOnly: true,
+    secure: process.env.NODE_ENV === 'production',
+    maxAge: 60 * 60 * 24 * 7, // 1 tuần
+    path: '/',
+  });
+
+  // 5. Chuyển hướng người dùng sang Dashboard
+  redirect('/dashboard');
+}
+```
+
+---
+
+## 36. Implementing JWT Authentication & Secure APIs (Xác thực JWT và Bảo mật APIs)
+
+- **JWT (JSON Web Token):** Là một chuỗi JSON được mã hóa được sử dụng để trao đổi thông tin an toàn giữa các bên.
+- **Cấu trúc (Structure):** Gồm 3 phần phân tách bởi dấu chấm (`.`): `Header`, `Payload` (chứa dữ liệu), `Signature` (chữ ký). Chữ ký đảm bảo token không bị can thiệp hay thay đổi trên đường truyền.
+- **Ứng dụng (Application):** Lý tưởng để bảo vệ các **API Routes** hoặc **Route Handlers** trong Next.js. Client gửi kèm JWT trong mỗi yêu cầu để chứng minh đã được xác thực.
+
+### 36.1. Luồng bảo mật API với JWT (API Security Flow with JWT)
+
+```text
+participant Client
+participant API as Next.js API Route
+participant AuthServer as Server (Login)
+
+Client->>AuthServer: 1. Login (username, password)
+AuthServer-->>Client: 2. Returns JWT
+Client->>Client: 3. Store JWT (localStorage/cookie)
+
+loop For each request to a protected API
+    Client->>API: 4. Send request + JWT in Header (Authorization: Bearer <token>)
+    API->>API: 5. Verify JWT signature
+    alt Signature valid
+        API-->>Client: 6a. Return data successfully
+    else Signature invalid/expired
+        API-->>Client: 6b. Return 401 Unauthorized error
+    end
+end
+### 36.2. Ví dụ bảo vệ API Route Handler (`app/api/secure-data/route.ts`)
+
+```typescript
+// app/api/secure-data/route.ts
+import { NextRequest, NextResponse } from 'next/server';
+import { jwtVerify } from 'jose';
+
+const JWT_SECRET = new TextEncoder().encode(process.env.JWT_SECRET!);
+
+export async function GET(req: NextRequest) {
+  const authHeader = req.headers.get('authorization');
+
+  if (!authHeader || !authHeader.startsWith('Bearer ')) {
+    return NextResponse.json({ message: 'Unauthorized' }, { status: 401 });
+  }
+
+  const token = authHeader.split(' ')[1];
+
+  try {
+    // Xác minh token JWT
+    const { payload } = await jwtVerify(token, JWT_SECRET);
+    console.log('JWT Payload:', payload);
+
+    // Logic thực thi khi token hợp lệ
+    return NextResponse.json({
+      data: `Secret data for user ID: ${payload.sub}`,
+    });
+  } catch (error) {
+    // Token không hợp lệ hoặc đã hết hạn
+    return NextResponse.json({ message: 'Invalid token' }, { status: 401 });
+  }
+}
+```
+
+---
+
+## 37. Role-Based Access Control - RBAC (Phân quyền dựa trên vai trò)
+
+**RBAC** là phương pháp hạn chế quyền truy cập hệ thống của người dùng đã được xác thực dựa trên vai trò (roles) của họ (ví dụ: `admin`, `editor`, `user`).
+
+### 37.1. Phương pháp triển khai trong Next.js (How to implement in Next.js)
+- **Middleware (`middleware.ts`):** Đóng vai trò là "Người gác cổng" (Gatekeeper). Nó chạy trước khi yêu cầu được xử lý, rất lý tưởng để kiểm tra vai trò và chuyển hướng nếu không được cấp quyền.
+- **Layouts:** Áp dụng cho một nhóm các routes. Có thể dùng để bọc các trang yêu cầu quyền cụ thể, hiển thị giao diện khác nhau, hoặc kiểm tra quyền ở cấp độ layout.
+
+### 37.2. Luồng phân quyền với Middleware (Authorization Flow with Middleware)
+
+```text
+Request to a route (e.g. /admin)
+       │
+       ▼
+[Middleware runs]
+       │
+       ▼
+[Get session/token from cookie]
+       ├── No session ──► [Redirect to /login]
+       │
+       └── Has session ──► [Read role from session]
+                                 ├── Role != 'admin' ──► [Redirect to home / or error page]
+                                 │
+                                 └── Role == 'admin' ──► [Allow request to proceed]
+                                                               │
+                                                               ▼
+                                                      [Render /admin page]
+```
+
+### 37.3. Ví dụ mã nguồn phân quyền với Middleware (`middleware.ts`)
+
+```typescript
+// middleware.ts (đặt tại thư mục gốc của dự án)
+import { NextResponse } from 'next/server';
+import type { NextRequest } from 'next/server';
+import { getIronSession } from 'iron-session/edge';
+
+export async function middleware(req: NextRequest) {
+  const res = NextResponse.next();
+  const session = await getIronSession(req, res, {
+    cookieName: 'session',
+    password: process.env.SECRET_COOKIE_PASSWORD!,
+  });
+
+  const { user } = session;
+
+  // Nếu truy cập trang admin nhưng không phải là admin
+  if (req.nextUrl.pathname.startsWith('/admin') && user?.isAdmin !== true) {
+    return NextResponse.redirect(new URL('/', req.url)); // Chuyển hướng về trang chủ
+  }
+
+  // Nếu chưa đăng nhập nhưng cố truy cập trang bị bảo vệ
+  if (req.nextUrl.pathname.startsWith('/dashboard') && !user) {
+    return NextResponse.redirect(new URL('/login', req.url));
+  }
+
+  return res;
+}
+
+---
+
+## 38. Testing Next.js Applications - Introduction & Objectives (Giới thiệu & Mục tiêu kiểm thử)
+
+### 38.1. Tại sao kiểm thử lại quan trọng? (Why is Testing Important?)
+- **Ensure Quality (Đảm bảo chất lượng):** Phát hiện lỗi sớm trước khi sản phẩm đến tay người dùng cuối.
+- **Increase Confidence (Tăng sự tự tin):** Tự tin hơn khi thực hiện refactor mã nguồn hoặc thêm các tính năng mới mà không sợ làm hỏng tính năng cũ.
+- **Living Documentation (Tài liệu sống):** Mã kiểm thử đóng vai trò như một bộ tài liệu mô tả chính xác cách mã nguồn hoạt động.
+- **Improve Architecture (Cải thiện kiến trúc):** Viết mã dễ kiểm thử (testable code) thường dẫn đến kiến trúc ứng dụng tốt hơn và decoupled hơn.
+
+### 38.2. Chương trình tổng quan (Agenda)
+1. **Unit Testing:** Với **Jest** dành cho Server & Client Components.
+2. **Integration Testing:** Với **React Testing Library (RTL)**.
+3. **End-to-End Testing:** Sử dụng **Cypress**.
+4. **Testing the Backend:** Kiểm thử **API Routes & Server Actions**.
+
+---
+
+## 39. The Testing Pyramid (Mô hình Kim tự tháp Kiểm thử)
+
+**Testing Pyramid** là mô hình trực quan hóa các cấp độ kiểm thử khác nhau cùng tỷ lệ phân bổ khuyến nghị giữa chúng.
+
+```text
+       /\
+      /  \        Top (Smallest): End-to-End (E2E) Tests (Fewest, slow, expensive)
+     / E2E\
+    /------\      Middle: Integration Tests (Moderate amount)
+   /  Integr\
+  /----------\    Bottom (Widest): Unit Tests (Most numerous, fast, cheap)
+ /    Unit    \
+/--------------\
+```
+
+- **Bottom (Đáy kim tự tháp - Rộng nhất) - Unit Tests:** Kiểm thử các đơn vị mã nhỏ nhất (các hàm, components đơn lẻ) một cách cô lập. Thực thi cực kỳ nhanh và chi phí thấp.
+- **Middle (Phần giữa) - Integration Tests:** Kiểm thử sự tương tác kết hợp giữa nhiều đơn vị mã với nhau.
+- **Top (Đỉnh kim tự tháp - Nhỏ nhất) - End-to-End (E2E) Tests:** Kiểm thử toàn bộ luồng hoạt động của ứng dụng từ đầu đến cuối, mô phỏng chính xác hành vi người dùng thật. Tốc độ chậm nhất và chi phí cao nhất.
+
+---
+
+## 40. Unit Testing with Jest (Kiểm thử đơn vị với Jest)
+
+- **Mục tiêu (Objective):** Kiểm thử một component hoặc một hàm đơn lẻ một cách độc lập, hoàn toàn tách biệt khỏi các phần khác của ứng dụng.
+- **Công cụ (Tools):**
+  - **Jest:** JavaScript Testing Framework mạnh mẽ và dễ thiết lập.
+  - **React Testing Library (RTL):** Cung cấp các tiện ích để render components và tương tác với chúng theo đúng cách người dùng thật tương tác.
+
+### 40.1. Luồng thực thi Unit Test (Unit Test Workflow)
+
+```text
+Test File ──► Jest Runner ──► Render Component ──► Simulate Interaction ──► Assert Result
+```
+
+### 40.2. Ví dụ Unit Test cho Client Component (Client Component Example)
+
+#### A. Component cần kiểm thử (`Counter.tsx`)
+```tsx
+// Counter.tsx
+'use client';
+import { useState } from 'react';
+
+export default function Counter() {
+  const [count, setCount] = useState(0);
+  return (
+    <div>
+      <p>Count: {count}</p>
+      <button onClick={() => setCount(count + 1)}>Increment</button>
+    </div>
+  );
+}
+```
+
+#### B. File kiểm thử (`Counter.test.tsx`)
+```tsx
+// Counter.test.tsx
+import { render, screen, fireEvent } from '@testing-library/react';
+import Counter from './Counter';
+
+describe('Counter Component', () => {
+  it('should render initial count and increment on click', () => {
+    // 1. Render component
+    render(<Counter />);
+
+    // 2. Tìm các phần tử trên DOM
+    const countElement = screen.getByText(/Count: 0/i);
+    const button = screen.getByRole('button', { name: /Increment/i });
+
+    // 3. Assertion: Kiểm tra trạng thái ban đầu
+    expect(countElement).toBeInTheDocument();
+
+    // 4. Action: Mô phỏng sự kiện click của người dùng
+    fireEvent.click(button);
+
+    // 5. Assertion: Kiểm tra trạng thái sau khi click
+    expect(screen.getByText(/Count: 1/i)).toBeInTheDocument();
+  });
+});
+```
+
+### 40.3. Ví dụ Unit Test cho Server Component (Server Component Example)
+
+#### A. Component cần kiểm thử (`UserProfile.tsx`)
+```tsx
+// UserProfile.tsx - Server Component (không có 'use client')
+type User = { id: number; name: string; email: string };
+
+export default async function UserProfile({ userId }: { userId: number }) {
+  // Giả định hàm fetchUser lấy dữ liệu từ API
+  const fetchUser = async (id: number): Promise<User> => {
+    return { id, name: 'Leanne Graham', email: 'Sincere@april.biz' };
+  };
+
+  const user = await fetchUser(userId);
+
+  return (
+    <div>
+      <h1>{user.name}</h1>
+      <p>{user.email}</p>
+    </div>
+  );
+}
+#### B. File kiểm thử (`UserProfile.test.tsx`)
+*Lưu ý: Chúng ta không test logic fetch dữ liệu, chỉ test xem UI có render chính xác với dữ liệu được cung cấp hay không.*
+
+```tsx
+// UserProfile.test.tsx
+import { render, screen } from '@testing-library/react';
+// Server component cần được render trong môi trường test
+import UserProfile from './UserProfile';
+
+// TypeScript sẽ báo lỗi vì chúng ta truyền một async component vào hàm render.
+// Để giải quyết, chúng ta có thể sử dụng một mẹo nhỏ (trick):
+const Resolved = async ({ children }: { children: React.ReactNode }) => await children;
+
+describe('UserProfile Server Component', () => {
+  it('renders user data correctly', async () => {
+    // 1. Render async component bằng Resolved wrapper
+    render(<Resolved>{UserProfile({ userId: 1 })}</Resolved>);
+
+    // 2. Chờ và tìm các phần tử hiển thị
+    const nameElement = await screen.findByRole('heading', { name: /Leanne Graham/i });
+    const emailElement = await screen.findByText(/Sincere@april.biz/i);
+
+    // 3. Assertion: Kiểm tra sự tồn tại của các phần tử
+    expect(nameElement).toBeInTheDocument();
+    expect(emailElement).toBeInTheDocument();
+  });
+});
+```
+
+---
+
+## 41. Integration Testing with React Testing Library (Kiểm thử tích hợp)
+
+- **Mục tiêu (Objective):** Kiểm thử cách nhiều components hoạt động phối hợp với nhau như một khối chức năng hoàn chỉnh. Ví dụ: một biểu mẫu (form) và thông báo thành công xuất hiện sau khi gửi.
+- **Công cụ (Tools):** Vẫn sử dụng **Jest** và **React Testing Library (RTL)**.
+- **Khác biệt so với Unit Test (Difference from Unit Test):** Thay vì render một component đơn lẻ, chúng ta render một nhóm components (thường là cả một trang web) và kiểm thử luồng tương tác giữa chúng.
+
+### 41.1. Luồng thực thi Integration Test (Integration Test Workflow)
+
+```text
+Test File ──► Render Page (with multiple components) ──► Simulate User Flow ──► Assert Final State
+```
+
+### 41.2. Ví dụ minh họa Integration Test (Integration Testing Example)
+
+#### A. Components cần kiểm thử (`NewsletterForm.tsx` & `page.tsx`)
+```tsx
+// NewsletterForm.tsx
+'use client';
+
+export default function NewsletterForm({ setSuccess }: { setSuccess: (success: boolean) => void }) {
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    setSuccess(true);
+  };
+  return (
+    <form onSubmit={handleSubmit}>
+      <input type="email" placeholder="Enter your email" required />
+      <button type="submit">Subscribe</button>
+    </form>
+  );
+}
+
+// page.tsx
+'use client';
+import { useState } from 'react';
+import NewsletterForm from './NewsletterForm';
+
+export default function Home() {
+  const [success, setSuccess] = useState(false);
+  return (
+    <main>
+      <h1>Join our Newsletter</h1>
+      {success ? (
+        <p>Thank you for subscribing!</p>
+      ) : (
+        <NewsletterForm setSuccess={setSuccess} />
+      )}
+    </main>
+  );
+}
+```
+
+#### B. File kiểm thử tích hợp (`Home.test.tsx`)
+```tsx
+// Home.test.tsx
+import { render, screen, fireEvent } from '@testing-library/react';
+import Home from './page';
+
+describe('Newsletter Subscription Flow', () => {
+  it('shows a success message after form submission', () => {
+    render(<Home />);
+
+    // 1. Tìm input và nút bấm
+    const emailInput = screen.getByPlaceholderText(/enter your email/i);
+    const subscribeButton = screen.getByRole('button', { name: /subscribe/i });
+
+    // 2. Nhập thông tin và submit form
+    fireEvent.change(emailInput, { target: { value: 'test@example.com' } });
+    fireEvent.click(subscribeButton);
+
+    // 3. Kiểm tra thông báo thành công xuất hiện
+    const successMessage = screen.getByText(/Thank you for subscribing!/i);
+    expect(successMessage).toBeInTheDocument();
+
+    // 4. (Tùy chọn) Kiểm tra form đã biến mất khỏi màn hình
+    expect(emailInput).not.toBeInTheDocument();
+  });
+});
+```
+
+---
+
+## 42. End-to-End (E2E) Testing with Cypress (Kiểm thử toàn trình với Cypress)
+
+- **Mục tiêu (Objective):** Mô phỏng một người dùng thực sự, kiểm thử toàn bộ ứng dụng từ giao diện người dùng (frontend) tới máy chủ (backend) ngay trên một trình duyệt thật.
+- **Công cụ (Tool):** **Cypress**.
+- **Ưu điểm (Advantages):** Kiểm thử toàn diện các luồng nghiệp vụ quan trọng nhất (Đăng ký, Đăng nhập, Thanh toán...). Đảm bảo tất cả các phần của hệ thống hoạt động trơn tru với nhau.
+
+### 42.1. Luồng thực thi E2E Test (E2E Test Workflow)
+
+### 42.2. Ví dụ minh họa E2E Test với Cypress (`cypress/e2e/navigation.cy.ts`)
+
+```typescript
+// cypress/e2e/navigation.cy.ts
+
+describe('Page Navigation', () => {
+  it('should navigate from home to the about page', () => {
+    // 1. Bắt đầu từ trang chủ
+    cy.visit('http://localhost:3000/');
+
+    // 2. Tìm thẻ a có href chứa 'about' và click vào nó
+    cy.get('a[href*="about"]').click();
+
+    // 3. Đường dẫn URL mới phải chứa '/about'
+    cy.url().should('include', '/about');
+
+    // 4. Trang mới phải có thẻ h1 chứa chữ "About Us"
+    cy.get('h1').contains('About Us');
+  });
+});
+```
+
+**Cách chạy E2E Test (How to run):**
+1. **Khởi chạy Next.js dev server:** `npm run dev`
+2. **Mở giao diện Cypress:** `npx cypress open`
+3. **Chọn file test** và theo dõi test chạy trực tiếp trên trình duyệt.
+
+---
+
+## 43. Testing API Routes & Server Actions (Kiểm thử Backend: API Routes & Server Actions)
+
+- **Mục tiêu (Objective):** Kiểm thử trực tiếp logic xử lý backend của Next.js mà không cần đi qua giao diện UI.
+- **Phương pháp (Methods):**
+  - **API Routes:** Gọi trực tiếp hàm handler với các đối tượng `req` và `res` được mock.
+  - **Server Actions:** Vì Server Actions thực chất chỉ là các hàm `async`, chúng ta có thể import và gọi trực tiếp chúng trong file test.
+- **Công cụ (Tools):** **Jest** và thư viện **`node-mocks-http`** để giả lập các đối tượng request/response.
+
+### 43.1. Luồng thực thi kiểm thử API Route (API Route Test Workflow)
+
+```text
+Test File ──► Calls API Handler ──► Provide Mock Request ──► Assert Mock Response (status, body)
+```
+
+### 43.2. Ví dụ kiểm thử API Route (Testing API Route Example)
+
+#### A. API Route cần kiểm thử (`app/api/hello/route.ts`)
+```typescript
+// app/api/hello/route.ts
+import { NextResponse } from 'next/server';
+
+export async function GET(request: Request) {
+  return NextResponse.json({ message: 'Hello, World!' });
+}
+```
+
+#### B. File kiểm thử API Route (`hello.test.ts`)
+```typescript
+// hello.test.ts
+import { GET } from '@/app/api/hello/route';
+import { NextRequest } from 'next/server';
+
+describe('API Route: /api/hello', () => {
+  it('should return a hello world message', async () => {
+    // Mock một NextRequest đơn giản
+    const request = new NextRequest('http://localhost/api/hello');
+
+    // Gọi trực tiếp hàm handler
+    const response = await GET(request);
+
+    // Lấy dữ liệu JSON từ response
+    const body = await response.json();
+
+    // Assertion: Kiểm tra status code và nội dung trả về
+    expect(response.status).toBe(200);
+    expect(body).toEqual({ message: 'Hello, World!' });
+  });
+});
+```
+
+### 43.3. Ví dụ kiểm thử Server Action (Testing Server Action Example)
+
+#### A. Server Action cần kiểm thử (`actions.ts`)
+```typescript
+// actions.ts
+'use server';
+
+// Giả định đây là đối tượng tương tác với cơ sở dữ liệu
+const db = {
+  items: [] as string[],
+  addItem: async (item: string) => {
+    db.items.push(item);
+    return { success: true };
+  },
+};
+
+export async function createItem(formData: FormData) {
+  const item = formData.get('item')?.toString();
+
+  if (!item) {
+    return { success: false, error: 'Item is required' };
+  }
+
+  return await db.addItem(item);
+}
+#### B. File kiểm thử Server Action (`actions.test.ts`)
+```typescript
+// actions.test.ts
+import { createItem } from './actions';
+
+describe('Server Action: createItem', () => {
+  it('should return an error if item is missing', async () => {
+    const formData = new FormData(); // Empty FormData
+    const result = await createItem(formData);
+
+    expect(result).toEqual({ success: false, error: 'Item is required' });
+  });
+
+  it('should add an item successfully', async () => {
+    const formData = new FormData();
+    formData.append('item', 'New Test Item');
+
+    const result = await createItem(formData);
+
+    expect(result).toEqual({ success: true });
+  });
+});
+```
+
+---
+
+## 44. Deploying App Router Projects to Vercel (Triển khai ứng dụng App Router lên Vercel)
+
+**Vercel là gì?** Vercel là nền tảng điện toán đám mây (cloud platform) được sáng lập bởi chính đội ngũ phát triển Next.js. Vercel cung cấp cơ sở hạ tầng được tối ưu hóa hoàn hảo dành riêng cho các ứng dụng Next.js.
+
+### 44.1. Tại sao nên chọn Vercel? (Why choose Vercel?)
+- **Zero-Configuration (Không cần cấu hình):** Không cần thiết lập phức tạp; Vercel tự động phát hiện và build các dự án Next.js.
+- **Performance Optimization (Tối ưu hóa hiệu năng):** Tự động áp dụng các Best Practices hàng đầu (Global CDN, caching, tối ưu hóa hình ảnh).
+- **Full App Router Support (Hỗ trợ toàn diện App Router):** Các tính năng mới nhất như Server Components, Server Actions và Route Handlers đều được hỗ trợ mặc định.
+- **Seamless Git Integration (Tích hợp Git mượt mà):** Tự động triển khai (deploy) mỗi khi bạn push code lên GitHub, GitLab hoặc Bitbucket.
+
+### 44.2. Sơ đồ quy trình triển khai lên Vercel (Vercel Deployment Process Diagram)
+
+```text
+1. Developer
+   ├── Viết mã nguồn ở môi trường local.
+   └── git push lên repository (ví dụ: GitHub).
+       │
+       ▼
+2. Vercel
+   ├── Lắng nghe sự kiện push từ GitHub thông qua Webhooks.
+   ├── Tự động tải mã nguồn mới nhất.
+   ├── Build Project: Chạy lệnh `next build`.
+   └── Deploy: Triển khai ứng dụng đã build lên mạng lưới Global CDN.
+       │
+       ▼
+3. End-User (Người dùng cuối)
+   └── Truy cập website với tốc độ nhanh nhất từ vị trí địa lý gần nhất.
+```
+
+### 44.3. Các bước triển khai chi tiết trên Vercel (Steps to Deploy on Vercel)
+
+1. **Push code lên Git Provider:**
+   - Đảm bảo dự án Next.js của bạn đã được đẩy lên một repository trên GitHub, GitLab, hoặc Bitbucket.
+2. **Đăng ký / Đăng nhập vào Vercel:**
+   - Truy cập [vercel.com](https://vercel.com) và đăng nhập bằng tài khoản Git của bạn.
+3. **Import Project:**
+   - Tại trang Dashboard, chọn **"Add New... -> Project"**.
+   - Chọn repository Next.js của bạn và nhấn **"Import"**.
+4. **Cấu hình (Tùy chọn):**
+   - Vercel tự động nhận diện framework (Next.js) và các lệnh build một cách chính xác.
+   - Bạn có thể bổ sung các Biến môi trường (Environment Variables) tại đây nếu cần (ví dụ: `DATABASE_URL`, `API_KEY`).
+5. **Deploy:**
+   - Nhấn nút **"Deploy"**. Vercel sẽ tiến hành quá trình build và triển khai.
+   - Sau vài phút, ứng dụng của bạn sẽ có một URL công khai và sẵn sàng phục vụ!
+
+---
+
+## 45. CI/CD with Netlify and Other Platforms (CI/CD với Netlify và các nền tảng khác)
+
+### 45.1. CI/CD là gì? (What is CI/CD?)
+- **Continuous Integration (CI - Tích hợp liên tục):** Thường xuyên gộp (merge) mã nguồn mới vào nhánh chính (main branch). Mỗi lần tích hợp đều được xác minh tự động bằng quy trình build và chạy test tự động.
+- **Continuous Deployment (CD - Triển khai liên tục):** Tự động triển khai mọi thay đổi vượt qua giai đoạn CI lên môi trường thực tế (production).
+
+### 45.2. Tại sao nên sử dụng CI/CD? (Why use CI/CD?)
+- **Giảm thiểu lỗi do con người (Minimize human error).**
+- **Tăng tốc độ phát hành sản phẩm (Increase the speed of product releases).**
+- **Quy trình phát triển nhất quán và đáng tin cậy (Consistent and reliable development process).**
+
+**Các nền tảng phổ biến (Popular Platforms):** Netlify, AWS Amplify, Google Firebase Hosting, Azure Static Web Apps, Render.
+
+### 45.3. Sơ đồ quy trình CI/CD với Netlify (CI/CD Process Diagram with Netlify)
+
+Quy trình tương tự như Vercel, tập trung mạnh mẽ vào tự động hóa:
+
+1. **Push to `main` branch:**
+   - Lập trình viên push code lên nhánh `main`.
+   - $\Rightarrow$ **Kích hoạt Deploy to Production** (Triển khai bản thực tế).
+2. **Create Pull Request (PR):**
+   - Lập trình viên tạo một Pull Request để review code.
+   - $\Rightarrow$ **Kích hoạt Deploy Preview**. Netlify/Vercel tạo một bản xem trước độc lập cho các thay đổi trong PR đó. Điều này cực kỳ hữu ích để kiểm thử trước khi tiến hành merge code!
+
+### 45.4. Ví dụ cấu hình triển khai trên Netlify (`netlify.toml`)
+
+**Hướng dẫn & File cấu hình `netlify.toml`:**
+1. **Kết nối tương tự như Vercel:** Đăng nhập Netlify bằng tài khoản Git và import repository.
+2. **Cấu hình Build:**
+   - Build command: `next build`
+   - Publish directory: `.next`
+3. **Sử dụng file cấu hình `netlify.toml` (Khuyên dùng):** Tạo file `netlify.toml` tại thư mục gốc của dự án để quản lý cấu hình build một cách rõ ràng.
+
+```toml
+# netlify.toml
+
+[build]
+  # Lệnh dùng để build dự án
+  command = "next build"
+
+  # Thư mục chứa kết quả build để Netlify tiến hành deploy.
+  # Đối với ứng dụng Next.js tiêu chuẩn, đây là thư mục mặc định.
+  publish = ".next"
+
+[build.environment]
+  # Các biến môi trường cần thiết cho quá trình build
+  # NEXT_PUBLIC_API_URL = "https://api.example.com"
+
+# Cấu hình plugin Next.js của Netlify để xử lý SSR, ISR...
+[[plugins]]
+  package = "@netlify/plugin-nextjs"
+```
+
+---
+
+## 46. Containerizing with Docker (Đóng gói ứng dụng với Docker)
+
+### 46.1. Docker là gì? (What is Docker?)
+- **Docker là gì?** Docker là một nền tảng cho phép bạn đóng gói một ứng dụng cùng toàn bộ các thư viện/dependencies phụ thuộc của nó vào trong một **"container"**.
+- **Container là gì?** Là một đơn vị phần mềm độc lập, siêu nhẹ chứa tất cả những gì cần thiết để ứng dụng có thể chạy: mã nguồn, môi trường thực thi (Node.js runtime), các thư viện hệ thống, cấu hình...
+- **Tại sao nên sử dụng Docker cho Next.js?**
+  - **Consistency (Tính đồng nhất):** Ứng dụng chạy hoàn toàn giống hệt nhau trên máy lập trình viên (local), server staging, và server production.
+  - **Portability (Tính linh hoạt/Di động):** Dễ dàng di chuyển ứng dụng giữa các nhà cung cấp dịch vụ đám mây (AWS, Google Cloud, Azure).
+  - **Isolation (Tính cô lập):** Chạy nhiều ứng dụng độc lập trên cùng một server vật lý mà không sợ xung đột môi trường.
+  - **Scalability (Khả năng mở rộng):** Dễ dàng nhân bản các containers để xử lý lưu lượng truy cập cao (kết hợp với Kubernetes/Docker Swarm).
+
+### 46.2. Sơ đồ kiến trúc Docker Container (Docker Container Architecture Diagram)
+
+```text
++-------------------------------------------------------+
+|                 Your Server / Cloud VM                |
+|  +-------------------------------------------------+  |
+|  |                  Docker Engine                  |  |
+|  |  +-------------------------------------------+  |  |
+|  |  |            My Next.js Container           |  |  |
+|  |  |  +-------------------------------------+  |  |  |
+|  |  |  | - Next.js Application (.next)       |  |  |  |
+|  |  |  | - Node.js Runtime                   |  |  |  |
+|  |  |  | - Production Dependencies (node_mod) |  |  |  |
+|  |  |  | - OS Libraries (from base image)    |  |  |  |
+|  |  |  +-------------------------------------+  |  |  |
+|  |  +-------------------------------------------+  |  |
+|  +-------------------------------------------------+  |
++-------------------------------------------------------+
+```
+
+### 46.3. Ví dụ viết Dockerfile - Phần 1 (Build Stage)
+
+```dockerfile
+# Dockerfile
+
+# --- Stage 1: Build ---
+# Sử dụng đầy đủ image Node.js để build ứng dụng
+FROM node:18-alpine AS builder
+
+# Thiết lập thư mục làm việc bên trong container
+WORKDIR /app
+
+# Sao chép package.json và package-lock.json
+COPY package*.json ./
+
+# Cài đặt tất cả phụ thuộc (bao gồm cả devDependencies)
+RUN npm install
+
+# Sao chép toàn bộ mã nguồn ứng dụng
+COPY . .
+
+# Build ứng dụng Next.js
+RUN npm run build
+
+# --- Stage 2: Production ---
+# Sử dụng image Node.js nhẹ hơn dành riêng cho môi trường Production
+FROM node:18-alpine AS runner
+
+WORKDIR /app
+
+# Chỉ cài đặt các phụ thuộc cần thiết cho production để giảm tối đa kích thước image
+COPY --from=builder /app/package*.json ./
+RUN npm install --omit=dev
+
+# Sao chép kết quả build từ stage 'builder'
+COPY --from=builder /app/.next ./.next
+COPY --from=builder /app/public ./public
+
+# Mở cổng 3000 để truy cập từ bên ngoài
+EXPOSE 3000
+
+# Lệnh để khởi chạy ứng dụng
+CMD ["npm", "start"]
+```
+
+### 46.4. Hướng dẫn sử dụng và khởi chạy (How to use it)
+
+1. **Build image:**
+   ```bash
+   docker build -t my-nextjs-app .
+   ```
+2. **Run container:**
+   ```bash
+   docker run -p 3000:3000 my-nextjs-app
+   ```
+
+---
+
+## 47. Serverless and Edge Functions (Serverless và Edge Functions)
+
+### 47.1. Serverless là gì? (What is Serverless?)
+- Là một mô hình phát triển đám mây nơi nhà cung cấp dịch vụ (Vercel, AWS) tự động quản lý việc cấp phát và mở rộng hạ tầng máy chủ.
+- Bạn chỉ cần viết và triển khai mã nguồn (functions) mà không cần lo lắng về việc quản trị hay bảo trì server.
+- **Ví dụ trong Next.js:** Route Handlers (API Routes) thường được triển khai dưới dạng Serverless Functions.
+
+### 47.2. Edge Functions là gì? (What are Edge Functions?)
+- Là các Serverless Functions được triển khai trên mạng lưới phân phối nội dung toàn cầu (Global Content Delivery Network - CDN), đặt ở vị trí địa lý **càng gần người dùng cuối càng tốt**.
+- **Mục đích:** Tối đa hóa việc giảm độ trễ (reduce latency) bằng cách xử lý logic ngay tại "rìa" (edge) của mạng lưới.
+- **Ví dụ trong Next.js:** **Middleware** là ví dụ điển hình và phổ biến nhất của một Edge Function.
+
+### 47.3. Sơ đồ so sánh: Serverless vs. Edge Functions (Serverless vs. Edge Functions Diagram)
+
+```text
+Traditional/Serverless (Centralized - Tập trung):
+  User (Vietnam) -> Request -> Server (US-West) -> Response -> User (Vietnam)
+  => High latency (Độ trễ cao do khoảng cách địa lý xa).
+
+Edge Functions (Distributed - Phân tán):
+  User (Vietnam) -> Request -> Edge Node (Singapore) -> Response -> User (Vietnam)
+  => Very low latency (Độ trễ cực thấp vì mã nguồn được thực thi ngay gần vị trí người dùng).
+```
+
+### 47.4. Ví dụ Next.js Middleware hoạt động như một Edge Function (`middleware.ts`)
+
+```typescript
+// middleware.ts
+import { NextResponse } from 'next/server';
+import type { NextRequest } from 'next/server';
+
+// Lấy thông tin vị trí địa lý từ request (Vercel tự động cung cấp thông tin này)
+export function middleware(request: NextRequest) {
+  const { geo } = request;
+  const country = geo?.country || 'N/A';
+
+  // Nếu người dùng truy cập từ quốc gia 'XX', hiển thị trang bị chặn
+  if (country === 'XX') {
+    return new NextResponse('Access denied from your country.', { status: 403 });
+  }
+
+  // Cho phép các request khác đi tiếp
+  return NextResponse.next();
+}
+
+// Cấu hình middleware chỉ chạy trên các đường dẫn mong muốn
+export const config = {
+  matcher: '/admin/:path*',
+};
+```
+
+
+
+
+
+
+
+
+
+
+
 
 
 
