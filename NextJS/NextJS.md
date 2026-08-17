@@ -2588,11 +2588,642 @@ export function middleware(request: NextRequest) {
   return NextResponse.next();
 }
 
-// Cấu hình middleware chỉ chạy trên các đường dẫn mong muốn
+---
+
+## 48. Scalability Overview (Tổng quan về Khả năng mở rộng)
+
+- **Scalability (Khả năng mở rộng):** Là khả năng của một hệ thống xử lý lượng công việc tăng lên bằng cách bổ sung thêm tài nguyên.
+- **Mục tiêu (Goal):** Duy trì hoặc cải thiện hiệu năng khi số lượng người dùng và khối lượng dữ liệu gia tăng.
+
+### 48.1. Hai phương pháp mở rộng chính (Two main approaches)
+- **Vertical Scaling (Mở rộng theo chiều dọc / Scale up):** Tăng cường sức mạnh phần cứng của một máy chủ đơn lẻ (thêm CPU, RAM).
+  - *Pros (Ưu điểm):* Đơn giản, không cần thay đổi kiến trúc mã nguồn.
+  - *Cons (Nhược điểm):* Giới hạn vật lý phần cứng, chi phí cực kỳ đắt đỏ khi đạt ngưỡng, tạo điểm lỗi đơn lẻ (single point of failure).
+- **Horizontal Scaling (Mở rộng theo chiều ngang / Scale out):** Bổ sung thêm nhiều máy chủ mới vào hệ thống.
+  - *Pros (Ưu điểm):* Linh hoạt, khả năng chịu lỗi (fault tolerance) tốt hơn rất nhiều.
+  - *Cons (Nhược điểm):* Quản lý phức tạp hơn, cần cơ chế đồng bộ và cân bằng tải (Load Balancer).
+
+---
+
+## 49. Code Organization: Modular Folder Structure (Tổ chức mã nguồn theo mô-đun)
+
+Trong Next.js App Router, việc tổ chức mã nguồn theo các mô-đun chức năng hoặc "features" giúp dự án dễ bảo trì (maintainable), mở rộng (scalable), và giúp các đội ngũ phát triển phối hợp dễ dàng hơn.
+
+- **Nguyên tắc (Principle):** Tất cả các tệp liên quan đến một tính năng cụ thể (Giao diện UI, logic, API route) nên được đặt nằm cùng một nơi (**co-located**).
+
+### 49.1. Sơ đồ cây thư mục minh họa (Modular Structure Tree)
+
+```text
+/src
+├── /app                    # Các trang chính và đường dẫn (Main pages and routes)
+│   ├── /api                # API Routes
+│   │   └── /products
+│   │       └── route.ts
+│   ├── /products           # Products Feature
+│   │   ├── /_components    # Components chỉ dùng riêng cho tính năng Products
+│   │   │   └── product-card.tsx
+│   │   ├── /[id]           # Product detail page
+│   │   │   └── page.tsx
+│   │   └── page.tsx        # Product list page
+│   ├── layout.tsx          # Root layout
+│   └── page.tsx            # Home page
+├── /components             # Components dùng chung cho toàn bộ ứng dụng
+│   └── /ui                 # Basic UI components (Button, Input, Card)
+├── /lib                    # Các hàm tiện ích, cấu hình chung (Utility functions, configs)
+└── /services               # Business logic, các lệnh gọi API bên thứ ba
+```
+
+---
+
+## 50. Reusability: Layouts and Templates (Tái sử dụng: Layouts và Templates)
+
+### 50.1. Layouts vs. Templates
+- **Layouts:** Là giao diện dùng chung (shared UI) cho nhiều trang. Khi chuyển hướng qua lại giữa các trang, Layout **giữ nguyên trạng thái (preserve state) và không bị re-render lại**. Rất lý tưởng cho headers, sidebars, và footers.
+- **Templates:** Tương tự như Layouts, nhưng chúng **tạo ra một bản thể mới (new instance) cho từng trang con** khi chuyển hướng. Trạng thái (state) sẽ **không** được giữ lại. Thích hợp khi bạn cần chạy lại các hook `useEffect` hoặc logic khởi tạo mỗi khi người dùng truy cập trang mới.
+
+### 50.2. Cấu trúc lồng nhau giữa Layout và Template (Nested Structure)
+
+```jsx
+<Layout>
+  {/* Header, Sidebar, Footer (Không bị re-render) */}
+  <Template key={route}>
+    {children} {/* Component của trang hiện tại (Re-renders khi chuyển trang) */}
+  </Template>
+</Layout>
+```
+
+### 50.3. Ví dụ mã nguồn Dashboard Layout (`/app/dashboard/layout.tsx`)
+
+```tsx
+// app/dashboard/layout.tsx
+export default function DashboardLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
+  return (
+    <section>
+      {/* Sidebar này sẽ KHÔNG bị re-render khi chuyển giữa các trang con */}
+      <nav>Dashboard Sidebar</nav>
+      {children}
+    </section>
+  );
+}
+```
+
+---
+
+## 51. Architecture: Microservices and API Gateways (Kiến trúc Microservices & API Gateway)
+
+### 51.1. Microservices
+Break down một ứng dụng lớn (monolith) thành nhiều dịch vụ nhỏ hơn, hoàn toàn độc lập với nhau. Mỗi dịch vụ tự quản lý một nghiệp vụ cụ thể (users, products, orders...).
+
+- **Lợi ích (Benefits):** Dễ dàng phát triển, triển khai độc lập, lựa chọn công nghệ linh hoạt cho từng service, cải thiện khả năng chịu lỗi của toàn bộ hệ thống.
+
+### 51.2. API Gateway
+Đóng vai trò là một điểm truy cập duy nhất (single entry point) cho tất cả các yêu cầu từ phía client gửi lên. Nó tự động điều hướng (route) các yêu cầu tới đúng microservice tương ứng.
+
+- **Nhiệm vụ chính (Responsibilities):** Xác thực người dùng (Authentication), Giới hạn tần suất gọi (Rate limiting), Ghi nhật ký (Logging), Điều hướng luồng (Routing).
+
+### 51.3. Luồng hoạt động minh họa API Gateway (Architecture Diagram & Example Flow)
+
+
+```text
+1. User truy cập https://my-app.com/api/users/1.
+2. Yêu cầu (Request) gửi tới API Gateway.
+3. API Gateway xác thực token (Authentication), sau đó điều hướng request tới User Service.
+4. User Service xử lý yêu cầu, truy vấn CSDL (DB), và trả kết quả về cho API Gateway.
+5. API Gateway gửi phản hồi (Response) cuối cùng về cho User.
+```
+
+---
+
+## 52. Performance: CDN and Caching Strategies (Tối ưu hiệu năng: CDN và Chiến lược Cache)
+
+### 52.1. CDN (Content Delivery Network)
+- Là mạng lưới các máy chủ được phân bố toàn cầu. Nó lưu trữ các bản sao tài nguyên tĩnh của bạn (hình ảnh, JS, CSS).
+- Khi người dùng gửi yêu cầu, CDN phục vụ các tài nguyên từ máy chủ ở vị trí địa lý **gần họ nhất**, giúp giảm thiểu độ trễ và cải thiện tốc độ tải trang đáng kể.
+
+### 52.2. Các chiến lược Caching (Caching Strategies)
+- **Browser Cache (Cache Trình duyệt):** Trình duyệt tự lưu tài nguyên tĩnh trực tiếp trên máy của người dùng.
+- **CDN Cache (Edge Cache):** CDN lưu trữ tài nguyên ngay tại các trạm "rìa" (edge) của mạng lưới.
+- **Server-Side Cache (Application Cache):** Lưu trữ kết quả của các tác vụ tốn chi phí xử lý cao (truy vấn DB phức tạp, gọi API bên thứ 3) trực tiếp vào bộ nhớ RAM phía Server (ví dụ: **Redis**, **Memcached**).
+
+### 52.3. Ví dụ mã nguồn Server-Side Caching trong Next.js (`unstable_cache`)
+
+Sử dụng dịch vụ như Vercel, Cloudflare, hoặc AWS CloudFront để tự động phân phối tài nguyên tĩnh Next.js. Đối với dữ liệu phía server:
+
+```typescript
+// Trong một Next.js Route Handler hoặc Server Component
+import { unstable_cache } from 'next/cache';
+import { db } from '@/lib/db';
+
+const getProducts = unstable_cache(
+  async () => db.product.findMany(), // Tác vụ tốn chi phí (Expensive function)
+  ['products'],                      // Cache key (Khóa xác định cache)
+  { revalidate: 3600 }               // Cache tự động hết hạn sau 1 giờ (3600 giây)
+);
+```
+
+---
+
+## 53. Database: Scaling Techniques (Kỹ thuật mở rộng Cơ sở dữ liệu)
+
+Khi lưu lượng truy cập tăng đột biến, **Database (CSDL) thường là điểm nghẽn (bottleneck) đầu tiên**. Các kỹ thuật scaling giúp CSDL xử lý được nhiều yêu cầu hơn.
+
+### 53.1. Các kỹ thuật cốt lõi (Key Techniques)
+
+1. **Read Replicas (Bản sao chỉ đọc):**
+   - Tạo ra các bản sao (replicas) của CSDL chính. Tất cả các yêu cầu **GHI (WRITE)** đều gửi về CSDL chính (Primary DB), trong khi các yêu cầu **ĐỌC (READ)** được phân phối đều cho các bản sao (Replicas).
+   - *Rất hiệu quả cho các ứng dụng có tỷ lệ đọc dữ liệu cao (read-heavy).*
+
+2. **Sharding (Phân mảnh dữ liệu):**
+   - Phân chia dữ liệu theo chiều ngang trên nhiều máy chủ CSDL khác nhau.
+   - *Ví dụ:* Shard 1 lưu người dùng từ tên A-M, Shard 2 lưu người dùng từ tên N-Z.
+
+3. **Connection Management & Connection Pooling (Quản lý kết nối CSDL):**
+   - Mỗi kết nối CSDL đều tiêu tốn tài nguyên hệ thống.
+   - **Connection Pooling:** Sử dụng một "bể kết nối" (pool) được khởi tạo sẵn. Thay vì mở một kết nối mới cho từng request (dễ làm sập CSDL), ứng dụng sẽ "mượn" một kết nối có sẵn từ pool và "trả lại" sau khi sử dụng xong.
+   - Các thư viện ORM như **Prisma** hoặc dịch vụ DBaaS như **Neon**, **Supabase** thường được tích hợp sẵn Connection Pooling qua Proxy để ngăn CSDL bị ngợp bởi hàng nghìn kết nối đồng thời từ Serverless Functions.
+
+---
+
+## 54. Setting Up i18n in Next.js App Router (Thiết lập Đa ngôn ngữ i18n trong App Router)
+
+Next.js cung cấp khả năng hỗ trợ sẵn (built-in support) cho việc định tuyến đa ngôn ngữ (i18n routing) mà không cần dùng đến thư viện bên thứ ba.
+
+- **Folder Structure (Cấu trúc thư mục):** Sử dụng một đường dẫn động `[lang]` làm thư mục cha chứa toàn bộ các trang của ứng dụng.
+- **Middleware:** Sử dụng `middleware.ts` để tự động phát hiện ngôn ngữ ưu tiên của người dùng (từ header `Accept-Language` của trình duyệt) và chuyển hướng tới URL chứa tiền tố ngôn ngữ tương ứng.
+
+### 54.1. Sơ đồ cây thư mục i18n (i18n Folder Structure Diagram)
+
+```text
+/
+├── /app
+│   └── /[lang]/ ...        # Chứa toàn bộ giao diện theo từng locale
+├── /dictionaries
+│   ├── en.json             # File từ điển Tiếng Anh
+│   └── vi.json             # File từ điển Tiếng Việt
+├── /i18n-config.ts         # Cấu hình i18n tập trung
+└── middleware.ts           # Xử lý logic điều hướng ngôn ngữ
+```
+
+### 54.2. Ví dụ mã nguồn Middleware nâng cao (`middleware.ts`)
+Sử dụng thư viện `negotiator` và `@formatjs/intl-localematcher` để đọc ngôn ngữ từ browser header:
+
+```typescript
+// middleware.ts
+import { NextResponse } from 'next/server';
+import type { NextRequest } from 'next/server';
+import { i18n } from './i18n-config';
+import { match as matchLocale } from '@formatjs/intl-localematcher';
+import Negotiator from 'negotiator';
+
+function getLocale(request: NextRequest): string | undefined {
+  const negotiatorHeaders: Record<string, string> = {};
+  request.headers.forEach((value, key) => (negotiatorHeaders[key] = value));
+
+  const locales = i18n.locales;
+  const languages = new Negotiator({ headers: negotiatorHeaders }).languages();
+
+  return matchLocale(languages, locales, i18n.defaultLocale);
+}
+
+export function middleware(request: NextRequest) {
+  const pathname = request.nextUrl.pathname;
+  const pathnameIsMissingLocale = i18n.locales.every(
+    (locale) => !pathname.startsWith(`/${locale}/`) && pathname !== `/${locale}`
+  );
+
+  // Chuyển hướng nếu đường dẫn thiếu tiền tố locale
+  if (pathnameIsMissingLocale) {
+    const locale = getLocale(request);
+    return NextResponse.redirect(
+      new URL(`/${locale}${pathname}`, request.url)
+    );
+  }
+}
+
 export const config = {
-  matcher: '/admin/:path*',
+  matcher: ['/((?!api|_next/static|_next/image|favicon.ico).*)'],
 };
 ```
+
+---
+
+## 55. Managing Dynamic Multilingual Content (Quản lý nội dung đa ngôn ngữ động)
+
+- Lưu trữ các chuỗi văn bản dịch (text strings) bên trong các file JSON.
+- Tạo một hàm helper để tải file JSON tương ứng cho một ngôn ngữ (`lang`) cụ thể.
+- Sử dụng cú pháp **`dynamic import()`** để chỉ tải duy nhất file ngôn ngữ thực sự cần thiết (**code-splitting**), giúp tối ưu hóa hiệu năng cực tốt.
+
+### 55.1. File quản lý từ điển (`lib/dictionary.ts`)
+
+```typescript
+// lib/dictionary.ts
+import 'server-only';
+import type { Locale } from '@/i18n-config';
+
+// Liệt kê tất cả các dictionary để Next.js phát hiện tại thời điểm build time
+const dictionaries = {
+  en: () => import('@/dictionaries/en.json').then((module) => module.default),
+  vi: () => import('@/dictionaries/vi.json').then((module) => module.default),
+};
+
+export const getDictionary = async (locale: Locale) => dictionaries[locale]();
+```
+
+### 55.2. Sử dụng trong Page Component (`app/[lang]/page.tsx`)
+
+```tsx
+// app/[lang]/page.tsx
+import { getDictionary } from '@/lib/dictionary';
+import { Locale } from '@/i18n-config';
+
+export default async function Home({ params: { lang } }: { params: { lang: Locale } }) {
+  // Lấy từ điển ngôn ngữ ngay trên server
+  const dict = await getDictionary(lang);
+
+  return <button>{dict.products.addToCart}</button>;
+}
+```
+
+---
+
+## 56. Implementing Right-to-Left - RTL (Hỗ trợ các ngôn ngữ viết từ Phải sang Trái)
+
+Các ngôn ngữ như tiếng Ả Rập (`ar`) hay tiếng Do Thái (`he`) yêu cầu bố cục giao diện hiển thị từ phải sang trái (RTL).
+
+- **Thuộc tính `dir` (The dir attribute):** Bổ sung thuộc tính `dir="rtl"` vào thẻ `<html>` cho các ngôn ngữ này.
+- **CSS Logical Properties:** Sử dụng các thuộc tính CSS logic (như `margin-inline-start`, `text-align: start`) thay cho `margin-left` hay `text-align: left` để giao diện tự động đảo chiều chính xác.
+
+### 56.1. Ví dụ cập nhật Root Layout (`app/[lang]/layout.tsx`)
+
+```tsx
+// app/[lang]/layout.tsx
+export default function RootLayout({
+  children,
+  params: { lang },
+}: {
+  children: React.ReactNode;
+  params: { lang: string };
+}) {
+  return (
+    <html lang={lang} dir={lang === 'ar' ? 'rtl' : 'ltr'}>
+      <body>{children}</body>
+    </html>
+  );
+}
+```
+
+---
+
+## 57. Language Switching and Locale-based Routing (Chuyển đổi ngôn ngữ và Điều hướng dựa trên Locale)
+
+Để tạo một component chuyển đổi ngôn ngữ (Language Switcher), chúng ta cần tạo ra các liên kết dẫn tới cùng một trang hiện tại nhưng với tiền tố ngôn ngữ (locale prefix) khác.
+
+- Sử dụng hook **`usePathname()`** để lấy đường dẫn hiện tại và thay thế đoạn (segment) locale một cách động.
+- **Luồng hoạt động (Language Switcher Flow):**
+  `[User ở trang /en/products]` $\rightarrow$ `[Click "Tiếng Việt"]` $\rightarrow$ `[Link trỏ về /vi/products]` $\rightarrow$ `[Next.js re-render lại trang với lang="vi"]`.
+
+### 57.1. Ví dụ mã nguồn Language Switcher Component (`components/LanguageSwitcher.tsx`)
+
+```tsx
+// components/LanguageSwitcher.tsx
+'use client';
+
+import { usePathname } from 'next/navigation';
+import Link from 'next/link';
+import { i18n, Locale } from '@/i18n-config';
+
+export default function LanguageSwitcher() {
+  const pathName = usePathname();
+
+  const redirectedPathName = (locale: Locale) => {
+    if (!pathName) return '/';
+    const segments = pathName.split('/');
+    segments[1] = locale;
+    return segments.join('/');
+  };
+
+  return (
+    <ul style={{ display: 'flex', gap: '1rem', listStyle: 'none', padding: 0 }}>
+      {i18n.locales.map((locale) => {
+        const isCurrent = pathName.startsWith(`/${locale}`);
+        return (
+          <li key={locale}>
+            <Link
+              href={redirectedPathName(locale)}
+              style={{
+                fontWeight: isCurrent ? 'bold' : 'normal',
+                textDecoration: 'none',
+              }}
+            >
+              {locale.toUpperCase()}
+            </Link>
+          </li>
+        );
+      })}
+    </ul>
+  );
+}
+```
+
+---
+
+## 58. When to use Redux with Next.js App Router? (Khi nào nên dùng Redux với App Router?)
+
+Redux không phải lúc nào cũng bắt buộc. Bạn chỉ nên xem xét sử dụng Redux khi:
+
+1. **Complex and Global State (State phức tạp và toàn cục):** Có lượng lớn dữ liệu cần chia sẻ giữa nhiều components không có quan hệ cha-con trực tiếp (ví dụ: thông tin người dùng, trạng thái giỏ hàng, giao diện trang).
+2. **Complicated State Update Logic (Logic cập nhật state phức tạp):** Khi các logic thay đổi state trở nên phức tạp, Redux cung cấp một cấu trúc rõ ràng (actions, reducers) để quản lý.
+3. **Middleware is Needed (Cần xử lý Middleware):** Khi bạn cần xử lý các tác vụ bất đồng bộ (gọi API), ghi log, hoặc side effects theo cách đồng nhất. Redux Toolkit cung cấp hàm `createAsyncThunk` rất mạnh mẽ cho việc này.
+4. **Predictable State (State có thể dự đoán):** Cần một nguồn dữ liệu đáng tin cậy duy nhất (single source of truth) và khả năng debug mạnh mẽ với **Redux DevTools**.
+
+### 58.1. Sơ đồ cây quyết định sử dụng Redux (Decision Tree: Redux with Next.js App Router)
+
+```text
+               Does your app have complex state?
+                            │
+               ┌────────────┴────────────┐
+               │ No                      │ Yes
+               ▼                         ▼
+  Use useState, useReducer,     Do you need to share state
+         Context API            across many components?
+                                         │
+                           ┌─────────────┴─────────────┐
+                           │ No                        │ Yes
+                           ▼                           ▼
+                   Pass props or use             Consider using
+                      Context API                    Redux
+```
+
+---
+
+## 59. Required Libraries and Setup (Các thư viện cần thiết & Cài đặt)
+
+Để tích hợp Redux vào dự án Next.js App Router, chúng ta cần 3 thư viện chính từ đội ngũ Redux:
+
+- **`@reduxjs/toolkit`:** Bộ công cụ chính thức, chuẩn hóa giúp phát triển Redux hiệu quả.
+- **`react-redux`:** Thư viện giúp kết nối Redux Store với các React components.
+- **`redux`:** Thư viện lõi Redux (được tự động cài đặt làm phụ thuộc của `@reduxjs/toolkit`).
+
+### 59.1. Lệnh cài đặt (Installation)
+
+```bash
+npm install @reduxjs/toolkit react-redux
+```
+
+---
+
+## 60. Suggested Folder Structure (Cấu trúc thư mục khuyến nghị)
+
+Để giữ cho codebase ngăn nắp, chúng ta nên đặt tất cả các logic liên quan đến Redux vào trong một thư mục riêng biệt, chẳng hạn như `lib/redux` hoặc `store`.
+
+### 60.1. Sơ đồ cây thư mục cấu trúc Redux (Redux Folder Structure)
+
+```text
+nextjs-redux-app
+├── package.json
+└── /lib
+    └── /redux
+        ├── store.ts            # Cấu hình Redux store
+        ├── provider.tsx         # Component Provider bọc ứng dụng
+        └── /features
+            └── /counter
+                └── counterSlice.ts  # Reducer & Actions cho từng tính năng
+```
+
+---
+
+## 61. Store Configuration using Redux Toolkit (Cấu hình Store với Redux Toolkit)
+
+Sử dụng hàm **`configureStore`** từ `@reduxjs/toolkit` để tạo store. Hàm này tự động thiết lập Redux DevTools và tích hợp sẵn các middleware mặc định hữu ích (như `redux-thunk`).
+
+### 61.1. Mã nguồn cấu hình Store với TypeScript (`lib/redux/store.ts`)
+
+```typescript
+// lib/redux/store.ts
+import { configureStore } from '@reduxjs/toolkit';
+import counterReducer from './features/counter/counterSlice';
+// Import các reducers khác tại đây
+
+export const makeStore = () => {
+  return configureStore({
+    reducer: {
+      counter: counterReducer,
+      // Bổ sung các reducers khác tại đây
+    },
+  });
+};
+
+// Suy luận kiểu dữ liệu cho makeStore
+export type AppStore = ReturnType<typeof makeStore>;
+// Suy luận kiểu 'RootState' và 'AppDispatch' trực tiếp từ store
+export type RootState = ReturnType<AppStore['getState']>;
+export type AppDispatch = AppStore['dispatch'];
+```
+
+---
+
+## 62. Creating Async Slices with `createAsyncThunk` (Tạo Async Slices với `createAsyncThunk`)
+
+`createAsyncThunk` là một hàm giúp xử lý các action bất đồng bộ (ví dụ: gọi API). Nó tự động sinh ra các action types cho 3 trạng thái: **`pending`**, **`fulfilled`**, và **`rejected`**.
+
+### 62.1. Sơ đồ quy trình luồng Async Thunk (Async Thunk Workflow Diagram)
+
+```text
+Component Dispatches Action
+       │
+       ▼
+createAsyncThunk (Thực thi payload creator)
+       │
+       ▼
+Makes API Call ──► API returns result
+                       │
+                       ▼
+Thunk dispatches fulfilled hoặc rejected action
+       │
+       ├────► fulfilled  (Thành công)
+       └────► rejected   (Thất bại)
+```
+
+### 62.2. Ví dụ tạo Async Thunk (`counterSlice.ts`)
+
+```typescript
+// Trong counterSlice.ts
+import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+
+// Tạo một async thunk để lấy giá trị tăng ngẫu nhiên
+export const fetchIncrementAmount = createAsyncThunk(
+  'counter/fetchIncrementAmount',
+  async (amount: number) => {
+    // Giả lập một lệnh gọi API (Simulate an API call)
+    const response = await new Promise<{ data: number }>((resolve) =>
+      setTimeout(() => resolve({ data: amount }), 1000)
+    );
+    return response.data;
+  }
+);
+```
+
+---
+
+## 63. Handling Async Thunks in Slices (Xử lý Async Thunks trong Slices)
+
+Bên trong `createSlice`, chúng ta sử dụng trường **`extraReducers`** để lắng nghe và xử lý các trạng thái của một `createAsyncThunk`.
+
+### 63.1. Ví dụ mã nguồn cấu hình `extraReducers` (`counterSlice.ts`)
+
+```typescript
+// counterSlice.ts
+const counterSlice = createSlice({
+  name: 'counter',
+  initialState: {
+    value: 0,
+    status: 'idle', // 'idle' | 'loading' | 'succeeded' | 'failed'
+  },
+  reducers: {
+    // Synchronous reducers...
+  },
+  extraReducers: (builder) => {
+    builder
+      .addCase(fetchIncrementAmount.pending, (state) => {
+        state.status = 'loading';
+      })
+      .addCase(fetchIncrementAmount.fulfilled, (state, action) => {
+        state.status = 'succeeded';
+        state.value += action.payload; // Cập nhật state với dữ liệu trả về từ API
+      })
+      .addCase(fetchIncrementAmount.rejected, (state) => {
+        state.status = 'failed';
+      });
+  },
+});
+
+export default counterSlice.reducer;
+```
+
+---
+
+## 64. Connecting Redux Store to Next.js App Router (Kết nối Redux Store vào App Router)
+
+Vì App Router ưu tiên các **Server Components**, chúng ta **không thể sử dụng `Provider` trực tiếp trong file gốc `layout.tsx`**. Thay vào đó, chúng ta tạo một Client Component `StoreProvider` để bọc ứng dụng.
+
+### 64.1. Tạo Client Component `StoreProvider` (`lib/redux/provider.tsx`)
+
+```tsx
+// lib/redux/provider.tsx
+'use client';
+
+import { useRef } from 'react';
+import { Provider } from 'react-redux';
+import { makeStore, AppStore } from './store';
+
+export default function StoreProvider({ children }: { children: React.ReactNode }) {
+  const storeRef = useRef<AppStore>();
+  if (!storeRef.current) {
+    // Tạo ra instance của store trong lần render đầu tiên
+    storeRef.current = makeStore();
+  }
+
+  return <Provider store={storeRef.current}>{children}</Provider>;
+}
+```
+
+### 64.2. Bọc `StoreProvider` vào Root Layout (`app/layout.tsx`)
+
+```tsx
+// app/layout.tsx
+import StoreProvider from '../lib/redux/provider';
+
+export default function RootLayout({ children }: { children: React.ReactNode }) {
+  return (
+    <html lang="en">
+      <body>
+        <StoreProvider>{children}</StoreProvider>
+      </body>
+    </html>
+  );
+}
+
+---
+
+
+## 65. Using Redux in Server and Client Components (Sử dụng Redux trong Server và Client Components)
+
+- **Client Components:** Có thể sử dụng các hook **`useSelector`** và **`useDispatch`** tương tự như một ứng dụng React tiêu chuẩn để đọc dữ liệu và cập nhật state.
+- **Server Components:** **Không thể** truy cập trực tiếp vào Redux Store vì store thuộc về trạng thái phía Client (client-side state).
+
+### 65.1. Mô hình kết hợp (Data Flow Pattern)
+
+Fetch dữ liệu ban đầu ở **Server Component**, sau đó truyền xuống cho **Client Component** thông qua **`props`**. Client Component có thể sử dụng dữ liệu đó để khởi tạo trạng thái trong Redux nếu cần thiết.
+
+```text
+Server Component (Fetches data from API)
+       │
+       ▼ (Passes props)
+Client Component
+       │
+       ▼ (Dispatches to Redux Store)
+Redux Store
+```
+
+---
+
+## 66. Using Redux with Server Actions (Kế thừa Redux với Server Actions)
+
+Server Actions là cách cho phép thực thi logic phía server trực tiếp từ phía client.
+
+### 66.1. Quy trình xử lý (Workflow)
+
+1. **Client Component** gọi một **Server Action**.
+2. **Server Action** thực thi logic trên server (ví dụ: ghi/cập nhật CSDL).
+3. **Server Action** có thể trả dữ liệu kết quả về cho client.
+4. Tại **Client Component**, sau khi `await` lệnh Server Action xong, sử dụng dữ liệu trả về đó để `dispatch` một action cập nhật Redux Store.
+
+### 66.2. Ví dụ mã nguồn Server Action kết hợp Redux (`app/actions.ts` & Client Component)
+
+```typescript
+// app/actions.ts
+'use server'
+import { revalidatePath } from 'next/cache';
+
+export async function updateUser(data: any) {
+  // Logic cập nhật người dùng trên server...
+  const updatedUser = { name: 'New Name' }; // Mock dữ liệu trả về
+  revalidatePath('/'); // Revalidate cache nếu cần
+  return updatedUser;
+}
+```
+
+```tsx
+// app/some-client-component.tsx
+'use client'
+import { useDispatch } from 'react-redux';
+import { updateUser as updateUserAction } from './actions';
+import { userSlice } from '../lib/redux/features/userSlice';
+
+function UserProfile() {
+  const dispatch = useDispatch();
+
+  const handleUpdate = async () => {
+    // 1. Gọi Server Action
+    const updatedUser = await updateUserAction({ id: 1 });
+    // 2. Dùng dữ liệu trả về để cập nhật Redux store
+    dispatch(userSlice.actions.setUser(updatedUser));
+  };
+
+  return <button onClick={handleUpdate}>Update User</button>;
+}
+```
+
+```
+
+
+
+
+
 
 
 
