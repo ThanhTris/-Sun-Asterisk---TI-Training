@@ -3216,9 +3216,577 @@ function UserProfile() {
 
   return <button onClick={handleUpdate}>Update User</button>;
 }
+
+---
+
+## 67. Managing Metadata and Head Tags (Quản lý Metadata và Thẻ Head)
+
+Trong Next.js App Router, file `head.tsx` đã được thay thế bằng object **`metadata`** cực kỳ mạnh mẽ. Bạn có thể xuất (export) object này từ file `layout.tsx` hoặc `page.tsx` để định nghĩa metadata cho trang. Đối với các giá trị động (như tiêu đề của bài viết blog), bạn sử dụng hàm **`generateMetadata`**.
+
+### 67.1. Lợi ích chính (Key Benefits)
+- **Server-Side Rendering:** Metadata được render trực tiếp ngay trên Server, đảm bảo các con bọ của công cụ tìm kiếm (Search Engine Crawlers) thu thập dữ liệu ngay lập tức.
+- **Colocation (Đặt cùng vị trí):** Thông tin SEO nằm ngay bên cạnh file trang mà nó mô tả.
+- **Dynamic (Tạo động):** Dễ dàng tạo các thẻ metadata dựa trên dữ liệu fetch từ API/Database.
+
+### 67.2. Ví dụ mã nguồn Metadata động (`app/products/[id]/page.tsx`)
+
+```tsx
+// app/products/[id]/page.tsx
+import { Metadata, ResolvingMetadata } from 'next';
+
+type Props = {
+  params: { id: string };
+};
+
+// Hàm sinh metadata động
+export async function generateMetadata(
+  { params }: Props,
+  parent: ResolvingMetadata
+): Promise<Metadata> {
+  // Fetch dữ liệu sản phẩm
+  const product = await fetch(`https://api.example.com/products/${params.id}`).then((res) => res.json());
+
+  return {
+    title: product.name,
+    description: product.description,
+    openGraph: {
+      images: [product.imageUrl],
+    },
+  };
+}
+
+export default function ProductPage({ params }: Props) {
+  // Giao diện trang sản phẩm (Page component UI)
+  return <h1>Product {params.id}</h1>;
+}
 ```
 
+---
+
+## 68. Generating Dynamic Sitemaps (Tạo Sitemap Động)
+
+Sitemap là một file XML liệt kê tất cả các URL quan trọng trên website của bạn, giúp các công cụ tìm kiếm phát hiện và lập chỉ mục (index) nội dung hiệu quả hơn. Trong Next.js, bạn có thể tạo sitemap động bằng cách thêm file **`sitemap.ts`** vào thư mục **`app`**. File này export một hàm mặc định trả về một mảng chứa danh sách các đối tượng URL.
+
+### 68.1. Sơ đồ quy trình tạo Sitemap (Dynamic Sitemap Workflow Diagram)
+
+```text
+app/sitemap.ts executes (Thực thi hàm sitemap)
+       │
+       ▼
+Fetches dynamic routes (e.g., posts, products) from a DB/API
+       │
+       ▼
+Generates an array of URL objects (Tạo mảng các URL objects)
+       │
+       ▼
+Next.js creates /sitemap.xml (Tự động sinh đường dẫn /sitemap.xml)
 ```
+
+### 68.2. Ví dụ mã nguồn file Sitemap (`app/sitemap.ts`)
+
+```typescript
+// app/sitemap.ts
+import { MetadataRoute } from 'next';
+
+// Định nghĩa kiểu Post
+interface Post {
+  id: string;
+  updatedAt: string;
+}
+
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
+  const staticRoutes = [
+    {
+      url: 'https://acme.com',
+      lastModified: new Date(),
+    },
+    {
+      url: 'https://acme.com/about',
+      lastModified: new Date(),
+    },
+  ];
+
+  // Fetch các đường dẫn động (ví dụ: các bài viết blog)
+  const posts: Post[] = await fetch('https://api.example.com/posts').then((res) => res.json());
+
+  const dynamicRoutes = posts.map((post) => ({
+    url: `https://acme.com/blog/${post.id}`,
+    lastModified: new Date(post.updatedAt),
+    changeFrequency: 'weekly' as const,
+    priority: 0.8,
+  }));
+
+  return [...staticRoutes, ...dynamicRoutes];
+}
+```
+
+---
+
+## 69. Implementing Structured Data with JSON-LD (Cấu trúc dữ liệu chuẩn hóa với JSON-LD)
+
+Dữ liệu có cấu trúc (Structured Data như **JSON-LD**) là một định dạng chuẩn hóa dùng để cung cấp thông tin về trang và phân loại nội dung của trang đó. Các công cụ tìm kiếm sử dụng nó để hiểu sâu hơn về nội dung và hiển thị các kết quả tìm kiếm phong phú (**Rich Snippets** như đánh giá sao, giá cả, danh sách câu hỏi FAQ), giúp tăng đáng kể tỷ lệ nhấp chuột (Click-Through Rate - CTR).
+
+Bạn có thể chèn JSON-LD trực tiếp vào các Server Components bằng cách render một thẻ **`<script>`**.
+
+### 69.1. Ví dụ mã nguồn chèn JSON-LD vào Server Component (`app/products/[id]/page.tsx`)
+
+```tsx
+// app/products/[id]/page.tsx
+async function getProductData(id: string) {
+  const res = await fetch(`https://api.example.com/products/${id}`);
+  return res.json();
+}
+
+export default async function ProductPage({ params }: { params: { id: string } }) {
+  const product = await getProductData(params.id);
+
+  const jsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'Product',
+    name: product.name,
+    description: product.description,
+    image: product.imageUrl,
+    sku: product.sku,
+    brand: {
+      '@type': 'Brand',
+      name: product.brand,
+    },
+    aggregateRating: {
+      '@type': 'AggregateRating',
+      ratingValue: product.rating,
+      reviewCount: product.reviewCount,
+    },
+    offers: {
+      '@type': 'Offer',
+      price: product.price,
+      priceCurrency: 'USD',
+      availability: 'https://schema.org/InStock',
+    },
+  };
+
+  return (
+    <div>
+      {/* Thêm dữ liệu JSON-LD vào trang */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
+
+      {/* Giao diện hiển thị sản phẩm */}
+      <h1>{product.name}</h1>
+      <p>{product.description}</p>
+    </div>
+  );
+}
+```
+
+---
+
+## 70. Code Splitting & Dynamic Import (Phân tách mã nguồn & Nạp động)
+
+**Code Splitting** là kỹ thuật chia nhỏ mã nguồn JavaScript của bạn thành các phần nhỏ hơn (**"chunks"**) để tải theo nhu cầu (on demand). `next/dynamic` là một tiện ích của Next.js cho phép bạn dễ dàng **"lazy load"** các components. Điều này cực kỳ hữu ích cho các components nặng (như các thư viện vẽ biểu đồ, trình soạn thảo văn bản giàu tính năng - rich text editors) vốn không cần thiết cho lần tải trang đầu tiên, giúp giảm đáng kể kích thước JS bundle ban đầu và cải thiện chỉ số **Time to Interactive (TTI)**.
+
+### 70.1. Minh họa quy trình nạp linh hoạt (Initial Load vs. After Interaction)
+
+```text
+Initial Load (Lần tải đầu tiên):
+  Lightweight Main JS Bundle (Tải siêu nhanh) ──► Trang web hiển thị ngay lập tức
+
+After User Interaction (Sau tương tác người dùng):
+  Heavy JS Chunk (Lazy Load sau tương tác) ──► Nạp Component nặng & sẵn sàng tương tác
+```
+
+### 70.2. Ví dụ mã nguồn nạp Component động (`app/dashboard/page.tsx`)
+
+```tsx
+// app/dashboard/page.tsx
+'use client'
+
+import { useState } from 'react'
+import dynamic from 'next/dynamic'
+
+// Sử dụng next/dynamic để lazy load HeavyChart component
+const HeavyChart = dynamic(() => import('../components/HeavyChart'), {
+  loading: () => <p>Loading chart...</p>, // Hiển thị trong lúc component đang tải
+  ssr: false // Không render component này phía server-side
+})
+
+export default function Dashboard() {
+  const [showChart, setShowChart] = useState(false)
+
+  return (
+    <div>
+      <h1>Main Dashboard</h1>
+      <button onClick={() => setShowChart(true)}>Show Revenue Chart</button>
+
+      {/* Component HeavyChart chỉ thực sự được nạp về khi showChart là true */}
+      {showChart && <HeavyChart />}
+    </div>
+  )
+}
+```
+
+---
+
+## 71. Image Optimization with `next/image` (Tối ưu hóa Hình ảnh)
+
+Component `<Image>` của Next.js (`next/image`) là giải pháp tối ưu hóa hình ảnh toàn diện. Nó tự động thực hiện các tác vụ:
+
+1. **Resizing (Thay đổi kích thước):** Tự động tạo nhiều phiên bản kích thước khác nhau của cùng một hình ảnh để phù hợp với từng thiết bị (Mobile, Tablet, Desktop).
+2. **Format Optimization (Tối ưu định dạng):** Tự động chuyển đổi hình ảnh sang các định dạng hiện đại như **WebP** hoặc **AVIF** (nếu trình duyệt người dùng hỗ trợ), giúp giảm tối đa dung lượng tệp nhưng vẫn giữ nguyên chất lượng hiển thị.
+3. **Lazy Loading (Nạp lười):** Mặc định, hình ảnh chỉ được tải về khi chúng chuẩn bị cuộn vào vùng nhìn thấy (**viewport**) của người dùng.
+
+### 71.1. Sơ đồ quy trình xử lý hình ảnh qua Vercel Edge CDN (Image Optimization Flow)
+
+```text
+Next.js Build Process / User Request
+       │
+       ▼
+Image Optimization Engine (Resizing + WebP/AVIF Conversion)
+       │
+       ▼
+Vercel Deployment / Vercel Edge CDN (Optimal Image Selection)
+       │
+       ▼
+Serving Optimal Image to End-User (Phục vụ ảnh tối ưu cho người dùng)
+```
+
+### 71.2. Ví dụ mã nguồn tối ưu hình ảnh với `priority` và `sizes`
+
+```tsx
+import Image from 'next/image'
+import heroImage from '../public/hero.png'
+
+export default function HomePage() {
+  return (
+    <div>
+      {/* Sử dụng `priority` để ưu tiên nạp ảnh quan trọng nhất trang (LCP - Largest Contentful Paint) */}
+      <Image
+        src={heroImage}
+        alt="Main hero image"
+        priority
+        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+      />
+    </div>
+  )
+}
+```
+
+---
+
+## 72. Font Optimization with `next/font` (Tối ưu hóa Font chữ)
+
+`next/font` là giải pháp tích hợp sẵn trong Next.js để tối ưu hóa việc nạp font chữ. Nó giải quyết triệt để các vấn đề phổ biến như **Layout Shift (Dịch chuyển bố cục)** và các yêu cầu mạng không cần thiết.
+
+### 72.1. Các ưu điểm chính (Key Benefits)
+- **Automatic Self-hosting (Tự động tự lưu trữ):** Tự động tải các font từ Google Fonts về tại thời điểm build time và tự host chúng cùng với các tài nguyên tĩnh khác của bạn. Điều này **loại bỏ hoàn toàn các yêu cầu mạng gửi tới server của Google**.
+- **No Layout Shift (Không gây dịch chuyển bố cục):** Next.js tính toán trước kích thước của font và áp dụng nó, đảm bảo không bị giật/dịch chuyển bố cục khi font chữ được tải xong.
+- **Preloading (Tải trước):** Tự động thêm các thẻ `preload` vào `<head>` để font được tải sớm hơn trong quá trình render trang.
+
+### 72.2. So sánh quy trình nạp Font (Traditional Way vs. next/font)
+
+```text
+Traditional Way (Cách truyền thống):
+  HTML Load ──► CSS Load ──► Fetch Google Fonts ──► Text Re-render (Risk of Layout Shift ❌)
+
+With next/font Optimization (Cách tối ưu của Next.js):
+  HTML Load ──► CSS Load & Font Inline ──► Text Render trực tiếp (No Layout Shift ✅)
+```
+
+### 72.3. Ví dụ mã nguồn sử dụng `next/font/google` trong Root Layout (`app/layout.tsx`)
+
+```tsx
+// app/layout.tsx
+import { Inter } from 'next/font/google'
+
+// Cấu hình font Inter từ Google Fonts
+const inter = Inter({
+  subsets: ['latin'],
+  display: 'swap',
+})
+
+export default function RootLayout({ children }: { children: React.ReactNode }) {
+  return (
+    // Áp dụng className của font vào thẻ html hoặc body
+    <html lang="en" className={inter.className}>
+      <body>{children}</body>
+    </html>
+  )
+}
+```
+
+---
+
+## 73. Caching with `fetch` & Layered Caching (Bộ nhớ đệm với `fetch` & Caching đa tầng)
+
+Next.js mở rộng hàm `fetch` nguyên bản của trình duyệt để cho phép bạn kiểm soát chính xác chiến lược caching phía server cho từng yêu cầu.
+
+### 73.1. Các tùy chọn Caching chính với `fetch`
+
+1. **`cache: 'force-cache'` (Mặc định):** Dữ liệu được fetch và cache vô thời hạn. Đây là lựa chọn tốt nhất cho dữ liệu không bao giờ (hoặc hiếm khi) thay đổi.
+2. **`cache: 'no-store'`:** Luôn fetch dữ liệu mới ở mọi request. Phù hợp cho dữ liệu động, thay đổi liên tục.
+3. **`next: { revalidate: number }` (Incremental Static Regeneration - ISR):** Dữ liệu được fetch và cache trong một khoảng thời gian nhất định (tính bằng giây). Khi hết hạn, request tiếp theo sẽ nhận dữ liệu cũ từ cache trong khi Next.js âm thầm re-fetch dữ liệu mới ở background để cập nhật cache.
+
+### 73.2. Ví dụ mã nguồn Caching trong Server Component
+
+```tsx
+async function Page() {
+  // 1. Dữ liệu tĩnh, được cache vĩnh viễn
+  const staticData = await fetch('https://.../static', { cache: 'force-cache' });
+
+  // 2. Dữ liệu động, không bao giờ cache
+  const dynamicData = await fetch('https://.../dynamic', { cache: 'no-store' });
+
+  // 3. Dữ liệu được cache và tự động làm mới sau mỗi 10 giây
+  const revalidatedData = await fetch('https://.../revalidate', {
+    next: { revalidate: 10 }
+  });
+
+  return <div>...</div>;
+}
+```
+
+### 73.3. Caching đa tầng với CDN / Vercel Edge (Layered Caching with CDN)
+
+Khi triển khai trên Vercel, Next.js sử dụng hệ thống caching đa tầng để tối đa hóa hiệu năng:
+
+1. **Data Cache:** Cache phía server lưu trữ kết quả của các yêu cầu `fetch`. Được kiểm soát bằng các tùy chọn `cache` và `revalidate`.
+2. **Full Route Cache:** Các trang được render hoàn chỉnh bởi Server Components (mà không dùng `no-store` hay `cookies()`) sẽ được cache trực tiếp tại mạng lưới CDN.
+3. **CDN / Edge Cache:** Lớp cache nằm gần người dùng nhất, phục vụ các tài nguyên tĩnh (JS, CSS, images, fonts) và các trang đã được cache (từ Full Route Cache) trên quy mô toàn cầu.
+
+ Chiến lược `revalidate` hoạt động xuyên suốt qua các tầng này, đảm bảo dữ liệu luôn được làm mới một cách nhất quán.
+
+---
+
+## 74. Bundle Analyzer (Công cụ Phân tích Kích thước Bundle)
+
+**`@next/bundle-analyzer`** là công cụ giúp bạn trực quan hóa kích thước của các gói JavaScript bundle sinh ra trong quá trình build dự án. Nó giúp bạn dễ dàng nhận biết:
+
+- Các thư viện chiếm dung lượng lớn nhất ảnh hưởng tới kích thước ứng dụng.
+- Các module bị thừa hoặc bị trùng lặp.
+- Cơ hội tối ưu hóa bằng cách thay thế thư viện hoặc áp dụng **code splitting**.
+
+Đây là bước cực kỳ quan trọng giúp ứng dụng của bạn luôn tinh gọn và đạt tốc độ tối đa.
+
+### 74.1. Mã nguồn cấu hình Bundle Analyzer (`next.config.js` / `next.config.mjs`)
+
+```javascript
+// next.config.js
+import bundleAnalyzer from '@next/bundle-analyzer'
+
+const withBundleAnalyzer = bundleAnalyzer({
+  enabled: process.env.ANALYZE === 'true',
+})
+
+/** @type {import('next').NextConfig} */
+const nextConfig = {
+  // Các cấu hình Next.js khác của bạn tại đây...
+}
+
+export default withBundleAnalyzer(nextConfig)
+```
+
+### 74.2. Cách thực thi phân tích (How to run)
+
+1. **Thêm script vào file `package.json`:**
+   ```json
+   "scripts": {
+     "analyze": "cross-env ANALYZE=true next build"
+   }
+   ```
+
+2. **Chạy lệnh phân tích:**
+   ```bash
+   npm run analyze
+   ```
+
+Sau khi chạy xong lệnh, một báo cáo dạng HTML trực quan (**HTML report**) sẽ tự động mở trên trình duyệt của bạn, hiển thị bản đồ trực quan sơ đồ các gói bundle.
+
+---
+
+## 75. Using Middleware for Custom Server Logic (Sử dụng Middleware cho Logic Server tùy chỉnh)
+
+Next.js Middleware cho phép bạn thực thi mã nguồn trước khi một yêu cầu (request) hoàn tất. Nó chạy trên nền tảng **Vercel Edge Functions** - các trạm mạng phân bố siêu gần về mặt địa lý với người dùng cuối, giúp thời gian phản hồi đạt tốc độ cực kỳ nhanh chóng. Đây là phương pháp hiện đại nhất để xử lý các logic cần thực thi trên mọi request hoặc một nhóm request cụ thể.
+
+### 75.1. Sơ đồ kiến trúc tầng Middleware (Middleware Architecture Diagram)
+
+```text
+Client Request
+      │
+      ▼
+Edge Network (DNS Resolution, Load Balancing, Caching)
+      │
+      ▼
+Middleware Layer
+  ├── Authentication / Authorization ──► Block / Respond ──► Blocked Response ❌
+  ├── Rate Limiting                  ──► Redirect       ──► Redirect Response 🔄
+  └── Routing                        ──► Allow / Rewrite ──► Origin Server ──► DB ──► Response ✅
+```
+
+### 75.2. Các trường hợp sử dụng phổ biến (Common Use Cases)
+- **Authentication (Xác thực):** Bảo vệ các trang nội bộ bằng cách kiểm tra sự tồn tại của session cookie hợp lệ.
+- **A/B Testing:** Rewrite chuyển hướng người dùng đến các phiên bản giao diện trang khác nhau dựa vào cookie.
+- **Localization (Đa ngôn ngữ):** Tự động chuyển hướng người dùng dựa theo vị trí địa lý hoặc ưu tiên ngôn ngữ của họ.
+- **Bot Protection (Chặn Bot):** Nhận diện và ngăn chặn lưu lượng truy cập độc hại từ các con bọ giả mạo.
+
+### 75.3. Ví dụ mã nguồn Middleware bảo vệ Route (`middleware.ts`)
+
+```typescript
+// middleware.ts
+import { NextResponse } from 'next/server'
+import type { NextRequest } from 'next/server'
+
+// Hàm này có thể khai báo `async` nếu sử dụng `await` bên trong
+export function middleware(request: NextRequest) {
+  const sessionToken = request.cookies.get('session_token');
+
+  // Nếu cố gắng truy cập trang /dashboard mà không có token, chuyển hướng về trang login
+  if (request.nextUrl.pathname.startsWith('/dashboard') && !sessionToken) {
+    return NextResponse.redirect(new URL('/login', request.url));
+  }
+
+  // Nếu request hợp lệ, cho phép tiếp tục luồng xử lý
+  return NextResponse.next();
+}
+
+// Cấu hình các đường dẫn áp dụng Middleware
+export const config = {
+  matcher: '/dashboard/:path*',
+};
+```
+
+---
+
+## 76. Building Custom Servers (Xây dựng Custom Server tùy chỉnh)
+
+Mặc dù máy chủ mặc định tích hợp sẵn của Next.js đã xử lý tốt hầu hết các trường hợp, bạn có thể cần tới một **Custom Server** cho các kịch bản nâng cao đặc thù. **Đây là lối thoát hiểm (escape hatch) và nên hạn chế tối đa việc sử dụng**, vì nó làm phức tạp quy trình deployment và vô hiệu hóa một số tính năng tối ưu hóa mặc định của Next.js. Cách tiếp cận hiện đại thường ưu tiên dùng **Middleware** hoặc **Route Handlers** thay thế.
+
+### 76.1. Khi nào nên xem xét dùng Custom Server? (When to consider a custom server)
+- **WebSocket Integration:** Cần khởi chạy một server WebSocket chạy song song ngay bên trong ứng dụng Next.js.
+- **Complex Proxying:** Khi bạn cần logic proxy phức tạp mà Middleware thông thường không thể đáp ứng.
+- **Integrating with existing Node.js code:** Khi bạn đã có sẵn một server Express cũ (legacy) và muốn tích hợp Next.js vào bên trong đó.
+
+### 76.2. Ví dụ mã nguồn Custom Server kết hợp Express (`server.js`)
+
+```javascript
+// server.js (Ví dụ đơn giản. Yêu cầu cài đặt `express` và `next`)
+const express = require('express');
+const next = require('next');
+const { createServer } = require('http');
+
+const dev = process.env.NODE_ENV !== 'production';
+const app = next({ dev });
+const handle = app.getRequestHandler();
+
+app.prepare().then(() => {
+  const server = express();
+
+  // Custom route riêng của Express
+  server.get('/custom-route', (req, res) => {
+    return res.json({ message: 'This is a custom route!' });
+  });
+
+  // Để Next.js xử lý tất cả các routes còn lại
+  server.all('*', (req, res) => {
+    return handle(req, res);
+  });
+
+  const port = process.env.PORT || 3000;
+  createServer(server).listen(port, () => {
+    console.log(`> Ready on http://localhost:${port}`);
+  });
+});
+
+---
+
+## 77. Static HTML Export & Serverless Support (Xuất HTML Tĩnh & Hỗ trợ Serverless)
+
+Next.js có thể xuất ứng dụng của bạn thành một tập hợp các tệp tĩnh **HTML, CSS, và JavaScript** mà không cần bất kỳ máy chủ Node.js nào để vận hành. Điều này cực kỳ lý tưởng cho các website có nội dung ít thay đổi và có thể tạo ra ngay tại thời điểm build (build time).
+
+### 77.1. Các trường hợp sử dụng (Use Cases)
+- Trang thông tin cá nhân (Portfolios), blogs, trang tiếp thị (marketing sites).
+- Website tài liệu kỹ thuật (Documentation websites).
+- Bất kỳ website nào có thể được pre-render và host trên các môi trường hosting tĩnh đơn giản như **GitHub Pages** hoặc **AWS S3**.
+
+### 77.2. Hạn chế cốt lõi của Static Export (Key Limitations of Static Export)
+- **Không hỗ trợ API Routes (Route Handlers).**
+- **Không hỗ trợ Middleware.**
+- **Không hỗ trợ Incremental Static Regeneration (ISR).**
+- **Đường dẫn động (Dynamic routes)** bắt buộc phải khai báo trước tất cả các tham số có thể xảy ra tại thời điểm build time bằng cách sử dụng hàm `generateStaticParams`.
+
+### 77.3. Cấu hình Static Export (`next.config.mjs` / `next.config.js`)
+
+```javascript
+// next.config.mjs
+/** @type {import('next').NextConfig} */
+const nextConfig = {
+  // Bật tính năng static export
+  output: 'export',
+
+  // Tùy chọn: Tắt tính năng tối ưu hóa ảnh nếu static host không hỗ trợ
+  // images: {
+  //   unoptimized: true,
+  // }
+};
+
+export default nextConfig;
+```
+
+---
+
+## 78. Creating Reusable API Utilities (Tạo các Tiện ích API có thể tái sử dụng)
+
+Thay vì pattern "API Middleware" cũ trong Pages Router, cách tiếp cận hiện đại trong App Router là tạo các **Higher-Order Functions (HOF)** hoặc các tiện ích dùng lại để bọc xung quanh logic của Route Handler. Điều này giúp mã nguồn trở nên sạch sẽ, tuân thủ nguyên tắc DRY (Don't Repeat Yourself), và dễ dàng viết unit test.
+
+Pattern này rất hoàn hảo để xử lý các nghiệp vụ chung (cross-cutting concerns) như:
+- **Authentication & Authorization (Xác thực & Phân quyền)**
+- **Input Validation (Xác thực dữ liệu đầu vào)**
+- **Error Handling & Logging (Xử lý lỗi & Ghi log)**
+
+### 78.1. Bước 1: Tạo utility HOF xác thực (`lib/api-utils.ts`)
+
+```typescript
+// lib/api-utils.ts
+import { type NextRequest, NextResponse } from 'next/server';
+
+type RouteHandler = (req: NextRequest, params: any) => Promise<NextResponse>;
+
+// Hàm này nhận vào một handler và trả về một handler mới tích hợp logic auth
+export function withAuthentication(handler: RouteHandler): RouteHandler {
+  return async (req: NextRequest, params: any) => {
+    const sessionToken = req.headers.get('Authorization');
+
+    if (sessionToken !== 'Bearer my-secret-token') {
+      return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+    }
+
+    // Nếu hợp lệ, gọi handler gốc ban đầu
+    return handler(req, params);
+  };
+}
+```
+
+### 78.2. Bước 2: Sử dụng HOF trong Route Handler (`app/api/protected/route.ts`)
+
+```typescript
+// app/api/protected/route.ts
+import { NextResponse, type NextRequest } from 'next/server';
+import { withAuthentication } from '@/lib/api-utils';
+
+// Định nghĩa logic cốt lõi của route
+const protectedRouteHandler = async (req: NextRequest) => {
+  return NextResponse.json({ message: 'You have accessed protected data!' });
+};
+
+// Bọc handler với utility xác thực với `withAuthentication`
+export const GET = withAuthentication(protectedRouteHandler);
+```
+
+
+
+
+
+
 
 
 
